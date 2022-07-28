@@ -1,0 +1,45 @@
+name: apt32f103x_demo
+version: v1.0.0
+description: demo code for reference
+tag: ""
+keywords: ~
+author:
+  name: ""
+license: ""
+homepage: ~
+type: common
+depends: ~
+yoc_version: ~
+hw_info:
+  cpu_id: ""
+  cpu_name: ""
+  vendor_name: ""
+  chip_name: ""
+  board_name: ""
+  ld_script: ""
+  flash_program: ""
+build_config:
+  include:
+    - include
+  internal_include: ~
+  cflag: -O3  -g1
+  cxxflag: -O3  -g1
+  asmflag: ""
+  define: ~
+  libs: ~
+  libpath: ~
+source_file:
+  - src/bt_demo.c
+  - src/rtc_demo.c
+  - src/cnta_demo.c
+  - src/spi_demo.c
+  - src/lpt_demo.c
+  - src/sio_demo.c
+  - src/ept_demo.c
+  - src/gpta_demo.c
+  - src/uart_demo.c
+  - src/iic_demo.c
+  - src/adc_demo.c
+def_config: ~
+install: ~
+depends_forward: ~
