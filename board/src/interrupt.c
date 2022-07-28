@@ -237,6 +237,7 @@ void bt3_int_handler(void)
 	csi_tick_increase();
 	
 	bt_irqhandler(BT3);
+	//csi_pin_toggle(PB05);
 }
 
 /*************************************************************/

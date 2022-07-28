@@ -90,7 +90,7 @@ static void _500usdelay(void)
     while (1) {
         cur = csp_bt_get_cnt(BT3);
 
-        if (start > cur) {
+        if (start <= cur) {
             if ((start - cur) >= cnt) {
                 break;
             }
@@ -145,7 +145,7 @@ void udelay(uint32_t us)
 	
     while (us) {
         us--;
-        _10usdelay();
+        _10udelay();
     }
 }
 /** \brief  delay, imprecise delay timer

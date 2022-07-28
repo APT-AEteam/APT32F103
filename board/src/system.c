@@ -31,14 +31,14 @@ extern void irq_vectors_init(void);
 void system_init(void)		//__attribute__((weak))
 {
 	uint32_t i;
-//	__disable_excp_irq();
+	__disable_excp_irq();
 	
 //    /* enable mstatus FS */
 //    uint32_t mstatus = __get_MSTATUS();
 //    mstatus |= (1 << 13);
 //    __set_MSTATUS(mstatus);
 
-	__disable_irq();
+	//__disable_irq();
 	
 	/* get interrupt level from info */
     CLIC->CLICCFG = (((CLIC->CLICINFO & CLIC_INFO_CLICINTCTLBITS_Msk) >> CLIC_INFO_CLICINTCTLBITS_Pos) << CLIC_CLICCFG_NLBIT_Pos);
@@ -61,7 +61,7 @@ void system_init(void)		//__attribute__((weak))
 	csi_get_pclk_freq();
 	csi_tick_init();
 	
-	//__enable_excp_irq();
-	__enable_irq();
+	__enable_excp_irq();
+	//__enable_irq();
 	
 }
