@@ -1265,6 +1265,144 @@
         <Bit Name="PEND" Authority="RW" Bits="0" Description="清除PEND原始中断状态位。" />
       </Register>
     </Peripheral>
+    <Peripheral Name="BT2">
+      <Register Name="BT_RSSR" Authority="RW" Address="0x40053000" Width="32" Description="Reset/Start Control Register">
+        <Bit Name="SRR" Authority="RW" Bits="15-12" Description="软件复位控制位。&#xD;&#xA;当对当前控制位写入‘0x5’时，BT模块会被复位。复位后，所有寄存器都恢复为RESET状态。" />
+        <Bit Name="START" Authority="RW" Bits="0" Description="计数器启动控制。&#xD;&#xA;0h：写入’0’时，停止计数器。&#xD;&#xA;1h：写入’1’时，启动计数器。&#xD;&#xA;&#xD;&#xA;读取时，返回当前计数器的工作状态。&#xD;&#xA;0h：计数器处于IDLE状态。&#xD;&#xA;1h：计数器处于工作状态。" />
+      </Register>
+      <Register Name="BT_CR" Authority="RW" Address="0x40053004" Width="32" Description="General Control Register">
+        <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
+        <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
+        <Bit Name="AREARM" Authority="RW" Bits="14" Description="硬件自动REARM控制位。&#xD;&#xA;0：禁止硬件自动REARM&#xD;&#xA;1：计数器周期结束时，自动REARM" />
+        <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
+        <Bit Name="REARM0" Authority="RW" Bits="12" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
+        <Bit Name="OSTMD1" Authority="RW" Bits="11" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。" />
+        <Bit Name="OSTMD0" Authority="RW" Bits="10" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。" />
+        <Bit Name="SYNCEN1" Authority="RW" Bits="9" Description="外部同步触发输入使能控制。&#xD;&#xA;0h：禁止外部触发&#xD;&#xA;1h：使能外部触发" />
+        <Bit Name="SYNCEN0" Authority="RW" Bits="8" Description="外部同步触发输入使能控制。&#xD;&#xA;0h：禁止外部触发&#xD;&#xA;1h：使能外部触发" />
+        <Bit Name="STARTST" Authority="RW" Bits="7" Description="BT开始计数时，BT_OUT状态设置。&#xD;&#xA;0：低电平&#xD;&#xA;1：高电平" />
+        <Bit Name="IDLEST" Authority="RW" Bits="6" Description="BT停止计数时，BT_OUT状态设置。&#xD;&#xA;0：低电平&#xD;&#xA;1：高电平" />
+        <Bit Name="EXTCKM" Authority="RW" Bits="5" Description="计数器时钟源选择。&#xD;&#xA;0h：计数器基于PCLK的分频计数&#xD;&#xA;1h：由同步触发端口触发计数" />
+        <Bit Name="OPM" Authority="RW" Bits="4" Description="计数器单次触发工作模式选择。&#xD;&#xA;0h：连续计数工作模式&#xD;&#xA;1h：单次触发工作模式" />
+        <Bit Name="SHDWSTP" Authority="RW" Bits="3" Description="START控制位的Shadow功能使能控制。START置位不受此位控制，清除时受此位控制。当选择Shadow模式时，START控制位在周期结束时清除。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="UPDATE" Authority="RW" Bits="2" Description="PRDR和PSCR软件强制更新。当对UPDATE写入‘1’时，PRDR和PSCR的Shadow寄存器内容将被载入到活动寄存器中。&#xD;&#xA;0h: 无效. &#xD;&#xA;1h: 触发更新" />
+        <Bit Name="DBGEN" Authority="RW" Bits="1" Description="调试使能控制。调试使能时，在CPU被调试器挂起时，时基计数器的计数时钟同时也被挂起。&#xD;&#xA;0h：调试禁止&#xD;&#xA;1h：调试使能" />
+        <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时基计数器的时钟使能控制。&#xD;&#xA;0h：计数器计数时钟禁止。&#xD;&#xA;1h：计数器计数时钟使能。" />
+      </Register>
+      <Register Name="BT_PSCR" Authority="RW" Address="0x40053008" Width="32" Description="Counter Clock Prescaler Register">
+        <Bit Name="PSCR" Authority="RW" Bits="15-0" Description="时基控制周期寄存器。&#xD;&#xA;BT的计数器时钟频率为PCLK/(PSCR+1)" />
+      </Register>
+      <Register Name="BT_PRDR" Authority="RW" Address="0x4005300c" Width="32" Description="Period Register">
+        <Bit Name="CMPLINK" Authority="RW" Bits="31" Description="CMP寄存器同步写入控制。&#xD;&#xA;当对PRDR进行更新时，若该控制位同时写入’1’时，则CMP寄存器同时被更新成和PRDR一样的值。" />
+        <Bit Name="PRDR" Authority="RW" Bits="15-0" Description="时基控制周期寄存器。&#xD;&#xA;当计数器计数值等于PRDR的设置值时，下一个计数周期计数器将从零开始计数。" />
+      </Register>
+      <Register Name="BT_CMP" Authority="RW" Address="0x40053010" Width="32" Description="Compare Data">
+        <Bit Name="CMP" Authority="RW" Bits="15-0" Description="比较值寄存器。&#xD;&#xA;当CNT值等于CMP时，下个计数周期开始BT输出将翻转。" />
+      </Register>
+      <Register Name="BT_CNT" Authority="RW" Address="0x40053014" Width="32" Description="Counter Register">
+        <Bit Name="CNT" Authority="RW" Bits="15-0" Description="当前计数器计数值寄存器。&#xD;&#xA;对CNT读取时，返回当前计数器值。对CNT写入时，将直接更新CNT的计数值。CNT计数器没有Shadow寄存器，CPU的写入将直接影响当前计数器值。" />
+      </Register>
+      <Register Name="BT_EVTRG" Authority="RW" Address="0x40053018" Width="32" Description="Event Generation Control Register">
+        <Bit Name="TRGOE" Authority="RW" Bits="20" Description="外部触发端口TRGOUT输出使能。&#xD;&#xA;0h：禁止触发输出到ETCB。&#xD;&#xA;1h：允许触发输出到ETCB。" />
+        <Bit Name="TRGSEL" Authority="RW" Bits="3-0" Description="TRGEV事件的触发源选择控制位。&#xD;&#xA;0h：禁止TRGOUT的触发。&#xD;&#xA;1h：指定PEND事件用于产生TRGEV事件。&#xD;&#xA;2h：指定CMP事件用于产生TRGEV事件。&#xD;&#xA;3h：指定OVF事件用于产生TRGEV事件。&#xD;&#xA;其他：保留" />
+      </Register>
+      <Register Name="BT_EVSWF" Authority="RW" Address="0x40053024" Width="32" Description="Event Counter Software Trigger Register">
+        <Bit Name="EVSWF" Authority="RW" Bits="0" Description="软件产生一次TRGEV事件。&#xD;&#xA;0h：写入’0’无效。&#xD;&#xA;1h：软件产生一次TRGEV事件。" />
+      </Register>
+      <Register Name="BT_RISR" Authority="RW" Address="0x40053028" Width="32" Description="Raw Interrupt Status Register">
+        <Bit Name="TRGEV" Authority="RO" Bits="3" Description="事件触发中断请求原始标志状态。" />
+        <Bit Name="OVF" Authority="RO" Bits="2" Description="OVF中断请求原始标志状态。" />
+        <Bit Name="CMP" Authority="RO" Bits="1" Description="CMP Match中断请求原始标志状态。" />
+        <Bit Name="PEND" Authority="RO" Bits="0" Description="PEND周期结束中断请求原始标志状态。" />
+      </Register>
+      <Register Name="BT_IMCR" Authority="RW" Address="0x4005302c" Width="32" Description="Interrupt Masking Control Register">
+        <Bit Name="EVTRG" Authority="RW" Bits="3" Description="事件触发中断中断使能控制位。" />
+        <Bit Name="OVF" Authority="RW" Bits="2" Description="OVF中断使能控制位。" />
+        <Bit Name="CMP" Authority="RW" Bits="1" Description="CMP Match中断使能控制位" />
+        <Bit Name="PEND" Authority="RW" Bits="0" Description="PEND中断使能控制位。" />
+      </Register>
+      <Register Name="BT_MISR" Authority="RW" Address="0x40053030" Width="32" Description="Masked Interrupt Status Register">
+        <Bit Name="EVTRG" Authority="RO" Bits="3" Description="事件触发中断请求标志状态。" />
+        <Bit Name="OVF" Authority="RO" Bits="2" Description="OVF中断请求标志状态。" />
+        <Bit Name="CMP" Authority="RO" Bits="1" Description="CMP Match中断请求标志状态。" />
+        <Bit Name="PEND" Authority="RO" Bits="0" Description="PEND周期结束中断请求标志状态。" />
+      </Register>
+      <Register Name="BT_ICR" Authority="RW" Address="0x40053034" Width="32" Description="Interrupt Clear Register">
+        <Bit Name="EVTRG" Authority="RW" Bits="3" Description="清除事件触发中断原始中断状态位。" />
+        <Bit Name="OVF" Authority="RW" Bits="2" Description="清除OVF原始中断状态位。" />
+        <Bit Name="CMP" Authority="RW" Bits="1" Description="清除CMP Match原始中断状态位。" />
+        <Bit Name="PEND" Authority="RW" Bits="0" Description="清除PEND原始中断状态位。" />
+      </Register>
+    </Peripheral>
+    <Peripheral Name="BT3">
+      <Register Name="BT_RSSR" Authority="RW" Address="0x40054000" Width="32" Description="Reset/Start Control Register">
+        <Bit Name="SRR" Authority="RW" Bits="15-12" Description="软件复位控制位。&#xD;&#xA;当对当前控制位写入‘0x5’时，BT模块会被复位。复位后，所有寄存器都恢复为RESET状态。" />
+        <Bit Name="START" Authority="RW" Bits="0" Description="计数器启动控制。&#xD;&#xA;0h：写入’0’时，停止计数器。&#xD;&#xA;1h：写入’1’时，启动计数器。&#xD;&#xA;&#xD;&#xA;读取时，返回当前计数器的工作状态。&#xD;&#xA;0h：计数器处于IDLE状态。&#xD;&#xA;1h：计数器处于工作状态。" />
+      </Register>
+      <Register Name="BT_CR" Authority="RW" Address="0x40054004" Width="32" Description="General Control Register">
+        <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
+        <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
+        <Bit Name="AREARM" Authority="RW" Bits="14" Description="硬件自动REARM控制位。&#xD;&#xA;0：禁止硬件自动REARM&#xD;&#xA;1：计数器周期结束时，自动REARM" />
+        <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
+        <Bit Name="REARM0" Authority="RW" Bits="12" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
+        <Bit Name="OSTMD1" Authority="RW" Bits="11" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。" />
+        <Bit Name="OSTMD0" Authority="RW" Bits="10" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。" />
+        <Bit Name="SYNCEN1" Authority="RW" Bits="9" Description="外部同步触发输入使能控制。&#xD;&#xA;0h：禁止外部触发&#xD;&#xA;1h：使能外部触发" />
+        <Bit Name="SYNCEN0" Authority="RW" Bits="8" Description="外部同步触发输入使能控制。&#xD;&#xA;0h：禁止外部触发&#xD;&#xA;1h：使能外部触发" />
+        <Bit Name="STARTST" Authority="RW" Bits="7" Description="BT开始计数时，BT_OUT状态设置。&#xD;&#xA;0：低电平&#xD;&#xA;1：高电平" />
+        <Bit Name="IDLEST" Authority="RW" Bits="6" Description="BT停止计数时，BT_OUT状态设置。&#xD;&#xA;0：低电平&#xD;&#xA;1：高电平" />
+        <Bit Name="EXTCKM" Authority="RW" Bits="5" Description="计数器时钟源选择。&#xD;&#xA;0h：计数器基于PCLK的分频计数&#xD;&#xA;1h：由同步触发端口触发计数" />
+        <Bit Name="OPM" Authority="RW" Bits="4" Description="计数器单次触发工作模式选择。&#xD;&#xA;0h：连续计数工作模式&#xD;&#xA;1h：单次触发工作模式" />
+        <Bit Name="SHDWSTP" Authority="RW" Bits="3" Description="START控制位的Shadow功能使能控制。START置位不受此位控制，清除时受此位控制。当选择Shadow模式时，START控制位在周期结束时清除。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="UPDATE" Authority="RW" Bits="2" Description="PRDR和PSCR软件强制更新。当对UPDATE写入‘1’时，PRDR和PSCR的Shadow寄存器内容将被载入到活动寄存器中。&#xD;&#xA;0h: 无效. &#xD;&#xA;1h: 触发更新" />
+        <Bit Name="DBGEN" Authority="RW" Bits="1" Description="调试使能控制。调试使能时，在CPU被调试器挂起时，时基计数器的计数时钟同时也被挂起。&#xD;&#xA;0h：调试禁止&#xD;&#xA;1h：调试使能" />
+        <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时基计数器的时钟使能控制。&#xD;&#xA;0h：计数器计数时钟禁止。&#xD;&#xA;1h：计数器计数时钟使能。" />
+      </Register>
+      <Register Name="BT_PSCR" Authority="RW" Address="0x40054008" Width="32" Description="Counter Clock Prescaler Register">
+        <Bit Name="PSCR" Authority="RW" Bits="15-0" Description="时基控制周期寄存器。&#xD;&#xA;BT的计数器时钟频率为PCLK/(PSCR+1)" />
+      </Register>
+      <Register Name="BT_PRDR" Authority="RW" Address="0x4005400c" Width="32" Description="Period Register">
+        <Bit Name="CMPLINK" Authority="RW" Bits="31" Description="CMP寄存器同步写入控制。&#xD;&#xA;当对PRDR进行更新时，若该控制位同时写入’1’时，则CMP寄存器同时被更新成和PRDR一样的值。" />
+        <Bit Name="PRDR" Authority="RW" Bits="15-0" Description="时基控制周期寄存器。&#xD;&#xA;当计数器计数值等于PRDR的设置值时，下一个计数周期计数器将从零开始计数。" />
+      </Register>
+      <Register Name="BT_CMP" Authority="RW" Address="0x40054010" Width="32" Description="Compare Data">
+        <Bit Name="CMP" Authority="RW" Bits="15-0" Description="比较值寄存器。&#xD;&#xA;当CNT值等于CMP时，下个计数周期开始BT输出将翻转。" />
+      </Register>
+      <Register Name="BT_CNT" Authority="RW" Address="0x40054014" Width="32" Description="Counter Register">
+        <Bit Name="CNT" Authority="RW" Bits="15-0" Description="当前计数器计数值寄存器。&#xD;&#xA;对CNT读取时，返回当前计数器值。对CNT写入时，将直接更新CNT的计数值。CNT计数器没有Shadow寄存器，CPU的写入将直接影响当前计数器值。" />
+      </Register>
+      <Register Name="BT_EVTRG" Authority="RW" Address="0x40054018" Width="32" Description="Event Generation Control Register">
+        <Bit Name="TRGOE" Authority="RW" Bits="20" Description="外部触发端口TRGOUT输出使能。&#xD;&#xA;0h：禁止触发输出到ETCB。&#xD;&#xA;1h：允许触发输出到ETCB。" />
+        <Bit Name="TRGSEL" Authority="RW" Bits="3-0" Description="TRGEV事件的触发源选择控制位。&#xD;&#xA;0h：禁止TRGOUT的触发。&#xD;&#xA;1h：指定PEND事件用于产生TRGEV事件。&#xD;&#xA;2h：指定CMP事件用于产生TRGEV事件。&#xD;&#xA;3h：指定OVF事件用于产生TRGEV事件。&#xD;&#xA;其他：保留" />
+      </Register>
+      <Register Name="BT_EVSWF" Authority="RW" Address="0x40054024" Width="32" Description="Event Counter Software Trigger Register">
+        <Bit Name="EVSWF" Authority="RW" Bits="0" Description="软件产生一次TRGEV事件。&#xD;&#xA;0h：写入’0’无效。&#xD;&#xA;1h：软件产生一次TRGEV事件。" />
+      </Register>
+      <Register Name="BT_RISR" Authority="RW" Address="0x40054028" Width="32" Description="Raw Interrupt Status Register">
+        <Bit Name="TRGEV" Authority="RO" Bits="3" Description="事件触发中断请求原始标志状态。" />
+        <Bit Name="OVF" Authority="RO" Bits="2" Description="OVF中断请求原始标志状态。" />
+        <Bit Name="CMP" Authority="RO" Bits="1" Description="CMP Match中断请求原始标志状态。" />
+        <Bit Name="PEND" Authority="RO" Bits="0" Description="PEND周期结束中断请求原始标志状态。" />
+      </Register>
+      <Register Name="BT_IMCR" Authority="RW" Address="0x4005402c" Width="32" Description="Interrupt Masking Control Register">
+        <Bit Name="EVTRG" Authority="RW" Bits="3" Description="事件触发中断中断使能控制位。" />
+        <Bit Name="OVF" Authority="RW" Bits="2" Description="OVF中断使能控制位。" />
+        <Bit Name="CMP" Authority="RW" Bits="1" Description="CMP Match中断使能控制位" />
+        <Bit Name="PEND" Authority="RW" Bits="0" Description="PEND中断使能控制位。" />
+      </Register>
+      <Register Name="BT_MISR" Authority="RW" Address="0x40054030" Width="32" Description="Masked Interrupt Status Register">
+        <Bit Name="EVTRG" Authority="RO" Bits="3" Description="事件触发中断请求标志状态。" />
+        <Bit Name="OVF" Authority="RO" Bits="2" Description="OVF中断请求标志状态。" />
+        <Bit Name="CMP" Authority="RO" Bits="1" Description="CMP Match中断请求标志状态。" />
+        <Bit Name="PEND" Authority="RO" Bits="0" Description="PEND周期结束中断请求标志状态。" />
+      </Register>
+      <Register Name="BT_ICR" Authority="RW" Address="0x40054034" Width="32" Description="Interrupt Clear Register">
+        <Bit Name="EVTRG" Authority="RW" Bits="3" Description="清除事件触发中断原始中断状态位。" />
+        <Bit Name="OVF" Authority="RW" Bits="2" Description="清除OVF原始中断状态位。" />
+        <Bit Name="CMP" Authority="RW" Bits="1" Description="清除CMP Match原始中断状态位。" />
+        <Bit Name="PEND" Authority="RW" Bits="0" Description="清除PEND原始中断状态位。" />
+      </Register>
+    </Peripheral>
     <Peripheral Name="GPT">
       <Register Name="GPTA_CEDR" Authority="RW" Address="0x40055000" Width="32" Description="ID &amp; Clock Enable/Disable Register">
         <Bit Name="IDCODE" Authority="RO" Bits="31-16" Description="当前GPTA模块的版本信息。" />
@@ -2266,112 +2404,6 @@
         <Bit Name="EVI" Authority="RW" Bits="0" Description="" />
       </Register>
     </Peripheral>
-    <Peripheral Name="USART">
-      <Register Name="US_IDR" Authority="RW" Address="0x40080000" Width="32" Description="ID寄存器">
-        <Bit Name="IDCODE" Authority="RO" Bits="25-0" Description="ID寄存器&#xD;&#xA;IP的ID代码" />
-      </Register>
-      <Register Name="US_CEDR" Authority="RW" Address="0x40080004" Width="32" Description="时钟使能/禁止寄存器">
-        <Bit Name="DBGEN" Authority="RW" Bits="31" Description="调试模式使能/禁止控制位&#xD;&#xA;0 = 禁止调试模式1 = 使能调试模式&#xD;&#xA;说明：&#xD;&#xA;0 = 进入调试模式后不影响USART功能1 = 进入调试模式后冻结USART的功能，但USART内部寄存器的读写不受影响" />
-        <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时钟使能/禁止控制位&#xD;&#xA;0 = 时钟禁止1 = 时钟使能" />
-      </Register>
-      <Register Name="US_SRR" Authority="RW" Address="0x40080008" Width="32" Description="软件复位寄存器">
-        <Bit Name="SWRST" Authority="RW" Bits="0" Description="软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位" />
-      </Register>
-      <Register Name="US_CR" Authority="RW" Address="0x4008000c" Width="32" Description="控制寄存器">
-        <Bit Name="SENDA" Authority="RW" Bits="12" Description="发送地址&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 只在Multi-drop模式，下一个写入US_THR的字节会被当作地址字节发送" />
-        <Bit Name="STTTO" Authority="RW" Bits="11" Description="开启超时接收&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 必须在超时计数器计数完成之前，接收到字节数据，否则报错" />
-        <Bit Name="STPBRK" Authority="RW" Bits="10" Description="停止Break.&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果一个Break状态正在发送，那么写1会在最少一个字节长度的Break状态后停止Break，并且发送一个12位周期的高电平" />
-        <Bit Name="STTBRK" Authority="RW" Bits="9" Description="开始Break.&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果Break没有发送，那么写1会在当前移位寄存器中的数据发送完之后，开始发送Break状态" />
-        <Bit Name="TXDIS" Authority="RW" Bits="7" Description="发送禁止&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 发送禁止" />
-        <Bit Name="TXEN" Authority="RW" Bits="6" Description="发送使能&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果TXDIS是0，写1使能发送" />
-        <Bit Name="RXDIS" Authority="RW" Bits="5" Description="接收禁止&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 接收禁止" />
-        <Bit Name="RXEN" Authority="RW" Bits="4" Description="接收使能&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果RXDIS是0，写1使能接收" />
-        <Bit Name="RSTTX" Authority="RW" Bits="3" Description="复位发送端&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位发送端逻辑" />
-        <Bit Name="RSTRX" Authority="RW" Bits="2" Description="复位接收端&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位接收端逻辑" />
-      </Register>
-      <Register Name="US_MR" Authority="RW" Address="0x40080010" Width="32" Description="模式寄存器">
-        <Bit Name="DSB" Authority="RW" Bits="20" Description="数据开始位选择&#xD;&#xA;0 = 数据发送从低位LSB开始，到高位MSB结束&#xD;&#xA;1 = 数据发送从高位MSB开始，到低位LSB结束" />
-        <Bit Name="CLKO" Authority="RW" Bits="18" Description="时钟输出选择&#xD;&#xA;0 = USART不输出USARTCLK &#xD;&#xA;1 = 如果CLKS[1]是0，USART输出USARTCLK" />
-        <Bit Name="MODE9" Authority="RW" Bits="17" Description="9位字节长度&#xD;&#xA;0 = CHRL位定义字节长度&#xD;&#xA;1 = 9位字节长度" />
-        <Bit Name="SMCARDPT" Authority="RW" Bits="16" Description="Smart Card协议&#xD;&#xA;0 = 禁止smart card协议&#xD;&#xA;1 = 使能smart card协议" />
-        <Bit Name="CHMODE" Authority="RW" Bits="15-14" Description="通道模式&#xD;&#xA;• 通道模式位&#xD;&#xA;CHMODE [1:0]                    模式描述&#xD;&#xA;00                           普通模式USART通道工作为正常的Rx/Tx功能&#xD;&#xA;01                           自动回应收到的数据自动通过USARTTX发送&#xD;&#xA;10                           本地回环发送端的输出信号短接到接收端的输入信号&#xD;&#xA;11                           远程回环USARTRX管脚内部直接短接到USARTTX管脚" />
-        <Bit Name="NBSTOP" Authority="RW" Bits="13-12" Description="停止位的个数&#xD;&#xA;停止位个数跟SYNC设置的模式有关&#xD;&#xA;&#xD;&#xA;• NBSTOP配置位&#xD;&#xA;NBSTOP [1:0]           异步模式 (SYNC = 0)       同步模式 (SYNC = 1)&#xD;&#xA;00                            1个停止位                      1个停止位&#xD;&#xA;01                            1.5个停止位                   保留&#xD;&#xA;10                            2个停止位                      2个停止位&#xD;&#xA;11                            保留                               保留" />
-        <Bit Name="PAR" Authority="RW" Bits="11-9" Description="校验类型&#xD;&#xA;• 校验类型位&#xD;&#xA;&#xD;&#xA;PAR[2:0]                     校验类型&#xD;&#xA;000                            偶校验&#xD;&#xA;001                            奇校验&#xD;&#xA;010                            0校验(Space)&#xD;&#xA;011                            1校验(Mark)&#xD;&#xA;10X                            无校验&#xD;&#xA;11X                            Multi-drop模式&#xD;&#xA;注意：如果使用LIN，PAR[2:0]必须设置为‘10X’." />
-        <Bit Name="SYNC" Authority="RW" Bits="8" Description="同步模式选择&#xD;&#xA;0 = USART工作在异步模式&#xD;&#xA;1 = USART工作在同步模式" />
-        <Bit Name="CHRL" Authority="RW" Bits="7-6" Description="字节长度 (除开始位，停止位和校验位外的字节长度)&#xD;&#xA;• 字节长度位&#xD;&#xA;&#xD;&#xA;CHRL[1:0]                字节长度&#xD;&#xA;0  0                          5位&#xD;&#xA;0  1                          6位&#xD;&#xA;1  0                          7位&#xD;&#xA;1  1                          8位" />
-        <Bit Name="CLKS" Authority="RW" Bits="5-4" Description="时钟选择 (波特率发生器的输入时钟).&#xD;&#xA;• CLKS 时钟选择位&#xD;&#xA;&#xD;&#xA;CLKS[1:0]     选择的时钟&#xD;&#xA;0  0                PCLK&#xD;&#xA;0  1                PCLK/8&#xD;&#xA;1  x                保留，请勿使用" />
-        <Bit Name="SENDTIME" Authority="RW" Bits="3-1" Description="表示USART被配置成Smart Card协议时，重复发送最多的次数0-7&#xD;&#xA;" />
-      </Register>
-      <Register Name="US_IMSCR" Authority="RW" Address="0x40080014" Width="32" Description="中断使能/禁止寄存器">
-        <Bit Name="IDLE" Authority="RW" Bits="10" Description="空间中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="TXEMPTY" Authority="RW" Bits="9" Description="发送缓冲空闲中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="TIMEOUT" Authority="RW" Bits="8" Description="超时中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="PARE" Authority="RW" Bits="7" Description="校验错中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="FRAME" Authority="RW" Bits="6" Description="帧错误中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="OVRE" Authority="RW" Bits="5" Description="溢出错误中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="RXBRK" Authority="RW" Bits="2" Description="接收端Break中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="TXRDY" Authority="RW" Bits="1" Description="发送端待机中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-        <Bit Name="RXRDY" Authority="RW" Bits="0" Description="接收端待机中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
-      </Register>
-      <Register Name="US_RISR" Authority="RW" Address="0x40080018" Width="32" Description="原始中断状态寄存器">
-        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲中断原始状态&#xD;&#xA;IDLE的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲中断原始状态&#xD;&#xA;TXEMPTY的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时中断原始状态&#xD;&#xA;TIMEOUT的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="PARE" Authority="RO" Bits="7" Description="帧错误中断原始状态&#xD;&#xA;PARE的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误中断原始状态&#xD;&#xA;FRAME的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误中断原始状态&#xD;&#xA;OVRE的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break中断原始状态&#xD;&#xA;RXBRK的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机中断原始状态&#xD;&#xA;TXRDY的原始中断状态，不管该中断是使能还是禁止" />
-        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机中断原始状态&#xD;&#xA;RXRDY的原始中断状态，不管该中断是使能还是禁止" />
-      </Register>
-      <Register Name="US_MISR" Authority="RW" Address="0x4008001c" Width="32" Description="中断状态寄存器">
-        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲中断状态&#xD;&#xA;IDLE中断使能后的状态" />
-        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲中断状态&#xD;&#xA;TXEMPTY中断使能后的状态" />
-        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时中断状态&#xD;&#xA;TIMEOUT中断使能后的状态" />
-        <Bit Name="PARE" Authority="RO" Bits="7" Description="帧错误中断状态&#xD;&#xA;PARE中断使能后的状态" />
-        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误中断状态&#xD;&#xA;FRAME中断使能后的状态" />
-        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误中断状态&#xD;&#xA;OVRE中断使能后的状态" />
-        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break中断状态&#xD;&#xA;RXBRK中断使能后的状态" />
-        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机中断状态&#xD;&#xA;TXRDY中断使能后的状态" />
-        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机中断状态&#xD;&#xA;RXRDY中断使能后的状态" />
-      </Register>
-      <Register Name="US_ICR" Authority="RW" Address="0x40080020" Width="32" Description="中断状态清除寄存器">
-        <Bit Name="IDLE" Authority="RW" Bits="10" Description="空闲中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-        <Bit Name="TIMEOUT" Authority="RW" Bits="8" Description="超时中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-        <Bit Name="PARE" Authority="RW" Bits="7" Description="帧错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-        <Bit Name="FRAME" Authority="RW" Bits="6" Description="帧错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-        <Bit Name="OVRE" Authority="RW" Bits="5" Description="溢出错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-        <Bit Name="RXBRK" Authority="RW" Bits="2" Description="接收端Break中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
-      </Register>
-      <Register Name="US_SR" Authority="RW" Address="0x40080024" Width="32" Description="状态寄存器">
-        <Bit Name="IDLEFLAG" Authority="RO" Bits="11" Description="0 = USART正在接收一个帧&#xD;&#xA;1 = USART没有在接收任何帧&#xD;&#xA;该位表示J1587协议的帧传送状态，当接收开始时变低，在接收完成+10个停止位(10个周期的高电平)后变高。" />
-        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲状态&#xD;&#xA;0 = 没有检测到J1587的结束帧&#xD;&#xA;1 = 检测到J1587的结束帧" />
-        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲&#xD;&#xA;0 = US_THR寄存器或者发送缓冲寄存器中有字节待发送&#xD;&#xA;1 = US_THR寄存器或者发送缓冲寄存器中没有字节待发送&#xD;&#xA;当USART被禁止或者复位后，该位为0，US_CR中的发送使能功能会将该位置1。" />
-        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时&#xD;&#xA;0 = 开始超时接收后，没有检测到超时，或者超时寄存器被设置为0 &#xD;&#xA;1 = 开始超时接收后，检测到了超时" />
-        <Bit Name="PARE" Authority="RO" Bits="7" Description="校验错误&#xD;&#xA;0 = 在上一次状态复位后，没有检测到校验位错(或者multi-drop模式下的数据字节) &#xD;&#xA;1 = 在上一次状态复位后，检测到至少1个校验位错(或者multi-drop模式下的地址字节)" />
-        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误&#xD;&#xA;0 = 在上一次状态复位后，没有停止位被检测到低电平&#xD;&#xA;1 = 在上一次状态复位后，至少有一个停止位被检测到低电平" />
-        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误&#xD;&#xA;0 = 当RXRDY有效后，没有字节从接收移位寄存器传到US_RHR寄存器&#xD;&#xA;1 = 当RXRDY有效后，至少有一个字节从接收移位寄存器传到了US_RHR寄存器" />
-        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break.&#xD;&#xA;0 = 在上一次状态复位后，还没有检测到Break &#xD;&#xA;1 = 在上一次状态复位后，检测到Break" />
-        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机&#xD;&#xA;0 = US_THR中有一个字节正在等待发送到移位寄存器中，或者发送端被禁止&#xD;&#xA;1 = US_THR中没有任何字节,等于0表示USART被禁止了，或者处于复位状态。US_CR中的发送使能命令会将这位置1。" />
-        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机&#xD;&#xA;0 = 自从上次读取US_RHR后没有收到任何完成的字节，或者接收端被禁止&#xD;&#xA;1 = 自从上次读取US_RHR后没有收到了至少一个完成的字节" />
-      </Register>
-      <Register Name="US_RHR" Authority="RW" Address="0x40080028" Width="32" Description="接收数据寄存器">
-        <Bit Name="RXCHR" Authority="RO" Bits="8-0" Description="接收到的字节&#xD;&#xA;当RXRDY有效时，储存接收到的字节。当位数小于9时，数据为右对齐。&#xD;&#xA;&#xD;&#xA;注意： 读取此寄存器后，RXRDY位会被自动清除。在调试模式，用户可以使用镜像寄存器来避免RXRDY被清除。" />
-      </Register>
-      <Register Name="US_THR" Authority="RW" Address="0x4008002c" Width="32" Description="发送数据寄存器">
-        <Bit Name="TXCHR" Authority="RO" Bits="8-0" Description="需要发送的字节&#xD;&#xA;当TXRDY有效时，存储下一个要发送的字节。如果TXRDY是0，那么当前US_THR寄存器的值会被覆盖。当位数小于9时，数据为右对齐。" />
-      </Register>
-      <Register Name="US_BRGR" Authority="RW" Address="0x40080030" Width="32" Description="波特率配置寄存器">
-        <Bit Name="CD" Authority="RW" Bits="15-4" Description="分频&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式):CD = FLOOR[ Fclk / (Baud Rate x 16), 1 ]&#xD;&#xA;同步模式):CD = FLOOR[ Fclk / Baud Rate, 1 ]&#xD;&#xA;&#xD;&#xA;CD[15:4]                           Action&#xD;&#xA;0                                      关闭时钟&#xD;&#xA;1                                      无分频 (1分频)&#xD;&#xA;2 to 65535                         &#xD;&#xA;波特率(异步模式)= Fclk /(16 × (CD+FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk /(CD+FRACTION/16)" />
-        <Bit Name="FRACTION" Authority="RW" Bits="3-0" Description="小数修正值(0-15)&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式:FRACTION = ROUND[((Fclk / (Baud Rate x 16)) - CD) x 16, 0]&#xD;&#xA;同步模式:FRACTION = ROUND[((Fclk / Baud Rate) - CD) x 16, 0]&#xD;&#xA;&#xD;&#xA;波特率(异步模式)= Fclk / (16 x (CD + FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk / (CD + FRACTION/16)" />
-      </Register>
-      <Register Name="US_RTOR" Authority="RW" Address="0x40080034" Width="32" Description="接收超时配置寄存器">
-        <Bit Name="TO" Authority="RW" Bits="15-0" Description="超时配置&#xD;&#xA;给这个寄存器写值后，会自动开启超时接收的指令&#xD;&#xA;• 超时配置位&#xD;&#xA;TO[15:0]                       Action&#xD;&#xA;0                         禁止接收端的超时功能&#xD;&#xA;1–65565             当开启超时接收时，或者每当收到一个数据字节时，超时计数                                   器会被载入TO[15:0]的值&#xD;&#xA;&#xD;&#xA;异步模式：超时时长= TO[15:0] × 位周期&#xD;&#xA;同步模式：超时时长= TO[15:0] × 16 × 位周期&#xD;&#xA;&#xD;&#xA;注意： 当设置US_CR寄存器的RXDIS位禁止接收端后，超时功能被停止，这时如果又通过US_CR的RXEN位重新使能了接收端，那么超时计数器会从刚才停止的地方继续开始(不会被复位)。" />
-      </Register>
-      <Register Name="US_TTGR" Authority="RW" Address="0x40080038" Width="32" Description="发送端Time-Guard寄存器">
-        <Bit Name="TG" Authority="RW" Bits="7-0" Description="Time-Guard配置&#xD;&#xA;• Time-Guard配置位&#xD;&#xA;TO[15:0]                              Action&#xD;&#xA;0                                      禁止发送端的time-guard功能&#xD;&#xA;1–255                               USARTTX在每发送完一个字节后，会变高一段时间，                                                这个时间段为time-guard时长&#xD;&#xA;&#xD;&#xA;Time-guard时长= TG[7:0] × 位周期" />
-      </Register>
-    </Peripheral>
     <Peripheral Name="UART0">
       <Register Name="UART_DATA" Authority="RW" Address="0x40080000" Width="32" Description="数据寄存器">
         <Bit Name="DATA" Authority="RW" Bits="7-0" Description="发送或接收到的数据&#xD;&#xA;读 = 接收到的数据&#xD;&#xA;写 = 发送的数据" />
@@ -2511,6 +2543,112 @@
       </Register>
       <Register Name="UART_BRDIV" Authority="RW" Address="0x40082010" Width="32" Description="波特率分频寄存器">
         <Bit Name="DIV" Authority="RW" Bits="19-0" Description="波特率分频&#xD;&#xA;最小值为16" />
+      </Register>
+    </Peripheral>
+    <Peripheral Name="USART">
+      <Register Name="US_IDR" Authority="RW" Address="0x40083000" Width="32" Description="ID寄存器">
+        <Bit Name="IDCODE" Authority="RO" Bits="25-0" Description="ID寄存器&#xD;&#xA;IP的ID代码" />
+      </Register>
+      <Register Name="US_CEDR" Authority="RW" Address="0x40083004" Width="32" Description="时钟使能/禁止寄存器">
+        <Bit Name="DBGEN" Authority="RW" Bits="31" Description="调试模式使能/禁止控制位&#xD;&#xA;0 = 禁止调试模式1 = 使能调试模式&#xD;&#xA;说明：&#xD;&#xA;0 = 进入调试模式后不影响USART功能1 = 进入调试模式后冻结USART的功能，但USART内部寄存器的读写不受影响" />
+        <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时钟使能/禁止控制位&#xD;&#xA;0 = 时钟禁止1 = 时钟使能" />
+      </Register>
+      <Register Name="US_SRR" Authority="RW" Address="0x40083008" Width="32" Description="软件复位寄存器">
+        <Bit Name="SWRST" Authority="RW" Bits="0" Description="软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位" />
+      </Register>
+      <Register Name="US_CR" Authority="RW" Address="0x4008300c" Width="32" Description="控制寄存器">
+        <Bit Name="SENDA" Authority="RW" Bits="12" Description="发送地址&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 只在Multi-drop模式，下一个写入US_THR的字节会被当作地址字节发送" />
+        <Bit Name="STTTO" Authority="RW" Bits="11" Description="开启超时接收&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 必须在超时计数器计数完成之前，接收到字节数据，否则报错" />
+        <Bit Name="STPBRK" Authority="RW" Bits="10" Description="停止Break.&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果一个Break状态正在发送，那么写1会在最少一个字节长度的Break状态后停止Break，并且发送一个12位周期的高电平" />
+        <Bit Name="STTBRK" Authority="RW" Bits="9" Description="开始Break.&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果Break没有发送，那么写1会在当前移位寄存器中的数据发送完之后，开始发送Break状态" />
+        <Bit Name="TXDIS" Authority="RW" Bits="7" Description="发送禁止&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 发送禁止" />
+        <Bit Name="TXEN" Authority="RW" Bits="6" Description="发送使能&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果TXDIS是0，写1使能发送" />
+        <Bit Name="RXDIS" Authority="RW" Bits="5" Description="接收禁止&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 接收禁止" />
+        <Bit Name="RXEN" Authority="RW" Bits="4" Description="接收使能&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 如果RXDIS是0，写1使能接收" />
+        <Bit Name="RSTTX" Authority="RW" Bits="3" Description="复位发送端&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位发送端逻辑" />
+        <Bit Name="RSTRX" Authority="RW" Bits="2" Description="复位接收端&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位接收端逻辑" />
+      </Register>
+      <Register Name="US_MR" Authority="RW" Address="0x40083010" Width="32" Description="模式寄存器">
+        <Bit Name="DSB" Authority="RW" Bits="20" Description="数据开始位选择&#xD;&#xA;0 = 数据发送从低位LSB开始，到高位MSB结束&#xD;&#xA;1 = 数据发送从高位MSB开始，到低位LSB结束" />
+        <Bit Name="CLKO" Authority="RW" Bits="18" Description="时钟输出选择&#xD;&#xA;0 = USART不输出USARTCLK &#xD;&#xA;1 = 如果CLKS[1]是0，USART输出USARTCLK" />
+        <Bit Name="MODE9" Authority="RW" Bits="17" Description="9位字节长度&#xD;&#xA;0 = CHRL位定义字节长度&#xD;&#xA;1 = 9位字节长度" />
+        <Bit Name="SMCARDPT" Authority="RW" Bits="16" Description="Smart Card协议&#xD;&#xA;0 = 禁止smart card协议&#xD;&#xA;1 = 使能smart card协议" />
+        <Bit Name="CHMODE" Authority="RW" Bits="15-14" Description="通道模式&#xD;&#xA;• 通道模式位&#xD;&#xA;CHMODE [1:0]                    模式描述&#xD;&#xA;00                           普通模式USART通道工作为正常的Rx/Tx功能&#xD;&#xA;01                           自动回应收到的数据自动通过USARTTX发送&#xD;&#xA;10                           本地回环发送端的输出信号短接到接收端的输入信号&#xD;&#xA;11                           远程回环USARTRX管脚内部直接短接到USARTTX管脚" />
+        <Bit Name="NBSTOP" Authority="RW" Bits="13-12" Description="停止位的个数&#xD;&#xA;停止位个数跟SYNC设置的模式有关&#xD;&#xA;&#xD;&#xA;• NBSTOP配置位&#xD;&#xA;NBSTOP [1:0]           异步模式 (SYNC = 0)       同步模式 (SYNC = 1)&#xD;&#xA;00                            1个停止位                      1个停止位&#xD;&#xA;01                            1.5个停止位                   保留&#xD;&#xA;10                            2个停止位                      2个停止位&#xD;&#xA;11                            保留                               保留" />
+        <Bit Name="PAR" Authority="RW" Bits="11-9" Description="校验类型&#xD;&#xA;• 校验类型位&#xD;&#xA;&#xD;&#xA;PAR[2:0]                     校验类型&#xD;&#xA;000                            偶校验&#xD;&#xA;001                            奇校验&#xD;&#xA;010                            0校验(Space)&#xD;&#xA;011                            1校验(Mark)&#xD;&#xA;10X                            无校验&#xD;&#xA;11X                            Multi-drop模式&#xD;&#xA;注意：如果使用LIN，PAR[2:0]必须设置为‘10X’." />
+        <Bit Name="SYNC" Authority="RW" Bits="8" Description="同步模式选择&#xD;&#xA;0 = USART工作在异步模式&#xD;&#xA;1 = USART工作在同步模式" />
+        <Bit Name="CHRL" Authority="RW" Bits="7-6" Description="字节长度 (除开始位，停止位和校验位外的字节长度)&#xD;&#xA;• 字节长度位&#xD;&#xA;&#xD;&#xA;CHRL[1:0]                字节长度&#xD;&#xA;0  0                          5位&#xD;&#xA;0  1                          6位&#xD;&#xA;1  0                          7位&#xD;&#xA;1  1                          8位" />
+        <Bit Name="CLKS" Authority="RW" Bits="5-4" Description="时钟选择 (波特率发生器的输入时钟).&#xD;&#xA;• CLKS 时钟选择位&#xD;&#xA;&#xD;&#xA;CLKS[1:0]     选择的时钟&#xD;&#xA;0  0                PCLK&#xD;&#xA;0  1                PCLK/8&#xD;&#xA;1  x                保留，请勿使用" />
+        <Bit Name="SENDTIME" Authority="RW" Bits="3-1" Description="表示USART被配置成Smart Card协议时，重复发送最多的次数0-7&#xD;&#xA;" />
+      </Register>
+      <Register Name="US_IMSCR" Authority="RW" Address="0x40083014" Width="32" Description="中断使能/禁止寄存器">
+        <Bit Name="IDLE" Authority="RW" Bits="10" Description="空间中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="TXEMPTY" Authority="RW" Bits="9" Description="发送缓冲空闲中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="TIMEOUT" Authority="RW" Bits="8" Description="超时中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="PARE" Authority="RW" Bits="7" Description="校验错中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="FRAME" Authority="RW" Bits="6" Description="帧错误中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="OVRE" Authority="RW" Bits="5" Description="溢出错误中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="RXBRK" Authority="RW" Bits="2" Description="接收端Break中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="TXRDY" Authority="RW" Bits="1" Description="发送端待机中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+        <Bit Name="RXRDY" Authority="RW" Bits="0" Description="接收端待机中断&#xD;&#xA;0 = 禁止中断&#xD;&#xA;1 = 使能中断" />
+      </Register>
+      <Register Name="US_RISR" Authority="RW" Address="0x40083018" Width="32" Description="原始中断状态寄存器">
+        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲中断原始状态&#xD;&#xA;IDLE的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲中断原始状态&#xD;&#xA;TXEMPTY的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时中断原始状态&#xD;&#xA;TIMEOUT的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="PARE" Authority="RO" Bits="7" Description="帧错误中断原始状态&#xD;&#xA;PARE的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误中断原始状态&#xD;&#xA;FRAME的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误中断原始状态&#xD;&#xA;OVRE的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break中断原始状态&#xD;&#xA;RXBRK的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机中断原始状态&#xD;&#xA;TXRDY的原始中断状态，不管该中断是使能还是禁止" />
+        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机中断原始状态&#xD;&#xA;RXRDY的原始中断状态，不管该中断是使能还是禁止" />
+      </Register>
+      <Register Name="US_MISR" Authority="RW" Address="0x4008301c" Width="32" Description="中断状态寄存器">
+        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲中断状态&#xD;&#xA;IDLE中断使能后的状态" />
+        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲中断状态&#xD;&#xA;TXEMPTY中断使能后的状态" />
+        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时中断状态&#xD;&#xA;TIMEOUT中断使能后的状态" />
+        <Bit Name="PARE" Authority="RO" Bits="7" Description="帧错误中断状态&#xD;&#xA;PARE中断使能后的状态" />
+        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误中断状态&#xD;&#xA;FRAME中断使能后的状态" />
+        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误中断状态&#xD;&#xA;OVRE中断使能后的状态" />
+        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break中断状态&#xD;&#xA;RXBRK中断使能后的状态" />
+        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机中断状态&#xD;&#xA;TXRDY中断使能后的状态" />
+        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机中断状态&#xD;&#xA;RXRDY中断使能后的状态" />
+      </Register>
+      <Register Name="US_ICR" Authority="RW" Address="0x40083020" Width="32" Description="中断状态清除寄存器">
+        <Bit Name="IDLE" Authority="RW" Bits="10" Description="空闲中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+        <Bit Name="TIMEOUT" Authority="RW" Bits="8" Description="超时中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+        <Bit Name="PARE" Authority="RW" Bits="7" Description="帧错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+        <Bit Name="FRAME" Authority="RW" Bits="6" Description="帧错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+        <Bit Name="OVRE" Authority="RW" Bits="5" Description="溢出错误中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+        <Bit Name="RXBRK" Authority="RW" Bits="2" Description="接收端Break中断状态&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除该中断状态" />
+      </Register>
+      <Register Name="US_SR" Authority="RW" Address="0x40083024" Width="32" Description="状态寄存器">
+        <Bit Name="IDLEFLAG" Authority="RO" Bits="11" Description="0 = USART正在接收一个帧&#xD;&#xA;1 = USART没有在接收任何帧&#xD;&#xA;该位表示J1587协议的帧传送状态，当接收开始时变低，在接收完成+10个停止位(10个周期的高电平)后变高。" />
+        <Bit Name="IDLE" Authority="RO" Bits="10" Description="空闲状态&#xD;&#xA;0 = 没有检测到J1587的结束帧&#xD;&#xA;1 = 检测到J1587的结束帧" />
+        <Bit Name="TXEMPTY" Authority="RO" Bits="9" Description="发送缓冲空闲&#xD;&#xA;0 = US_THR寄存器或者发送缓冲寄存器中有字节待发送&#xD;&#xA;1 = US_THR寄存器或者发送缓冲寄存器中没有字节待发送&#xD;&#xA;当USART被禁止或者复位后，该位为0，US_CR中的发送使能功能会将该位置1。" />
+        <Bit Name="TIMEOUT" Authority="RO" Bits="8" Description="超时&#xD;&#xA;0 = 开始超时接收后，没有检测到超时，或者超时寄存器被设置为0 &#xD;&#xA;1 = 开始超时接收后，检测到了超时" />
+        <Bit Name="PARE" Authority="RO" Bits="7" Description="校验错误&#xD;&#xA;0 = 在上一次状态复位后，没有检测到校验位错(或者multi-drop模式下的数据字节) &#xD;&#xA;1 = 在上一次状态复位后，检测到至少1个校验位错(或者multi-drop模式下的地址字节)" />
+        <Bit Name="FRAME" Authority="RO" Bits="6" Description="帧错误&#xD;&#xA;0 = 在上一次状态复位后，没有停止位被检测到低电平&#xD;&#xA;1 = 在上一次状态复位后，至少有一个停止位被检测到低电平" />
+        <Bit Name="OVRE" Authority="RO" Bits="5" Description="溢出错误&#xD;&#xA;0 = 当RXRDY有效后，没有字节从接收移位寄存器传到US_RHR寄存器&#xD;&#xA;1 = 当RXRDY有效后，至少有一个字节从接收移位寄存器传到了US_RHR寄存器" />
+        <Bit Name="RXBRK" Authority="RO" Bits="2" Description="接收端Break.&#xD;&#xA;0 = 在上一次状态复位后，还没有检测到Break &#xD;&#xA;1 = 在上一次状态复位后，检测到Break" />
+        <Bit Name="TXRDY" Authority="RO" Bits="1" Description="发送端待机&#xD;&#xA;0 = US_THR中有一个字节正在等待发送到移位寄存器中，或者发送端被禁止&#xD;&#xA;1 = US_THR中没有任何字节,等于0表示USART被禁止了，或者处于复位状态。US_CR中的发送使能命令会将这位置1。" />
+        <Bit Name="RXRDY" Authority="RO" Bits="0" Description="接收端待机&#xD;&#xA;0 = 自从上次读取US_RHR后没有收到任何完成的字节，或者接收端被禁止&#xD;&#xA;1 = 自从上次读取US_RHR后没有收到了至少一个完成的字节" />
+      </Register>
+      <Register Name="US_RHR" Authority="RW" Address="0x40083028" Width="32" Description="接收数据寄存器">
+        <Bit Name="RXCHR" Authority="RO" Bits="8-0" Description="接收到的字节&#xD;&#xA;当RXRDY有效时，储存接收到的字节。当位数小于9时，数据为右对齐。&#xD;&#xA;&#xD;&#xA;注意： 读取此寄存器后，RXRDY位会被自动清除。在调试模式，用户可以使用镜像寄存器来避免RXRDY被清除。" />
+      </Register>
+      <Register Name="US_THR" Authority="RW" Address="0x4008302c" Width="32" Description="发送数据寄存器">
+        <Bit Name="TXCHR" Authority="RO" Bits="8-0" Description="需要发送的字节&#xD;&#xA;当TXRDY有效时，存储下一个要发送的字节。如果TXRDY是0，那么当前US_THR寄存器的值会被覆盖。当位数小于9时，数据为右对齐。" />
+      </Register>
+      <Register Name="US_BRGR" Authority="RW" Address="0x40083030" Width="32" Description="波特率配置寄存器">
+        <Bit Name="CD" Authority="RW" Bits="15-4" Description="分频&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式):CD = FLOOR[ Fclk / (Baud Rate x 16), 1 ]&#xD;&#xA;同步模式):CD = FLOOR[ Fclk / Baud Rate, 1 ]&#xD;&#xA;&#xD;&#xA;CD[15:4]                           Action&#xD;&#xA;0                                      关闭时钟&#xD;&#xA;1                                      无分频 (1分频)&#xD;&#xA;2 to 65535                         &#xD;&#xA;波特率(异步模式)= Fclk /(16 × (CD+FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk /(CD+FRACTION/16)" />
+        <Bit Name="FRACTION" Authority="RW" Bits="3-0" Description="小数修正值(0-15)&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式:FRACTION = ROUND[((Fclk / (Baud Rate x 16)) - CD) x 16, 0]&#xD;&#xA;同步模式:FRACTION = ROUND[((Fclk / Baud Rate) - CD) x 16, 0]&#xD;&#xA;&#xD;&#xA;波特率(异步模式)= Fclk / (16 x (CD + FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk / (CD + FRACTION/16)" />
+      </Register>
+      <Register Name="US_RTOR" Authority="RW" Address="0x40083034" Width="32" Description="接收超时配置寄存器">
+        <Bit Name="TO" Authority="RW" Bits="15-0" Description="超时配置&#xD;&#xA;给这个寄存器写值后，会自动开启超时接收的指令&#xD;&#xA;• 超时配置位&#xD;&#xA;TO[15:0]                       Action&#xD;&#xA;0                         禁止接收端的超时功能&#xD;&#xA;1–65565             当开启超时接收时，或者每当收到一个数据字节时，超时计数                                   器会被载入TO[15:0]的值&#xD;&#xA;&#xD;&#xA;异步模式：超时时长= TO[15:0] × 位周期&#xD;&#xA;同步模式：超时时长= TO[15:0] × 16 × 位周期&#xD;&#xA;&#xD;&#xA;注意： 当设置US_CR寄存器的RXDIS位禁止接收端后，超时功能被停止，这时如果又通过US_CR的RXEN位重新使能了接收端，那么超时计数器会从刚才停止的地方继续开始(不会被复位)。" />
+      </Register>
+      <Register Name="US_TTGR" Authority="RW" Address="0x40083038" Width="32" Description="发送端Time-Guard寄存器">
+        <Bit Name="TG" Authority="RW" Bits="7-0" Description="Time-Guard配置&#xD;&#xA;• Time-Guard配置位&#xD;&#xA;TO[15:0]                              Action&#xD;&#xA;0                                      禁止发送端的time-guard功能&#xD;&#xA;1–255                               USARTTX在每发送完一个字节后，会变高一段时间，                                                这个时间段为time-guard时长&#xD;&#xA;&#xD;&#xA;Time-guard时长= TG[7:0] × 位周期" />
       </Register>
     </Peripheral>
     <Peripheral Name="SPI">
@@ -3411,20 +3549,6 @@
       </Register>
       <Register Name="HWD_CR" Authority="RW" Address="0x70000010" Width="32" Description="控制寄存器">
         <Bit Name="UNSIGN" Authority="RW" Bits="0" Description="运算符号位控制寄存器 &#xD;&#xA;0h：有符号除法运算 &#xD;&#xA;1h：无符号除法运算  " />
-      </Register>
-    </Peripheral>
-    <Peripheral Name="CORET">
-      <Register Name="CORET_CSR" Authority="RW" Address="0xe000e010" Width="32" Description="控制寄存器">
-        <Bit Name="COUNTFLAG" Authority="RO" Bits="16" Description="表示在上一次读此寄存器后计数器是否计数到 0：&#xD;&#xA;0 : 计数器还没有计数到0&#xD;&#xA;1 : 计数器已经计数到0&#xD;&#xA;在计数器的值由1变到0时，COUNTFLAG会被置位。&#xD;&#xA;读CSR寄存器以及任何写CVR寄存器会使COUNTFLAG 清零。" />
-        <Bit Name="CLKSOURCE" Authority="RW" Bits="2" Description="系统定时器时钟(STCLK)的时钟源选择：&#xD;&#xA;0 : 时钟源为(CORECLK/8)&#xD;&#xA;1 : 时钟源为CORECLK" />
-        <Bit Name="TICKINT" Authority="RW" Bits="1" Description="中断使能：&#xD;&#xA;0 : 禁止计数到0的中断&#xD;&#xA;1 : 使能计数到0的中断&#xD;&#xA;写CVR寄存器会使计数器清零，但不会导致系统计时器的中断状态位发生改变。" />
-        <Bit Name="ENABLE" Authority="RW" Bits="0" Description="定时器的使能控制：&#xD;&#xA;0 : 禁止定时器&#xD;&#xA;1 : 使能定时器" />
-      </Register>
-      <Register Name="CORET_RVR" Authority="RW" Address="0xe000e014" Width="32" Description="回填值寄存器">
-        <Bit Name="RELOAD" Authority="RW" Bits="23-0" Description="在计数器计数到0时，RELOAD值会被赋给CORET_CVR寄存器。&#xD;&#xA;向CORET_RVR寄存器写0会使计数器在下一次循环时停止工作，此后计数器的值将一直保持为0。当使用外部参考&#xD;&#xA;时钟使能计数器后，必须等到计数器正常计数开始后(即&#xD;&#xA;CORET_CVR 变为非0值时)，才可以将 CORET_RVR 置为0以让计数器在下一次循环时停止工作，否则计数器无法开始第一次计数。" />
-      </Register>
-      <Register Name="CORET_CVR" Authority="RW" Address="0xe000e018" Width="32" Description="当前值寄存器">
-        <Bit Name="CURRENT" Authority="RW" Bits="23-0" Description="计数器的当前值。&#xD;&#xA;&#xD;&#xA;写CORET_CVR寄存器会同时使此寄存器和COUNTFLAG&#xD;&#xA;状态位清零，并且会导致下一个时钟周期开始时，系统计时器取出寄存器CORET_RVR里的值并赋给CORET_CVR。&#xD;&#xA;注意写CORET_CVR不会导致系统计时器的中断状态位发生改变。&#xD;&#xA;读 CORET_CVR 会返回访问寄存器时计数器的值。" />
       </Register>
     </Peripheral>
     <Peripheral Name="INTERRUPT">
