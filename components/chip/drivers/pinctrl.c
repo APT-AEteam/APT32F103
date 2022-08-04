@@ -98,12 +98,12 @@ int gpio_intgroup_set(csp_gpio_t *ptGpioBase, uint8_t byPinNum, gpio_igrp_e eExi
 					else
 						return CSI_ERROR;
 					break;
-				case GRP_GPIOB0:
-					if(byPinNum < 4)		//PB0.0->PB0.3
-						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 8) << byMaskShift);
-					else
-						return CSI_ERROR;
-					break;
+//				case GRP_GPIOB0:
+//					if(byPinNum < 4)		//PB0.0->PB0.3
+//						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 8) << byMaskShift);
+//					else
+//						return CSI_ERROR;
+//					break;
 //				case GRP_GPIOC0:
 //					if((byPinNum < 2))		//PC0.0->PC0.1
 //						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 12) << byMaskShift);
@@ -205,23 +205,23 @@ static void apt_iomap_handle(pin_name_e ePinName, csi_gpio_iomap_e eIoMap, uint8
 					case IOMAP0_I2C_SDA:
 						wFlag |= (0x01 << IOMAP0_I2C_SDA);
 						break;
-					case IOMAP0_USART0_TX:
-						wFlag |= (0x01 << IOMAP0_USART0_TX);
+					case IOMAP0_GPT_CHA:
+						wFlag |= (0x01 << IOMAP0_GPT_CHA);
 						break;
-					case IOMAP0_USART0_RX:
-						wFlag |= (0x01 << IOMAP0_USART0_RX);
+					case IOMAP0_GPT_CHB:
+						wFlag |= (0x01 << IOMAP0_GPT_CHB);
 						break;
-					case IOMAP0_SPI_NSS:
-						wFlag |= (0x01 << IOMAP0_SPI_NSS);
-						break;
-					case IOMAP0_SPI_SCK:
-						wFlag |= (0x01 << IOMAP0_SPI_SCK);
+					case IOMAP0_SPI_MOSI:
+						wFlag |= (0x01 << IOMAP0_SPI_MOSI);
 						break;
 					case IOMAP0_SPI_MISO:
 						wFlag |= (0x01 << IOMAP0_SPI_MISO);
 						break;
-					case IOMAP0_SPI_MOSI:
-						wFlag |= (0x01 << IOMAP0_SPI_MOSI);
+					case IOMAP0_SPI_SCK:
+						wFlag |= (0x01 << IOMAP0_SPI_SCK);
+						break;
+					case IOMAP0_SPI_NSS:
+						wFlag |= (0x01 << IOMAP0_SPI_NSS);
 						break;
 				}
 			}
@@ -272,55 +272,32 @@ csi_error_t csi_pin_set_iomap(pin_name_e ePinName, csi_gpio_iomap_e eIoMap)
 	unsigned int *ptPinInfo = NULL;
 	
 	//IO REMAP
-	if((ePinName < PA06) || (ePinName == PB06) || (ePinName == PB07))		//iomap group1
+	if(ePinName < PA08)					//iomap group0
 	{
-		if((eIoMap < IOMAP1_USART0_TX) || (eIoMap > IOMAP1_CMP0_OUT))
-			return CSI_ERROR;	
-			
-		if(ePinName < PA06)										
-		{
-			apt_iomap_handle(ePinName, eIoMap, 1);
-			SYSCON->IOMAP1 = (SYSCON->IOMAP1 & ~(0x0F << 4*ePinName)) | ((eIoMap-8) << 4*ePinName);
-		}
-		else 
-		{
-			apt_iomap_handle((ePinName-30), eIoMap, 1);
-			SYSCON->IOMAP1 = (SYSCON->IOMAP1 & ~(0x0F << 4 * (ePinName-30))) | ((eIoMap-8) << (4 * (ePinName-30)));	
-		}
-	}
-	else 																	//iomap group0
-	{
-		if(eIoMap > IOMAP0_SPI_MOSI)
-			return CSI_ERROR;	
-			
-		if((ePinName == PA014) || (ePinName == PA015))			
-		{
-			apt_iomap_handle((ePinName-14), eIoMap, 0);
-			SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4 * (ePinName-14))) | (eIoMap << (4 * (ePinName-14)));
-		}
-		else if((ePinName > PA015))//&& (ePinName < PA13))
-		{
-			apt_iomap_handle((ePinName-11), eIoMap, 0);
-			SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4 * (ePinName-11))) | (eIoMap << (4 * (ePinName-11)));
-		}
-		else if(ePinName == PB03)
-		{
-			apt_iomap_handle((ePinName-31), eIoMap, 0);
-			SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4 * (ePinName-31))) | (eIoMap << (4 * (ePinName-31)));
-		}
-		else if(ePinName == PB04)
-		{
-			apt_iomap_handle((ePinName-30), eIoMap, 0);
-			SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4 * (ePinName-30))) | (eIoMap << (4 * (ePinName-30)));
-		}
-//		else if(ePinName == PC01)
-//		{
-//			apt_iomap_handle((ePinName-40), eIoMap, 0);
-//			SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4 * (ePinName-40))) | (eIoMap << (4 * (ePinName-40)));
-//		}
-		else
+		if(eIoMap > IOMAP0_SPI_NSS)
 			return CSI_ERROR;
 		
+		apt_iomap_handle(ePinName, eIoMap, 0);
+		
+		SYSCON->IOMAP0 = (SYSCON->IOMAP0 & ~(0x0F << 4*ePinName)) | (eIoMap << 4*ePinName);
+	}
+	else 								//iomap group1
+	{
+		if((eIoMap < IOMAP1_UART0_RX) || (eIoMap > IOMAP1_EPT_CHCY))
+			return CSI_ERROR;	
+		
+		if((ePinName > PA07) && (ePinName < PA014))			//PA08->PA013
+		{
+			apt_iomap_handle((ePinName - 6), eIoMap, 1);
+			SYSCON->IOMAP1 = (SYSCON->IOMAP1 & ~(0x0F << 4*(ePinName - 6))) |  ((eIoMap - 8) << 4*(ePinName - 6));
+		}
+		else if((ePinName == PB02) || (ePinName == PB03))	//PB02 or PB03
+		{
+			apt_iomap_handle((ePinName - 18), eIoMap, 1);
+			SYSCON->IOMAP1 = (SYSCON->IOMAP1 & ~(0x0F << 4*(ePinName - 18))) |  ((eIoMap - 8) << 4*(ePinName - 18));
+		}
+		else
+			return CSI_ERROR;
 	}
 
 	ptPinInfo = apt_get_pin_name_addr(ePinName);
@@ -435,29 +412,28 @@ void csi_pin_drive(pin_name_e ePinName, csi_gpio_drive_e eDrive)
  */ 
 csi_error_t csi_pin_input_mode(pin_name_e ePinName, csi_gpio_input_mode_e eInputMode)
 {
-
-//	csi_error_t ret = CSI_OK;
-//	csp_gpio_t *ptGpioBase = NULL;
-//	unsigned int *ptPinInfo = NULL;
-//	
-//	ptPinInfo = apt_get_pin_name_addr(ePinName);
-//	ptGpioBase = (csp_gpio_t *)ptPinInfo[0];	
-//	ePinName = (pin_name_e)ptPinInfo[1];	
-//	
-//	switch (eInputMode)
-//	{
-//		case (GPIO_INPUT_TTL2):	csp_gpio_ccm_ttl2(ptGpioBase, ePinName);
-//			break;
-//		case (GPIO_INPUT_TTL1): csp_gpio_ccm_ttl1(ptGpioBase, ePinName);
-//			break;
-//		case (GPIO_INPUT_CMOS):	csp_gpio_ccm_cmos(ptGpioBase, ePinName);
-//			break;
-//		default:
-//			ret = CSI_ERROR;
-//			break;
-//	}
+	csi_error_t ret = CSI_OK;
+	csp_gpio_t *ptGpioBase = NULL;
+	unsigned int *ptPinInfo = NULL;
 	
-	return CSI_UNSUPPORTED;
+	ptPinInfo = apt_get_pin_name_addr(ePinName);
+	ptGpioBase = (csp_gpio_t *)ptPinInfo[0];	
+	ePinName = (pin_name_e)ptPinInfo[1];	
+	
+	switch (eInputMode)
+	{
+		case (GPIO_INPUT_TTL2):	csp_gpio_ccm_ttl2(ptGpioBase, ePinName);
+			break;
+		case (GPIO_INPUT_TTL1): csp_gpio_ccm_ttl1(ptGpioBase, ePinName);
+			break;
+		case (GPIO_INPUT_CMOS):	csp_gpio_ccm_cmos(ptGpioBase, ePinName);
+			break;
+		default:
+			ret = CSI_ERROR;
+			break;
+	}
+	
+	return ret;
 }
 /** \brief set gpio pin input mode
  * 
@@ -482,12 +458,6 @@ csi_error_t csi_pin_output_mode(pin_name_e ePinName, csi_gpio_output_mode_e eOut
 			break;
 		case GPIO_OPEN_DRAIN:
 			csp_gpio_opendrain_en(ptGpioBase, ePinName);	//open drain mode 
-			break;
-		case GPIO_CONST_CURR_EN:
-			csp_gpio_constcurr_en(ptGpioBase, ePinName);	//constant current
-			break;
-		case GPIO_CONST_CURR_DIS:
-			csp_gpio_constcurr_dis(ptGpioBase, ePinName);
 			break;
 		default:
 			ret = CSI_ERROR;

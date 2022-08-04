@@ -109,7 +109,7 @@ __attribute__((weak)) void gpio_irqhandler(uint8_t byExiNum)
 			break;
 		
 	}
-	csp_exi_clr_port_irq(SYSCON,wExiSta);		//clear interrput 
+	csp_exi_clr_port_irq(SYSCON,wExiSta);				//clear interrput 
 }
 
 /** \brief get gpio port total number 
@@ -126,7 +126,7 @@ static uint8_t apt_get_gpio_port_num(csp_gpio_t *ptGpioBase)
 //		case APB_GPIOA1_BASE:
 //			return 14;
 		case APB_GPIOB0_BASE:
-			return 12;
+			return 14;
 //		case APB_GPIOC0_BASE:
 //			return 2;
 		default:
@@ -239,12 +239,6 @@ csi_error_t csi_gpio_port_output_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask,
 		case GPIO_OPEN_DRAIN:						//open drain output
 			ptGpioBase->OMCR = (ptGpioBase->OMCR & ~hwOpdVal) | hwOpdVal;
 			break;
-		case GPIO_CONST_CURR_EN:
-			ptGpioBase->OMCR = (ptGpioBase->OMCR & ~(hwOpdVal << 16)) | (hwOpdVal << 16);
-			break;
-		case GPIO_CONST_CURR_DIS:
-			ptGpioBase->OMCR &= ~(hwOpdVal << 16);
-			break;
 		default:
 			ret = CSI_ERROR;
 			break;
@@ -261,31 +255,33 @@ csi_error_t csi_gpio_port_output_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask,
  */ 
 csi_error_t csi_gpio_port_input_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask, csi_gpio_input_mode_e eInputMode)
 {
-//	csi_error_t	ret = CSI_OK;
-//	uint8_t i, byPortNum =  apt_get_gpio_port_num(ptGpioBase);	
-//
-//	if(byPortNum > 16)
-//		return CSI_ERROR;
-//		
-//	for(i = 0; i < byPortNum; i++)
-//	{
-//		if(wPinMask & 0x01)
-//		{
-//			switch(eInputMode)
-//			{
-//				case (GPIO_INPUT_TTL2):	csp_gpio_ccm_ttl2(ptGpioBase, i);
-//					break;
-//				case (GPIO_INPUT_TTL1): csp_gpio_ccm_ttl1(ptGpioBase, i);
-//					break;
-//				default:
-//					ret = CSI_ERROR;
-//				break;
-//			}
-//		}
-//		wPinMask = (wPinMask >> 1);
-//	}
-//	
-	return CSI_UNSUPPORTED;
+	csi_error_t	ret = CSI_OK;
+	uint8_t i, byPortNum =  apt_get_gpio_port_num(ptGpioBase);	
+
+	if(byPortNum > 16)
+		return CSI_ERROR;
+		
+	for(i = 0; i < byPortNum; i++)
+	{
+		if(wPinMask & 0x01)
+		{
+			switch(eInputMode)
+			{
+				case (GPIO_INPUT_TTL2):	csp_gpio_ccm_ttl2(ptGpioBase, i);
+					break;
+				case (GPIO_INPUT_TTL1): csp_gpio_ccm_ttl1(ptGpioBase, i);
+					break;
+				case (GPIO_INPUT_CMOS):	csp_gpio_ccm_cmos(ptGpioBase, i);
+					break;
+				default:
+					ret = CSI_ERROR;
+				break;
+			}
+		}
+		wPinMask = (wPinMask >> 1);
+	}
+	
+	return ret;
  }
 /** \brief config gpio input filtering
  * 

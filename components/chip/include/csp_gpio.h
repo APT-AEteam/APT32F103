@@ -315,20 +315,20 @@ static inline void csp_gpio_constcurr_dis(csp_gpio_t *ptGpioBase,uint8_t byPinNu
  * @brief  gpio pin driver strength
 ****************************************************************************/
 
-//static inline void csp_gpio_ccm_ttl2(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
-//{
-//	ptGpioBase->DSCR  = (ptGpioBase->DSCR) | (0x02 << (2*byPinNum));
-//	ptGpioBase->OMCR  = (ptGpioBase->OMCR) | (0x01 << (byPinNum+16));
-//}
-//static inline void csp_gpio_ccm_ttl1(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
-//{
-//	ptGpioBase->DSCR  = (ptGpioBase->DSCR) | (0x02 << (2*byPinNum));
-//	ptGpioBase->OMCR  = (ptGpioBase->OMCR) & ~(0x01 << (byPinNum+16));
-//}
-//static inline void csp_gpio_ccm_cmos(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
-//{
-//	ptGpioBase->DSCR  = (ptGpioBase->DSCR) & ~(0x02 << (2*byPinNum));
-//}
+static inline void csp_gpio_ccm_ttl2(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
+{
+	ptGpioBase->DSCR  = (ptGpioBase->DSCR) | (0x02 << (2*byPinNum));
+	ptGpioBase->OMCR  = (ptGpioBase->OMCR) | (0x01 << (byPinNum+16));
+}
+static inline void csp_gpio_ccm_ttl1(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
+{
+	ptGpioBase->DSCR  = (ptGpioBase->DSCR) | (0x02 << (2*byPinNum));
+	ptGpioBase->OMCR  = (ptGpioBase->OMCR) & ~(0x01 << (byPinNum+16));
+}
+static inline void csp_gpio_ccm_cmos(csp_gpio_t *ptGpioBase,uint8_t byPinNum)
+{
+	ptGpioBase->DSCR  = (ptGpioBase->DSCR) & ~(0x02 << (2*byPinNum));
+}
 
 static inline void csp_gpio_drv_set(csp_gpio_t *ptGpioBase, uint8_t byPinNum, uint8_t byDrive)
 {
