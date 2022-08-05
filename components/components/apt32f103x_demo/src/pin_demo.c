@@ -68,7 +68,7 @@ int pin_input_demo(void)
 	
 	uint32_t wStatus;
 	
-	csi_pin_set_mux(PA08,PA05_INPUT);			//PA08 配置为输入
+	csi_pin_set_mux(PA08,PA08_INPUT);			//PA08 配置为输入
 	csi_pin_pull_mode(PA08,GPIO_PULLNONE);		//无上下拉
 	mdelay(100);
 	wStatus = csi_pin_read(PA08);				//PA08 输入状态读取(0/1 = 高/低)

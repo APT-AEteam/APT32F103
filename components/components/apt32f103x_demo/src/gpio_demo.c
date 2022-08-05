@@ -21,7 +21,7 @@
 #define		PINMASK_PA00		(0x01ul << 0)	
 #define		PINMASK_PA01		(0x01ul << 1)
 #define		PINMASK_PA02		(0x01ul << 2)	
-#define		PINMASK_PA05		(0x01ul << 5)
+#define		PINMASK_PA06		(0x01ul << 6)
 #define		PINMASK_PA09		(0x01ul << 9)	
 #define		PINMASK_PA010		(0x01ul << 10)
 #define		PINMASK_PA013		(0x01ul << 13)
@@ -29,6 +29,8 @@
 #define		PINMASK_PB01		(0x01ul << 1)
 #define		PINMASK_PB02		(0x01ul << 2)
 #define		PINMASK_PB05		(0x01ul << 5)
+#define		PINMASK_PB012		(0x01ul << 12)
+#define		PINMASK_PB013		(0x01ul << 13)
 /* Private variablesr------------------------------------------------------*/
 
 /** \brief gpio port output demo 
@@ -109,7 +111,7 @@ int gpio_port_input_demo(void)
 int gpio_port_irq_demo(void)
 {
 	int iRet = 0;
-	uint32_t wPinMask = PINMASK_PA00 | PINMASK_PA02 | PINMASK_PA013; //GPIOA0端口，PA00/PA02/PA05
+	uint32_t wPinMask = PINMASK_PA00 | PINMASK_PA02 | PINMASK_PA013; //GPIOA0端口，PA00/PA02/PINMASK_PA013
 
 	csi_gpio_port_dir(GPIOA0, wPinMask, GPIO_DIR_INPUT);			//端口配置为输入
 	csi_gpio_port_pull_mode(GPIOA0, wPinMask, GPIO_PULLUP);			//上拉
