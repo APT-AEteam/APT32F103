@@ -95,12 +95,43 @@ int pin_input_demo(void)
 int pin_irq_demo(void)
 {
 	int iRet = 0;
-	csi_imosc_enable(2);
-	csi_exi_flt_enable(EXI_FLT_CKDIV4, ENABLE);					//EXI 去抖滤波
+//	csi_imosc_enable(2);
+//	csi_exi_flt_enable(EXI_FLT_CKDIV4, ENABLE);					//EXI 去抖滤波
 	csi_pin_set_mux(PB01, PB01_INPUT);							//PB01 配置为输入
 	csi_pin_pull_mode(PB01, GPIO_PULLUP);						//PB01 上拉
 	csi_pin_irq_mode(PB01, EXI_GRP18, GPIO_IRQ_FALLING_EDGE);	//PB01 下降沿产生中断
 	csi_pin_irq_enable(PB01, EXI_GRP18, ENABLE);				//PB01 中断使能，选择中断组5	
+	
+	return iRet;
+}
+/** \brief gpio pin ioremap demo 
+ * 
+ *  \param[in] none
+ *  \return error code
+ */
+int pin_ioremap_demo(void)
+{
+	int iRet = 0;
+	
+	//IOMAP GROUP0
+	csi_pin_set_iomap(PA00, IOMAP0_I2C_SCL);
+	csi_pin_set_iomap(PA01, IOMAP0_GPT_CHA);
+	csi_pin_set_iomap(PA02, IOMAP0_I2C_SDA);
+	csi_pin_set_iomap(PA03, IOMAP0_I2C_SCL);
+	csi_pin_set_iomap(PA04, IOMAP0_GPT_CHB);
+	csi_pin_set_iomap(PA05, IOMAP0_SPI_MOSI);
+	csi_pin_set_iomap(PA06, IOMAP0_SPI_SCK);
+	csi_pin_set_iomap(PA07, IOMAP0_SPI_MOSI);
+	
+	//IOMAP GROUP0
+	csi_pin_set_iomap(PB02, IOMAP1_UART0_TX);
+	csi_pin_set_iomap(PB03, IOMAP1_UART0_RX);
+	csi_pin_set_iomap(PA08, IOMAP1_EPT_CHAX);
+	csi_pin_set_iomap(PA09, IOMAP1_EPT_CHBX);
+	csi_pin_set_iomap(PA010, IOMAP1_UART0_TX);
+	csi_pin_set_iomap(PA011, IOMAP1_EPT_CHAY);
+	csi_pin_set_iomap(PA012, IOMAP1_EPT_CHAX);
+	csi_pin_set_iomap(PA013, IOMAP1_EPT_CHBY);
 	
 	return iRet;
 }
