@@ -98,12 +98,12 @@ int gpio_intgroup_set(csp_gpio_t *ptGpioBase, uint8_t byPinNum, gpio_igrp_e eExi
 					else
 						return CSI_ERROR;
 					break;
-//				case GRP_GPIOB0:
-//					if(byPinNum < 4)		//PB0.0->PB0.3
-//						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 8) << byMaskShift);
-//					else
-//						return CSI_ERROR;
-//					break;
+				case GRP_GPIOB0:
+					if(byPinNum < 4)		//PB0.0->PB0.3
+						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 8) << byMaskShift);
+					else
+						return CSI_ERROR;
+					break;
 //				case GRP_GPIOC0:
 //					if((byPinNum < 2))		//PC0.0->PC0.1
 //						GPIOGRP->IGREX = ((GPIOGRP->IGREX) & byMask) | ((byPinNum + 12) << byMaskShift);
