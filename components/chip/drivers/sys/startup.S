@@ -131,7 +131,7 @@ Reset_Handler:
     addi    a0, a0, 4
     bltu    a0, a1, 1b
 2:
-
+/*
 #ifndef __NO_SYSTEM_INIT
     jal     system_init 
 #endif
@@ -139,7 +139,7 @@ Reset_Handler:
 #ifndef __NO_BOARD_INIT
     jal     board_init   
 #endif
-
+*/
     jal     main
 
     .size   Reset_Handler, . - Reset_Handler
