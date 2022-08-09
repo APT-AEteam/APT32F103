@@ -190,7 +190,9 @@ typedef enum{
 	DMA_CH0EN_SR	= (0x01ul << 0),
 	DMA_CH1EN_SR	= (0x01ul << 1),
 	DMA_CH2EN_SR	= (0x01ul << 2),
-	DMA_CH3EN_SR	= (0x01ul << 3)
+	DMA_CH3EN_SR	= (0x01ul << 3),
+	DMA_CH4EN_SR	= (0x01ul << 4),
+	DMA_CH5EN_SR	= (0x01ul << 5),
 }dma_cesr_e;
 
 ///******************************************************************************
@@ -201,10 +203,14 @@ typedef enum{
 	DMA_CH1_LTCIT_SR	= (0x01ul << 1),
 	DMA_CH2_LTCIT_SR	= (0x01ul << 2),
 	DMA_CH3_LTCIT_SR	= (0x01ul << 3),
+	DMA_CH4_LTCIT_SR	= (0x01ul << 4),
+	DMA_CH5_LTCIT_SR	= (0x01ul << 5),
 	DMA_CH0_TCIT_SR		= (0x01ul << 16),
 	DMA_CH1_TCIT_SR		= (0x01ul << 17),
 	DMA_CH2_TCIT_SR		= (0x01ul << 18),
 	DMA_CH3_TCIT_SR		= (0x01ul << 19),
+	DMA_CH4_TCIT_SR		= (0x01ul << 20),
+	DMA_CH5_TCIT_SR		= (0x01ul << 21),
 }dma_isr_e;
 /******************************************************************************
 * ICR: Interrupt Clear Register
@@ -214,6 +220,8 @@ typedef enum{
 	DMA_CH1_IT		= (0x01ul << 1),
 	DMA_CH2_IT		= (0x01ul << 2),
 	DMA_CH3_IT		= (0x01ul << 3),
+	DMA_CH4_IT		= (0x01ul << 4),
+	DMA_CH5_IT		= (0x01ul << 5),
 }dma_icr_e;
 
 /******************************************************************************
