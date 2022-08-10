@@ -573,7 +573,7 @@ void spi_etcb_dma_send(void)
 	csi_spi_init(SPI0,&t_SpiConfig);					//初始化并启动spi
 	
 	csi_spi_nss_low(PA07);
-	csi_spi_send_dma(SPI0,(void *)bySdData,100,DMA, 0);  //使能dma通道，等待对应dma请求并传输
+	csi_spi_send_dma(SPI0,(void *)bySdData,100, 0);  //使能dma通道，等待对应dma请求并传输
 	csp_dma_t *ptDmaChBase = (csp_dma_t *)DMA_REG_BASE(DMA, 0);
 	while(csp_dma_get_curr_htc(ptDmaChBase));//等待直到dma传输完成
 	while(csp_spi_get_sr(SPI0) & SPI_BSY );		//wait for transmition finish
@@ -583,7 +583,7 @@ void spi_etcb_dma_send(void)
 	while(1)
 	{
 		csi_spi_nss_low(PA07);
-		csi_spi_send_dma(SPI0,(void *)bySdData,100,DMA, 0);
+		csi_spi_send_dma(SPI0,(void *)bySdData,100, 0);
 		while(csp_dma_get_curr_htc(ptDmaChBase));//等待直到dma传输完成
 		while(csp_spi_get_sr(SPI0) & SPI_BSY );	 //wait for transmition finish
 		csi_spi_nss_high(PA07);
@@ -688,8 +688,8 @@ void spi_etcb_dma_send_receive(void)
 	
 	
 	csi_spi_nss_low(PA07);
-	csi_spi_recv_dma(SPI0,(void *)byDesBuf,104,DMA, byChnl1);
-	csi_spi_send_dma(SPI0,(void *)bySrcBuf,104,DMA, byChnl);
+	csi_spi_recv_dma(SPI0,(void *)byDesBuf,104, byChnl1);
+	csi_spi_send_dma(SPI0,(void *)bySrcBuf,104, byChnl);
 
 	csp_dma_t *ptDmaChBase_01 = (csp_dma_t *)DMA_REG_BASE(DMA, 1);
 	csp_dma_t *ptDmaChBase_00 = (csp_dma_t *)DMA_REG_BASE(DMA, 0);
@@ -703,8 +703,8 @@ void spi_etcb_dma_send_receive(void)
 	while(1)
 	{
 		csi_spi_nss_low(PA07);
-		csi_spi_recv_dma(SPI0,(void *)byDesBuf,104,DMA, 1);
-		csi_spi_send_dma(SPI0,(void *)bySrcBuf,104,DMA, 0);
+		csi_spi_recv_dma(SPI0,(void *)byDesBuf,104, 1);
+		csi_spi_send_dma(SPI0,(void *)bySrcBuf,104, 0);
 		while(csp_dma_get_curr_htc(ptDmaChBase_00));			//等待直到dma发送完成
 		while(csp_dma_get_curr_htc(ptDmaChBase_01));			//等待直到dma接收完成
 		while( (SPI0->SR & SPI_BSY) );							//等到spi传输完成
