@@ -243,9 +243,9 @@ csi_error_t csi_uart_dma_tx_init(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, cs
   \param[in]   eDmaCh		channel number of dma, eDmaCh: DMA_CH0` DMA_CH3
   \param[in]   pData		pointer to buffer with data to send to uart transmitter.
   \param[in]   hwSize		number of data to send (byte).
-  \return  	   none
+  \return  	   error code \ref csi_error_t
  */
-void csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *pData, uint16_t hwSize);
+csi_error_t csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *pData, uint16_t hwSize);
 
 /** 
   \brief 	   receive data from uart, this function is dma mode
@@ -253,9 +253,10 @@ void csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *
   \param[in]   eDmaCh		channel number of dma, eDmaCh: DMA_CH0` DMA_CH3
   \param[in]   pData		pointer to buffer with data to receive to uart transmitter.
   \param[in]   hwSize		number of data to receive (byte).
-  \return  	   none
+  \return  	   error code \ref csi_error_t
  */
-void csi_uart_recv_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, void *pData, uint16_t hwSize);
+csi_error_t csi_uart_recv_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, void *pData, uint16_t hwSize);
+
 
 /**
   \brief       Query data from UART receiver FIFO, this function is blocking.

@@ -272,19 +272,19 @@ csi_error_t csi_usart_dma_tx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
   \brief 	   send data to usart transmitter, this function is dma mode
   \param[in]   ptUsartBase	pointer of usart register structure
   \param[in]   pData		pointer to buffer with data to send to usart transmitter.
-  \param[in]   wSize		number of data to send (byte).
+  \param[in]   wSize		number of data to send (byte), hwSize <= 0xfff.
   \return      error code \ref csi_error_t
  */
-void csi_usart_send_dma(csp_usart_t *ptUsartBase, const void *pData, uint8_t byDmaCh, uint16_t hwSize);
+csi_error_t csi_usart_send_dma(csp_usart_t *ptUsartBase, const void *pData, uint8_t byDmaCh, uint16_t hwSize);
 
 /** 
   \brief 	   receive data to usart transmitter, this function is dma mode
   \param[in]   ptUsartBase	pointer of usart register structure
   \param[in]   pData		pointer to buffer with data to send to usart transmitter.
-  \param[in]   wSize		number of data to send (byte).
+  \param[in]   wSize		number of data to send (byte), hwSize <= 0xfff.
   \return      error code \ref csi_error_t
  */
-void csi_usart_recv_dma(csp_usart_t *ptUsartBase, void *pData, uint8_t byDmaCh, uint16_t hwSize);
+csi_error_t csi_usart_recv_dma(csp_usart_t *ptUsartBase, void *pData, uint8_t byDmaCh, uint16_t hwSize);
 
 /**
   \brief       Query data from USART receiver FIFO, this function is blocking.
