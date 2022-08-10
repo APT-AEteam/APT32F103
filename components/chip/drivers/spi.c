@@ -1021,28 +1021,34 @@ csi_error_t csi_spi_send_receive_d8(csp_spi_t *ptSpiBase, uint8_t *pDataOut,uint
  * 
  *  \param[in] ptSpiBase: pointer of SPI reg structure.
  *  \param[in] pData: pointer to buffer data of SPI transmitter.
- *  \param[in] hwSize: number of data to send (byte).
- *  \param[in] ptDmaBase: pointer of DMA reg structure.
+ *  \param[in] hwSize: number of data to send (byte), hwSize <= 0xfff.
  *  \param[in] byDmaCh: channel of DMA(0 -> 3)
- *  \return  none
+ *  \return  error code \ref csi_error_t
  */
-void csi_spi_send_dma(csp_spi_t *ptSpiBase, const void *pData, uint16_t hwSize, csp_dma_t *ptDmaBase,uint8_t byDmaCh)
+csi_error_t csi_spi_send_dma(csp_spi_t *ptSpiBase, const void *pData, uint16_t hwSize, uint8_t byDmaCh)
 {	
-	csi_dma_ch_start(ptDmaBase, byDmaCh, (void *)pData, (void *)&(ptSpiBase->DR), hwSize);
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
+	csi_dma_ch_start(DMA, byDmaCh, (void *)pData, (void *)&(ptSpiBase->DR), hwSize, 1);
 	csp_spi_set_txdma(ptSpiBase, SPI_TDMA_EN, SPI_TDMA_FIFO_NFULL);
+	
+	return CSI_OK;
 }
 
 /** \brief receive data of spi by DMA
  * 
  *  \param[in] ptSpiBase: pointer of SPI reg structure.
  *  \param[in] pbyRecv: pointer to buffer data of SPI receive.
- *  \param[in] hwSize: number of data to receive (byte).
- *  \param[in] ptDmaBase: pointer of DMA reg structure.
+ *  \param[in] hwSize: number of data to receive (byte), hwSize <= 0xfff.
  *  \param[in] byDmaCh: channel of DMA(0 -> 3)
- *  \return  none
+ *  \return  error code \ref csi_error_t
  */
-void csi_spi_recv_dma(csp_spi_t *ptSpiBase, void *pbyRecv, uint16_t hwSize, csp_dma_t *ptDmaBase,uint8_t byDmaCh)
+csi_error_t csi_spi_recv_dma(csp_spi_t *ptSpiBase, void *pbyRecv, uint16_t hwSize ,uint8_t byDmaCh)
 {
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
 	csp_spi_set_rxdma(ptSpiBase, SPI_RDMA_EN, SPI_RDMA_FIFO_NSPACE);
-	csi_dma_ch_start(ptDmaBase, byDmaCh, (void *)&(ptSpiBase->DR),(void *)pbyRecv, hwSize);
+	csi_dma_ch_start(DMA, byDmaCh, (void *)&(ptSpiBase->DR),(void *)pbyRecv, hwSize, 1);
+	
+	return CSI_OK;
 }

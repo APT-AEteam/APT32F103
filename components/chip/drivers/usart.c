@@ -546,25 +546,34 @@ csi_error_t csi_usart_dma_tx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
  * 
  *  \param[in] ptUartBase: pointer of usart register structure
  *  \param[in] pData: pointer to buffer with data to send to usart transmitter.
- *  \param[in] hwSize: number of data to send (byte).
+ *  \param[in] hwSize: number of data to send (byte), hwSize <= 0xfff.
  *  \return  error code \ref csi_error_t
  */
-void csi_usart_send_dma(csp_usart_t *ptUsartBase, const void *pData, uint8_t byDmaCh, uint16_t hwSize)
+csi_error_t csi_usart_send_dma(csp_usart_t *ptUsartBase, const void *pData, uint8_t byDmaCh, uint16_t hwSize)
 {
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
+		
 	csp_usart_set_txdma(ptUsartBase, US_TDMA_EN, US_TDMA_FIF0_TRG);
-	csi_dma_ch_start(DMA, byDmaCh, (void *)pData, (void *)&(ptUsartBase->THR), hwSize);
+	csi_dma_ch_start(DMA, byDmaCh, (void *)pData, (void *)&(ptUsartBase->THR), hwSize, 1);
+	
+	return CSI_OK;
 }
 /** \brief receive data from usart, this function is dma transfer
  * 
  *  \param[in] ptUartBase: pointer of usart register structure
  *  \param[in] pData: pointer to buffer with data to send to usart transmitter.
- *  \param[in] hwSize: number of data to send (byte).
+ *  \param[in] hwSize: number of data to send (byte), hwSize <= 0xfff.
  *  \return  error code \ref csi_error_t
  */
-void csi_usart_recv_dma(csp_usart_t *ptUsartBase, void *pData, uint8_t byDmaCh, uint16_t hwSize)
+csi_error_t csi_usart_recv_dma(csp_usart_t *ptUsartBase, void *pData, uint8_t byDmaCh, uint16_t hwSize)
 {
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
 	csp_usart_set_rxdma(USART0, US_RDMA_EN, US_RDMA_FIFO_NSPACE);
-	csi_dma_ch_start(DMA, byDmaCh, (void *)&(USART0->RHR), (void *)pData, hwSize);
+	csi_dma_ch_start(DMA, byDmaCh, (void *)&(USART0->RHR), (void *)pData, hwSize, 1);
+	
+	return CSI_OK;
 }
 /** \brief get the status of usart send 
  * 

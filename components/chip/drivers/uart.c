@@ -484,14 +484,18 @@ csi_error_t csi_uart_dma_tx_init(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, cs
  *  \param[in] ptDmaBase: pointer of dma register structure
  *  \param[in] eDmaCh: channel number of dma, eDmaCh: DMA_CH0` DMA_CH3
  *  \param[in] pData: pointer to buffer with data to send to uart transmitter.
- *  \param[in] hwSize: number of data to send (byte).
- *  \return  none
+ *  \param[in] hwSize: number of data to send (byte); hwSize <= 0xfff
+ *  \return error code \ref csi_error_t
  */
-void csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *pData, uint16_t hwSize)
+csi_error_t csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *pData, uint16_t hwSize)
 {
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
+		
 	csp_uart_set_txdma(ptUartBase, UART_TDMA_EN, UART_TDMA_FIFO_NFULL);
-	csi_dma_ch_start(DMA, eDmaCh, (void *)pData, (void *)&(ptUartBase->DATA), hwSize);
+	csi_dma_ch_start(DMA, eDmaCh, (void *)pData, (void *)&(ptUartBase->DATA), hwSize, 1);
 	
+	return CSI_OK;
 }
 /** \brief receive data from uart, this function is dma mode
  * 
@@ -499,13 +503,17 @@ void csi_uart_send_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, const void *
  *  \param[in] ptDmaBase: pointer of dma register structure
  *  \param[in] eDmaCh: channel number of dma, eDmaCh: DMA_CH0` DMA_CH3
  *  \param[in] pData: pointer to buffer with data to receive to uart transmitter.
- *  \param[in] hwSize: number of data to receive (byte).
- *  \return  none
+ *  \param[in] hwSize: number of data to receive (byte), hwSize <= 0xfff
+ *  \return  error code \ref csi_error_t
  */
-void csi_uart_recv_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, void *pData, uint16_t hwSize)
+csi_error_t csi_uart_recv_dma(csp_uart_t *ptUartBase, csi_dma_ch_e eDmaCh, void *pData, uint16_t hwSize)
 {
+	if(hwSize > 0xfff)
+		return CSI_ERROR;
 	csp_uart_set_rxdma(UART1, UART_RDMA_EN, UART_RDMA_FIFO_NSPACE);
-	csi_dma_ch_start(DMA, eDmaCh, (void *)&(UART1->DATA), (void *)pData, hwSize);
+	csi_dma_ch_start(DMA, eDmaCh, (void *)&(UART1->DATA), (void *)pData, hwSize, 1);
+	
+	return CSI_OK;
 }
 /** \brief receive data from uart, this function is polling(sync).
  * 
