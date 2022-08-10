@@ -46,7 +46,7 @@ static uint8_t apt_dma_post_msg(csi_dma_int_msg_e eIntMsg, uint8_t byPost)
  */ 
 __attribute__((weak)) void dma_irqhandler(csp_dma_t *ptDmaBase)
 {
-	volatile uint32_t wIsr = csp_dma_get_isr(ptDmaBase) & 0x000f000f;
+	volatile uint32_t wIsr = csp_dma_get_isr(ptDmaBase) & 0x003f003f;
 	
 	switch(wIsr)
 	{
@@ -55,6 +55,8 @@ __attribute__((weak)) void dma_irqhandler(csp_dma_t *ptDmaBase)
 		case DMA_CH1_LTCIT_SR:
 		case DMA_CH2_LTCIT_SR:
 		case DMA_CH3_LTCIT_SR:
+		case DMA_CH4_LTCIT_SR:
+		case DMA_CH5_LTCIT_SR:
 			csp_dma_clr_isr(ptDmaBase, (uint8_t)wIsr);		//clear LTCIT status
 			apt_dma_post_msg(wIsr, 1);						//post LTCIT interrupt message
 			break;
@@ -64,6 +66,8 @@ __attribute__((weak)) void dma_irqhandler(csp_dma_t *ptDmaBase)
 		case DMA_CH1_TCIT_SR:
 		case DMA_CH2_TCIT_SR:
 		case DMA_CH3_TCIT_SR:
+		case DMA_CH4_TCIT_SR:
+		case DMA_CH5_TCIT_SR:
 			csp_dma_clr_isr(ptDmaBase, (wIsr >> 16));		//clear LTCIT status
 			apt_dma_post_msg((wIsr >> 12), 1);				//post TCIT interrupt message
 			break;
@@ -121,42 +125,46 @@ csi_error_t csi_dma_ch_init(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_c
  *  \param[in] eDmaCh: channel num of dma(4channel: 0->3)
  *  \param[in] pSrcAddr: src addr of transfer 
  *  \param[in] pDstAddr: dst addr of transfer 
- *  \param[in] wLen: length of transfer 
+ *  \param[in] hwHTranNum: high transfer num, hwHTranNum <= 0xfff; transfer number = hwHTranNum * hwLTranNum(TSIZE = ONCE)
+ *  \param[in] hwLTranNum: low transfer num,  hwLTranNum <= 0xfff; transfer number = hwHTranNum * hwLTranNum(TSIZE = ONCE)
+ * 			   transfer length (unit: bytes), if set data_width is 16, the length should be the multiple of 2, and
+			   if set data_width is 32, the length should be the multiple of 4
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_dma_ch_start(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, void *pSrcAddr, void *pDstAddr, uint32_t wLen)
+csi_error_t csi_dma_ch_start(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, void *pSrcAddr, void *pDstAddr, uint16_t hwHTranNum, uint16_t hwLTranNum)
 {
-	uint32_t wTranLtc = wLen;
-	uint32_t wTranHtc = 0x01;
+//	uint32_t wTranLtc = wLen;
+//	uint32_t wTranHtc = 0x01;
 	csp_dma_t *ptDmaChBase = (csp_dma_t *)DMA_REG_BASE(ptDmaBase, eDmaCh);
 	
-	if(eDmaCh >= DMA_CH_MAX_NUM)
+	if((eDmaCh >= DMA_CH_MAX_NUM) || ((hwHTranNum == 0) && (hwLTranNum == 0)))
 		return CSI_ERROR;
 	
-	if(csp_dma_get_crx(ptDmaChBase) & DMA_TSIZE_MSK)			//Tsize mode 4byte mode
-	{
-		if((wLen % 4) == 0)
-			wTranLtc = wLen >> 2;  
-		else
-			wTranLtc = (wLen >> 2) + 1;
-	}
+//	if(csp_dma_get_crx(ptDmaChBase) & DMA_TSIZE_MSK)			//Tsize mode 4byte mode
+//	{
+//		if((wLen % 4) == 0)
+//			wTranLtc = wLen >> 2;  
+//		else
+//			wTranLtc = (wLen >> 2) + 1;
+//	}
+//	
+//	if(wTranLtc > 0xfff)								
+//	{
+//		wTranHtc = wTranLtc / 0xfff;							//transfer low count and high count
+//		wTranLtc = wTranLtc % 0xfff;
+//	}
 	
-	if(wTranLtc > 0xfff)								
-	{
-		wTranHtc = wTranLtc / 0xfff;							//transfer low count and high count
-		wTranLtc = wTranLtc % 0xfff;
-	}
-	
-	if(csp_dma_get_crx(ptDmaChBase) & DMA_SMODE_MSK)				
-		csp_dma_set_ch_trans_num(ptDmaChBase, wTranLtc, wTranHtc);	//continuous mode: data length
-	else
-		csp_dma_set_ch_trans_num(ptDmaChBase, wTranHtc, wTranLtc);	//once mode: data length switch
+//	if(csp_dma_get_crx(ptDmaChBase) & DMA_SMODE_MSK)				
+//		csp_dma_set_ch_trans_num(ptDmaChBase, hwLTranNum, hwHTranNum);	//continuous mode: data length
+//	else
+//		csp_dma_set_ch_trans_num(ptDmaChBase, hwHTranNum, hwLTranNum);	//once mode: data length switch
 		
-	csp_dma_set_ch_src_addr(ptDmaChBase, (uint32_t)pSrcAddr);	//Src addr
-	csp_dma_set_ch_dst_addr(ptDmaChBase, (uint32_t)pDstAddr);	//dst addr
-	csp_dma_ch_en(ptDmaChBase);									//channel enable
+	csp_dma_set_ch_trans_num(ptDmaChBase, hwLTranNum, hwHTranNum);	//continuous mode: data length
+	csp_dma_set_ch_src_addr(ptDmaChBase, (uint32_t)pSrcAddr);		//Src addr
+	csp_dma_set_ch_dst_addr(ptDmaChBase, (uint32_t)pDstAddr);		//dst addr
+	csp_dma_ch_en(ptDmaChBase);										//channel enable
 	if(!csp_dma_get_rsrx(ptDmaChBase))
-		csp_dma_ch_swtrig(ptDmaChBase);							//sw triger 
+		csp_dma_ch_swtrig(ptDmaChBase);								//sw triger 
 	
 	return CSI_OK;
 }

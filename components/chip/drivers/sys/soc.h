@@ -41,8 +41,8 @@ extern "C" {
 #define IMOSC_5M_VALUE		5556000U
 #endif
 #ifndef IMOSC_4M_VALUE
-//#define IMOSC_4M_VALUE      4194000U  
-#define IMOSC_4M_VALUE      48000000U  
+#define IMOSC_4M_VALUE      4194000U  
+//#define IMOSC_4M_VALUE      48000000U  
 #endif
 #ifndef IMOSC_2M_VALUE
 #define IMOSC_2M_VALUE      2094000U
@@ -534,7 +534,7 @@ typedef enum{
 #define PFLASHSIZE			0x00010000  //64k  32k = 0x00008000
 #define PFLASHPAGE			256          //64k 32k = 128
 #define PFLASHLIMIT			(PFLASHBASE + PFLASHSIZE) 
-//#define USEROPTION_ADDR		0x000800C0
+#define USEROPTION_ADDR		0x000800C0
 #define DFLASHBASE			0x10000000
 #define DFLASHSIZE			0x00000800 //32k
 #define DFLASHPAGE			64  
