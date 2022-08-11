@@ -226,6 +226,9 @@ csi_error_t csi_lin_init(csp_lin_t *ptLinBase, csi_lin_config_t *ptLinCfg)
 {
 	uint8_t byClkDiv = 1;
 	
+	if(ptLinCfg->hwBaudRate == 0)						//Baud
+		return CSI_ERROR;
+	
 	csi_clk_enable((uint32_t *)ptLinBase);				//usart peripheral clk enable
 	csp_usart_clk_en(ptLinBase);						//usart clk enable
 	csp_usart_soft_rst(ptLinBase);
@@ -246,7 +249,8 @@ csi_error_t csi_lin_init(csp_lin_t *ptLinBase, csi_lin_config_t *ptLinCfg)
 		byClkDiv = 8;
 	else
 		byClkDiv = 1;
-	csp_usart_set_brdiv(ptLinBase, ptLinCfg->hwBaudRate, (csi_get_pclk_freq() >> 4)/byClkDiv);
+	//csp_usart_set_brdiv(ptLinBase, ptLinCfg->hwBaudRate, (csi_get_pclk_freq() >> 4)/byClkDiv);
+	csp_usart_set_brdiv(ptLinBase, ptLinCfg->hwBaudRate, csi_get_pclk_freq()/byClkDiv);
 	
 	//lin
 	csp_usart_lin_set_ver(ptLinBase, ptLinCfg->byLinVer);						//lin1.2/lin2.0

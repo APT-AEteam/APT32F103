@@ -155,11 +155,8 @@ typedef enum {
 
 typedef enum {
 	RTC_OUT_ALMA_PULSE = 0,
-	RTC_OUT_ALMA_HIGH,
-	RTC_OUT_ALMA_LOW,
-	RTC_OUT_ALMB_PULSE = 0,
-	RTC_OUT_ALMB_HIGH,
-	RTC_OUT_ALMB_LOW,	
+	RTC_OUT_ALMB_PULSE,
+	RTC_OUT_CPRD_PULSE,	
 }rtc_osel_e;
 
 #define RTC_CPRD_POS		(13ul)
@@ -192,7 +189,7 @@ typedef enum {
 typedef enum{
 	RTC_ISOSC = 0,
 	RTC_IMOSC_DIV4,
-	RTC_ESOSC,
+	RTC_EMOSC,
 	RTC_EMOSC_DIV4
 }rtc_clksrc_e;
 
@@ -382,7 +379,7 @@ static inline void csp_rtc_rb_enable(csp_rtc_t *ptRtcBase, bool bEnable)
 {
 	//while(ptRtcBase->CR & RTC_BSY);
 	ptRtcBase->KEY = 0xCA53;
-	ptRtcBase->CR = (ptRtcBase->CR &(~RTC_RBEN)) | (bEnable << 16);
+	ptRtcBase->CR = (ptRtcBase->CR &(~RTC_RBEN)) | (bEnable << 16) ;
 	ptRtcBase->KEY = 0x0;
 	while(ptRtcBase->CR & RTC_BSY);
 }
@@ -400,9 +397,15 @@ static inline void csp_rtc_set_osel(csp_rtc_t *ptRtcBase, rtc_osel_e eOsel)
 {
 	//while(ptRtcBase->CR & RTC_BSY);
 	ptRtcBase->KEY = 0xCA53;
-	ptRtcBase->CR  = (ptRtcBase->CR & (~RTC_OSEL_MSK)) | (eOsel << RTC_OSEL_POS) ;
+	ptRtcBase->CR  = (ptRtcBase->CR & (~RTC_OSEL_MSK)) | (eOsel << RTC_OSEL_POS);
 	ptRtcBase->KEY = 0x0;
 	while(ptRtcBase->CR & RTC_BSY);
+	
+//	ptRtcBase->KEY = 0xCA53;
+//	ptRtcBase->CR  = ptRtcBase->CR & 0xFFFEFFFF;
+//	ptRtcBase->KEY = 0x0;
+//	while(ptRtcBase->CR & RTC_BSY);
+	
 }
 
 static inline void csp_rtc_stop(csp_rtc_t *ptRtcBase)

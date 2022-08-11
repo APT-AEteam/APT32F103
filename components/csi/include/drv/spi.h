@@ -358,23 +358,21 @@ csi_error_t csi_spi_send_receive_d8(csp_spi_t *ptSpiBase, uint8_t *pDataOut,uint
  * 
  *  \param[in] ptSpiBase: pointer of SPI reg structure.
  *  \param[in] pData: pointer to buffer data of SPI transmitter.
- *  \param[in] hwSize: number of data to send (byte).
- *  \param[in] ptDmaBase: pointer of DMA reg structure.
+ *  \param[in] hwSize: number of data to send (byte), hwSize <= 0xfff.
  *  \param[in] byDmaCh: channel of DMA(0 -> 3)
- *  \return  none
+ *  \return  error code \ref csi_error_t
  */
-void csi_spi_send_dma(csp_spi_t *ptSpiBase, const void *pData, uint16_t hwSize, csp_dma_t *ptDmaBase,uint8_t byDmaCh);
+csi_error_t csi_spi_send_dma(csp_spi_t *ptSpiBase, const void *pData, uint16_t hwSize, uint8_t byDmaCh);
 
 /** \brief receive data of spi by DMA
  * 
  *  \param[in] ptSpiBase: pointer of SPI reg structure.
  *  \param[in] pbyRecv: pointer to buffer data of SPI receive.
- *  \param[in] hwSize: number of data to receive (byte).
- *  \param[in] ptDmaBase: pointer of DMA reg structure.
+ *  \param[in] hwSize: number of data to receive (byte), hwSize <= 0xfff.
  *  \param[in] byDmaCh: channel of DMA(0 -> 3)
- *  \return  none
+ *  \return  error code \ref csi_error_t
  */
-void csi_spi_recv_dma(csp_spi_t *ptSpiBase, void *pbyRecv, uint16_t hwSize, csp_dma_t *ptDmaBase,uint8_t byDmaCh);
+csi_error_t csi_spi_recv_dma(csp_spi_t *ptSpiBase, void *pbyRecv, uint16_t hwSize,  uint8_t byDmaCh);
 
 
 #ifdef __cplusplus
