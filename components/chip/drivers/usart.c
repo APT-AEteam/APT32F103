@@ -486,11 +486,7 @@ csi_error_t csi_usart_dma_rx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
 	//etb config
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE_DMA;			//单个源触发单个目标，DMA方式
 	tEtbConfig.bySrcIp 	= ETB_USART0_RXSRC;				//UART TXSRC作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;						
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp 	= ETB_DMA_CH0 + eDmaCh;			//ETB DMA通道 作为目标实际
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;			//通道触发模式采样硬件触发
 	
 	ret = csi_etb_ch_config(eEtbCh, &tEtbConfig);		//初始化ETB，DMA ETB CHANNEL > ETB_CH19_ID
@@ -528,11 +524,7 @@ csi_error_t csi_usart_dma_tx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
 	//etb config
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE_DMA;			//单个源触发单个目标，DMA方式
 	tEtbConfig.bySrcIp 	= ETB_USART0_TXSRC;				//UART TXSRC作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;						
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp 	= ETB_DMA_CH0 + eDmaCh;			//ETB DMA通道 作为目标实际
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;			//通道触发模式采样硬件触发
 	
 	ret = csi_etb_ch_config(eEtbCh, &tEtbConfig);		//初始化ETB，DMA ETB CHANNEL > ETB_CH19_ID
@@ -570,8 +562,8 @@ csi_error_t csi_usart_recv_dma(csp_usart_t *ptUsartBase, void *pData, uint8_t by
 {
 	if(hwSize > 0xfff)
 		return CSI_ERROR;
-	csp_usart_set_rxdma(USART0, US_RDMA_EN, US_RDMA_FIFO_NSPACE);
-	csi_dma_ch_start(DMA, byDmaCh, (void *)&(USART0->RHR), (void *)pData, hwSize, 1);
+	csp_usart_set_rxdma(ptUsartBase, US_RDMA_EN, US_RDMA_FIFO_NSPACE);
+	csi_dma_ch_start(DMA, byDmaCh, (void *)&(ptUsartBase->RHR), (void *)pData, hwSize, 1);
 	
 	return CSI_OK;
 }
