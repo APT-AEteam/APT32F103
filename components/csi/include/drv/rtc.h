@@ -53,17 +53,10 @@ struct csi_rtc {
     void               *priv;
 } ;
 
-//typedef enum{
-//	RTC_CLKSRC_ISOSC = 0,
-//	RTC_CLKSRC_IMOSC_DIV4,
-//	RTC_CLKSRC_EMOSC,
-//	RTC_CLKSRC_EMOSC_DIV4
-//}csi_rtc_clksrc_e;
-
 typedef enum{
 	RTC_CLKSRC_ISOSC = 0,
 	RTC_CLKSRC_IMOSC_DIV4,
-	RTC_CLKSRC_ESOSC,
+	RTC_CLKSRC_EMOSC,
 	RTC_CLKSRC_EMOSC_DIV4
 }csi_rtc_clksrc_e;
 
@@ -94,12 +87,8 @@ typedef enum {
 
 typedef enum {
 	RTC_ALMA_P = 0,
-	RTC_ALMA_H,
-	RTC_ALMA_L,
 	RTC_ALMB_P,
-	RTC_ALMB_H,
-	RTC_ALMB_L,
-	
+	RTC_CPRD_P,	
 }csi_rtc_osel_e;
 
 typedef enum{
@@ -124,15 +113,6 @@ typedef enum{
 }csi_rtc_intsrc_e;
 
 typedef enum{
-//	EveryDay   = 0x00,
-//	Sundays    = 0x01,
-//	Saturdays  = 0x02,
-//	Fridays    = 0x04,
-//	Thursdays  = 0x08,
-//	Wednesdays = 0x10,
-//	Tuesdays   = 0x20,
-//	Mondays    = 0x40
-	
 	EVERYDAY   = 0x00,
 	SUNDAYS    = 0x01,
 	SATURDAYS  = 0x02,

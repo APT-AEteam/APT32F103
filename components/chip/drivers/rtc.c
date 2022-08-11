@@ -58,12 +58,6 @@ void csi_rtc_init(csp_rtc_t *ptRtc, csi_rtc_config_t *tConfig)
 			byDiva = 49;
 			hwDivs = 269;
 			break;
-//		case (RTC_ESOSC):
-//			csi_esosc_enable(ESOSC_VALUE);
-//			byDiva = 3;
-//			hwDivs = 4095;
-////			hwDivs = 1;
-//			break;
 		case (RTC_IMOSC_DIV4):
 			switch(csp_get_imosc_fre(SYSCON))
 			{
@@ -87,19 +81,27 @@ void csi_rtc_init(csp_rtc_t *ptRtc, csi_rtc_config_t *tConfig)
 					break;
 			}			
 			break;
+		case (RTC_EMOSC):
+			csi_emosc_enable(4000000);     //外部接4MHz晶振，需要分频后得到2Hz的时钟。4000000÷(99+1)÷(19999+1) = 2Hz
+			byDiva = 99;                   //外部主晶振4MHz，如果不为4MHz请根据实际晶振大小再计算，7bits ,有效值范围0~127 
+			hwDivs = 19999;                //外部主晶振4MHz，如果不为4MHz请根据实际晶振大小再计算，15bits,有效值范围0~32767
+			break;
 		case (RTC_EMOSC_DIV4):
-			csi_emosc_enable(EMOSC_VALUE); //EMOSC_VALUE 值在board_config.h 文件定义
-			byDiva = 99;                   //外部主晶振12MHz，如果不为12MHz请根据实际晶振大小再计算
-			hwDivs = 14999;                //外部主晶振12MHz，如果不为12MHz请根据实际晶振大小再计算
+//			csi_emosc_enable(12000000);    //外部接12MHz晶振，需要分频后得到2Hz的时钟。(12000000÷4)÷(99+1)÷(14999+1) = 2Hz
+//			byDiva = 99;                   //外部主晶振12MHz，如果不为12MHz请根据实际晶振大小再计算，7bits ,有效值范围0~127
+//			hwDivs = 14999;                //外部主晶振12MHz，如果不为12MHz请根据实际晶振大小再计算，15bits,有效值范围0~32767
+			csi_emosc_enable(4000000);
+			byDiva = 99;
+			hwDivs = 4999;
 			break;
 		default:
 			break;
 	}
-//	GPIOC0->CONLR = (GPIOC0->CONLR & 0xFFFFFFF0)|0x00000007;      //PC00   Pin37  调试DIVA、DIVS参数时用
+//	GPIOA0->CONHR = (GPIOA0->CONHR & 0xFFFFFFF0) | 0x00000007; //PA0.8 CLO 输出 调试DIVA、DIVS参数时用
 //	SYSCON->OPT1  = (SYSCON->OPT1 & 0xFFFF80FF) | 6<<8 | 1<<12;   //CLO 输出RTCCLK ,不分频
 	ptRtc->KEY = 0xCA53;
 	RTC->CCR &= ~(0X01<<27);
-	ptRtc->CCR = (ptRtc->CCR & (~RTC_CLKSRC_MSK) & (~RTC_DIVA_MSK)& (~RTC_DIVS_MSK)) | (tConfig->byClkSrc << RTC_CLKSRC_POS)|(byDiva << RTC_DIVA_POS)| (hwDivs << RTC_DIVS_POS) | (RTC_CLKEN);
+	ptRtc->CCR = (ptRtc->CCR & (~RTC_CLKSRC_MSK) & (~RTC_DIVA_MSK)& (~RTC_DIVS_MSK)) | (tConfig->byClkSrc << RTC_CLKSRC_POS)|(byDiva << RTC_DIVA_POS)| (hwDivs << RTC_DIVS_POS) | (RTC_CLKEN)  | RTC_DBGEN;
 	//ptRtc->KEY = 0x0;
 	while((ptRtc->CCR & RTC_CLK_STABLE) == 0);
 	
@@ -108,6 +110,8 @@ void csi_rtc_init(csp_rtc_t *ptRtc, csi_rtc_config_t *tConfig)
 	csp_rtc_set_fmt(ptRtc, tConfig->byFmt);
 	csp_rtc_alm_enable(ptRtc, RTC_ALMB, DISABLE);
 	csp_rtc_alm_enable(ptRtc, RTC_ALMA, DISABLE);
+	
+	csp_rtc_set_osel(ptRtc,6);
 	
 	csp_rtc_int_enable(ptRtc, RTC_INTSRC_ALMA|RTC_INTSRC_ALMB|RTC_INTSRC_CPRD|RTC_INTSRC_TRGEV0|RTC_INTSRC_TRGEV1, DISABLE);
 	csp_rtc_int_clr(ptRtc, RTC_INTSRC_ALMA|RTC_INTSRC_ALMB|RTC_INTSRC_CPRD|RTC_INTSRC_TRGEV0|RTC_INTSRC_TRGEV1);
@@ -182,18 +186,23 @@ csi_error_t csi_rtc_set_time(csp_rtc_t *ptRtc, csi_rtc_time_t *ptRtcTime)
 		csp_rtc_stop(ptRtc);
 		
 	
-		
 		ptRtcTime->iWday = get_week_by_date((struct tm *)ptRtcTime);
 		
 		
 		apt_rtc_set_date(ptRtc, ptRtcTime->iYear, ptRtcTime->iMon, ptRtcTime->iWday, ptRtcTime->iMday);
 		
-	
-		if ((ptRtcTime->iHour == 12) && (csp_rtc_get_fmt(ptRtc) == RTC_FMT_24))
+		if ((ptRtcTime->iHour >= 12) && (csp_rtc_get_fmt(ptRtc) == RTC_FMT_24))
+		{
 			ret =  apt_rtc_set_time(ptRtc, RTC_PM, ptRtcTime->iHour, ptRtcTime->iMin,ptRtcTime->iSec);
+		}
+		else if((ptRtcTime->iHour < 12) && (csp_rtc_get_fmt(ptRtc) == RTC_FMT_24))
+		{
+			ret =  apt_rtc_set_time(ptRtc, RTC_AM, ptRtcTime->iHour, ptRtcTime->iMin,ptRtcTime->iSec);
+		}
 		else
+		{
 			ret =  apt_rtc_set_time(ptRtc, ptRtcTime->iPm, ptRtcTime->iHour, ptRtcTime->iMin,ptRtcTime->iSec);
-		
+		}
 		
 		if (ret < CSI_OK) {
             break;
@@ -570,7 +579,7 @@ __attribute__((weak)) void rtc_irqhandler(csp_rtc_t *ptRtcBase)
 	if(((csp_rtc_get_int_st(ptRtcBase) & RTC_INTSRC_CPRD))==RTC_INTSRC_CPRD)
 	{
 		s_hwRtcMsg |= RTC_INTSRC_CPRD;
-		csp_rtc_int_clr(ptRtcBase,RTC_INTSRC_CPRD);	
+		csp_rtc_int_clr(ptRtcBase,RTC_INTSRC_CPRD);
 	}	
 	if(((csp_rtc_get_int_st(ptRtcBase) & RTC_INTSRC_TRGEV0))==RTC_INTSRC_TRGEV0)
 	{
