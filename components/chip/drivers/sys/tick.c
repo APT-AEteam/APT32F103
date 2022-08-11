@@ -66,12 +66,12 @@ uint32_t csi_tick_get(void)
 uint32_t csi_tick_get_ms(void)
 {
     uint32_t time;
-
+	uint16_t cnttm;
+	
     while (1) 
 	{
-
-		time = (csi_tick * (1000U / CONFIG_SYSTICK_HZ))+(csp_bt_get_prdr(BT3)-csp_bt_get_cnt(BT3)) / 6000U;
-	
+		cnttm = (csp_bt_get_cnt(BT3) * (csp_bt_get_pscr(BT3)+1) * 1000) / csi_get_pclk_freq();
+		time = (csi_tick * (1000U / CONFIG_SYSTICK_HZ))+ cnttm;
         if (time >= last_time_ms) 
             break;
     }
@@ -85,17 +85,17 @@ static void _500usdelay(void)
     uint32_t start = csp_bt_get_cnt(BT3);
     uint32_t load = csp_bt_get_prdr(BT3);
     uint32_t cur;
-    uint32_t cnt = ((long long)csi_get_pclk_freq()) /(csp_bt_get_pscr(BT3)+1) /2000U  ;
+    volatile  uint32_t cnt = ((long long)csi_get_pclk_freq()) / (csp_bt_get_pscr(BT3)+1) /2000U  ;
 
     while (1) {
         cur = csp_bt_get_cnt(BT3);
 
         if (start <= cur) {
-            if ((start - cur) >= cnt) {
+            if ((cur - start) >= cnt) {
                 break;
             }
         } else {
-            if (((load - cur) + start) > cnt) {
+            if (((load - start) + cur) > cnt) {
                 break;
             }
         }
@@ -112,12 +112,12 @@ void _10udelay(void)
     while (1) {
         uint32_t cur = csp_bt_get_cnt(BT3);
 
-        if (start > cur) {
-            if ((start - cur) >= cnt) {
+        if (start <= cur) {
+            if ((cur - start) >= cnt) {
                 break;
             }
         } else {
-            if (((load - cur) + start) > cnt) {
+            if (((load - start) + cur) > cnt) {
                 break;
             }
         }
