@@ -31,18 +31,19 @@
    __IOM uint32_t	PHSR;     	//0x0028	Phase control reg
    __IOM uint32_t	CMPA;  		//0x002C	Compare Value A
    __IOM uint32_t	CMPB;   	//0x0030	Compare Value B
-   __IOM uint32_t	CMPC;     	//0x0034	Compare Value C 
-   __IOM uint32_t	CMPD;  		//0x0038	Compare Value D
+   __IOM uint32_t	RSVD1[2];
+  // __IOM uint32_t	CMPC;     	//0x0034	Compare Value C 
+  // __IOM uint32_t	CMPD;  		//0x0038	Compare Value D
    __IOM uint32_t	CMPLDR;	    //0x003C	Cmp reg load control
    __IOM uint32_t	CNT;      	//0x0040	Counter reg
    __IOM uint32_t	AQLDR; 		//0x0044	AQ reg load control
    __IOM uint32_t	AQCRA;      //0x0048	Action qualify of ch-A
    __IOM uint32_t	AQCRB;    	//0x004C	Action qualify of ch-B
 
-   __IM uint32_t	RSVD1[3];
+   __IM uint32_t	RSVD2[3];
    __IOM uint32_t	AQOSF; 		//0x005C	AQ output one-shot software forcing
    __IOM uint32_t	AQCSF;      //0x0060	AQ output conti-software forcing
-   __IM uint32_t	RSVD2[21];
+   __IM uint32_t	RSVD3[21];
    __IOM uint32_t   TRGFTCR;    //0x00B8    Trigger Filter control reg
    __IOM uint32_t   TRGFTWR;    //0x00BC    Trigger filter window
    __IOM uint32_t   EVTRG;      //0x00C0    Event trigger setting
