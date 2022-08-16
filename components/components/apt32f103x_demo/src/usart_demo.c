@@ -38,15 +38,11 @@ int usart_send_dma_demo(void)
 	volatile uint8_t byRecv;
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//TX	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//RX
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//CK,同步模式时使用
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 
-//	csi_pin_set_mux(PA14, PA14_USART0_TX);				//TX	
-//	csi_pin_set_mux(PA15, PA15_USART0_RX);				//RX
-//	csi_pin_set_mux(PA13, PA13_USART0_CK);				//CK
-//	csi_pin_pull_mode(PA15,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置	
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
 	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV8;		//clk = PCLK
 	tUsartCfg.byMode		= USART_MODE_ASYNC;			//异步模式
@@ -65,15 +61,15 @@ int usart_send_dma_demo(void)
 	csi_etb_init();										//使能ETB模块
 	//csi_dma_soft_rst(DMA);								//复位DMA模块
 
-	csi_usart_dma_tx_init(USART0, DMA_CH0, ETB_CH10);	//发送DMA初始化，选择DMA通道和ETB触发通道，DMA_CH: 0~3; ETB_CH: 8~11
+	csi_usart_dma_tx_init(USART0, DMA_CH5, ETB_CH11);	//发送DMA初始化，选择DMA通道和ETB触发通道，DMA_CH: 0~3; ETB_CH: 8~11
 	
 	while(1)
 	{
 		byRecv = csi_usart_getc(USART0);
 		if(byRecv == 0x06)
-			csi_usart_send_dma(USART0,(void *)bySdData, DMA_CH0, 31);	//采用DMA方式发送
+			csi_usart_send_dma(USART0,(void *)bySdData, DMA_CH5, 31);	//采用DMA方式发送
 		mdelay(10);
-		if(csi_dma_get_msg(DMA_CH0, ENABLE))			//获取发送完成消息，并清除消息
+		if(csi_dma_get_msg(DMA_CH5, ENABLE))			//获取发送完成消息，并清除消息
 		{
 			//添加用户代码
 			nop;
@@ -96,14 +92,11 @@ int usart_recv_dma_demo(void)
 	int iRet = 0;
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//TX	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//RX
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//CK，同步模式时使用
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
-	
-//	csi_pin_set_mux(PA14, PA14_USART0_TX);				//TX	
-//	csi_pin_set_mux(PA15, PA15_USART0_RX);				//RX
-//	csi_pin_set_mux(PA13, PA13_USART0_CK);				//CK
+
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
 	
 	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV1;		//clk = PCLK
@@ -123,17 +116,17 @@ int usart_recv_dma_demo(void)
 	csi_etb_init();										//使能ETB模块
 	//csi_dma_soft_rst(DMA);								//复位DMA模块	
 
-	csi_usart_dma_rx_init(USART0, DMA_CH3, ETB_CH11);			//DMA接收初始化，选择DMA通道和ETB触发通道，DMA_CH: 0~3; ETB_CH: 8~11
-	csi_usart_recv_dma(USART0,(void*)byRvUsart, DMA_CH3, 25);	//DMA接收
+	csi_usart_dma_rx_init(USART0, DMA_CH0, ETB_CH10);			//DMA接收初始化，选择DMA通道和ETB触发通道，DMA_CH: 0~3; ETB_CH: 8~11
+	csi_usart_recv_dma(USART0,(void*)byRvUsart, DMA_CH0, 25);	//DMA接收
 	
 	while(1)
 	{
-		if(csi_dma_get_msg(DMA_CH3, ENABLE))						//获取接收完成消息，并清除消息
+		if(csi_dma_get_msg(DMA_CH0, ENABLE))						//获取接收完成消息，并清除消息
 		{
 			//添加用户代码
 			csi_usart_send(USART0, (void*)byRvUsart, 25);
 			nop;
-			break;
+			//break;
 		}
 		mdelay(10);
 		nop;
@@ -153,11 +146,11 @@ int usart_char_demo(void)
 	int iRet = 0;
 	volatile uint8_t byRecv;
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
-	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//USART0 TX管脚配置	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//USART0 RX管脚配置
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//CK，同步模式时使用
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
 	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV1;		//clk = PCLK
 	tUsartCfg.byMode		= USART_MODE_ASYNC;			//异步模式
@@ -197,18 +190,18 @@ int usart_send_demo(void)
 	volatile uint8_t byRecv;
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//USART0 TX管脚配置	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//USART0 RX管脚配置
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//CK，同步模式时使用
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
-	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV1;		//clk = PCLK
+	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV8;		 //clk = PCLK
 	tUsartCfg.byMode		= USART_MODE_ASYNC;			//异步模式
 	tUsartCfg.byDatabit 	= USART_DATA_BITS_8;		//字节长度，8bit
 	tUsartCfg.byStopbit 	= USART_STOP_BITS_1;		//停止位，1个
 	tUsartCfg.byParity		= USART_PARITY_EVEN;		//偶校验
-	tUsartCfg.bClkOutEn		= DISABLE;					//禁止USARTCLK输出；同步模式时，USARTCLK可以给另外设备上的USART提供clk，作为同步输入时钟使用
-	tUsartCfg.wBaudRate 	= 115200;					//波特率：115200
+	tUsartCfg.bClkOutEn		= ENABLE;					//禁止USARTCLK输出；同步模式时，USARTCLK可以给另外设备上的USART提供clk，作为同步输入时钟使用
+	tUsartCfg.wBaudRate 	= 9600;					//波特率：115200
 	tUsartCfg.wInt			= USART_INTSRC_NONE;		//不使用中断
 	tUsartCfg.byTxMode		= USART_TX_MODE_POLL;		//发送模式：轮询/中断模式
 	tUsartCfg.byRxMode		= USART_RX_MODE_POLL;		//接收模式：轮询模式
@@ -218,8 +211,8 @@ int usart_send_demo(void)
 	
 	while(1)
 	{
-		byRecv = csi_usart_getc(USART0);
-		if(byRecv == 0x06)
+//		byRecv = csi_usart_getc(USART0);
+//		if(byRecv == 0x06)
 			byRecv = csi_usart_send(USART0,(void *)bySdData,18);		//采用轮询方式,调用该函数时，UART发送中断关闭
 		
 		nop;
@@ -241,10 +234,10 @@ int usart_send_int_demo(void)
 	volatile uint8_t byRecv;
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//USART0 TX管脚配置	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//USART0 RX管脚配置
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//CK，同步模式时使用
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
 	tUsartCfg.byClkSrc 		= USART_CLKSRC_DIV1;		//clk = PCLK
 	tUsartCfg.byMode		= USART_MODE_ASYNC;			//异步模式
@@ -263,8 +256,8 @@ int usart_send_int_demo(void)
 
 	while(1)
 	{
-		byRecv = csi_usart_getc(USART0);
-		if(byRecv == 0x06)
+//		byRecv = csi_usart_getc(USART0);
+//		if(byRecv == 0x06)
 		{
 			csi_usart_send(USART0,(void *)bySdData,18);		//采用中断方式。调用改函数时，UART发送中断使能
 			while(1)			
@@ -297,15 +290,11 @@ int usart_recv_dynamic_demo(void)
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 	volatile uint16_t hwRecvLen;
 	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//TX	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//RX
-	//csi_pin_set_mux(PA07, PA07_USART0_CK);				//RX	
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);
-
-//	csi_pin_set_mux(PA14, PA14_USART0_TX);				//TX	
-//	csi_pin_set_mux(PA15, PA15_USART0_RX);				//RX
-//	csi_pin_set_mux(PA13, PA13_USART0_CK);				//CK
-//	csi_pin_pull_mode(PA15,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+	
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
@@ -355,9 +344,10 @@ int usart_recv_int_demo(void)
 	uint16_t hwRecvNum = 1;
 	volatile uint16_t hwRecvLen;
 	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//TX	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//RX
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
 	
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
@@ -412,10 +402,11 @@ int usart_recv_demo(void)
 	csi_usart_config_t tUsartCfg;						//USART0 参数配置结构体
 	volatile uint8_t byRecv;
 	
-	csi_pin_set_mux(PB02, PB02_USART0_TX);				//TX	
-	csi_pin_set_mux(PA06, PA06_USART0_RX);				//RX
-	csi_pin_pull_mode(PA06,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
-	
+	csi_pin_set_mux(PB010, PB010_USART_TX);				//USART0 TX管脚配置	
+	csi_pin_set_mux(PB011, PB011_USART_RX);				//USART0 RX管脚配置
+	csi_pin_set_mux(PB08, PB08_USART_CK);				//CK，同步模式时使用
+	csi_pin_pull_mode(PB011,GPIO_PULLUP);				//RX管脚上拉使能, 建议配置
+
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度

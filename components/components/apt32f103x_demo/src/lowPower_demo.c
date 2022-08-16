@@ -83,25 +83,25 @@ void delay_ms(unsigned int t)
  */
 void lp_lpt_wakeup_deepsleep_demo(void)
 {
-	csi_pm_mode_e ePmMode = PM_MODE_DEEPSLEEP;		
+	csi_pm_mode_e ePmMode = PM_MODE_SLEEP;		
 	
-	csi_pin_set_mux(PA05,PA05_OUTPUT);				//PA05 OUTPUT
+	csi_pin_set_mux(PB05,PB05_OUTPUT);				//PA05 OUTPUT
 	
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
-	csi_pin_toggle(PA05);
+	csi_pin_toggle(PB05);
 	mdelay(250);
 
 #ifdef CONFIG_USER_PM	
@@ -109,15 +109,15 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 #endif
 
 	csi_pm_config_wakeup_source(WKUP_LPT, ENABLE);			//配置唤醒源
-//	csi_pm_clk_enable(DP_ISOSC, ENABLE);					//SNOOZE模式下时钟开启/关闭
-//	csi_pm_clk_enable(DP_IMOSC, ENABLE);
-//	csi_pm_clk_enable(DP_ESOSC, ENABLE);
-//	csi_pm_clk_enable(DP_EMOSC, ENABLE);
+					
+//	csi_clk_pm_enable(ISOSC_STP, ENABLE);  //DEEPSLEEP 模式下时钟开启/关闭
+//	csi_clk_pm_enable(IMOSC_STP, ENABLE);
+//	csi_clk_pm_enable(EMOSC_STP, ENABLE);
 	
 	//lpt初始化配置
-	csi_lpt_timer_init(LPT,LPT_CLK_ISCLK, 500);       		//初始化lpt,选用内部超低功耗时钟,定时500ms,默认采用PEND中断
+	csi_lpt_timer_init(LPT,LPT_CLK_ISCLK, 1000);       		//初始化lpt,选用内部超低功耗时钟,定时500ms,默认采用PEND中断
 	csi_lpt_start(LPT);	  
-	mdelay(10);
+//	mdelay(10);
 	
 	switch(ePmMode)
 	{
@@ -127,23 +127,23 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 		case PM_MODE_DEEPSLEEP:
 			my_printf("Enter Deep-Sleep mode\n");
 			break;
-		case PM_MODE_SNOOZE:
-			my_printf("Enter Snooze Mode\n");
-			break;
-		case PM_MODE_SHUTDOWN:
-			my_printf("Enter ShutDown Mode\n");
-			break;
+//		case PM_MODE_SNOOZE:
+//			my_printf("Enter Snooze Mode\n");
+//			break;
+//		case PM_MODE_SHUTDOWN:
+//			my_printf("Enter ShutDown Mode\n");
+//			break;
 		default:
 			break;
 	}
 	
 	while(1) 
 	{
-		csi_pin_set_high(PA05);
+//		csi_pin_set_high(PB05);
 		csi_pm_enter_sleep(ePmMode);
-		my_printf("Wakeup From Deep-Sleep Mode...\n");
-		csi_pin_set_low(PA05);
-		mdelay(200);
+		//my_printf("Wakeup From Deep-Sleep Mode...\n");
+		csi_pin_toggle(PB05);
+		
 	}
 }
 

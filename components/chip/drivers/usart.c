@@ -19,6 +19,7 @@
 
 #include "csp_dma.h"
 #include "csp_etb.h"
+#include "csp_usart.h"
 
 /* Private macro------------------------------------------------------*/
 /* externs function---------------------------------------------------*/
@@ -37,8 +38,6 @@ static uint8_t apt_get_usart_idx(csp_usart_t *ptUsartBase)
 	{
 		case APB_USART0_BASE:
 			return 0;
-//		case APB_USART1_BASE:
-//			return 1;
 		default:
 			return 0xff;		//error
 	}
@@ -67,7 +66,8 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 			else
 			{
 				//csp_usart_rxfifo_rst(ptUsartBase);  			// reset rxfifo 
-				csp_usart_cr_cmd(USART0, US_RSTRX | US_FIFO_EN | US_RXFIFO_1_2);	//reset rx 
+				csp_usart_cr_cmd(USART0, US_RSTRX );	//reset rx 
+				csp_usart_set_fifo(USART0, US_FIFO_EN , US_RXFIFO_1_2);
 				g_tUsartTran[byIdx].ptRingBuf->hwDataLen = 0;						//clear hwDataLen			
 			}
 			break;
@@ -96,12 +96,14 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 				}
 			}
 			else
-				csp_usart_cr_cmd(USART0, US_RSTRX | US_FIFO_EN | US_RXFIFO_1_2);	//reset rx 
+				csp_usart_cr_cmd(USART0, US_RSTRX );	//reset rx 
+				csp_usart_set_fifo(USART0, US_FIFO_EN , US_RXFIFO_1_2);
 				//csp_usart_rxfifo_rst(ptUsartBase);
 			
 			g_tUsartTran[byIdx].byRecvStat = USART_STATE_FULL;						//receive complete
 			csp_usart_clr_isr(USART0,US_TIMEOUT_INT);								//clear interrupt status
-			csp_usart_cr_cmd(USART0, US_STTTO | US_FIFO_EN | US_RXFIFO_1_2);		//enable receive timeover
+			csp_usart_cr_cmd(USART0, US_STTTO); // | US_FIFO_EN | US_RXFIFO_1_2);		//enable receive timeover
+			csp_usart_set_fifo(USART0,  US_FIFO_EN , US_RXFIFO_1_2);
 			break;
 			
 		default:
@@ -183,8 +185,8 @@ csi_error_t csi_usart_init(csp_usart_t *ptUsartBase, csi_usart_config_t *ptUsart
 		csp_usart_set_clko(ptUsartBase, US_CLKO_EN); 				//Enable usartclk output
 		
 	csp_usart_set_rtor(ptUsartBase, 2000);							//set receive timeover time
-	csp_usart_cr_cmd(ptUsartBase, US_FIFO_EN | US_RXFIFO_1_2);		//set fifo
-	//csp_usart_set_fifo(ptUsartBase, US_FIFO_EN, US_RXFIFO_1_2);		//set fifo
+	//csp_usart_cr_cmd(ptUsartBase, US_FIFO_EN | US_RXFIFO_1_2);		//set fifo
+	csp_usart_set_fifo(ptUsartBase, US_FIFO_EN, US_RXFIFO_1_2);		//set fifo
 	
 	//get usart rx/tx mode 
 	byIdx = apt_get_usart_idx(ptUsartBase);
@@ -198,8 +200,8 @@ csi_error_t csi_usart_init(csp_usart_t *ptUsartBase, csi_usart_config_t *ptUsart
 		ptUsartCfg->wInt &= 0xbdfd;													//clear tx all interrupt
 		if((ptUsartCfg->wInt) && (ptUsartCfg->byRxMode))							//receive iterrupt mode
 		{
-			csp_usart_cr_cmd(ptUsartBase, US_STTTO | US_FIFO_EN | US_RXFIFO_1_2);	//enable receive timeover
-			//csp_usart_cr_cmd(ptUsartBase, US_STTTO);
+			//csp_usart_cr_cmd(ptUsartBase, US_STTTO | US_FIFO_EN | US_RXFIFO_1_2);	//enable receive timeover
+			csp_usart_cr_cmd(ptUsartBase, US_STTTO);
 			ptUsartCfg->wInt |= US_TIMEOUT_INT;										//open receive timeout interrupt
 			csp_usart_int_enable(ptUsartBase, ptUsartCfg->wInt, ENABLE);			//enable usart interrupt
 		}
@@ -240,13 +242,17 @@ csi_error_t csi_usart_start(csp_usart_t *ptUsartBase, csi_usart_func_e eFunc)
 	switch(eFunc)
 	{
 		case USART_FUNC_RX:
-			csp_usart_cr_cmd(ptUsartBase, US_RXEN | US_FIFO_EN | US_RXFIFO_1_2);				//enable RX
+			csp_usart_cr_cmd(ptUsartBase, US_RXEN );				//enable RX
+			csp_usart_set_fifo(ptUsartBase, US_FIFO_EN, US_RXFIFO_1_2);
 			break;
 		case USART_FUNC_TX:
-			csp_usart_cr_cmd(ptUsartBase, US_TXEN | US_FIFO_EN | US_RXFIFO_1_2);				//enable TX
+			csp_usart_cr_cmd(ptUsartBase, US_TXEN );				//enable TX
+			csp_usart_set_fifo(ptUsartBase, US_FIFO_EN, US_RXFIFO_1_2);
 			break;
 		case USART_FUNC_RX_TX:
-			csp_usart_cr_cmd(ptUsartBase, US_RXEN | US_TXEN | US_FIFO_EN | US_RXFIFO_1_2);		//enable RX/TX
+//			csp_usart_cr_cmd(ptUsartBase, US_RXEN | US_TXEN | US_FIFO_EN | US_RXFIFO_1_2);		//enable RX/TX
+			csp_usart_cr_cmd(ptUsartBase, US_RXEN | US_TXEN);
+			csp_usart_set_fifo(ptUsartBase,  US_FIFO_EN, US_RXFIFO_1_2);
 			break;
 		default:
 			return CSI_ERROR;
@@ -265,10 +271,11 @@ csi_error_t csi_usart_stop(csp_usart_t *ptUsartBase, csi_usart_func_e eFunc)
 	switch(eFunc)
 	{
 		case USART_FUNC_RX:
-			csp_usart_cr_cmd(ptUsartBase, US_RXDIS | US_FIFO_EN | US_RXFIFO_1_2);		//disable RX
+			csp_usart_cr_cmd(ptUsartBase, US_RXDIS); // | US_FIFO_EN | US_RXFIFO_1_2);		//disable RX
+			
 			break;
 		case USART_FUNC_TX:
-			csp_usart_cr_cmd(ptUsartBase, US_TXDIS | US_FIFO_EN | US_RXFIFO_1_2);		//disable TX
+			csp_usart_cr_cmd(ptUsartBase, US_TXDIS); // | US_FIFO_EN | US_RXFIFO_1_2);		//disable TX
 			break;
 		case USART_FUNC_RX_TX:
 			csp_usart_cr_cmd(ptUsartBase, US_RXDIS | US_TXDIS);							//disable TX/RX
@@ -478,7 +485,7 @@ csi_error_t csi_usart_dma_rx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
 	tDmaConfig.byDetHinc 	= DMA_ADDR_INC;				//高位传输目标地址自增
 	tDmaConfig.byDataWidth 	= DMA_DSIZE_8_BITS;			//传输数据宽度8bit
 	tDmaConfig.byReload 	= DMA_RELOAD_DISABLE;		//禁止自动重载
-	tDmaConfig.byTransMode 	= DMA_TRANS_ONCE;			//DMA服务模式(传输模式)，连续服务
+	tDmaConfig.byTransMode 	= DMA_TRANS_CONTINU;			//DMA服务模式(传输模式)，连续服务
 	tDmaConfig.byTsizeMode  = DMA_TSIZE_ONE_DSIZE;		//传输数据大小，一个 DSIZE , 即DSIZE定义大小
 	tDmaConfig.byReqMode	= DMA_REQ_HARDWARE;			//DMA请求模式，硬件请求
 	tDmaConfig.wInt			= DMA_INTSRC_TCIT;			//使用TCIT中断
@@ -516,10 +523,10 @@ csi_error_t csi_usart_dma_tx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
 	tDmaConfig.byDetHinc 	= DMA_ADDR_CONSTANT;		//高位传输目标地址固定不变
 	tDmaConfig.byDataWidth 	= DMA_DSIZE_8_BITS;			//传输数据宽度8bit
 	tDmaConfig.byReload 	= DMA_RELOAD_DISABLE;		//禁止自动重载
-	tDmaConfig.byTransMode 	= DMA_TRANS_ONCE;			//DMA服务模式(传输模式)，连续服务
+	tDmaConfig.byTransMode 	= DMA_TRANS_CONTINU;			//DMA服务模式(传输模式)，连续服务
 	tDmaConfig.byTsizeMode  = DMA_TSIZE_ONE_DSIZE;		//传输数据大小，一个 DSIZE , 即DSIZE定义大小
 	tDmaConfig.byReqMode	= DMA_REQ_HARDWARE;			//DMA请求模式，软件请求（软件触发）
-	tDmaConfig.wInt			= DMA_INTSRC_TCIT;			//使用TCIT中断
+	tDmaConfig.wInt			= DMA_INTSRC_LTCIT;			//使用TCIT中断
 	
 	//etb config
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE_DMA;			//单个源触发单个目标，DMA方式
@@ -534,6 +541,7 @@ csi_error_t csi_usart_dma_tx_init(csp_usart_t *ptUsartBase, csi_dma_ch_e eDmaCh,
 	
 	return ret;
 }
+
 /** \brief send data from usart, this function is dma transfer
  * 
  *  \param[in] ptUartBase: pointer of usart register structure

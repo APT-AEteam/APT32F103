@@ -14,6 +14,7 @@
 #include <drv/lin.h>
 #include <drv/tick.h>
 #include <drv/usart.h>
+#include "csp_usart.h"
 
 /* LIN ID introduction------------------------------------------------*/
 //Frame ID: 0x00-0x3B, 信号携带帧，包含：无条件/事件触发/偶发帧
@@ -54,7 +55,7 @@ static uint8_t apt_lin_get_ndata(csp_lin_t *ptLinBase, uint8_t byDataLen, csi_li
 		case LIN_VER1_2:
 			if(byDataLen < 4)
 				byDataNum = 1;				//Number of data = 2
-			else if(byDataNum < 8)
+			else if(byDataLen < 8)
 				byDataNum = 2;				//Number of data = 4
 			else 
 				byDataNum = 3;				//Number of data = 8
@@ -133,11 +134,11 @@ static uint8_t apt_lin_set_data(csp_lin_t *ptLinBase, uint8_t *pbyData, uint8_t 
 	
 	return byDataNum;
 }
-/** \brief lin interrupt handle function, 
+/** \brief lin interrupt handle function
+ * 
  *  \param[in] ptLinBase: pointer of lin register structure
  *  \param[in] byIdx: lin id number(0)
  *  \return none
- *  \note:  when use lin demo, please uncomment this funtion ,and comment USART0_irqhandler function in interrupt.c.
  */ 
 __attribute__((weak)) void lin_irqhandler(csp_lin_t *ptLinBase, uint8_t byIdx)
 {
@@ -228,7 +229,7 @@ csi_error_t csi_lin_init(csp_lin_t *ptLinBase, csi_lin_config_t *ptLinCfg)
 	
 	if(ptLinCfg->hwBaudRate == 0)						//Baud
 		return CSI_ERROR;
-	
+		
 	csi_clk_enable((uint32_t *)ptLinBase);				//usart peripheral clk enable
 	csp_usart_clk_en(ptLinBase);						//usart clk enable
 	csp_usart_soft_rst(ptLinBase);
