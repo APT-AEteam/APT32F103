@@ -29,9 +29,9 @@ MEMORY
 
 /*heap and stack*/
 __heap_size  = 0x00;							/* heap for dynamically allocated memory */	
-__stack_size = STACK_SIZE;
+/*__stack_size = STACK_SIZE;
 __stack_top = ORIGIN(RAM) + LENGTH(RAM);
-__stack_start = __stack_top - STACK_SIZE - __heap_size; 
+__stack_start = __stack_top - STACK_SIZE - __heap_size; */
 
 /*PROVIDE (__ram_end  = 0x0000C000); */			/* define symbol for external reference*/
 /*PROVIDE (__heap_end = __ram_end);  */
