@@ -30,9 +30,6 @@ build_config:
   libpath: ~
 source_file:
   - src/*.c
-  - src/etcb_demo.c
-  - src/gpta_demo.c
-  - src/ept_demo.c
 def_config: ~
 install: ~
 depends_forward: ~
