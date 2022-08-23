@@ -211,8 +211,9 @@ csi_error_t csi_lpt_timer_init(csp_lpt_t *ptLptBase,csi_lpt_clksrc_e eClk, uint3
 	else
 	{
 		csp_lpt_set_prdr(ptLptBase, (uint16_t)wLptPrd);
+		csp_lpt_set_cmp(ptLptBase, (uint16_t)wLptPrd >> 1);
 	}
-	csi_lpt_int_enable(ptLptBase,LPT_PEND_INT,ENABLE);	 //enable PEND interrupt
+	csi_lpt_int_enable(ptLptBase,LPT_PEND_INT, ENABLE);	 //enable PEND interrupt
 	return tRet;	
 }
 
@@ -300,13 +301,10 @@ bool csi_lpt_is_running(csp_lpt_t *ptLptBase)
  */
 void csi_lpt_pwm_para_updata(csp_lpt_t *ptLptBase, uint16_t hwCmp, uint16_t hwPrdr, csi_lpt_updata_e eModeUpdata)
 {
-	
-	csp_lpt_data_update(ptLptBase, hwCmp, hwPrdr);
 	if(eModeUpdata == LPT_UPDATA_IM)
-	{
-		csp_lpt_set_prdr(ptLptBase, hwPrdr);
-		csp_lpt_set_cmp(ptLptBase, hwCmp);
-	}
+		ptLptBase->CR &= ~(LPT_CMPLD_MSK | LPT_PRDLD_MSK);
+		
+	csp_lpt_data_update(ptLptBase, hwPrdr, hwCmp);
 }
 
 /** \brief restart lpt sync 
@@ -425,13 +423,13 @@ csi_error_t csi_lpt_pwm_init(csp_lpt_t *ptLptBase, csi_lpt_pwm_config_t *ptLptPa
 		wCmp = wLptPrd*ptLptPara->byCycle/100;		
 	}
 	
-	if(wCmp == 0)
-	{
-		if(ptLptPara->byStartpol == LPT_PWM_START_HIGH)
-			ptLptPara->byStartpol = LPT_PWM_START_LOW; 
-		else
-			ptLptPara->byStartpol = LPT_PWM_START_HIGH; 
-	}
+//	if(wCmp == 0)
+//	{
+//		if(ptLptPara->byStartpol == LPT_PWM_START_HIGH)
+//			ptLptPara->byStartpol = LPT_PWM_START_LOW; 
+//		else
+//			ptLptPara->byStartpol = LPT_PWM_START_HIGH; 
+//	}
 	
 	csp_lpt_set_pol(ptLptBase, ptLptPara->byStartpol);
 	csp_lpt_set_idle_st(ptLptBase, ptLptPara->byIdlepol);
@@ -487,13 +485,13 @@ csi_error_t csi_lpt_pwm_start_sync(csp_lpt_t *ptLptBase, csi_lpt_pwm_config_t *p
 	{
 		wCmp = wLptPrd*ptLptPara->byCycle/100;		
 	}
-	if(wCmp == 0)
-	{
-		if(ptLptPara->byStartpol == LPT_PWM_START_HIGH)
-			ptLptPara->byStartpol = LPT_PWM_START_LOW; 
-		else
-			ptLptPara->byStartpol = LPT_PWM_START_HIGH; 
-	}
+//	if(wCmp == 0)
+//	{
+//		if(ptLptPara->byStartpol == LPT_PWM_START_HIGH)
+//			ptLptPara->byStartpol = LPT_PWM_START_LOW; 
+//		else
+//			ptLptPara->byStartpol = LPT_PWM_START_HIGH; 
+//	}
 	csp_lpt_set_pol(ptLptBase, ptLptPara->byStartpol);
 	csp_lpt_prdr_ldmode(ptLptBase, LPT_PRDLD_IM);
 	csp_lpt_cmp_ldmode(ptLptBase, LPT_CMPLD_IM);
@@ -524,17 +522,19 @@ csi_error_t csi_lpt_change_duty(csp_lpt_t *ptLptBase, uint32_t wDutyCycle)
 	{
 		hwCmp = wLptPrd*wDutyCycle/100;		
 	}
-	if(hwCmp == 0)
-	{
-		if(byStartpolBack == LPT_PWM_START_HIGH)
-			csp_lpt_set_pol(ptLptBase, LPT_PWM_START_LOW);	
-		else
-			csp_lpt_set_pol(ptLptBase, LPT_PWM_START_HIGH);
-	}
-	else
-	{
-		csp_lpt_set_pol(ptLptBase, byStartpolBack);		
-	}
+	
+//	if(hwCmp == 0)
+//	{
+//		if(byStartpolBack == LPT_PWM_START_HIGH)
+//			csp_lpt_set_pol(ptLptBase, LPT_PWM_START_LOW);	
+//		else
+//			csp_lpt_set_pol(ptLptBase, LPT_PWM_START_HIGH);
+//	}
+//	else
+//	{
+//		csp_lpt_set_pol(ptLptBase, byStartpolBack);		
+//	}
+
 	csp_lpt_set_cmp(ptLptBase, hwCmp);
 	return CSI_OK;
 }
@@ -613,4 +613,39 @@ csi_error_t csi_lpt_set_sync(csp_lpt_t *ptLptBase, csi_lpt_trgin_e eTrgin, csi_l
 void csi_lpt_swsync_enable(csp_lpt_t *ptLptBase, bool bEnable)
 {
 	csp_lpt_swsync_enable(ptLptBase, bEnable);
+}
+
+/** \brief lpt software generates a trigger event
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \return none
+ */
+void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase)
+{
+	csi_clk_enable(ptLptBase);										
+	csp_lpt_trg_enable(ptLptBase, ENABLE);
+	csp_lpt_evswf_en(ptLptBase);
+}
+/** \brief LPT sync filt offset and window value config
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \param[in] hwOffset: filtering window offset 
+ *  \param[in] hwWindow: filtering window width
+ *  \return none
+ */
+void csi_lpt_sync_filt_window_timing(csp_lpt_t *ptLptBase, uint16_t hwOffset, uint16_t hwWindow)
+{
+	csp_lpt_sync_window_timing(ptLptBase, hwOffset, hwWindow);
+}
+/** \brief LPT sync filt offset and window value config
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \param[in] eWindowCross: window cross TB period enable 
+ *  \param[in] eWindowInv: window inv enable
+ *  \param[in] bEnable: sync filter enable
+ *  \return none
+ */
+void csi_lpt_sync_filt_window_ctrl(csp_lpt_t *ptLptBase, csi_lpt_window_cross_e eWindowCross, csi_lpt_window_inv_e eWindowInv, bool bEnble)
+{
+	csp_lpt_sync_window_ctrol(ptLptBase, eWindowCross, eWindowInv, bEnble);
 }
