@@ -42,7 +42,7 @@ extern "C" {
 #endif
 #ifndef IMOSC_4M_VALUE
 #define IMOSC_4M_VALUE      4194000U  
-//#define IMOSC_4M_VALUE      48000000U  
+
 #endif
 #ifndef IMOSC_2M_VALUE
 #define IMOSC_2M_VALUE      2094000U

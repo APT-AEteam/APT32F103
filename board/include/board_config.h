@@ -37,8 +37,8 @@ extern "C" {
 
 #define XIN_PIN							PA03
 #define XOUT_PIN						PA04
-#define XIN_PIN_FUNC					PA03_OSC_XI
-#define XOUT_PIN_FUNC					PA04_OSC_XO
+#define XIN_PIN_FUNC					PA03
+#define XOUT_PIN_FUNC					PA04
 
 
 #define EXI_PIN                      	PA09
