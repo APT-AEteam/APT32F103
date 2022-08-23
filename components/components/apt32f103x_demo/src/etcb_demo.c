@@ -48,11 +48,7 @@ int etcb_one_trg_one_demo0(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT1 ;  	    //EXI1 触发输出0作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN0;   	    //BT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -63,11 +59,7 @@ int etcb_one_trg_one_demo0(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_BT0_TRGOUT ;  	    //BT0 触发输出0作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_LPT_SYNCIN0;   	    //LPT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -119,13 +111,13 @@ void etcb_adc_config(void)
 	csi_adc_config_t tAdcConfig;
 	
 	//adc 输入管脚配置
-	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
-	csi_pin_set_mux(PB00, PB00_ADC_AIN3);
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);
+	csi_pin_set_mux(PA03, PA03_ADC_AIN3);
 	
-	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
+	csi_pin_set_mux(PA09,  PA09_ADC_AIN10);
+	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+	csi_pin_set_mux(PA011, PA011_ADC_AIN12);
 
 	byAdcChnlNum = 6;                                           //通道数配置为6路                               
 	
@@ -147,13 +139,13 @@ void etcb_adc_config(void)
 void etcb_ept_config(void)
 {
 //------------------------------------------------------------------------------------------------------------------------	
-	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//PIN17
-	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//PIN18
-	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//PIN19
+	csi_pin_set_mux(PA010, PA010_EPT_CHAX);						//
+	csi_pin_set_mux(PA011, PA011_EPT_CHBX);						//
+//	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//PIN19
 	
-	csi_pin_set_mux(PA10, PA10_EPT_CHAY);						//PIN14	
-	csi_pin_set_mux(PA11, PA11_EPT_CHBY);						//PIN15
-	csi_pin_set_mux(PA12, PA12_EPT_CHCY);						//PIN16
+//	csi_pin_set_mux(PA10, PA10_EPT_CHAY);						//PIN14	
+//	csi_pin_set_mux(PA11, PA11_EPT_CHBY);						//PIN15
+//	csi_pin_set_mux(PA12, PA12_EPT_CHCY);						//PIN16
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_config_t tPwmCfg;								  
 	tPwmCfg.byWorkmod       = EPT_WAVE;                        //WAVE or CAPTURE    //计数或捕获	
@@ -200,11 +192,7 @@ int etcb_one_trg_one_demo1(void)
 
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  	//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_ETP0_TRGOUT0 ;  	//EPT0 触发输出作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_ADC_SYNCIN0;   	//ADC_SYNCIN0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -232,8 +220,8 @@ void etcb_adc_config12(void)
 	csi_adc_config_t tAdcConfig;
 	
 	//adc 输入管脚配置
-	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);
 
 	byAdcChnlNum = 2;                                
 	
@@ -265,11 +253,8 @@ int etcb_one_trg_more_demo(void)
 
 	tEtbConfig.byChType = ETB_ONE_TRG_MORE;  	//单个源触发多个目标
 	tEtbConfig.bySrcIp  = ETB_ETP0_TRGOUT0 ;  	//EPT0 触发输出作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_ADC_SYNCIN0;   	//ADC_SYNCIN0 同步输入作为目标事件
 	tEtbConfig.byDstIp1 = ETB_ADC_SYNCIN1;      //ADC_SYNCIN1 同步输入作为目标事件
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -298,9 +283,9 @@ void etcb_adc_config13(void)
 	csi_adc_config_t tAdcConfig;
 	
 	//adc 输入管脚配置
-	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
+	csi_pin_set_mux(PA09,  PA09_ADC_AIN10);
+	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+	csi_pin_set_mux(PA011, PA011_ADC_AIN12);
 
 	byAdcChnlNum = 3;                                           //通道数配置为3路                               
 	
@@ -350,8 +335,6 @@ int etcb_more_trg_one_demo(void)
 	tEtbConfig.bySrcIp1 = ETB_EXI_TRGOUT2;      
 	tEtbConfig.bySrcIp2 = ETB_EXI_TRGOUT3;
 	tEtbConfig.byDstIp =  ETB_ADC_SYNCIN0;   	    //ADC0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -409,8 +392,6 @@ int etcb_mix_demo(void)
 	tEtbConfig.bySrcIp1 = ETB_EXI_TRGOUT2;      
 	tEtbConfig.bySrcIp2 = ETB_EXI_TRGOUT3;
 	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN0;   	    //BT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -421,11 +402,7 @@ int etcb_mix_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_BT0_TRGOUT ;  	    //BT0 触发输出0作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_LPT_SYNCIN0;   	    //LPT 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -436,11 +413,7 @@ int etcb_mix_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_LPT_TRGOUT0 ;  	    //LPT 触发输出0作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_ADC_SYNCIN0;   	    //ADC0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();

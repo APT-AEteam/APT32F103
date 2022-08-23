@@ -101,11 +101,8 @@ typedef volatile struct {                   			/*!< SYSCON Structure            
 
 /// IDCCR reg content
 #define SYSCON_CLKEN		(0x01ul)
-#define SYSCON_SWRST_POS 	(5)
-typedef enum{
-	SYS_SWRST	= 0x04ul,
-	CPU_SWRST 	= 0x05ul
-}sw_rst_e;
+#define SYSCON_CPU_SWRST    (1<<7)
+
 #define SYSCON_IDKEY		(0xE11Eul << 16)
 
 /// GCER/GCDR/GCSR/CKST reg content
@@ -122,12 +119,11 @@ typedef enum{
 	HCLK_IDLE,
 	ISOSC_STP = 12, 
 	IMOSC_STP,
-	ESOSC_STP,
-	EMOSC_STP
+	EMOSC_STP = 15,
 }clk_pm_e;
 
-#define ES_CM_EN 	(0x01ul<<16)
-#define ES_CMRST 	(0x01ul<<17)
+//#define ES_CM_EN 	(0x01ul<<16)
+//#define ES_CMRST 	(0x01ul<<17)
 
 #define EM_CM_EN 	(0x01ul<<18)
 #define EM_CMRST 	(0x01ul<<19)
@@ -160,7 +156,6 @@ typedef enum{
 #define SC_EMOSC 	1
 #define SC_HFOSC 	2
 #define SC_ISOSC 	4
-#define SC_ESOSC 	5
 
 #define HCLK_DIV_MSK (0xful<<8)
 #define SCLK_KEY (0xd22dul<<16)
@@ -176,8 +171,7 @@ typedef enum{
 #define EM_GM_POS	(11)
 #define EM_GM_MSK	(0x1F << EM_GM_POS)
 
-#define ES_GM_POS	(28)
-#define ES_GM_MSK	(0xF << ES_GM_POS)
+
 
 ///LVDCR 
 #define LVDEN_MSK (0xf)
@@ -620,10 +614,10 @@ static inline void csp_set_em_gain(csp_syscon_t *ptSysconBase, uint8_t byGn)
 {
 	ptSysconBase->OSTR = (ptSysconBase->OSTR & (~EM_GM_MSK)) | (byGn << EM_GM_POS);
 }
-static inline void csp_set_es_gain(csp_syscon_t *ptSysconBase, uint8_t byGn)
-{
-	ptSysconBase->OSTR = (ptSysconBase->OSTR & (~ES_GM_MSK)) | (byGn << ES_GM_POS);
-}
+//static inline void csp_set_es_gain(csp_syscon_t *ptSysconBase, uint8_t byGn)
+//{
+//	ptSysconBase->OSTR = (ptSysconBase->OSTR & (~ES_GM_MSK)) | (byGn << ES_GM_POS);
+//}
 
 static inline void csp_set_lvr_level(csp_syscon_t *ptSysconBase,lvr_level_e eLvl)
 {
@@ -791,21 +785,21 @@ static inline void csp_emcm_rst_enable(csp_syscon_t *ptSysconBase, bool bEnable)
 		ptSysconBase -> GCDR = EM_CMRST;
 }
 
-static inline void csp_escm_enable(csp_syscon_t *ptSysconBase, bool bEnable)
-{
-	if (bEnable)
-		ptSysconBase -> GCER = ES_CM_EN;
-	else
-		ptSysconBase -> GCDR = ES_CM_EN;
-}
-
-static inline void csp_escm_rst_enable(csp_syscon_t *ptSysconBase, bool bEnable)
-{
-	if (bEnable)
-		ptSysconBase -> GCER = ES_CMRST;
-	else
-		ptSysconBase -> GCDR = ES_CMRST;
-}
+//static inline void csp_escm_enable(csp_syscon_t *ptSysconBase, bool bEnable)
+//{
+//	if (bEnable)
+//		ptSysconBase -> GCER = ES_CM_EN;
+//	else
+//		ptSysconBase -> GCDR = ES_CM_EN;
+//}
+//
+//static inline void csp_escm_rst_enable(csp_syscon_t *ptSysconBase, bool bEnable)
+//{
+//	if (bEnable)
+//		ptSysconBase -> GCER = ES_CMRST;
+//	else
+//		ptSysconBase -> GCDR = ES_CMRST;
+//}
 
 //wkcr 
 static inline void csp_set_deepsleep_mode(csp_syscon_t *ptSysconBase, deepsleep_mode_e eDpSleep)
@@ -838,9 +832,9 @@ static inline void csp_set_ureg(csp_syscon_t *ptSysconBase, uint8_t byNum, uint3
 	*(uint32_t *)((uint32_t)&ptSysconBase->UREG0 + (byNum * 4)) = wVal;
 }
 //IDCCR
-static inline void csp_set_swrst(csp_syscon_t *ptSysconBase, sw_rst_e eSwRst)
+static inline void csp_set_swrst(csp_syscon_t *ptSysconBase)
 {
-	ptSysconBase->IDCCR |= (SYSCON_IDKEY | (eSwRst << SYSCON_SWRST_POS));
+	ptSysconBase->IDCCR = ((ptSysconBase->IDCCR)&0x0000ffff)|(SYSCON_IDKEY | SYSCON_CPU_SWRST);
 }
 
 #endif  /* _CSP_SYSCON_H*/

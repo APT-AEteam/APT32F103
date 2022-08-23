@@ -70,7 +70,7 @@ extern "C" {
 
 //ETB dma start channel  number
 //ETB max channel  number
-#define ETB_CH_DMA_STAR		ETB_CH8
+#define ETB_CH_DMA_STAR		ETB_CH6
 #define ETB_CH_MAX_NUM		12
 
 //UARTx id number

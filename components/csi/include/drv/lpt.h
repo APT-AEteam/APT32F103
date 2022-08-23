@@ -86,9 +86,21 @@ typedef enum
 
 typedef enum
 {
-    LPT_CNT_CONTINU 	= 	(0x00ul),
-	LPT_CNT_ONCE = 		 	(0x01ul)
+    LPT_CNT_CONTINU		= (0x00ul),
+	LPT_CNT_ONCE		= (0x01ul)
 }csi_lpt_cntmode_e;
+
+typedef enum
+{
+    LPT_WINDOW_INV_DIS	= 0,
+	LPT_WINDOW_INV_EN
+}csi_lpt_window_inv_e;
+
+typedef enum
+{
+    LPT_WINDOW_CROSS_DIS= 0,
+	LPT_WINDOW_CROSS_EN
+}csi_lpt_window_cross_e;
 
 typedef struct
 {
@@ -257,9 +269,35 @@ csi_error_t csi_lpt_set_fre(csp_lpt_t *ptLptBase, csi_lpt_clksrc_e eClk, uint16_
  * 
  *  \param ptLptBase:pointer of lpt register structure
  *  \param bEnable: ENABLE/DISABLE
- *  \return void
+ *  \return none
  */
 void csi_lpt_swsync_enable(csp_lpt_t *ptLptBase, bool bEnable);
+
+/** \brief lpt software generates a trigger event
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \return none
+ */
+void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase);
+
+/** \brief LPT sync filt offset and window value config
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \param[in] hwOffset: filtering window offset 
+ *  \param[in] hwWindow: filtering window width
+ *  \return none
+ */
+void csi_lpt_sync_filt_window_timing(csp_lpt_t *ptLptBase, uint16_t hwOffset, uint16_t hwWindow);
+
+/** \brief LPT sync filt offset and window value config
+ * 
+ *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \param[in] eWindowCross: window cross TB period enable 
+ *  \param[in] eWindowInv: window inv enable
+ *  \param[in] bEnable: sync filter enable
+ *  \return none
+ */
+void csi_lpt_sync_filt_window_ctrl(csp_lpt_t *ptLptBase, csi_lpt_window_cross_e eWindowCross, csi_lpt_window_inv_e eWindowInv, bool bEnble);
 
 #ifdef __cplusplus
 }

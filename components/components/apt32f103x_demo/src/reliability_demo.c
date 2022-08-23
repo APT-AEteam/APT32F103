@@ -99,21 +99,3 @@ void emcm_demo(void)
 	csi_emcm_disable();					//取消对外部晶振的检测。
 }
 
-
-/** \brief 外部副时钟监测的使用方法。必须外接晶振。
- * 
- *  \param[in] none
- *  \return error code
- */
-void escm_demo(void)
-{
-	csi_pin_set_mux(PA01, PA01_OSC_SXI);
-	csi_pin_set_mux(PA02, PA02_OSC_SXO);
-	
-	csi_esosc_enable(0);			 //使能外部晶振驱动电路,输入频率参数，以调整内部增益
-	
-	csi_escm_2_imosc_int();				//一旦检测到外部晶振失常，系统时钟切到IMOSC，并触发中断。注意：
-	csi_escm_rst();						//一旦检测到外部晶振失常，系统复位。
-	csi_escm_disable();					//取消对外部晶振的检测。
-	
-}
