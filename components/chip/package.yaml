@@ -54,7 +54,7 @@ hw_info:
   chip_name: ""
   board_name: ""
   ld_script: ""
-  flash_program: APT32F103_FLASHDOWN_1.elf
+  flash_program: APT32F103_FLASHDOWN.elf
 #flash_program: APT32F102_FLASHDOWN.elf
 ## chip component(多处理器)
 # hw_info:
