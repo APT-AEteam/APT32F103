@@ -27,7 +27,7 @@
 int lin_send_test(void)
 {
 	int iRet = 0;
-//	volatile uint8_t byRecv;
+	volatile uint8_t byRecv;
 	uint8_t bySdBuf[8] = {0x45,0x46,3,4,5,6,7,8};
 	csi_lin_config_t tLinCfg;							//lin 初始化参数配置结构体
 
@@ -54,25 +54,22 @@ int lin_send_test(void)
 	csi_lin_init(LIN0, &tLinCfg);						//初始化LIN
 	csi_lin_start(LIN0);
 
-//	mdelay(10);
-    nop;
-	nop;
-	nop;
-	
+	mdelay(10);
+
 	while(1)
 	{
-	//	byRecv = csi_uart_getc(UART0);
-		//if(byRecv == 0x06)
+		byRecv = csi_uart_getc(UART0);
+		if(byRecv == 0x06)
 		{
 			csi_lin_send(LIN0, 0x0e, (void *)bySdBuf, 8);		//发送完整帧
-//			while(1)
-//			{
-//				if(csi_lin_get_msg(LIN0, ENABLE))
-//				{
-//					nop;
-//					break;
-//				}
-//			}
+			while(1)
+			{
+				if(csi_lin_get_msg(LIN0, ENABLE))
+				{
+					nop;
+					break;
+				}
+			}
 		}
 		nop;
 		mdelay(10);
@@ -113,16 +110,13 @@ int lin_send_recv_test(void)
 	csi_lin_init(LIN0, &tLinCfg);						//初始化LIN
 	csi_lin_start(LIN0);
 
-	//mdelay(10);
-	nop;
-	nop;
-	nop;
-	nop;
+	mdelay(10);
+
 	
 	while(1)
 	{
-		//byRecv = csi_uart_getc(UART0);
-	//	if(byRecv == 0x06)
+		byRecv = csi_uart_getc(UART0);
+		if(byRecv == 0x06)
 		{
 			
 			iRet = csi_lin_send_recv(LIN0, 0x0e, (void *)byReBuf, 7);	//发送帧头，等待应答数据
@@ -134,7 +128,7 @@ int lin_send_recv_test(void)
 				
 		}
 		
-		//mdelay(10);
+		mdelay(10);
 	}
 	
 	return iRet;

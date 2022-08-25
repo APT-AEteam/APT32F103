@@ -356,45 +356,6 @@ void csi_emcm_disable(void)
 	
 }
 
-/// ************************************************************************
-///						for ES clock monitor
-///*************************************************************************
-
-/**
-  \brief       claim INT and switch sysclk to IMOSC when ESOSC failure detected
-  \return      none
-*/
-void csi_escm_2_imosc_int(void)
-{
-
-	csi_imosc_enable(0);  //0 - 5MHz   1 - 4MHz  2 - 2MHz  3 - 131KHz
-	csp_escm_enable(SYSCON, ENABLE);
-	csp_escm_rst_enable(SYSCON, DISABLE);
-	
-	csp_syscon_int_enable(SYSCON, ESFAIL_INT, ENABLE);
-	csi_vic_enable_irq(SYSCON_IRQ_NUM);
-}
-
-/**
-  \brief      rest chip when EMOSC failure detected
-  \param       none
-  \return      none
-*/
-void csi_escm_rst(void)
-{	
-	csp_escm_enable(SYSCON, ENABLE);
-	csp_escm_rst_enable(SYSCON, ENABLE);
-}
-
-/**
-  \brief       disable EMOSC monitor funtion
-  \param       none
-  \return      none
-*/
-void csi_escm_disable(void)
-{
-	csp_escm_enable(SYSCON, DISABLE);
-}
 
 /// *********************************************************************************
 ///  For SWD Lock function: To switch SWD pins to other AF, should unlock SWD first 
@@ -406,7 +367,9 @@ void csi_escm_disable(void)
 */
 void csi_swd_lock(void)
 {
-	*(uint32_t *)(0x40011128) = 0;
+	//*(uint32_t *)(0x40011128) = 0;
+	//SYSCON->DBGCR = 0x5a;
+	csp_swd_lock(SYSCON);
 }
 
 /**
@@ -415,5 +378,6 @@ void csi_swd_lock(void)
 */
 void csi_swd_unlock(void)
 {
-	*(uint32_t *)(0x40011128) = 0x5a;
+	//*(uint32_t *)(0x40011128) = 0x5a;
+	csp_swd_unlock(SYSCON);
 }
