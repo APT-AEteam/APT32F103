@@ -54,6 +54,26 @@ void csi_ifc_dflash_paramode_enable(csp_ifc_t *ptIfcBase, bool bEnable);
 */
 csi_error_t csi_ifc_read(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *data, uint32_t wDataNum);
 
+/** \brief Program data (<page size)to DFLASH. NOTE!!! Extra ERASE is NOT needed before programming.
+ * 
+ *  \param[in] ptIfcBase：pointer of ifc register structure
+ *  \param[in] wAddr：Data address (SHOULD BE WORD ALLIGNED)
+ *  \param[in] pwData: data  Pointer to a buffer containing the data to be programmed to Flash.
+ *  \param[in] wDataWordNum: Number of data(WORDS) items to program.
+ *  \return error code
+ */
+csi_error_t csi_ifc_dflash_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataWordNum);
+
+
+/** \brief Program data (<page size)to PFLASH. NOTE!!! Extra ERASE is NOT needed before programming.
+ * 
+ *  \param[in] ptIfcBase：pointer of ifc register structure
+ *  \param[in] wAddr：Data address (SHOULD BE WORD ALLIGNED)
+ *  \param[in] pwData: data  Pointer to a buffer containing the data to be programmed to Flash.
+ *  \param[in] wDataWordNum: Number of data(WORDS) items to program.
+ *  \return error code
+ */
+csi_error_t csi_ifc_pflash_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataWordNum);
 
 /** \brief Program data (<page size)to Flash. NOTE!!! Extra ERASE is NOT needed before programming.
  * 
