@@ -13,7 +13,6 @@
 #include "sys_clk.h"
 #include <drv/gpio.h>
 #include <drv/pin.h>
-
 #include "demo.h"
 /* externs function--------------------------------------------------------*/
 /* externs variablesr------------------------------------------------------*/
@@ -112,26 +111,38 @@ int pin_irq_demo(void)
 int pin_ioremap_demo(void)
 {
 	int iRet = 0;
+
+	
+//	csi_pin_set_mux(PA07, PA07_OUTPUT);                     //PA07 as output
+//	csi_pin_output_mode(PA07, GPIO_PUSH_PULL);              //PA07 push pull mode
+//	csi_spi_nss_high(PA07);								    //PA07 NSS init high
+	
+//	csi_pin_output_mode(PA00,GPIO_OPEN_DRAIN);
+//	csi_pin_output_mode(PA01,GPIO_OPEN_DRAIN);
+//	csi_swd_unlock();
 	
 	//IOMAP GROUP0
-	csi_pin_set_iomap(PA00, IOMAP0_I2C_SCL);
-	csi_pin_set_iomap(PA01, IOMAP0_GPT_CHA);
-	csi_pin_set_iomap(PA02, IOMAP0_I2C_SDA);
-	csi_pin_set_iomap(PA03, IOMAP0_I2C_SCL);
-	csi_pin_set_iomap(PA04, IOMAP0_GPT_CHB);
-	csi_pin_set_iomap(PA05, IOMAP0_SPI_MOSI);
-	csi_pin_set_iomap(PA06, IOMAP0_SPI_SCK);
-	csi_pin_set_iomap(PA07, IOMAP0_SPI_MOSI);
+//	csi_pin_set_iomap(PA00, IOMAP0_I2C_SCL);
+//	csi_pin_set_iomap(PA01, IOMAP0_I2C_SDA);
+	csi_pin_set_iomap(PA02, IOMAP0_GPT_CHA);
+	csi_pin_set_iomap(PA03, IOMAP0_GPT_CHB);
+//	csi_pin_set_iomap(PA04, IOMAP0_SPI_MOSI);
+//	csi_pin_set_iomap(PA05, IOMAP0_SPI_MISO);
+//	csi_pin_set_iomap(PA06, IOMAP0_SPI_SCK);
+//	csi_pin_set_iomap(PA07, IOMAP0_SPI_NSS);
 	
 	//IOMAP GROUP0
-	csi_pin_set_iomap(PB02, IOMAP1_UART0_TX);
-	csi_pin_set_iomap(PB03, IOMAP1_UART0_RX);
-	csi_pin_set_iomap(PA08, IOMAP1_EPT_CHAX);
-	csi_pin_set_iomap(PA09, IOMAP1_EPT_CHBX);
-	csi_pin_set_iomap(PA010, IOMAP1_UART0_TX);
-	csi_pin_set_iomap(PA011, IOMAP1_EPT_CHAY);
-	csi_pin_set_iomap(PA012, IOMAP1_EPT_CHAX);
-	csi_pin_set_iomap(PA013, IOMAP1_EPT_CHBY);
+//	csi_pin_set_iomap(PB02, IOMAP1_UART0_TX);
+//	csi_pin_set_iomap(PB03, IOMAP1_UART0_RX);
+//	csi_pin_set_iomap(PA08, IOMAP1_EPT_CHAX);
+//	csi_pin_set_iomap(PA09, IOMAP1_EPT_CHBX);
+//	csi_pin_set_iomap(PA010, IOMAP1_EPT_CHCX);
+//	csi_pin_set_iomap(PA011, IOMAP1_EPT_CHAY);
+//	csi_pin_set_iomap(PA012, IOMAP1_EPT_CHBY);
+//	csi_pin_set_iomap(PA013, IOMAP1_EPT_CHCY);
+
+
+
 	
 	return iRet;
 }

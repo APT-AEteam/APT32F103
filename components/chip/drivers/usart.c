@@ -96,8 +96,10 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 				}
 			}
 			else
+			{
 				csp_usart_cr_cmd(USART0, US_RSTRX );	//reset rx 
 				csp_usart_set_fifo(USART0, US_FIFO_EN , US_RXFIFO_1_2);
+			}
 				//csp_usart_rxfifo_rst(ptUsartBase);
 			
 			g_tUsartTran[byIdx].byRecvStat = USART_STATE_FULL;						//receive complete

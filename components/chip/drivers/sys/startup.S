@@ -10,7 +10,7 @@
  * @date     29. July 2019
  ******************************************************************************/
 //#include <csi_config.h>
-#define CONFIG_ARCH_INTERRUPTSTACK 1024
+#define CONFIG_ARCH_INTERRUPTSTACK 2048	
 	
 .section .vectors, "aw", @progbits
     .align  6
@@ -35,7 +35,7 @@ __Vectors:
     .long   Default_Handler
 
     /* External interrupts */
-    .long   bt3_int_handler			//16
+    .long   Default_Handler			//16
     .long   syscon_int_handler
     .long   ifc_int_handler
     .long   adc0_int_handler

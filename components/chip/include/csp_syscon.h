@@ -108,11 +108,10 @@ typedef volatile struct {                   			/*!< SYSCON Structure            
 /// GCER/GCDR/GCSR/CKST reg content
 #define ISOSC 		(0x01ul)
 #define IMOSC 		(0x01ul << 1)
-#define ESOSC 		(0x01ul << 2)
 #define EMOSC 		(0x01ul << 3)
 #define HFOSC 		(0x01ul << 4)
-#define SYSCLK		(0x01ul << 8)
-#define SYSTICK 	(0x01ul << 11)
+//#define SYSCLK		(0x01ul << 8)
+//#define SYSTICK 	(0x01ul << 11)
 
 typedef enum{
 	PCLK_IDLE = 8,
@@ -246,7 +245,6 @@ typedef enum {
 typedef enum{
 	CLO_ISCLK = 0,
 	CLO_IMCLK,
-	CLO_ESCLK,
 	CLO_EMCLK = 3,
 	CLO_HFCLK,
 	CLO_RTCCLK = 6,
@@ -297,20 +295,20 @@ typedef enum{
 #define LPT_WKEN	(0x1<<10)
 #define LVD_WKEN	(0x1<<11)
 #define TKEY_WKEN	(0x1<<12)
-#define WKI_WKEN	(0x1<<13)
 
-#define DPSLEEP_MODE_P0S	(16)
-#define DPSLEEP_MODE_MSK	(0xfful << DPSLEEP_MODE_P0S)
-typedef enum{
-	SNOOZE_MODE		= (0xAaul),
-	SHUTDOWN_MODE	= (0xA5ul),
-	DPSLEEP_MODE	= (0x05ul),
-}deepsleep_mode_e;
 
-#define SNOOZE_TOUCH_P0S	(24)
-#define SNOOZE_TOUCH_MSK	(0x01ul << SNOOZE_TOUCH_P0S)
-#define SNOOZE_LCD_P0S		(25)
-#define SNOOZE_LCD_MSK		(0x01ul << SNOOZE_LCD_P0S)
+//#define DPSLEEP_MODE_P0S	(16)
+//#define DPSLEEP_MODE_MSK	(0xfful << DPSLEEP_MODE_P0S)
+//typedef enum{
+//	SNOOZE_MODE		= (0xAaul),
+//	SHUTDOWN_MODE	= (0xA5ul),
+//	DPSLEEP_MODE	= (0x05ul),
+//}deepsleep_mode_e;
+//
+//#define SNOOZE_TOUCH_P0S	(24)
+//#define SNOOZE_TOUCH_MSK	(0x01ul << SNOOZE_TOUCH_P0S)
+//#define SNOOZE_LCD_P0S		(25)
+//#define SNOOZE_LCD_MSK		(0x01ul << SNOOZE_LCD_P0S)
 
 ///INTERRUPT related regs: IMER/IMDR/IAR/ICR/IMCR/RISR/MISR
 /*#define ISOSC_ST	(0x1)
@@ -327,7 +325,6 @@ typedef enum{
 typedef enum{
 	ISOSC_ST_INT 	= (0x1<<0),
 	IMOSC_ST_INT 	= (0x1<<1),
-	ESOSC_ST_INT 	= (0x1<<2),
 	EMOSC_ST_INT 	= (0x1<<3),
 	HFOSC_ST_INT 	= (0x1<<4),
 	SYSTICK_ST_INT 	= (0x1<<7),
@@ -338,17 +335,11 @@ typedef enum{
 	HWD_ERR_INT 	= (0x1<<12),
 	EFL_ERR_INT 	= (0x1<<13),
 	OPL_ERR_INT 	= (0x1<<14),
-	ESFAIL_INT 		= (0x1<<16),
-	CQCDNE_INT 		= (0x1<<17),
 	EMFAIL_INT 		= (0x1<<18),
 	EV0TRG_INT 		= (0x1<<19),
 	EV1TRG_INT 		= (0x1<<20),
 	EV2TRG_INT 		= (0x1<<21),
 	EV3TRG_INT 		= (0x1<<22),
-	WKALV0_INT 		= (0x1<<24),
-	WKALV1_INT 		= (0x1<<25),
-	WKALV2_INT 		= (0x1<<26),
-	WKALV3_INT 		= (0x1<<27),
 	CMD_ERR_INT		= (0x1<<29),
 }syscon_int_e;
 
@@ -433,7 +424,7 @@ typedef enum{
 #define EFLR_PD		(0x3 << 18)
 #define EFLR_CTL_M	(0x0<<20)
 #define EFLR_CTL_SLP	(0x1<<20)
-#define EFLR_CTL_SLP_LP	(0x2<<20)
+#define EFLR_CTL_SLP_LP	(0x3<<20)
 
 ///System Protection Information Mirror Register Access
 #define PROT_ACCESS_KEY  0x6996ul
@@ -491,6 +482,9 @@ typedef enum{
 #define SWFC_EV_POS(n)	(n)
 #define SWFC_EV_MSK(n)  (0x1 << (n))
 
+//DBGCR
+#define SWD_LOCK    0x5a
+#define SWD_UNLOCK  0x0
 
 ///API to access setup of SYSCON
 static inline uint32_t csp_get_ckst(csp_syscon_t *ptSysconBase)
@@ -506,7 +500,7 @@ static inline uint32_t csp_get_gcsr(csp_syscon_t *ptSysconBase)
 static inline void csp_set_clksrc(csp_syscon_t *ptSysconBase, uint32_t wClkSrc)
 {
 	ptSysconBase->SCLKCR = (ptSysconBase->SCLKCR & (~SYSCLK_SRC_MSK)) | SCLK_KEY | wClkSrc;
-	while((ptSysconBase->CKST & SYSCLK) == 0);
+	while((ptSysconBase->CKST & SYSCLK_STABLE) == 0);
 }
 
 static inline void csp_set_hfosc_fre(csp_syscon_t *ptSysconBase, uint32_t wFreq)
@@ -802,24 +796,24 @@ static inline void csp_emcm_rst_enable(csp_syscon_t *ptSysconBase, bool bEnable)
 //}
 
 //wkcr 
-static inline void csp_set_deepsleep_mode(csp_syscon_t *ptSysconBase, deepsleep_mode_e eDpSleep)
-{
-	ptSysconBase->WKCR = (ptSysconBase->WKCR & (~DPSLEEP_MODE_MSK)) | (eDpSleep  << DPSLEEP_MODE_P0S);
-}
-static inline void csp_snooze_touch_power_ctrl(csp_syscon_t *ptSysconBase, bool bEnable)
-{
-	if(bEnable)
-		ptSysconBase->WKCR |= SNOOZE_TOUCH_MSK;
-	else
-		ptSysconBase->WKCR &= (~SNOOZE_TOUCH_MSK);
-}
-static inline void csp_snooze_lcd_power_ctrl(csp_syscon_t *ptSysconBase, bool bEnable)
-{
-	if(bEnable)
-		ptSysconBase->WKCR |= SNOOZE_LCD_MSK;
-	else
-		ptSysconBase->WKCR &= (~SNOOZE_LCD_MSK);
-}
+//static inline void csp_set_deepsleep_mode(csp_syscon_t *ptSysconBase, deepsleep_mode_e eDpSleep)
+//{
+//	ptSysconBase->WKCR = (ptSysconBase->WKCR & (~DPSLEEP_MODE_MSK)) | (eDpSleep  << DPSLEEP_MODE_P0S);
+//}
+//static inline void csp_snooze_touch_power_ctrl(csp_syscon_t *ptSysconBase, bool bEnable)
+//{
+//	if(bEnable)
+//		ptSysconBase->WKCR |= SNOOZE_TOUCH_MSK;
+//	else
+//		ptSysconBase->WKCR &= (~SNOOZE_TOUCH_MSK);
+//}
+//static inline void csp_snooze_lcd_power_ctrl(csp_syscon_t *ptSysconBase, bool bEnable)
+//{
+//	if(bEnable)
+//		ptSysconBase->WKCR |= SNOOZE_LCD_MSK;
+//	else
+//		ptSysconBase->WKCR &= (~SNOOZE_LCD_MSK);
+//}
 
 //UREG0/1/2/3
 static inline uint32_t csp_get_ureg(csp_syscon_t *ptSysconBase, uint8_t byNum)
@@ -836,6 +830,15 @@ static inline void csp_set_swrst(csp_syscon_t *ptSysconBase)
 {
 	ptSysconBase->IDCCR = ((ptSysconBase->IDCCR)&0x0000ffff)|(SYSCON_IDKEY | SYSCON_CPU_SWRST);
 }
+//DBGCR
+static inline void csp_swd_lock(csp_syscon_t *ptSysconBase)
+{
+	ptSysconBase->DBGCR = SWD_LOCK;
+}
 
+static inline void csp_swd_unlock(csp_syscon_t *ptSysconBase)
+{
+	ptSysconBase->DBGCR = SWD_UNLOCK;
+}
 #endif  /* _CSP_SYSCON_H*/
 
