@@ -5,6 +5,7 @@
  * <table>
  * <tr><th> Date  <th>Version  <th>Author  <th>Description
  * <tr><td> 2021-5-28 <td>V2.0 <td>WNN    <td>initial
+ * <tr><td> 2022-8-28 <td>V3.0 <td>WNN    <td> add page erase/PGM unction; support SWD/user option PGM; bug fix
  * </table>
  * *********************************************************************
 */
@@ -200,7 +201,7 @@ csi_error_t csi_ifc_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t 
 	}
 	else {
 		wFlashType = DFLASH;
-		wPageLimit = (wAddr & (0xffffff40)) + 0x40;
+		wPageLimit = (wAddr & (0xffffffc0)) + 0x40;
 		if (wPageLimit > DFLASHLIMIT) {
 			tRet = CSI_ERROR;
 			return tRet;
@@ -230,10 +231,10 @@ csi_error_t csi_ifc_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t 
  *  \param[in] ptIfcBase：pointer of ifc register structure
  *  \param[in] wAddr：Data address (SHOULD BE WORD ALLIGNED)
  *  \param[in] pwData: data  Pointer to a buffer containing the data to be programmed to Flash.
- *  \param[in] wDataByteNum: Number of data(BYTES) items to program.
+ *  \param[in] wDataByteNum: Number of data(WORDs) items to program.
  *  \return error code
  */
-csi_error_t csi_ifc_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataByteNum)
+csi_error_t csi_ifc_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataWordNum)
 {
 	csi_error_t tRet = CSI_OK;
 	uint32_t *wData = (uint32_t *)pwData;
@@ -244,7 +245,7 @@ csi_error_t csi_ifc_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwDa
 	{
 		return CSI_ERROR;
 	}	
-	else if (((wAddr < DFLASHBASE) && ((wAddr + wDataByteNum)>PFLASHLIMIT) )|| ((wAddr>=DFLASHBASE)&& ((wAddr + wDataByteNum)> DFLASHLIMIT))) {
+	else if (((wAddr < DFLASHBASE) && ((wAddr + (wDataWordNum<<2))>PFLASHLIMIT) )|| ((wAddr>=DFLASHBASE)&& ((wAddr + (wDataWordNum<<2))> DFLASHLIMIT))) {
 		return CSI_ERROR;
 	}
 	
@@ -266,18 +267,18 @@ csi_error_t csi_ifc_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwDa
 		wOffset = (wAddr - DFLASHBASE)>>2;
 	}
 		
-	if (wDataByteNum > (wPageSize-wOffset%wPageSize)){
+	if (wDataWordNum > (wPageSize-wOffset%wPageSize)){
 			wLen0 = wPageSize-wOffset%wPageSize;
-			wFullPageNum = (wDataByteNum - wLen0)/wPageSize;
-			if (wDataByteNum > ((wFullPageNum*wPageSize) + wLen0)) {
-				wLen1 = wDataByteNum - ((wFullPageNum*wPageSize) + wLen0);
+			wFullPageNum = (wDataWordNum - wLen0)/wPageSize;
+			if (wDataWordNum > ((wFullPageNum*wPageSize) + wLen0)) {
+				wLen1 = wDataWordNum - ((wFullPageNum*wPageSize) + wLen0);
 			}
 			else
 				wLen1 = 0;
 
 	}
 	else {
-			wLen0 = wDataByteNum;
+			wLen0 = wDataWordNum;
 			wFullPageNum = 0;
 			wLen1 = 0;
 	}

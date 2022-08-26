@@ -5,6 +5,7 @@
  * <table>
  * <tr><th> Date  <th>Version  <th>Author  <th>Description
  * <tr><td> 2020-8-18 <td>V0.0  <td>WNN   <td>initial for csi
+ * <tr><td> 2022-8-28 <td>V3.0  <td>WNN    <td> add page erase/PGM unction; bug fix
  * </table>
  * *********************************************************************
 */
