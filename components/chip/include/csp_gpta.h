@@ -595,8 +595,10 @@ static inline void csp_gpta_clken(csp_gpta_t *ptGptaBase)
  }
  
 static inline void csp_gpta_reset(csp_gpta_t *ptGptaBase)
- {
-	ptGptaBase->RSSR |= GPTA_RESET;
+{  
+	ptGptaBase -> REGPROT = EPT_REGPROT;
+	ptGptaBase -> RSSR |= GPTA_RESET;	
+	
  }
 static inline void csp_gpta_dbg_enable(csp_gpta_t *ptGptaBase, bool bEnable)
 {
@@ -817,6 +819,11 @@ static inline void csp_gpta_set_trgprd(csp_gpta_t *ptGptaBase, uint8_t byCh, uin
 static inline void csp_gpta_trg_cntxinit(csp_gpta_t *ptGptaBase, uint8_t byCh, uint8_t byVal)
 {
 	ptGptaBase -> EVCNTINIT = (ptGptaBase -> EVCNTINIT & ~GPTA_CNT_INIT_MSK_EV(byCh)) | GPTA_CNT_INIT(byVal,byCh);
+}
+
+static inline void csp_gpta_swf_trg(csp_gpta_t *ptGptaBase, uint8_t byCh)
+{
+	ptGptaBase -> EVSWF |= 0x1 << byCh; 
 }
 
 static inline void csp_gpta_int_enable(csp_gpta_t *ptGptaBase, csp_gpta_int_e byInt, bool bEnable)
