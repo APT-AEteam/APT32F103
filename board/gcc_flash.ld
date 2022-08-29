@@ -29,9 +29,9 @@ MEMORY
 
 /*heap and stack*/
 __heap_size  = 0x00;							/* heap for dynamically allocated memory */	
-__stack_size = STACK_SIZE;
+/*__stack_size = STACK_SIZE;
 __stack_top = ORIGIN(RAM) + LENGTH(RAM);
-__stack_start = __stack_top - STACK_SIZE - __heap_size; 
+__stack_start = __stack_top - STACK_SIZE - __heap_size; */
 
 /*PROVIDE (__ram_end  = 0x0000C000); */			/* define symbol for external reference*/
 /*PROVIDE (__heap_end = __ram_end);  */
@@ -46,36 +46,39 @@ ENTRY(Reset_Handler)							/* Entrance address */
 SECTIONS {
     .text :								
     {
-		. = ALIGN(0x4) ;						/* Align the start of the section */
+		. = ALIGN(4) ;						/* Align the start of the section */
         *startup.o (.text)						/* The file linked to the start position is startup.o */
+		KEEP(*startup.o(*.vectors*))
         *(.text)
 		*(.text.*)
     } > REGION_TEXT
 	
-	.softreset :
-	{
-		. = ALIGN(0x04);
-		_softreset_addr = .;
-		*(.softreset)
-		*(.softreset.*)
-	} > ROM1
-	
+
     .rodata :
     {
 		. = ALIGN(0x4) ;
         *(.rodata) 
         *(.rodata.*)
 		. = ALIGN(0x4) ; 
-        _end_rodata = . ;
+        _end_rodata = .;
     } > REGION_RODATA
-
+	
+	/*.srodata :
+	{
+		. = ALIGN(0x4) ;
+        *(.srodata) 
+        *(.srodata.*)
+		. = ALIGN(0x4) ; 
+        _end_rodata = .;
+	} > ROM */
+	
     .data : 
     { 
 		. = ALIGN(0x4) ;						/* Align the start of the section */
 		_start_data = .;						/* Provide the name for the start of this section */
 		KEEP(*csp.o(.data.*))					/* keep keyword to prevent it from being optimized */
 		KEEP(*csp.o(.data))
-		KEEP(*startup.o(*.vectors*))
+		
     	*( .data );
 		*( .data.* );
 		. = ALIGN(0x4) ;						/* Align the start of the section */

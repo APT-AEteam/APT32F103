@@ -90,32 +90,32 @@ void syscon_int_handler(void)
 void ifc_int_handler(void) 
 {	
 	// ISR content ...
-	ifc_irqhandler();
+//	ifc_irqhandler();
 }
 
 void adc0_int_handler(void) 
 {
 	// ISR content ...
-	adc_irqhandler(ADC0);
+	//adc_irqhandler(ADC0);
 	
 }
 
 void ept0_int_handler(void) 
 {	
 	// ISR content ...
-	ept_initen_irqhandler(EPT0);
+//	ept_initen_irqhandler(EPT0);
 	
 }
 void dma_int_handler(void)
 {
 	// ISR content ...	 
-	dma_irqhandler(DMA);
+//	dma_irqhandler(DMA);
 }
 
 void wwdt_int_handler(void)
 {
 	 // ISR content ...
-	 wwdt_irqhandler();
+	// wwdt_irqhandler();
 }
 
 void gpta0_int_handler(void) 
@@ -127,80 +127,80 @@ void gpta0_int_handler(void)
 void rtc_int_handler(void) 
 {
     //ISR content ...
-	rtc_irqhandler(RTC);
+//	rtc_irqhandler(RTC);
 }
 
 void uart0_int_handler(void) 
 {
     // ISR content ...
-	uart_irqhandler(UART0, 0);
+//	uart_irqhandler(UART0, 0);
 }
 void uart1_int_handler(void) 
 {
     // ISR content ...
-	uart_irqhandler(UART1, 1);
+//	uart_irqhandler(UART1, 1);
 }
 void uart2_int_handler(void) 
 {
     // ISR content ...
-	uart_irqhandler(UART2, 2);
+//	uart_irqhandler(UART2, 2);
 }
 
 void usart0_int_handler(void) 
 {// when use lin demo,please uncomment lin_irqhandler function,and comment USART0_irqhandler function.
 
 	// ISR content ...
-	usart_irqhandler(USART0, 0);
+//	usart_irqhandler(USART0, 0);
 	//lin_irqhandler(LIN0, 0);
 }
 
 void sio_int_handler(void) 
 {
    // ISR content ...
-   sio_irqhandler(SIO0);
+//   sio_irqhandler(SIO0);
 }
 
 void i2c_int_handler(void) 
 {
     // ISR content ...
-	i2c_irqhandler(I2C0);
+//	i2c_irqhandler(I2C0);
 }
 void spi0_int_handler(void) 
 {
     // ISR content ...
-	spi_irqhandler(SPI0);
+//	spi_irqhandler(SPI0);
 }
 
 void exi0_int_handler(void) 			
 {
     // ISR content ...
-	gpio_irqhandler(0);
+//	gpio_irqhandler(0);
 }
 void exi1_int_handler(void) 
 {
     // ISR content ...
-	gpio_irqhandler(1);
+//	gpio_irqhandler(1);
 }
 void exi2_3_int_handler(void) 
 {
     // ISR content ...
-	gpio_irqhandler(2);
+//	gpio_irqhandler(2);
 }
 void exi4_9_int_handler(void) 
 {
     // ISR content ...
-	gpio_irqhandler(3);
+//	gpio_irqhandler(3);
 }
 void exi10_15_int_handler(void) 
 {
     // ISR content ...
-	gpio_irqhandler(4);
+//	gpio_irqhandler(4);
 }
 
 void cnta_int_handler(void) 
 {
     // ISR content ...
-	cnta_irqhandler(CNTA);
+//	cnta_irqhandler(CNTA);
 }
 void tkey_int_handler(void) 
 {
@@ -211,32 +211,32 @@ void tkey_int_handler(void)
 void lpt_int_handler(void) 
 {
     // ISR content ...
-	lpt_irqhandler(LPT);
+//	lpt_irqhandler(LPT);
 }
 
 void bt0_int_handler(void) 
 {
     // ISR content ...
-	bt_irqhandler(BT0);
+//	bt_irqhandler(BT0);
 }
 
 void bt1_int_handler(void) 
 {
     // ISR content ...
-	bt_irqhandler(BT1);
+	//bt_irqhandler(BT1);
 }
 
 void bt2_int_handler(void) 
 {
     // ISR content ...
-	bt_irqhandler(BT2);
+	//bt_irqhandler(BT2);
 }
 void bt3_int_handler(void) 
 {
     // ISR content ...
-	csi_tick_increase();
+//	csi_tick_increase();
 	
-	bt_irqhandler(BT3);
+//	bt_irqhandler(BT3);
 	//csi_pin_toggle(PB05);
 }
 
