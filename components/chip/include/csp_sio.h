@@ -47,7 +47,7 @@ typedef struct
 ******************************************************************************/
 #define	SIO_CLKEN_POS		(0)			//SIO CLKEN
 #define SIO_CLKEN_MSK		(0x01ul << SIO_CLKEN_POS)
-#define SIO_CLKEN			(0x01ul << SIO_CLKEN_POS)
+#define SIO_CLKEN			(0x01ul)
 
 #define SIO_DEBDEP_POS		(1)			//Receive Filter period
 #define SIO_DEBDEP_MSK		(0x07ul << SIO_DEBDEP_POS)
@@ -72,6 +72,28 @@ typedef enum{
 	SIO_MODE_TX			= 0,
 	SIO_MODE_RX
 }sio_mode_e;
+
+#define	SIO_TDMA_EN_POS		(10)	
+#define	SIO_TDMA_EN_MSK		(0x01ul << SIO_TDMA_EN_POS)	
+typedef enum{
+	SIO_TDMA_DIS		= 0,
+	SIO_TDMA_EN
+}sio_tdma_en_e;
+
+#define	SIO_RDMA_EN_POS		(11)		
+#define	SIO_RDMA_EN_MSK		(0x01ul << SIO_RDMA_EN_POS)	
+typedef enum{
+	SIO_RDMA_DIS		= 0,
+	SIO_RDMA_EN
+}sio_rdma_en_e;
+
+#define	SIO_WOKE_RST_POS	(12)		
+#define SIO_WOKE_RST_MSK	(0x01ul << SIO_WOKE_RST_POS)
+#define SIO_WOKE_RST		(0x01ul)
+
+#define	SIO_WOKE_RSTKEY_POS	(13)		
+#define SIO_WOKE_RSTKEY_MSK	(0x05ul << SIO_WOKE_RSTKEY_POS)
+#define SIO_WOKE_RSTKEY		(0x05ul)
 
 #define SIO_TCKPRS_POS    	(16)		//Send CLK Div
 #define SIO_TCKPRS_MSK    	(0xFFFFul << SIO_TCKPRS_POS)
@@ -361,6 +383,20 @@ static inline void csp_sio_set_mode(csp_sio_t *ptSioBase, sio_mode_e eTxRx)
 {
 	ptSioBase->CR = (ptSioBase->CR & ~SIO_MODE_MSK) | (eTxRx << SIO_MODE_POS);
 }
+static inline void csp_sio_woke_rst(csp_sio_t *ptSioBase)
+{
+	ptSioBase->CR |= SIO_WOKE_RSTKEY_MSK | SIO_WOKE_RST_MSK;
+}
+
+//sio dma
+static inline void csp_sio_set_tx_dma(csp_sio_t *ptSioBase, sio_tdma_en_e eTxDma)
+{
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_TDMA_EN_MSK) | (eTxDma << SIO_TDMA_EN_POS);
+}
+static inline void csp_sio_set_rx_dma(csp_sio_t *ptSioBase, sio_rdma_en_e eRxDma)
+{
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_RDMA_EN_MSK) | (eRxDma << SIO_RDMA_EN_POS);
+}
 
 //SIO TX 
 static inline void csp_sio_set_tx_clkdiv(csp_sio_t *ptSioBase,uint16_t hwClkDiv)
@@ -492,6 +528,16 @@ static inline void csp_sio_int_enable(csp_sio_t *ptSioBase,sio_int_e eSioInt, bo
 static inline void csp_sio_soft_reset(csp_sio_t *ptSioBase)
 {
 	ptSioBase->SRR = SIO_SWRST_MSK;
+}
+
+static inline void csp_sio_set_txdma(csp_sio_t *ptSioBase, sio_tdma_en_e eTxDmaEn) 
+{
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_TDMA_EN_MSK) | (eTxDmaEn << SIO_TDMA_EN_POS);
+}
+
+static inline void csp_sio_set_rxdma(csp_sio_t *ptSioBase, sio_rdma_en_e eRxDmaEn) 
+{
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_RDMA_EN_MSK) | (eRxDmaEn << SIO_RDMA_EN_POS);
 }
 
 #endif

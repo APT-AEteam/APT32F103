@@ -20,14 +20,13 @@
 #define CSI_LVD_FLAF    (0x1 << 15)
 
 typedef enum{
-	LVD_21 = 0,
-	LVD_24,
+	LVD_24 = 0,
+	LVD_21,
 	LVD_27,
 	LVD_30,
 	LVD_33,
 	LVD_36,
 	LVD_39,
-	LVDIN_10			//1.0V
 }csi_lvd_level_e;
 
 typedef enum {
@@ -267,30 +266,6 @@ void csi_emcm_rst(void);
   \return      none
 */
 void csi_emcm_disable(void);
-
-/// ************************************************************************
-///						for ES clock monitor
-///*************************************************************************
-/**
-  \brief       claim INT and switch sysclk to IMOSC when ESOSC failure detected
-  \return      none
-*/
-void csi_escm_2_imosc_int(void);
-
-/**
-  \brief      rest chip when ESOSC failure detected
-  \param       none
-  \return      none
-*/
-void csi_escm_rst(void);
-
-
-/**
-  \brief       disable ESOSC monitor funtion
-  \param       none
-  \return      none
-*/
-void csi_escm_disable(void);
 
 /// ************************************************************************
 ///						for RSR

@@ -213,7 +213,7 @@ csi_error_t csi_lpt_timer_init(csp_lpt_t *ptLptBase,csi_lpt_clksrc_e eClk, uint3
 		csp_lpt_set_prdr(ptLptBase, (uint16_t)wLptPrd);
 		csp_lpt_set_cmp(ptLptBase, (uint16_t)wLptPrd >> 1);
 	}
-	csi_lpt_int_enable(ptLptBase,LPT_PEND_INT | LPT_TRGEV_INT,ENABLE);	 //enable PEND interrupt
+	csi_lpt_int_enable(ptLptBase,LPT_PEND_INT, ENABLE);	 //enable PEND interrupt
 	return tRet;	
 }
 

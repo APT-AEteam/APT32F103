@@ -113,11 +113,13 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 //	csi_clk_pm_enable(ISOSC_STP, ENABLE);  //DEEPSLEEP 模式下时钟开启/关闭
 //	csi_clk_pm_enable(IMOSC_STP, ENABLE);
 //	csi_clk_pm_enable(EMOSC_STP, ENABLE);
+//  csi_clk_pm_enable(PCLK_IDLE, DISABLE);
+	csi_clk_pm_enable(HCLK_IDLE, DISABLE);
 	
 	//lpt初始化配置
 	csi_lpt_timer_init(LPT,LPT_CLK_ISCLK, 1000);       		//初始化lpt,选用内部超低功耗时钟,定时500ms,默认采用PEND中断
 	csi_lpt_start(LPT);	  
-//	mdelay(10);
+	mdelay(10);
 	
 	switch(ePmMode)
 	{
@@ -127,12 +129,6 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 		case PM_MODE_DEEPSLEEP:
 			my_printf("Enter Deep-Sleep mode\n");
 			break;
-//		case PM_MODE_SNOOZE:
-//			my_printf("Enter Snooze Mode\n");
-//			break;
-//		case PM_MODE_SHUTDOWN:
-//			my_printf("Enter ShutDown Mode\n");
-//			break;
 		default:
 			break;
 	}
@@ -141,48 +137,48 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 	{
 //		csi_pin_set_high(PB05);
 		csi_pm_enter_sleep(ePmMode);
-		//my_printf("Wakeup From Deep-Sleep Mode...\n");
+		my_printf("Wakeup From Deep-Sleep Mode...\n");
 		csi_pin_toggle(PB05);
 		
 	}
 }
 
-/** \brief 各种源唤醒低功耗的示例代码，低功耗的模式=sleep/deepsleep/
+/** \brief 各种源唤醒低功耗的示例代码，低功耗的模式=sleep/deepsleep
  * 
  *  \param  none
  *  \return none
  */
 void lp_wakeup_demo(void)
 {
-	csi_pm_mode_e ePmMode = PM_MODE_SLEEP;		//PM_MODE_SLEEP/PM_MODE_DEEPSLEEP/PM_MODE_SNOOZE/PM_MODE_SHUTDOWN
+	csi_pm_mode_e ePmMode = PM_MODE_DEEPSLEEP;		//PM_MODE_SLEEP/PM_MODE_DEEPSLEEP
 	uint16_t hwRstSrc = csi_get_rst_reason();
+	
 	
 	if(hwRstSrc)									//获取并打印复位信息
 	{
-		my_printf("System Reset Source = 0x%x \n", hwRstSrc);
+		//my_printf("System Reset Source = 0x%x \n", hwRstSrc);
 		csi_clr_rst_reason(hwRstSrc);				//清除复位信息
 	}
 	
 	csi_pin_set_mux(PB01,PB01_OUTPUT);				//PB01 OUTPUT
 	
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
-	csi_pin_toggle(PB01);
-	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
+//	csi_pin_toggle(PB01);
+//	mdelay(250);
 
-	csi_pin_set_high(PB02);
 	
 #ifdef CONFIG_USER_PM	
 	csi_pm_attach_callback(ePmMode, prepare_lp, wkup_lp);	//需要在工程设置compiler tab下加入define CONFIG_USER_PM=1;
@@ -202,64 +198,61 @@ void lp_wakeup_demo(void)
 //	csi_pm_clk_enable(DP_ESOSC, ENABLE);
 //	csi_pm_clk_enable(DP_EMOSC, ENABLE);
 	
-	csi_pm_config_wakeup_source(WKUP_RTC, ENABLE);
+	csi_pm_config_wakeup_source(WKUP_LVD, ENABLE);
 
 	
-	//LPT WAKEUP DeepSleep/snooze
+	//LPT WAKEUP DeepSleep
 //	csi_lpt_timer_init(LPT,LPT_CLK_ISCLK, 500);       		//初始化lpt,选用内部超低功耗时钟,定时200ms,默认采用PEND中断
 //	csi_lpt_start(LPT);	  
 	
-	//LVD WAKEUP	DeepSleep/snooze/shutdown
-	//csi_lvd_int_enable(LVD_INTF,LVD_30);  						//VDD掉电到3.9V即触发LVD中断
+	//LVD WAKEUP	DeepSleep
+	csi_lvd_int_enable(LVD_INTF,LVD_33);  						//VDD掉电到3.6V即触发LVD中断
 	
-	
-	//CMP WAKUP DeepSleep
-//	cmp_base_demo();
-	
-//	csi_pin_set_mux(SXIN_PIN, SXIN_PIN_FUNC);		//ESOSC管脚使能	
-//	csi_pin_set_mux(SXOUT_PIN, SXOUT_PIN_FUNC);		//ESOSC管脚使能	
+
 //	csi_pin_set_mux(PA03, PA03_OSC_XI);
 //	csi_pin_set_mux(PA04, PA04_OSC_XO);
-	//RTC WAKEUP DeepSleep/snooze/shutdown
-	{
-		csi_rtc_config_t tRtcConfig;
-		
-		tRtcConfig.byClkSrc = RTC_CLKSRC_ISOSC;  		//选择时钟源
-		tRtcConfig.byFmt = RTC_24FMT;				  	//选择时间模式
-		csi_rtc_init(RTC, &tRtcConfig);				  	//初始化RTC
-		csi_rtc_start_as_timer(RTC, RTC_TIMER_0_5S);	//每1s进一次中断
-		csi_rtc_start(RTC);	
-	}
 
-	//IWDT WAKEUP DeepSleep/snooze/shutdown
+//	//RTC WAKEUP DeepSleep
+//	{
+//		csi_rtc_config_t tRtcConfig;
+//		
+//		tRtcConfig.byClkSrc = RTC_CLKSRC_ISOSC;  		//选择时钟源
+//		tRtcConfig.byFmt = RTC_24FMT;				  	//选择时间模式
+//		csi_rtc_init(RTC, &tRtcConfig);				  	//初始化RTC
+//		csi_rtc_start_as_timer(RTC, RTC_TIMER_0_5S);	//每1s进一次中断
+//		csi_rtc_start(RTC);	
+//	}
+
+//	//IWDT WAKEUP DeepSleep
 //	csi_iwdt_init(IWDT_TO_1024);						//初始化看门狗，溢出时间为1000ms(系统复位时间)
 //	csi_iwdt_irq_enable(IWDT_ALARMTO_4_8, ENABLE);		//使能看门狗报警中断，报警时间为4/8溢出时间(500ms)
 //	csi_iwdt_open();	
 //	csi_iwdt_feed();
 	
-	mdelay(10);
+//	mdelay(10);
 	
-	switch(ePmMode)
-	{
-		case PM_MODE_SLEEP:
-			my_printf("Enter Sleep Mode\n");
-			break;
-		case PM_MODE_DEEPSLEEP:
-			my_printf("Enter Deep-Sleep mode\n");
-			break;
-		default:
-			break;
-	}
+//	switch(ePmMode)
+//	{
+//		case PM_MODE_SLEEP:
+//			my_printf("Enter Sleep Mode\n");
+//			break;
+//		case PM_MODE_DEEPSLEEP:
+//			my_printf("Enter Deep-Sleep mode\n");
+//			break;
+//		default:
+//			break;
+//	}
 	
 	while(1) 
 	{
-		csi_pin_set_high(PB01);
+		//csi_pin_set_high(PB01);
 		
 		csi_pm_enter_sleep(ePmMode);
-		//csi_iwdt_feed();
+	//	csi_iwdt_feed();
 		//mdelay(100);
-		csi_pin_set_low(PB01);
-		mdelay(100);
+		csi_pin_toggle(PB01);
+		delay_ums(200000);
+	//	delay_ums(10000);
 		//delay_nms(10000);
 		//my_printf("Wakeup From Sleep Mode...\n");
 	}

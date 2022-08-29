@@ -69,7 +69,7 @@ __attribute__((weak)) void dma_irqhandler(csp_dma_t *ptDmaBase)
 		case DMA_CH4_TCIT_SR:
 		case DMA_CH5_TCIT_SR:
 			csp_dma_clr_isr(ptDmaBase, (wIsr >> 16));		//clear LTCIT status
-			apt_dma_post_msg((wIsr >> 12), 1);				//post TCIT interrupt message
+			apt_dma_post_msg((wIsr >> 10), 1);				//post TCIT interrupt message
 			break;
 		default:
 			break;
@@ -211,7 +211,7 @@ void csi_dma_soft_rst(csp_dma_t *ptDmaBase)
 
 /** \brief get dma interrupt message and (D0 not)clear message
  * 
- *  \param[in] eDmaCh: dma channel number, channel 0 -> 3
+ *  \param[in] eDmaCh: dma channel number, channel 0 -> 5
  *  \param[in] bClrEn: clear dma interrupt message enable; ENABLE: clear , DISABLE: Do not clear
  *  \return  bool type true/false
  */ 
@@ -226,10 +226,10 @@ bool csi_dma_get_msg(csi_dma_ch_e eDmaCh, bool bClrEn)
 		bRet |= true;
 	}
 	
-	if(0 != (s_hwDmaMsg & (0x01ul << (eDmaCh + 4))))
+	if(0 != (s_hwDmaMsg & (0x01ul << (eDmaCh + 6))))
 	{
 		if(bClrEn)
-			s_hwDmaMsg &= ~(0x01ul << (eDmaCh + 4));
+			s_hwDmaMsg &= ~(0x01ul << (eDmaCh + 6));
 		bRet |= true;
 	}
 	

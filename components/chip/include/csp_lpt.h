@@ -409,7 +409,10 @@ static inline void csp_lpt_trg_enable(csp_lpt_t *ptLptBase,bool bEnable)
 	ptLptBase->EVTRG = (ptLptBase->EVTRG & ~LPT_TRG0OE_MSK) | (bEnable << LPT_TRG0OE_POS);
 }
 
-
+static inline void csp_lpt_evswf_en(csp_lpt_t *ptLptBase)
+{
+	ptLptBase->EVSWF = 0x01;
+}
 
 static inline void csp_lpt_set_start_im_enable(csp_lpt_t *ptLptBase, bool bEnable)
 {
@@ -492,8 +495,6 @@ static inline void csp_lpt_clr_all_int(csp_lpt_t *ptLptBase)
 //{
 //	NVIC_DisableIRQ(LPT_IRQ_NUM);
 //}
-//
-
 
 //
 static inline void csp_lpt_debug_enable(csp_lpt_t *ptLptBase, bool bEnable)
@@ -505,7 +506,8 @@ static inline void csp_lpt_debug_enable(csp_lpt_t *ptLptBase, bool bEnable)
 static inline void csp_lpt_clk_enable(csp_lpt_t *ptLptBase, bool bEnable)
 {
 	ptLptBase->CEDR = (ptLptBase->CEDR & ~LPT_CLK_MSK) | (bEnable << LPT_CLK_POS);
-	while(ptLptBase->SR&LPT_CEDR_BUSY);
+
+	while(ptLptBase->SR & LPT_CEDR_BUSY);
 }
 
 static inline void csp_lpt_stopshadow_enable(csp_lpt_t *ptLptBase, bool bEnable)
@@ -583,30 +585,39 @@ static inline void csp_lpt_out_enable(csp_lpt_t *ptLptBase, bool bEnable)
 	ptLptBase->CR = (ptLptBase->CR & ~LPT_OUT_EN_MSK) | bEnable << LPT_OUT_EN_POS;
 	while(ptLptBase->SR&LPT_CR_BUSY);
 }
+//static inline void csp_lpt_sync_window_enable(csp_lpt_t *ptLptBase, bool bEnable)
+//{
+//	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_SRCSEL_MSK)| (bEnable << LPT_SRCSEL_POS);
+//}
+//
+//static inline void csp_lpt_sync_window_inv_enable(csp_lpt_t *ptLptBase,bool bEnable)
+//{
+//	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_BLKINV_MSK)| (bEnable << LPT_BLKINV_POS);
+//}
+//
+//static inline void csp_lpt_sync_window_cross_enable(csp_lpt_t *ptLptBase, bool bEnable)
+//{
+//	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_CROSS_MSK)| (bEnable << LPT_CROSS_POS);
+//}
+//static inline void csp_lpt_set_sync_offset(csp_lpt_t *ptLptBase, uint16_t hwOffset)
+//{
+//	ptLptBase -> TRGFWR = (ptLptBase -> TRGFWR & ~LPT_OFFSET_MSK)| (hwOffset << LPT_OFFSET_POS );
+//}
+//
+//static inline void csp_lpt_set_sync_window(csp_lpt_t *ptLptBase, uint16_t hwWindow)
+//{
+//	ptLptBase -> TRGFWR = (ptLptBase -> TRGFWR & ~LPT_WINDOW_MSK)| (hwWindow << LPT_WINDOW_POS );
+//}
 
-static inline void csp_lpt_sync_window_enable(csp_lpt_t *ptLptBase, bool bEnable)
+static inline void csp_lpt_sync_window_timing(csp_lpt_t *ptLptBase, uint16_t hwOffset, uint16_t hwWindow)
 {
-	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_SRCSEL_MSK)| (bEnable << LPT_SRCSEL_POS);
+	ptLptBase -> TRGFWR = (hwWindow << LPT_WINDOW_POS) |  hwOffset;
 }
 
-static inline void csp_lpt_sync_window_inv_enable(csp_lpt_t *ptLptBase,bool bEnable)
+static inline void csp_lpt_sync_window_ctrol(csp_lpt_t *ptLptBase, uint8_t byCross, uint8_t byBlkInv, bool bEnable)
 {
-	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_BLKINV_MSK)| (bEnable << LPT_BLKINV_POS);
-}
-
-static inline void csp_lpt_sync_window_cross_enable(csp_lpt_t *ptLptBase, bool bEnable)
-{
-	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~LPT_CROSS_MSK)| (bEnable << LPT_CROSS_POS);
-}
-
-static inline void csp_lpt_set_sync_offset(csp_lpt_t *ptLptBase, uint16_t hwOffset)
-{
-	ptLptBase -> TRGFWR = (ptLptBase -> TRGFWR & ~LPT_OFFSET_MSK)| (hwOffset << LPT_OFFSET_POS );
-}
-
-static inline void csp_lpt_set_sync_window(csp_lpt_t *ptLptBase, uint16_t hwOffset)
-{
-	ptLptBase -> TRGFWR = (ptLptBase -> TRGFWR & ~LPT_WINDOW_MSK)| (hwOffset << LPT_WINDOW_POS );
+	ptLptBase -> TRGFCR = (ptLptBase -> TRGFCR & ~(LPT_CROSS_MSK | LPT_BLKINV_MSK | LPT_BLKINV_MSK)) | 
+					(byCross << LPT_CROSS_POS) | (byBlkInv << LPT_BLKINV_POS) | (bEnable << LPT_SRCSEL_POS);
 }
 
 #endif

@@ -114,8 +114,8 @@ int ept_pwm_demo(void)
 //	csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));				//输出高
 	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));		
 //------------------------------------------------------------------------------------------------------------------------	
-	csi_pin_set_mux(PA010, PA010_EPT_CHAX);						//PIN17
-	csi_pin_set_mux(PA011, PA011_EPT_CHBX);						//PIN18
+//	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//PIN17
+//	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//PIN18
 //	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//PIN19
 //	csi_pin_set_mux(PA16, PA16_EPT_CHD);						//PIN20
 //	

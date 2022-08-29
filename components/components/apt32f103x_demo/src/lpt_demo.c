@@ -29,7 +29,7 @@ int lpt_timer_demo(void)
 {
 	int iRet = 0;
 	
-	csi_lpt_timer_init(LPT,LPT_CLK_ISCLK,200);       	//初始化lpt,选用内部超低功耗时钟,定时200ms,默认采用PEND中断
+	csi_lpt_timer_init(LPT,LPT_CLK_PCLK_DIV4,5);       	//初始化lpt,选用内部超低功耗时钟,定时200ms,默认采用PEND中断
 	csi_lpt_start(LPT);	                             	//启动lpt
 	
 	return iRet;	
@@ -102,18 +102,18 @@ int lbt_sync_trg_start_demo(void)
 	volatile uint8_t ch;
 	csi_etb_config_t tEtbConfig;				               			//ETB 参数配置结构体
 
-	csi_pin_set_mux(PB00, PB01_INPUT);									//PB00 配置为输入
+	csi_pin_set_mux(PB00, PB00_INPUT);									//PB00 配置为输入
 	csi_pin_pull_mode(PB00, GPIO_PULLUP);								//PB00 上拉
 	csi_pin_irq_mode(PB00, EXI_GRP0, GPIO_IRQ_FALLING_EDGE);			//PB00 下降沿产生中断
 	//csi_pin_irq_enable(PB00, EXI_GRP16, ENABLE);						//PB00 中断使能，选择中断组16
 
 	csi_exi_set_evtrg(EXI_TRGOUT0, TRGSRC_EXI0, 0);						//EXI0(PB00) 触发EXI_TRGOUT0(PB00用EXI0触发输出)
 
-	csi_lpt_timer_init(LPT,LPT_CLK_PCLK_DIV4,50);       				//初始化lpt
+	csi_lpt_timer_init(LPT,LPT_CLK_PCLK_DIV4,5);       					//初始化lpt
 	//csi_lpt_start_sync(LPT,LPT_CLK_PCLK_DIV4,50
 //	csi_lpt_sync_filt_window_timing(LPT, 0, 100);
 //	csi_lpt_sync_filt_window_ctrl(LPT, LPT_WINDOW_CROSS_DIS, LPT_WINDOW_INV_DIS, ENABLE);
-	csi_lpt_set_sync(LPT, LPT_TRG_SYNCIN0, LPT_SYNC_ONCE, ENABLE);
+	csi_lpt_set_sync(LPT, LPT_TRG_SYNCIN0, LPT_SYNC_CONTINU, DISABLE);
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT0;  	    //EXI_TRGOUT5作为触发源

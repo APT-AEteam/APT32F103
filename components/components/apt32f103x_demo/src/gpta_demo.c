@@ -93,9 +93,9 @@ int gpta_capture_demo(void)
 	csi_gpta_start(GPTA0);//start  timer
     while(1){		
 		  		      
-		//    mdelay(200);                        
+		    mdelay(200);                        
 		    	
-		//   mdelay(200);
+		    mdelay(200);
 	}			
 	return iRet;
 };

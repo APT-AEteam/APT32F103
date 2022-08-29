@@ -297,11 +297,6 @@ void csi_gpio_port_input_filter(csp_gpio_t *ptGpioBase, uint32_t wPinMask, bool 
 	else
 		ptGpioBase->FLTEN &= ~wPinMask;
 }
-
-void csi_gpio_port_driver(csp_gpio_t *ptGpioBase, uint32_t wPinMask, csi_gpio_drive_e eDrive)
-{
-	
-}
 /** \brief config gpio irq mode
  * 
  *  \param[in] ptGpioBase: pointer of gpio register structure

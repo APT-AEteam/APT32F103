@@ -126,10 +126,10 @@ int usart_recv_dma_demo(void)
 			//添加用户代码
 			csi_usart_send(USART0, (void*)byRvUsart, 25);
 			nop;
-			//break;
+			break;
 		}
 		mdelay(10);
-		nop;
+
 	}
 	
 	return iRet;
@@ -201,7 +201,7 @@ int usart_send_demo(void)
 	tUsartCfg.byStopbit 	= USART_STOP_BITS_1;		//停止位，1个
 	tUsartCfg.byParity		= USART_PARITY_EVEN;		//偶校验
 	tUsartCfg.bClkOutEn		= ENABLE;					//禁止USARTCLK输出；同步模式时，USARTCLK可以给另外设备上的USART提供clk，作为同步输入时钟使用
-	tUsartCfg.wBaudRate 	= 9600;					//波特率：115200
+	tUsartCfg.wBaudRate 	= 115200;					//波特率：115200
 	tUsartCfg.wInt			= USART_INTSRC_NONE;		//不使用中断
 	tUsartCfg.byTxMode		= USART_TX_MODE_POLL;		//发送模式：轮询/中断模式
 	tUsartCfg.byRxMode		= USART_RX_MODE_POLL;		//接收模式：轮询模式
@@ -211,9 +211,9 @@ int usart_send_demo(void)
 	
 	while(1)
 	{
-//		byRecv = csi_usart_getc(USART0);
-//		if(byRecv == 0x06)
-			byRecv = csi_usart_send(USART0,(void *)bySdData,18);		//采用轮询方式,调用该函数时，UART发送中断关闭
+		byRecv = csi_usart_getc(USART0);
+		if(byRecv == 0x06)
+			byRecv = csi_usart_send(USART0,(void *)bySdData,28);		//采用轮询方式,调用该函数时，UART发送中断关闭
 		
 		nop;
 	}
@@ -253,11 +253,12 @@ int usart_send_int_demo(void)
 	csi_usart_init(USART0, &tUsartCfg);					//初始化串口	
 	csi_usart_start(USART0, USART_FUNC_RX_TX);			//开启USART的RX和TX功能，也可单独开启RX或者TX功能
 
+	//USART0->MR |= (0X1<<16) | (0X7<<1);
 
 	while(1)
 	{
-//		byRecv = csi_usart_getc(USART0);
-//		if(byRecv == 0x06)
+		byRecv = csi_usart_getc(USART0);
+		if(byRecv == 0x06)
 		{
 			csi_usart_send(USART0,(void *)bySdData,18);		//采用中断方式。调用改函数时，UART发送中断使能
 			while(1)			
@@ -267,10 +268,12 @@ int usart_send_int_demo(void)
 				{
 					//发送状态有三种，IDLE(空闲)/SEND(发送中)/DONE(发送完成)
 					//具体定义参考：uart.h中csi_uart_state_e,
-					nop;;
+					mdelay(10);
 					break;
 				}
 			}
+			mdelay(10);
+			
 		}
 		nop;
 	}
