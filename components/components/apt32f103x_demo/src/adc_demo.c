@@ -61,26 +61,32 @@ int adc_samp_oneshot_demo(void)
 	csi_adc_config_t tAdcConfig;
 	
 		//adc 输入管脚配置
-	//csi_pin_set_mux(PA00, PA00_ADC_AIN0);				//ADC GPIO作为输入通道
-//	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-//	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
-//	csi_pin_set_mux(PB00, PB00_ADC_AIN3);
-//	csi_pin_set_mux(PB01, PB01_ADC_AIN4);
-//	csi_pin_set_mux(PB02, PB02_ADC_AIN5);
-//	csi_pin_set_mux(PA06, PA06_ADC_AIN6);
-//	csi_pin_set_mux(PA07, PA07_ADC_AIN7);
-//	csi_pin_set_mux(PA08, PA08_ADC_AIN8);
-//	csi_pin_set_mux(PA09, PA09_ADC_AIN9);
-//	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-//	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-//	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
-//	csi_pin_set_mux(PA013, PA013_ADC_AIN13);
-//	csi_pin_set_mux(PB03, PB03_ADC_AIN14);
-//	csi_pin_set_mux(PC01, PC01_ADC_AIN15);
-//	csi_pin_set_mux(PB04, PB04_ADC_AIN16);
-//	csi_pin_set_mux(PC00, PC00_ADC_AIN17);
-//	csi_pin_set_mux(PA02, PA02_ADC_AIN18);
+//	csi_pin_set_mux(PB01, PB01_ADC_AIN0);				
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);               
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);               
+	csi_pin_set_mux(PA03, PA03_ADC_AIN3);
 	
+//	csi_pin_set_mux(PA05, PA05_ADC_AIN4);       
+//	csi_pin_set_mux(PA06, PA06_ADC_AIN5);
+//	csi_pin_set_mux(PA07, PA07_ADC_AIN6);
+//	csi_pin_set_mux(PB02, PB02_ADC_AIN7);
+//	csi_pin_set_mux(PB03, PB03_ADC_AIN8);
+//	csi_pin_set_mux(PA08, PA08_ADC_AIN9);
+//	csi_pin_set_mux(PA09, PA09_ADC_AIN10);
+//	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+//	csi_pin_set_mux(PA011, PA011_ADC_AIN12);      
+//	csi_pin_set_mux(PA012, PA012_ADC_AIN13);      
+//	csi_pin_set_mux(PA013, PA013_ADC_AIN14);
+//	csi_pin_set_mux(PB00, PB00_ADC_AIN15);
+//	csi_pin_set_mux(PB06, PB06_ADC_AIN16);        
+//	csi_pin_set_mux(PB07, PB07_ADC_AIN17);        
+//	csi_pin_set_mux(PB08, PB08_ADC_AIN18);
+//	csi_pin_set_mux(PB09, PB09_ADC_AIN19);
+//	csi_pin_set_mux(PB010, PB010_ADC_AIN20);
+//	csi_pin_set_mux(PB011, PB011_ADC_AIN21);	
+//	csi_pin_set_mux(PB012, PB012_ADC_AIN22);
+//	csi_pin_set_mux(PB013, PB013_ADC_AIN23);	
+
 	//adc 参数配置初始化
 	tAdcConfig.byClkDiv = 0x02;							//ADC clk两分频：clk = pclk/2
 	tAdcConfig.bySampHold = 0x06;						//ADC 采样时间： time = 16 + 6 = 22(ADC clk周期)
@@ -146,25 +152,31 @@ int adc_samp_continuous_demo(void)
 	csi_adc_config_t tAdcConfig;
 	
 		//adc 输入管脚配置
-	//csi_pin_set_mux(PA00, PA00_ADC_AIN0);				//ADC GPIO作为输入通道
-//	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-//	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
-//	csi_pin_set_mux(PB00, PB00_ADC_AIN3);
-//	csi_pin_set_mux(PB01, PB01_ADC_AIN4);
-//	csi_pin_set_mux(PB02, PB02_ADC_AIN5);
-//	csi_pin_set_mux(PA06, PA06_ADC_AIN6);
-//	csi_pin_set_mux(PA07, PA07_ADC_AIN7);
-//	csi_pin_set_mux(PA08, PA08_ADC_AIN8);
-//	csi_pin_set_mux(PA09, PA09_ADC_AIN9);
-//	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-//	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-//	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
-//	csi_pin_set_mux(PA013, PA013_ADC_AIN13);
-//	csi_pin_set_mux(PB03, PB03_ADC_AIN14);
-//	csi_pin_set_mux(PC01, PC01_ADC_AIN15);
-//	csi_pin_set_mux(PB04, PB04_ADC_AIN16);
-//	csi_pin_set_mux(PC00, PC00_ADC_AIN17);
-//	csi_pin_set_mux(PA02, PA02_ADC_AIN18);
+//	csi_pin_set_mux(PB01, PB01_ADC_AIN0);				
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);               
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);               
+	csi_pin_set_mux(PA03, PA03_ADC_AIN3);
+	
+//	csi_pin_set_mux(PA05, PA05_ADC_AIN4);       
+//	csi_pin_set_mux(PA06, PA06_ADC_AIN5);
+//	csi_pin_set_mux(PA07, PA07_ADC_AIN6);
+//	csi_pin_set_mux(PB02, PB02_ADC_AIN7);
+//	csi_pin_set_mux(PB03, PB03_ADC_AIN8);
+//	csi_pin_set_mux(PA08, PA08_ADC_AIN9);
+//	csi_pin_set_mux(PA09, PA09_ADC_AIN10);
+//	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+//	csi_pin_set_mux(PA011, PA011_ADC_AIN12);      
+//	csi_pin_set_mux(PA012, PA012_ADC_AIN13);      
+//	csi_pin_set_mux(PA013, PA013_ADC_AIN14);
+//	csi_pin_set_mux(PB00, PB00_ADC_AIN15);
+//	csi_pin_set_mux(PB06, PB06_ADC_AIN16);        
+//	csi_pin_set_mux(PB07, PB07_ADC_AIN17);        
+//	csi_pin_set_mux(PB08, PB08_ADC_AIN18);
+//	csi_pin_set_mux(PB09, PB09_ADC_AIN19);
+//	csi_pin_set_mux(PB010, PB010_ADC_AIN20);
+//	csi_pin_set_mux(PB011, PB011_ADC_AIN21);	
+//	csi_pin_set_mux(PB012, PB012_ADC_AIN22);
+//	csi_pin_set_mux(PB013, PB013_ADC_AIN23);	
 	
 	//adc 参数配置初始化
 	tAdcConfig.byClkDiv = 0x02;							//ADC clk两分频：clk = pclk/2
@@ -283,25 +295,31 @@ int adc_samp_oneshot_int_demo(void)
 	csi_adc_config_t tAdcConfig;
 	
 		//adc 输入管脚配置
-	//csi_pin_set_mux(PA00, PA00_ADC_AIN0);				//ADC GPIO作为输入通道
-//	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-//	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
-//	csi_pin_set_mux(PB00, PB00_ADC_AIN3);
-//	csi_pin_set_mux(PB01, PB01_ADC_AIN4);
-//	csi_pin_set_mux(PB02, PB02_ADC_AIN5);
-//	csi_pin_set_mux(PA06, PA06_ADC_AIN6);
-//	csi_pin_set_mux(PA07, PA07_ADC_AIN7);
-//	csi_pin_set_mux(PA08, PA08_ADC_AIN8);
-//	csi_pin_set_mux(PA09, PA09_ADC_AIN9);
-//	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-//	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-//	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
-//	csi_pin_set_mux(PA013, PA013_ADC_AIN13);
-//	csi_pin_set_mux(PB03, PB03_ADC_AIN14);
-//	csi_pin_set_mux(PC01, PC01_ADC_AIN15);
-//	csi_pin_set_mux(PB04, PB04_ADC_AIN16);
-//	csi_pin_set_mux(PC00, PC00_ADC_AIN17);
-//	csi_pin_set_mux(PA02, PA02_ADC_AIN18);
+//	csi_pin_set_mux(PB01, PB01_ADC_AIN0);				
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);               
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);               
+	csi_pin_set_mux(PA03, PA03_ADC_AIN3);
+	
+//	csi_pin_set_mux(PA05, PA05_ADC_AIN4);       
+//	csi_pin_set_mux(PA06, PA06_ADC_AIN5);
+//	csi_pin_set_mux(PA07, PA07_ADC_AIN6);
+//	csi_pin_set_mux(PB02, PB02_ADC_AIN7);
+//	csi_pin_set_mux(PB03, PB03_ADC_AIN8);
+//	csi_pin_set_mux(PA08, PA08_ADC_AIN9);
+//	csi_pin_set_mux(PA09, PA09_ADC_AIN10);
+//	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+//	csi_pin_set_mux(PA011, PA011_ADC_AIN12);      
+//	csi_pin_set_mux(PA012, PA012_ADC_AIN13);      
+//	csi_pin_set_mux(PA013, PA013_ADC_AIN14);
+//	csi_pin_set_mux(PB00, PB00_ADC_AIN15);
+//	csi_pin_set_mux(PB06, PB06_ADC_AIN16);        
+//	csi_pin_set_mux(PB07, PB07_ADC_AIN17);        
+//	csi_pin_set_mux(PB08, PB08_ADC_AIN18);
+//	csi_pin_set_mux(PB09, PB09_ADC_AIN19);
+//	csi_pin_set_mux(PB010, PB010_ADC_AIN20);
+//	csi_pin_set_mux(PB011, PB011_ADC_AIN21);	
+//	csi_pin_set_mux(PB012, PB012_ADC_AIN22);
+//	csi_pin_set_mux(PB013, PB013_ADC_AIN23);	
 	
 	//adc 参数配置初始化
 	tAdcConfig.byClkDiv = 48;									//ADC clk两分频：clk = pclk/2
@@ -368,25 +386,31 @@ int adc_samp_continuous_int_demo(void)
 	csi_adc_config_t tAdcConfig;
 	
 	//adc 输入管脚配置
-	//csi_pin_set_mux(PA00, PA00_ADC_AIN0);				//ADC GPIO作为输入通道
-//	csi_pin_set_mux(PA01, PA01_ADC_AIN1);
-//	csi_pin_set_mux(PA03, PA03_ADC_AIN2);
-//	csi_pin_set_mux(PB00, PB00_ADC_AIN3);
-//	csi_pin_set_mux(PB01, PB01_ADC_AIN4);
-//	csi_pin_set_mux(PB02, PB02_ADC_AIN5);
-//	csi_pin_set_mux(PA06, PA06_ADC_AIN6);
-//	csi_pin_set_mux(PA07, PA07_ADC_AIN7);
-//	csi_pin_set_mux(PA08, PA08_ADC_AIN8);
-//	csi_pin_set_mux(PA09, PA09_ADC_AIN9);
-//	csi_pin_set_mux(PA010, PA010_ADC_AIN10);
-//	csi_pin_set_mux(PA011, PA011_ADC_AIN11);
-//	csi_pin_set_mux(PA012, PA012_ADC_AIN12);
-//	csi_pin_set_mux(PA013, PA013_ADC_AIN13);
-//	csi_pin_set_mux(PB03, PB03_ADC_AIN14);
-//	csi_pin_set_mux(PC01, PC01_ADC_AIN15);
-//	csi_pin_set_mux(PB04, PB04_ADC_AIN16);
-//	csi_pin_set_mux(PC00, PC00_ADC_AIN17);
-//	csi_pin_set_mux(PA02, PA02_ADC_AIN18);
+//	csi_pin_set_mux(PB01, PB01_ADC_AIN0);				
+	csi_pin_set_mux(PA00, PA00_ADC_AIN1);               
+	csi_pin_set_mux(PA01, PA01_ADC_AIN2);               
+	csi_pin_set_mux(PA03, PA03_ADC_AIN3);
+	
+//	csi_pin_set_mux(PA05, PA05_ADC_AIN4);       
+//	csi_pin_set_mux(PA06, PA06_ADC_AIN5);
+//	csi_pin_set_mux(PA07, PA07_ADC_AIN6);
+//	csi_pin_set_mux(PB02, PB02_ADC_AIN7);
+//	csi_pin_set_mux(PB03, PB03_ADC_AIN8);
+//	csi_pin_set_mux(PA08, PA08_ADC_AIN9);
+//	csi_pin_set_mux(PA09, PA09_ADC_AIN10);
+//	csi_pin_set_mux(PA010, PA010_ADC_AIN11);
+//	csi_pin_set_mux(PA011, PA011_ADC_AIN12);      
+//	csi_pin_set_mux(PA012, PA012_ADC_AIN13);      
+//	csi_pin_set_mux(PA013, PA013_ADC_AIN14);
+//	csi_pin_set_mux(PB00, PB00_ADC_AIN15);
+//	csi_pin_set_mux(PB06, PB06_ADC_AIN16);        
+//	csi_pin_set_mux(PB07, PB07_ADC_AIN17);        
+//	csi_pin_set_mux(PB08, PB08_ADC_AIN18);
+//	csi_pin_set_mux(PB09, PB09_ADC_AIN19);
+//	csi_pin_set_mux(PB010, PB010_ADC_AIN20);
+//	csi_pin_set_mux(PB011, PB011_ADC_AIN21);	
+//	csi_pin_set_mux(PB012, PB012_ADC_AIN22);
+//	csi_pin_set_mux(PB013, PB013_ADC_AIN23);	
 	
 	
 	//adc 参数配置初始化
