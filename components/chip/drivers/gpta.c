@@ -81,6 +81,7 @@ __attribute__((weak)) void gpta0_initen_irqhandler(csp_gpta_t *ptGptaBase)
 	
     if(((csp_gpta_get_misr(ptGptaBase) & GPTA_INT_CBU))==GPTA_INT_CBU)
 	{	
+#if 0		
 		gTick++;if(gTick>=5){	
 								   //load1();	
 	                               gTick=0;
@@ -91,6 +92,7 @@ __attribute__((weak)) void gpta0_initen_irqhandler(csp_gpta_t *ptGptaBase)
 	                               csi_gpta_change_ch_duty(GPTA0,GPTA_CAMPB, 25);
 								   csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
 		                         }
+#endif
 	    csp_gpta_clr_int(ptGptaBase, GPTA_INT_CBU);
 	   	
 	}
@@ -571,6 +573,16 @@ csi_error_t csi_gpta_continuous_software_waveform(csp_gpta_t *ptGptaBase, csi_gp
 	     break;
     }		
 	return CSI_OK;
+}
+
+/** \brief gpta soft trg
+ *  \param[in] ptGptaBase:pointer of gpta register structure
+ *  \param[in] eCh: 0/1
+ *  \return none
+ */
+void csi_gpta_swf_trg(csp_gpta_t *ptGptaBase, csi_gpta_trgout_e byCh)
+{
+	csp_gpta_swf_trg(ptGptaBase, byCh);
 }
 
 /** \brief gpta  input  config  
