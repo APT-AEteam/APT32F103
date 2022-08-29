@@ -1016,8 +1016,8 @@ __ALWAYS_STATIC_INLINE void __WAIT(void)
  */
 __ALWAYS_STATIC_INLINE void __DOZE(void)
 {
-	__ASM volatile("li x1,0x4");
-	__ASM volatile("csrrs x0, mexstatus, x1");
+	__ASM volatile("li x6,0x4");
+	__ASM volatile("csrrs x0, mexstatus, x6");
     __ASM volatile("wfi");
 }
 
@@ -1027,8 +1027,8 @@ __ALWAYS_STATIC_INLINE void __DOZE(void)
  */
 __ALWAYS_STATIC_INLINE void __STOP(void)
 {
-	__ASM volatile("li x1,0xc");
-	__ASM volatile("csrrc x0, mexstatus, x1");
+	__ASM volatile("li x6,0xc");
+	__ASM volatile("csrrc x0, mexstatus, x6");
     __ASM volatile("wfi");
 }
 
