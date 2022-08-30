@@ -626,26 +626,46 @@ void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase)
 	csp_lpt_trg_enable(ptLptBase, ENABLE);
 	csp_lpt_evswf_en(ptLptBase);
 }
-/** \brief LPT sync filt offset and window value config
+/** \brief lpt sync window config  
  * 
- *  \param[in] ptLptBase:pointer of lpt register structure
- *  \param[in] hwOffset: filtering window offset 
- *  \param[in] hwWindow: filtering window width
- *  \return none
+ *  \param[in] lpt: LPT handle to operate
+ *  \param bCrossEnable: window cross enable/disable
+ *  \param bInvEnable: window invert enable/disable
+ *  \param hwOffset: window start point from CNT=ZRO, us
+ *  \param hwWindow: window width, us
+ *  \return error code \ref csi_error_t
  */
-void csi_lpt_sync_filt_window_timing(csp_lpt_t *ptLptBase, uint16_t hwOffset, uint16_t hwWindow)
+csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffset, uint16_t hwWindow)
 {
-	csp_lpt_sync_window_timing(ptLptBase, hwOffset, hwWindow);
-}
-/** \brief LPT sync filt offset and window value config
- * 
- *  \param[in] ptLptBase:pointer of lpt register structure
- *  \param[in] eWindowCross: window cross TB period enable 
- *  \param[in] eWindowInv: window inv enable
- *  \param[in] bEnable: sync filter enable
- *  \return none
- */
-void csi_lpt_sync_filt_window_ctrl(csp_lpt_t *ptLptBase, csi_lpt_window_cross_e eWindowCross, csi_lpt_window_inv_e eWindowInv, bool bEnble)
-{
-	csp_lpt_sync_window_ctrol(ptLptBase, eWindowCross, eWindowInv, bEnble);
+	uint32_t wOffset, wWindow;
+	
+	wOffset = (long long )csi_get_pclk_freq() * hwOffset / 1000000;
+	wWindow = (long long )csi_get_pclk_freq() * hwWindow / 1000000;
+	
+	if((wWindow > 0xffff) || (wOffset > 0xffff))
+		return CSI_ERROR;
+		
+	csp_lpt_sync_window_cross_enable(ptLptBase, bCrossEnable);
+	csp_lpt_sync_window_inv_enable(ptLptBase, bInvEnable);
+	
+	csp_lpt_set_sync_offset(ptLptBase, (uint16_t)wOffset);
+	csp_lpt_set_sync_window(ptLptBase, (uint16_t)wWindow);	
+	csp_lpt_sync_window_enable(ptLptBase, ENABLE);
+	
+	return CSI_OK;
+//	
+//	hwOffset = wLptPrd * hwOffsetRate/100;
+//	hwWindow = wLptPrd * hwWindowRate/100;
+//	
+//	if (hwOffsetRate + hwWindowRate > 100)
+//			csp_lpt_sync_window_cross_enable(ptLptBase, ENABLE);
+//	else
+//			csp_lpt_sync_window_cross_enable(ptLptBase, DISABLE);
+//			
+//	csp_lpt_set_sync_offset(ptLptBase, hwOffset);
+//	csp_lpt_set_sync_window(ptLptBase, hwWindow);
+//	
+//	csp_lpt_sync_window_enable(ptLptBase, ENABLE);
+
+
 }
