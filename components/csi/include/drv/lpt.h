@@ -283,21 +283,13 @@ void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase);
 /** \brief LPT sync filt offset and window value config
  * 
  *  \param[in] ptLptBase:pointer of lpt register structure
+ *  \param[in] bCrossEnable: window cross TB period enable 
+ *  \param[in] bInvEnable: window inv enable
  *  \param[in] hwOffset: filtering window offset 
  *  \param[in] hwWindow: filtering window width
- *  \return none
+ *  \return error code \ref csi_error_t
  */
-void csi_lpt_sync_filt_window_timing(csp_lpt_t *ptLptBase, uint16_t hwOffset, uint16_t hwWindow);
-
-/** \brief LPT sync filt offset and window value config
- * 
- *  \param[in] ptLptBase:pointer of lpt register structure
- *  \param[in] eWindowCross: window cross TB period enable 
- *  \param[in] eWindowInv: window inv enable
- *  \param[in] bEnable: sync filter enable
- *  \return none
- */
-void csi_lpt_sync_filt_window_ctrl(csp_lpt_t *ptLptBase, csi_lpt_window_cross_e eWindowCross, csi_lpt_window_inv_e eWindowInv, bool bEnble);
+csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffsetRate, uint16_t hwWindowRate);
 
 #ifdef __cplusplus
 }
