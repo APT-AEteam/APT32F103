@@ -86,7 +86,7 @@ int bt_sync_trg_start_demo(void)
 	csi_pin_set_mux(PB01, PB01_INPUT);									//PB01 配置为输入
 	csi_pin_pull_mode(PB01, GPIO_PULLUP);								//PB01 上拉
 	csi_pin_irq_mode(PB01, EXI_GRP1, GPIO_IRQ_FALLING_EDGE);			//PB01 下降沿产生中断, 选择中断组1	
-	csi_pin_irq_enable(PB01, ENABLE);									//PB01 中断使能，
+	csi_pin_irq_enable(PB01, ENABLE);									//PB01 中断使能
 	
 	csi_exi_set_evtrg(EXI_TRGOUT0, TRGSRC_EXI1, 3);						//EXI1 触发EXI_TRGOUT0
 	
@@ -96,11 +96,7 @@ int bt_sync_trg_start_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT0;  	    //EXI_TRGOUT0作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN0;   	    //BT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
    
 	csi_etb_init();
@@ -137,11 +133,7 @@ int bt_sync_trg_count_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT4;  	    //EXI_TRGOUT4作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN1;   	    //BT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
 	
 	csi_etb_init();
@@ -177,11 +169,7 @@ int bt_sync_trg_stop_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT5;  	    //EXI_TRGOUT5作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN2;   	    //BT0 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
 	
 	csi_etb_init();
@@ -215,11 +203,7 @@ int bt_trg_out_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  							//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_BT0_TRGOUT;  	    						//EXI_TRGOUT4作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT1_SYNCIN0;   	    					//BT1 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
 	
 	
@@ -248,11 +232,7 @@ int bt_soft_trg_out_demo(void)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  							//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_BT0_TRGOUT;  	    						//EXI_TRGOUT4作为触发源
-	tEtbConfig.bySrcIp1 = 0xff;      
-	tEtbConfig.bySrcIp2 = 0xff;
 	tEtbConfig.byDstIp =  ETB_BT1_SYNCIN0;   	    					//BT1 同步输入作为目标事件
-	tEtbConfig.byDstIp1 = 0xff;
-	tEtbConfig.byDstIp2 = 0xff;
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
 	
 	

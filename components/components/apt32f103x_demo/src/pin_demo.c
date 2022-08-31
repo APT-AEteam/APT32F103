@@ -100,6 +100,7 @@ int pin_irq_demo(void)
 	csi_pin_pull_mode(PB01, GPIO_PULLUP);						//PB01 上拉
 	csi_pin_irq_mode(PB01, EXI_GRP1, GPIO_IRQ_FALLING_EDGE);	//PB01 下降沿产生中断, 选择中断组1	
 	csi_pin_irq_enable(PB01, ENABLE);							//PB01 中断使能
+	csi_pin_vic_irq_enable(EXI_GRP1, ENABLE);					//VIC中断使能，选择中断组1
 	
 	return iRet;
 }

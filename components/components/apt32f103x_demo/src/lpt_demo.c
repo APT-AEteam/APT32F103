@@ -104,15 +104,12 @@ int lbt_sync_trg_start_demo(void)
 
 	csi_pin_set_mux(PB00, PB00_INPUT);									//PB00 配置为输入
 	csi_pin_pull_mode(PB00, GPIO_PULLUP);								//PB00 上拉
-	csi_pin_irq_mode(PB00, EXI_GRP0, GPIO_IRQ_FALLING_EDGE);			//PB00 下降沿产生中断
-	//csi_pin_irq_enable(PB00, EXI_GRP16, ENABLE);						//PB00 中断使能，选择中断组16
+	csi_pin_irq_mode(PB00, EXI_GRP0, GPIO_IRQ_FALLING_EDGE);			//PB00 下降沿产生中断，选择中断组16
+	csi_pin_irq_enable(PB00, ENABLE);									//PB00 中断使能
 
 	csi_exi_set_evtrg(EXI_TRGOUT0, TRGSRC_EXI0, 0);						//EXI0(PB00) 触发EXI_TRGOUT0(PB00用EXI0触发输出)
 
 	csi_lpt_timer_init(LPT,LPT_CLK_PCLK_DIV4,5);       					//初始化lpt
-	//csi_lpt_start_sync(LPT,LPT_CLK_PCLK_DIV4,50
-//	csi_lpt_sync_filt_window_timing(LPT, 0, 100);
-//	csi_lpt_sync_filt_window_ctrl(LPT, LPT_WINDOW_CROSS_DIS, LPT_WINDOW_INV_DIS, ENABLE);
 	csi_lpt_set_sync(LPT, LPT_TRG_SYNCIN0, LPT_SYNC_CONTINU, DISABLE);
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
