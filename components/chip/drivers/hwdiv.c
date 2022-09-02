@@ -20,12 +20,12 @@
 //!!!This function will be called AUTOMATICALLY when "/" is used.
 int __divsi3(int wDividend, int wDivisor)
 {
-//	uint32_t wPsr;
+	uint32_t wPsr;
 //	wPsr = __get_PSR();
 //	__disable_excp_irq(); 
 
-//	wPsr = __get_MSTATUS();
-//	__disable_irq();
+	wPsr = __get_MSTATUS();
+	__disable_irq();
 	
 	csp_hwdiv_t * ptHwdivBase = (csp_hwdiv_t *)HWDIV_REG_BASE;
 	ptHwdivBase->CR = 0;
@@ -33,7 +33,7 @@ int __divsi3(int wDividend, int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 	//__set_PSR(wPsr);
-//	__set_MSTATUS(wPsr);
+	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->QUOTIENT);
 }
 
@@ -41,12 +41,12 @@ int __divsi3(int wDividend, int wDivisor)
 //!!!This function will be called AUTOMATICALLY when "%" is used.
 int __modsi3(int wDividend, int wDivisor)
 {
-//	uint32_t wPsr;
+	uint32_t wPsr;
 //	wPsr = __get_PSR();
 //	__disable_excp_irq();  
 
-//	wPsr = __get_MSTATUS();
-//	__disable_irq();
+	wPsr = __get_MSTATUS();
+	__disable_irq();
 	
 	csp_hwdiv_t * ptHwdivBase = (csp_hwdiv_t *)HWDIV_REG_BASE;
 	ptHwdivBase->CR = 0;
@@ -55,7 +55,7 @@ int __modsi3(int wDividend, int wDivisor)
 	ptHwdivBase->DIVISOR = wDivisor;
 //	__set_PSR(wPsr);
 
-//	__set_MSTATUS(wPsr);
+	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->REMAIN);
 }
 
@@ -63,12 +63,12 @@ int __modsi3(int wDividend, int wDivisor)
 //!!!This function will be called AUTOMATICALLY when "/" is used.
 unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 {
-//	uint32_t wPsr;
+	uint32_t wPsr;
 //	wPsr = __get_PSR();
 //	__disable_excp_irq(); 
 //
-//	wPsr = __get_MSTATUS();
-//	__disable_irq();
+	wPsr = __get_MSTATUS();
+	__disable_irq();
 	
 	csp_hwdiv_t * ptHwdivBase = (csp_hwdiv_t *)HWDIV_REG_BASE;
 	ptHwdivBase->CR = 1;
@@ -77,7 +77,7 @@ unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 	ptHwdivBase->DIVISOR = wDivisor;
 //	__set_PSR(wPsr);
 
-//	__set_MSTATUS(wPsr);
+	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->QUOTIENT);
 }
 
@@ -85,11 +85,11 @@ unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 //!!!This function will be called AUTOMATICALLY when "%" is used.
 unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 {
-//	uint32_t wPsr;
+	uint32_t wPsr;
 //	wPsr = __get_PSR();
 //	__disable_excp_irq(); 
-//	wPsr = __get_MSTATUS();
-//	__disable_irq();
+	wPsr = __get_MSTATUS();
+	__disable_irq();
 	
 	csp_hwdiv_t * ptHwdivBase = (csp_hwdiv_t *)HWDIV_REG_BASE;
 	ptHwdivBase->CR = 1;
@@ -97,6 +97,6 @@ unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 //	__set_PSR(wPsr);
-//	__set_MSTATUS(wPsr);
+	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->REMAIN);
 }
