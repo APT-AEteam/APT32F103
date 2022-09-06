@@ -671,6 +671,19 @@ typedef enum{
 	EP6,
 	EP7,
 }csp_ept_ep_e;
+
+typedef enum{
+	SYNCIN4_5 = 0,
+	AQTSCR_EP0,
+	AQTSCR_EP1,
+	AQTSCR_EP2,
+	AQTSCR_EP3,
+	AQTSCR_EP4,
+	AQTSCR_EP5,
+	AQTSCR_EP6,
+}csp_ept_aqtscr_e;
+
+
 typedef enum {
 	EBI0 = 1,
 	EBI1,
@@ -1139,7 +1152,7 @@ static inline void csp_ept_set_aqcr4(csp_ept_t *ptEptBase, uint32_t bwVal)
 	ptEptBase -> AQCRD = bwVal;
 }
 
-static inline void csp_ept_set_aqtscr(csp_ept_t *ptEptBase, csp_ept_t_e bwVal,csp_ept_ep_e bwEP)
+static inline void csp_ept_set_aqtscr(csp_ept_t *ptEptBase, csp_ept_t_e bwVal,csp_ept_aqtscr_e bwEP)
 {  
   
 	if(bwVal==EPT_T1) ptEptBase -> AQTSCR =(ptEptBase -> AQTSCR &~(0x0f))|(((bwEP+1)&0x0f)<<EPT_T1SEL_POS);

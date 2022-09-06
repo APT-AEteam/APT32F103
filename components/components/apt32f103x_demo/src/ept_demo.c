@@ -35,13 +35,18 @@ int ept_capture_demo(void)
 	volatile uint8_t ch;	
 	csi_pin_set_mux(PA01,PA01_INPUT);		
 	csi_pin_pull_mode(PA01, GPIO_PULLUP);						//PA01 上拉
-	csi_pin_irq_mode(PA01,EXI_GRP1, GPIO_IRQ_FALLING_EDGE);		//PA01 下降沿产生中断	
+	csi_pin_irq_mode(PA01, EXI_GRP1, GPIO_IRQ_FALLING_EDGE);			//PA01 下降沿产生中断, 选择中断组1	
+	csi_pin_irq_enable(PA01, ENABLE);									//PA01 中断使能	
 	csi_exi_set_evtrg(1, TRGSRC_EXI1, 1);
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//PIN17
-//	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//PIN18
-//	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//PIN19
-//	csi_pin_set_mux(PA16, PA16_EPT_CHD);						//PIN20
+//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+
+//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+//	csi_pin_set_mux(PB03, PB03_EPT_CHD);
 //------------------------------------------------------------------------------------------------------------------------		
 	csi_etb_config_t tEtbConfig;				//ETB 参数配置结构体	
 	tEtbConfig.byChType  = ETB_ONE_TRG_ONE;  	//单个源触发单个目标
@@ -110,21 +115,21 @@ int ept_pwm_demo(void)
 {
 	int iRet = 0;
 //	uint32_t wPinMask = (0x01ul << 0);				            //GPIOA0端口
-    csi_gpio_port_dir(GPIOA0, (0x01ul << 0), GPIO_DIR_OUTPUT);	//GPIOA0 端口配置为输出
+//	csi_gpio_port_dir(GPIOA0, (0x01ul << 0), GPIO_DIR_OUTPUT);	//GPIOA0 端口配置为输出
 //	csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));				//输出高
-	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));		
+//	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));		
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//PIN17
-//	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//PIN18
-//	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//PIN19
-//	csi_pin_set_mux(PA16, PA16_EPT_CHD);						//PIN20
-//	
-//	csi_pin_set_mux(PA10, PA10_EPT_CHAY);						//PIN14	
-//	csi_pin_set_mux(PA11, PA11_EPT_CHBY);						//PIN15
-//	csi_pin_set_mux(PA12, PA12_EPT_CHCY);						//PIN16
+//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+
+//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+//	csi_pin_set_mux(PB03, PB03_EPT_CHD);						
 //------------------------------------------------------------------------------------------------------------------------
 //    csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPA);
-//	csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPB);
+//	  csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPB);
 //    csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPC);
 //    csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPD);	
 	
@@ -138,12 +143,16 @@ int ept_pwm_demo(void)
 	tPwmCfg.wFreq 			 = 10000;							//pwm ouput frequency	
 	tPwmCfg.wInt 		 	 = 0;                               //interrupt
 	csi_ept_wave_init(EPT0, &tPwmCfg);
+
+//	csp_ept_set_aqtscr(EPT0,EPT_T1,SYNCIN4_5);//波形输出T事件选择
+//	csp_ept_set_aqtscr(EPT0,EPT_T2,SYNCIN4_5);//波形输出T事件选择
+
 	
 //	csp_ept_dbg_enable(EPT0, 2);
-//	csp_ept_set_clksrc(EPT0, 1);                    //0h：PCLK ; 1h：由SYNCIN3控制
-//	csi_ept_set_sync (EPT0, EPT_TRG_SYNCEN3, EPT_TRG_CONTINU,EPT_AUTO_REARM_ZRO);	
-//	csi_ept_set_evtrg(EPT0, EPT_TRG_OUT0, EPT_TRGSRC_EP2);    //EP1用trg0输出，
-//	csi_ept_int_enable(EPT0, EPT_INTSRC_TRGEV0,true);
+//	csp_ept_set_clksrc(EPT0, 1);                   			 //0h：PCLK ; 1h：由SYNCIN3控制
+//	csi_ept_set_sync (EPT0, EPT_TRG_SYNCEN0, EPT_TRG_CONTINU,EPT_AUTO_REARM_ZRO);	
+//	csi_ept_set_evtrg(EPT0, EPT_TRGOUT1, EPT_TRGSRC_EX);    //EP1用trg0输出，
+//	csi_ept_int_enable(EPT0, EPT_INTSRC_TRGEV1,true);
 //------------------------------------------------------------------------------------------------------------------------	
 //	csi_ept_channel_aqload_config(EPT0, EPT_LD_SHDW, EPT_LDCMP_PRD ,EPT_CHANNEL_1);//配置波形控制寄存器的载入模式：Immediate/Shadow  注意：在改变AQLDR寄存器时 会改变相应的AQCRx(内部访问地址变了)
 //	csi_ept_channel_aqload_config(EPT0, EPT_LD_SHDW, EPT_LDCMP_PRD ,EPT_CHANNEL_2);
@@ -177,7 +186,7 @@ int ept_pwm_demo(void)
 //------------------------------------------------------------------------------------------------------------------------
 //	csi_ept_Global_load_control_config_t  Gldcfg;
 //	Gldcfg.bGlden        =  ENABLE;//DISABLE               //全局载入使能
-//    Gldcfg.bOstmd        =  DISABLE;                       //One Shot 载入模式使能控制位
+//  Gldcfg.bOstmd        =  DISABLE;                       //One Shot 载入模式使能控制位
 //	Gldcfg.bGldprd       =  2;                             //周期值
 //	Gldcfg.byGldcnt      =  0;							   //计数值
 //	Gldcfg.byGldmd       =  EPT_LDGLD_PRD;                 //选择触发载入条件
@@ -187,10 +196,9 @@ int ept_pwm_demo(void)
 //	csi_ept_gldcfg(EPT0 ,bycmpb ,ENABLE);
 	
 //------------------------------------------------------------------------------------------------------------------------
-//	csi_ept_set_sync      (EPT0, EPT_TRG_SYNCEN4, EPT_TRG_CONTINU,EPT_AUTO_REARM_ZRO);//使能同步事件4
-//    csi_ept_set_sync2evtrg(EPT0, EPT_TRG_SYNCEN4,0);                                //
-//	csi_ept_set_evtrg     (EPT0, EPT_TRG_OUT0, EPT_TRGSRC_EX);                          //同步事件4 用于事件触发输出0
-//	csi_ept_int_enable    (EPT0, EPT_INTSRC_TRGEV0,true);                               //使能事件中断
+//	csi_ept_set_sync(EPT0, EPT_TRG_SYNCEN4, EPT_TRG_CONTINU,EPT_AUTO_REARM_ZRO);	//使能同步事件4
+//	csi_ept_set_evtrg（EPT0, EPT_TRG_OUT0, EPT_TRGSRC_EX);                          //同步事件4 用于事件触发输出0
+//	csi_ept_int_enable(EPT0, EPT_INTSRC_TRGEV0,true);                               //使能事件中断
 //	csi_ept_int_enable (EPT0, EPT_INTSRC_CBD,true);
 //------------------------------------------------------------------------------------------------------------------------
 	csi_ept_start(EPT0);//start  timer
@@ -221,14 +229,14 @@ int ept_pwm_dz_demo(void)
 {
 	int iRet = 0;	
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//
-//	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//
-//	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//
-//	csi_pin_set_mux(PA16, PA16_EPT_CHD);						//
-//	
-//	csi_pin_set_mux(PA10, PA10_EPT_CHAY);						//	
-//	csi_pin_set_mux(PA11, PA11_EPT_CHBY);						//
-//	csi_pin_set_mux(PA12, PA12_EPT_CHCY);
+//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+
+//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+//	csi_pin_set_mux(PB03, PB03_EPT_CHD);
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_config_t tPwmCfg;								  
 	tPwmCfg.byWorkmod       = EPT_WAVE;                        //WAVE or CAPTURE    //计数或捕获	
@@ -262,13 +270,13 @@ int ept_pwm_dz_demo(void)
 	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_2);
 	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_3);
 //	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_4);	
-//csp_ept_set_aqtscr(EPT0,EPT_T1,EP1);//波形输出T事件选择
+	csp_ept_set_aqtscr(EPT0,EPT_T1,EP1);//波形输出T事件选择
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_deadzone_config_t  tEptDeadZoneTime;
 	tEptDeadZoneTime.byDcksel               = EPT_DB_DPSC;     //
 	tEptDeadZoneTime.hwDpsc                 =  0;              //FDBCLK = FHCLK / (DPSC+1)
 	tEptDeadZoneTime.hwRisingEdgereGister   = 500;             //上升沿-ns
-	tEptDeadZoneTime.hwFallingEdgereGister  = 200;             //下降沿-ns
+	tEptDeadZoneTime.hwFallingEdgereGister  = 500;             //下降沿-ns
 	tEptDeadZoneTime.byChaDedb              = DB_AR_BF;        //不使用死区双沿
 	tEptDeadZoneTime.byChbDedb              = DB_AR_BF;
 	tEptDeadZoneTime.byChcDedb              = DB_AR_BF;
@@ -289,7 +297,7 @@ int ept_pwm_dz_demo(void)
 	ept_Chopper.byChopperOutCasel   =0;                  //载波信号源选择控制位: 0h：EPT内部产生载波; 1h：TIN的输入	                 														  
 	csi_ept_chopper_config(EPT0, &ept_Chopper);
 														  
-//	csi_ept_chopper_enable(EPT0,EPTCHAX, true);          //斩波输出使能控制位    0b：禁止当前通道斩波输出
+//	  csi_ept_chopper_enable(EPT0,EPTCHAX, true);          //斩波输出使能控制位    0b：禁止当前通道斩波输出
 //	  csi_ept_chopper_enable(EPT0,EPTCHAY, true);          //                      1b：开启当前通道斩波输出
 //    csi_ept_chopper_enable(EPT0,EPTCHBX, true);
 //    csi_ept_chopper_enable(EPT0,EPTCHBY, true);
@@ -325,21 +333,19 @@ int ept_pwm_dz_em_demo(void)
 {
 	int iRet = 0;	
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PA13, PA13_EPT_CHAX);						//17
-//	csi_pin_set_mux(PA14, PA14_EPT_CHBX);						//18
-//	csi_pin_set_mux(PA15, PA15_EPT_CHCX);						//19
-//	csi_pin_set_mux(PA16, PA16_EPT_CHD);						//20
-//	
-//	csi_pin_set_mux(PA10, PA10_EPT_CHAY);						//14	
-//	csi_pin_set_mux(PA11, PA11_EPT_CHBY);						//15
-//	csi_pin_set_mux(PA12, PA12_EPT_CHCY);                       //16
-//	
-//	csi_pin_set_mux(PA09,PA09_EBI0);
-//	csi_pin_set_mux(PB04,PB04_EBI1);
-    
-//	csi_pin_set_mux(PA010, PA010_EPT_CHAY);                       //5
-//    csi_pin_set_mux(PA011, PA011_EPT_CHBY);                       //6
-//	csi_pin_set_mux(PA012, PA012_EPT_CHCY);                       //7
+//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+
+//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+//	csi_pin_set_mux(PB03, PB03_EPT_CHD);
+
+//	csi_pin_set_mux(PA07, PA07_EPI0);
+//	csi_pin_set_mux(PB013, PB013_EPI1);
+//	csi_pin_set_mux(PB03, PB03_EPI2);
+//	csi_pin_set_mux(PB02, PB02_EPI3);
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_pwmconfig_t tPwmCfg;								  
 	tPwmCfg.byWorkmod       = EPT_WAVE;                        //WAVE or CAPTURE    //计数或捕获	
@@ -351,7 +357,7 @@ int ept_pwm_dz_em_demo(void)
 	tPwmCfg.wFreq 			= 10000;						   //pwm ouput frequency			
 	tPwmCfg.wInt 			= EPT_INTSRC_TRGEV0;               //interrupt
 	csi_ept_wave_init(EPT0, &tPwmCfg);
-
+//	csp_ept_dbg_enable(EPT0, 2);
 //------------------------------------------------------------------------------------------------------------------------
 	csi_ept_pwmchannel_config_t  tEptchannelCfg;
 	tEptchannelCfg.byActionZro    =   LO;
@@ -416,19 +422,15 @@ int ept_pwm_dz_em_demo(void)
 //	csi_ept_set_evtrg(EPT0, EPT_TRG_OUT0, EPT_TRGSRC_EP2);    //EPx用trg0输出，
 //	csi_ept_int_enable(EPT0, EPT_INTSRC_TRGEV0,true);
 	
-//	csi_ept_feglk_config_t  FEGLKcfg2;                                                                       //
+	csi_ept_feglk_config_t  FEGLKcfg2;                                                                       //
 //	FEGLKcfg2.byPrdr	   = 1;                                                                                 //0x0  不链接
 //	FEGLKcfg2.byRssr    = 1;																                    //0x1  EPT0
 //	FEGLKcfg2.byCmpa    = 1;																					//0x2  GPTA0
 //	FEGLKcfg2.byCmpb    = 1;																					//0x3  GPTA1
-//	FEGLKcfg2.byGld2    = 1;																					//0x4  GPTB0
-//	FEGLKcfg2.byEmslclr = 1;																					//0x5  GPTB1
-//	FEGLKcfg2.byEmhlclr = 1;																					//0x6  
-//	FEGLKcfg2.byEmicr   = 1;																					//0x7  
-//	FEGLKcfg2.byEmfrcr  = 1;																					//0x8  
+//	FEGLKcfg2.byGld2    = 1;																					//0x4  GPTB0 
 //	FEGLKcfg2.byAqosf   = 1;																					//0x9  
 //	FEGLKcfg2.byAqcsf   = 1;  																				    //0xa  
-//    csi_ept_reglk_config(EPT0,&FEGLKcfg2);
+//  csi_ept_reglk_config(EPT0,&FEGLKcfg2);
 	
 	
 	csi_ept_start(EPT0);//start  timer
@@ -458,6 +460,8 @@ int ept_pwm_dz_em_demo(void)
             csi_ept_change_ch_duty(EPT0,EPT_CAMPB, 20);
 		    csi_ept_change_ch_duty(EPT0,EPT_CAMPC, 20);
 		    mdelay(200);
+//			csp_ept_clr_emHdlck(EPT0, EP2);
+//			csp_ept_clr_emSdlck(EPT0, EP2);
 			csi_ept_change_ch_duty(EPT0,EPT_CAMPA, 80);
             csi_ept_change_ch_duty(EPT0,EPT_CAMPB, 80);
 		    csi_ept_change_ch_duty(EPT0,EPT_CAMPC, 80);

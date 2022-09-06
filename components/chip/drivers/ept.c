@@ -54,7 +54,7 @@ __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 		gEptTick++;if(gEptTick>=5){	
 								   //load();	
 	                               gEptTick=0;
-								    csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));						 
+								    //csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));						 
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPA);
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPB);
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPC);
@@ -62,7 +62,7 @@ __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPA, 20);
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPB, 20);
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPC, 20);							 
-									csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
+									//csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
 								   
 		                         }
 						 
@@ -1108,10 +1108,10 @@ void csi_ept_reglk_config(csp_ept_t *ptEptBase,csi_ept_feglk_config_t *Global)
 	w_GLK = (w_GLK & ~EPT_RSSR_MSK )| ((Global-> byRssr & 0xF)<< EPT_RSSR_POS);
 	csp_ept_set_feglk(ptEptBase,w_GLK);
 	w_GLK =0;
-	w_GLK = (w_GLK & ~EPT_EMSLCLR_MSK )| ((Global-> byEmslclr & 0xF)<< EPT_EMSLCLR_POS);
-	w_GLK = (w_GLK & ~EPT_EMHLCLR_MSK )| ((Global-> byEmhlclr & 0xF)<< EPT_EMHLCLR_POS);
-	w_GLK = (w_GLK & ~EPT_EMICR_MSK )  | ((Global-> byEmicr   & 0xF)<< EPT_EMICR_POS);
-	w_GLK = (w_GLK & ~EPT_EMFRCR_MSK ) | ((Global-> byEmfrcr  & 0xF)<< EPT_EMFRCR_POS);
+//	w_GLK = (w_GLK & ~EPT_EMSLCLR_MSK )| ((Global-> byEmslclr & 0xF)<< EPT_EMSLCLR_POS);
+//	w_GLK = (w_GLK & ~EPT_EMHLCLR_MSK )| ((Global-> byEmhlclr & 0xF)<< EPT_EMHLCLR_POS);
+//	w_GLK = (w_GLK & ~EPT_EMICR_MSK )  | ((Global-> byEmicr   & 0xF)<< EPT_EMICR_POS);
+//	w_GLK = (w_GLK & ~EPT_EMFRCR_MSK ) | ((Global-> byEmfrcr  & 0xF)<< EPT_EMFRCR_POS);
 	w_GLK = (w_GLK & ~EPT_AQOSF_MSK )  | ((Global-> byAqosf   & 0xF)<< EPT_AQOSF_POS);
 	w_GLK = (w_GLK & ~EPT_AQCSF_MSK )  | ((Global-> byAqcsf   & 0xF)<< EPT_AQCSF_POS);
 	csp_ept_set_feglk2(ptEptBase,w_GLK);	

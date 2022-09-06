@@ -122,7 +122,7 @@ typedef enum
 	BT_SYNC_EN       
 }bt_sync_e;
 
-#define BT_AREARM_POS	(14)
+#define BT_AREARM_POS	(15)
 #define BT_AREARM_MSK	(0x01ul << BT_AREARM_POS)
 typedef enum
 {

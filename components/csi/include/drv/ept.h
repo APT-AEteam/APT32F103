@@ -248,10 +248,10 @@ typedef struct {
 	uint8_t		byCmpb;			
 	uint8_t		byGld2;			
 	uint8_t 	byRssr;		          
-	uint8_t 	byEmslclr;
-	uint8_t 	byEmhlclr;
-    uint8_t 	byEmicr;
-	uint8_t 	byEmfrcr;
+//	uint8_t 	byEmslclr;
+//	uint8_t 	byEmhlclr;
+//  uint8_t 	byEmicr;
+//	uint8_t 	byEmfrcr;
     uint8_t 	byAqosf;
 	uint8_t 	byAqcsf;		
 } csi_ept_feglk_config_t;

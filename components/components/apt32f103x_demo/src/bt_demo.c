@@ -21,7 +21,7 @@
 /* Private variablesr------------------------------------------------------*/
 
 /** \brief bt timer
- * 
+ *  BT0采用PEND定时中断
  *  \param[in] none
  *  \return error code
  */
@@ -37,7 +37,7 @@ int bt_timer_demo(void)
 }
 
 /** \brief bt pwm ouput
- *  
+ *  BT0采用PWM波形输出
  *  \param[in] none
  *  \return error code
  */
@@ -46,34 +46,33 @@ int bt_pwm_demo(void)
 	int iRet = 0;
 	csi_bt_pwm_config_t tPwmCfg;							//BT PWM输出参数初始化配置结构体
 	
-//	csi_pin_set_mux(PA19, PA19_BT0_OUT);					//PB02 作为BT0 PWM输出引脚
+	csi_pin_set_mux(PB02, PB02_BT0_OUT);					//PB02 作为BT0 PWM输出引脚	
 	
 	//init timer pwm para config
 	tPwmCfg.byIdleLevel = BT_PWM_IDLE_HIGH;					//PWM 输出空闲电平
 	tPwmCfg.byStartLevel= BT_PWM_START_HIGH;				//PWM 输出起始电平
 	tPwmCfg.byDutyCycle = 50;								//PWM 输出占空比(0 < DutyCycle < 100)		
-	tPwmCfg.wFreq 		= 1;								//PWM 输出频率
+	tPwmCfg.wFreq 		= 1000;								//PWM 输出频率
 	//tPwmCfg.byInt 	= BT_INTSRC_PEND | BT_INTSRC_CMP;	//PWM 中断配置(PEND and CMP)
 	tPwmCfg.byInt		= BT_INTSRC_NONE;
 	
 	csi_bt_pwm_init(BT0, &tPwmCfg);							//初始化BT0 PWM输出
 	csi_bt_start(BT0);										//启动BT0
 		
-	csi_bt_pwm_duty_cycle_updata(BT0, 10);
-	csi_bt_pwm_duty_cycle_updata(BT0, 0);
-	csi_bt_pwm_updata(BT0, 1000, 20);
-	csi_bt_pwm_duty_cycle_updata(BT0, 50);
-	csi_bt_pwm_duty_cycle_updata(BT0, 100);
-	csi_bt_pwm_duty_cycle_updata(BT0, 70);
-	csi_bt_pwm_updata(BT0, 10000, 50);
-	csi_bt_pwm_duty_cycle_updata(BT0, 40);
-	csi_bt_pwm_duty_cycle_updata(BT0, 0);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 10);
+//	csi_bt_pwm_updata(BT0, 1000, 20);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 50);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 100);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 70);
+//	csi_bt_pwm_updata(BT0, 10000, 50);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 40);
+//	csi_bt_pwm_duty_cycle_updata(BT0, 0);
 	
 	return iRet;
 }
 
 /** \brief bt sync trg start 
- *  
+ *  PB01的下降沿事件产生EXI_EXI_TRGOUT0事件，EXI_TRGOUT0事件采用连续模式,同步触发BT1_SYNCIN0目标事件，启动BT0计数器工作
  *  \param[in] none
  *  \return error code
  */
@@ -110,7 +109,7 @@ int bt_sync_trg_start_demo(void)
 }
 
 /** \brief bt sync trg count
- *  
+ *  PB01的下降沿事件产生EXI_TRGOUT4事件，EXI_TRGOUT4事件采用连续模式,同步触发BT1_SYNCIN1目标事件，停止BT0计数器工作
  *  \param[in] none
  *  \return error code
  */
@@ -125,9 +124,10 @@ int bt_sync_trg_count_demo(void)
 	csi_pin_irq_mode(PB01, EXI_GRP18, GPIO_IRQ_FALLING_EDGE);			//PB01 下降沿产生中断,选择中断组18
 	csi_pin_irq_enable(PB01, ENABLE);									//PB01 中断使能	
 	
-	csi_exi_set_evtrg(EXI_TRGOUT4, TRGSRC_EXI18, 0);					//EXI18(PB01) 触发EXI_TRGOUT4(PB01用EXI18触发输出)
-	
-	csi_bt_timer_init(BT0,20);											//BT定时
+	csi_exi_set_evtrg(EXI_TRGOUT4, TRGSRC_EXI18, 1);					//EXI18(PB01) 触发EXI_TRGOUT4(PB01用EXI18触发输出)
+
+
+	csi_bt_timer_init(BT0,2000);											//BT定时
 	csi_bt_set_sync(BT0, BT_TRG_SYNCIN1, BT_TRG_CONTINU, DISABLE);		//外部触发bt计数(SYNCIN1)
 	csi_bt_start(BT0);													//启动BT0
 	
@@ -146,7 +146,7 @@ int bt_sync_trg_count_demo(void)
 }
 
 /** \brief bt sync trg count
- *  
+ *  PB01的下降沿事件产生EXI_TRGOUT5事件，EXI_TRGOUT5事件采用单次模式,同步触发BT0_SYNCIN1目标事件，停止BT0计数器工作
  *  \param[in] none
  *  \return error code
  */
@@ -164,12 +164,12 @@ int bt_sync_trg_stop_demo(void)
 	csi_exi_set_evtrg(EXI_TRGOUT5, TRGSRC_EXI16, 0);					//EXI16(PB01) 触发EXI_TRGOUT5(PB01用EXI16触发输出)
 	
 	csi_bt_timer_init(BT0,2000);										//BT定时
-	csi_bt_set_sync(BT0, BT_TRG_SYNCIN2, BT_TRG_ONCE, DISABLE);		//外部触发停止BT(SYNCIN2)
+	csi_bt_set_sync(BT0, BT_TRG_SYNCIN1, BT_TRG_ONCE, ENABLE);		//外部触发停止BT(SYNCIN1)
 	csi_bt_start(BT0);													//启动定时器
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  		//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_EXI_TRGOUT5;  	    //EXI_TRGOUT5作为触发源
-	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN2;   	    //BT0 同步输入作为目标事件
+	tEtbConfig.byDstIp =  ETB_BT0_SYNCIN1;   	    //BT0 同步输入作为目标事件
 	tEtbConfig.byTrgMode = ETB_HARDWARE_TRG;
 	
 	csi_etb_init();
@@ -183,7 +183,7 @@ int bt_sync_trg_stop_demo(void)
 }
 
 /** \brief bt event trg count
- *  
+ *  BT0的PEND事件产生BT0_TRGOUT事件，BT0_TRGOUT事件采用连续模式,同步触发BT1_SYNCIN0目标事件，启动BT0计数器工作
  *  \param[in] none
  *  \return error code
  */
@@ -217,7 +217,7 @@ int bt_trg_out_demo(void)
 }
 
 /** \brief bt soft trg out
- *  
+ *  BT0软件控制产生BT0_TRGOUT事件，BT0_TRGOUT事件采用单次模式,同步触发BT1_SYNCIN0目标事件，启动BT1计数器工作
  *  \param[in] none
  *  \return error code
  */

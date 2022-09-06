@@ -38,9 +38,9 @@ int uart_send_dma_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -50,7 +50,7 @@ int uart_send_dma_demo(void)
 	
 	csi_uart_init(UART1, &tUartConfig);			//初始化串口
 	csi_uart_start(UART1, UART_FUNC_RX_TX);		//开启UART的RX和TX功能，也可单独开启RX或者TX功能
-	
+	csi_etb_init();
 	csi_uart_dma_tx_init(UART1, DMA_CH1, ETB_CH10);	
 	
 	while(1)
@@ -58,7 +58,7 @@ int uart_send_dma_demo(void)
 		byRecv = csi_uart_getc(UART1);
 		if(byRecv == 0x06)
 			csi_uart_send_dma(UART1, DMA_CH1, (void *)bySdData, 26);	
-		mdelay(10);
+		//mdelay(10);
 		if(csi_dma_get_msg(DMA_CH1, ENABLE))	//获取发送完成消息，并清除消息
 		{
 			//添加用户代码
@@ -81,9 +81,9 @@ int uart_recv_dma_demo(void)
 	int iRet = 0;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -122,9 +122,9 @@ int uart_char_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX	
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -140,7 +140,7 @@ int uart_char_demo(void)
 		byRecv = csi_uart_getc(UART1);
 		csi_uart_putc(UART1, byRecv+1);
 		
-		mdelay(10);
+		//mdelay(10);
 	}
 	
 	return iRet;
@@ -160,9 +160,9 @@ int uart_send_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -179,7 +179,7 @@ int uart_send_demo(void)
 		if(byRecv == 0x06)
 			byRecv = csi_uart_send(UART1,(void *)bySendData,18);		//采用轮询方式,调用该函数时，UART发送中断关闭
 		
-		mdelay(5);
+//		mdelay(5);
 //		if(byRecv == 16)
 //			csi_uart_putc(UART1, 0x03);
 	}
@@ -200,9 +200,9 @@ int uart_send_int_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -216,8 +216,8 @@ int uart_send_int_demo(void)
 	while(1)
 	{
 		byRecv = csi_uart_getc(UART1);
-		if(byRecv == 0x06)
-			csi_uart_send(UART1,(void *)bySendData,28);		//采用中断方式。调用改函数时，UART发送中断使能
+		//if(byRecv == 0x06)
+		csi_uart_send(UART1,(void *)bySendData,28);		//采用中断方式。调用改函数时，UART发送中断使能
 		
 		while(1)			
 		{
@@ -253,9 +253,9 @@ int uart_receive_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -292,9 +292,9 @@ int uart_recv_int_demo(void)
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 //	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
@@ -347,9 +347,9 @@ int uart_recv_dynamic_demo(void)
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
@@ -391,9 +391,9 @@ int uart_recv_dynamic_int_demo(void)
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PB02, PB02_UART1_TX);		//TX	
-//	csi_pin_set_mux(PA06, PA06_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA06,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
