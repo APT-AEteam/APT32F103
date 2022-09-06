@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <com.csky.cds.peripheral>
-  <config Version="0,0">
+  <config Version="0.0">
     <Peripheral Name="IFC">
       <Register Name="IFC_IDR" Authority="RW" Address="0x40010000" Width="32" Description="闪存控制器ID寄存器">
         <Bit Name="IDCODE" Authority="RW" Bits="23-0" Description="ID代码 (0x32f102)" />
@@ -81,7 +81,6 @@
         <Bit Name="LP_EMOEN" Authority="RW" Bits="15" Description="使能或禁止DEEP-SLEEP模式下EMOSC工作状态（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止EMOSC在DEEP-SLEEP模式下工作。" />
         <Bit Name="LP_IMOEN" Authority="RW" Bits="13" Description="使能或禁止DEEP-SLEEP模式下IMOSC工作状态（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止IMOSC在DEEP-SLEEP模式下工作。" />
         <Bit Name="LP_ISOEN" Authority="RW" Bits="12" Description="使能或禁止DEEP-SLEEP模式下ISOSC工作状态（缺省禁止，若IWDT使能，则该控制位设置无效）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止ISOSC在DEEP-SLEEP模式下工作。" />
-        <Bit Name="SYSTICK" Authority="RW" Bits="11" Description="使能或禁止CORET的计数时钟（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="IDLE_HCLK" Authority="RW" Bits="9" Description="使能或禁止SLEEP模式下的HCLK（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="IDLE_PCLK" Authority="RW" Bits="8" Description="使能或禁止SLEEP模式下的PCLK（缺省使能）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="HFOSC" Authority="RW" Bits="4" Description="使能或禁止HFOSC 内部振荡器（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定振荡器。" />
@@ -95,7 +94,6 @@
         <Bit Name="LP_EMOEN" Authority="RW" Bits="15" Description="使能或禁止DEEP-SLEEP模式下EMOSC工作状态（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止EMOSC在DEEP-SLEEP模式下工作。" />
         <Bit Name="LP_IMOEN" Authority="RW" Bits="13" Description="使能或禁止DEEP-SLEEP模式下IMOSC工作状态（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止IMOSC在DEEP-SLEEP模式下工作。" />
         <Bit Name="LP_ISOEN" Authority="RW" Bits="12" Description="使能或禁止DEEP-SLEEP模式下ISOSC工作状态（缺省禁止，若IWDT使能，则该控制位设置无效）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止ISOSC在DEEP-SLEEP模式下工作。" />
-        <Bit Name="SYSTICK" Authority="RW" Bits="11" Description="使能或禁止CORET的计数时钟（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="IDLE_HCLK" Authority="RW" Bits="9" Description="使能或禁止SLEEP模式下的HCLK（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="IDLE_PCLK" Authority="RW" Bits="8" Description="使能或禁止SLEEP模式下的PCLK（缺省使能）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定功能。" />
         <Bit Name="HFOSC" Authority="RW" Bits="4" Description="使能或禁止HFOSC 内部振荡器（缺省禁止）。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：使能或禁止指定振荡器。" />
@@ -109,7 +107,6 @@
         <Bit Name="LP_EMOEN" Authority="RO" Bits="15" Description="DEEP-SLEEP模式下EMOSC工作状态。&#xD;&#xA;0h：EMOSC被关闭。&#xD;&#xA;1h：EMOSC被打开。" />
         <Bit Name="LP_IMOEN" Authority="RO" Bits="13" Description="DEEP-SLEEP模式下IMOSC工作状态。&#xD;&#xA;0h：IMOSC被关闭。&#xD;&#xA;1h：IMOSC被打开。" />
         <Bit Name="LP_ISOEN" Authority="RO" Bits="12" Description="DEEP-SLEEP模式下ISOSC工作状态。&#xD;&#xA;0h：ISOSC被关闭。&#xD;&#xA;1h：ISOSC被打开。" />
-        <Bit Name="SYSTICK" Authority="RO" Bits="11" Description="CORET的时钟工作状态。&#xD;&#xA;0h：CORET时钟被关闭。&#xD;&#xA;1h：CORET时钟被打开。" />
         <Bit Name="IDLE_HCLK" Authority="RO" Bits="9" Description="SLEEP 模式下HCLK状态。&#xD;&#xA;0h：SLEEP模式下HCLK被关闭。&#xD;&#xA;1h：SLEEP模式下HCLK被打开。" />
         <Bit Name="IDLE_PCLK" Authority="RO" Bits="8" Description="SLEEP 模式下PCLK状态。&#xD;&#xA;0h：SLEEP模式下PCLK被关闭。&#xD;&#xA;1h：SLEEP模式下PCLK被打开。" />
         <Bit Name="HFOSC" Authority="RO" Bits="4" Description="HFOSC 内部振荡器工作状态。&#xD;&#xA;0h：HFOSC被关闭。&#xD;&#xA;1h：HFOSC被打开。" />
@@ -421,33 +418,185 @@
         <Bit Name="POR" Authority="RW" Bits="0" Description="POR上电复位。" />
       </Register>
       <Register Name="SYSCON_EXIRT" Authority="RW" Address="0x40011094" Width="32" Description="外部中断上升沿选择寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="外部中断上升沿/下降沿使能控制。&#xD;&#xA;0h：该边沿触发关闭。&#xD;&#xA;1h：该边沿触发打开。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="外部中断上升沿/下降沿使能控制。&#xD;&#xA;0h：该边沿触发关闭。&#xD;&#xA;1h：该边沿触发打开。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIFT" Authority="RW" Address="0x40011098" Width="32" Description="外部中断下降沿选择寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="外部中断上升沿/下降沿使能控制。&#xD;&#xA;0h：该边沿触发关闭。&#xD;&#xA;1h：该边沿触发打开。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="外部中断上升沿/下降沿使能控制。&#xD;&#xA;0h：该边沿触发关闭。&#xD;&#xA;1h：该边沿触发打开。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIER" Authority="RW" Address="0x4001109c" Width="32" Description="外部中断使能寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="外部中断使能控制。&#xD;&#xA;EXIER和EXIDR为只写寄存器。通过EXIER使能中断，EXIDR禁止中断。只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：打开/关闭该EXI中断源。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="外部中断使能控制。&#xD;&#xA;EXIER和EXIDR为只写寄存器。通过EXIER使能中断，EXIDR禁止中断。只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：打开/关闭该EXI中断源。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIDR" Authority="RW" Address="0x400110a0" Width="32" Description="外部中断禁止寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="外部中断使能控制。&#xD;&#xA;EXIER和EXIDR为只写寄存器。通过EXIER使能中断，EXIDR禁止中断。只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：打开/关闭该EXI中断源。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="外部中断使能控制。&#xD;&#xA;EXIER和EXIDR为只写寄存器。通过EXIER使能中断，EXIDR禁止中断。只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：打开/关闭该EXI中断源。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIMR" Authority="RW" Address="0x400110a4" Width="32" Description="外部中断使能/禁止状态寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="EXIMR为只读寄存器，读取时返回当前中断使能状态。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断处于关闭状态。&#xD;&#xA;1h：中断处于打开状态。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="EXIMR为只读寄存器，读取时返回当前中断使能状态。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断处于关闭状态。&#xD;&#xA;1h：中断处于打开状态。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIAR" Authority="RW" Address="0x400110a8" Width="32" Description="外部中断软件触发寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="EXIAR为只写寄存器，只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：软件触发该EXI中断源。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="EXIAR为只写寄存器，只有对寄存器写入’1’时才有效，读取时返回总为‘0’。&#xD;&#xA;寄存器写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：软件触发该EXI中断源。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXICR" Authority="RW" Address="0x400110ac" Width="32" Description="外部中断清除寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="EXICR为读写寄存器。读取时返回当前中断pending标志。写入‘1’时，清除当前中断标志；写入‘0’时无效。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断标志处于未Pending状态。&#xD;&#xA;1h：中断标志处于Pending状态。&#xD;&#xA;写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：清除该EXI Pending状态。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="EXICR为读写寄存器。读取时返回当前中断pending标志。写入‘1’时，清除当前中断标志；写入‘0’时无效。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断标志处于未Pending状态。&#xD;&#xA;1h：中断标志处于Pending状态。&#xD;&#xA;写入时：&#xD;&#xA;0h：无效。&#xD;&#xA;1h：清除该EXI Pending状态。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_EXIRS" Authority="RW" Address="0x400110b0" Width="32" Description="外部中断原始标志状态寄存器">
-        <Bit Name="EXI0 ~ EXI19" Authority="RW" Bits="19-0" Description="EXIRS为只读寄存器，读取时返回当前中断原始标志状态。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断处于未Pending状态。&#xD;&#xA;1h：中断处于Pending状态。" />
+        <Bit Name="EXI19" Authority="RW" Bits="19" Description="EXIRS为只读寄存器，读取时返回当前中断原始标志状态。&#xD;&#xA;读取时：&#xD;&#xA;0h：中断处于未Pending状态。&#xD;&#xA;1h：中断处于Pending状态。" />
+        <Bit Name="EXI18" Authority="RW" Bits="18" Description="" />
+        <Bit Name="EXI17" Authority="RW" Bits="17" Description="" />
+        <Bit Name="EXI16" Authority="RW" Bits="16" Description="" />
+        <Bit Name="EXI15" Authority="RW" Bits="15" Description="" />
+        <Bit Name="EXI14" Authority="RW" Bits="14" Description="" />
+        <Bit Name="EXI13" Authority="RW" Bits="13" Description="" />
+        <Bit Name="EXI12" Authority="RW" Bits="12" Description="" />
+        <Bit Name="EXI11" Authority="RW" Bits="11" Description="" />
+        <Bit Name="EXI10" Authority="RW" Bits="10" Description="" />
+        <Bit Name="EXI9" Authority="RW" Bits="9" Description="" />
+        <Bit Name="EXI8" Authority="RW" Bits="8" Description="" />
+        <Bit Name="EXI7" Authority="RW" Bits="7" Description="" />
+        <Bit Name="EXI6" Authority="RW" Bits="6" Description="" />
+        <Bit Name="EXI5" Authority="RW" Bits="5" Description="" />
+        <Bit Name="EXI4" Authority="RW" Bits="4" Description="" />
+        <Bit Name="EXI3" Authority="RW" Bits="3" Description="" />
+        <Bit Name="EXI2" Authority="RW" Bits="2" Description="" />
+        <Bit Name="EXI1" Authority="RW" Bits="1" Description="" />
+        <Bit Name="EXI0" Authority="RW" Bits="0" Description="" />
       </Register>
       <Register Name="SYSCON_IWDCR" Authority="RW" Address="0x400110b4" Width="32" Description="独立看门狗控制寄存器">
         <Bit Name="IWDT_KEY" Authority="RW" Bits="31-16" Description="对本寄存器进行写操作时，需要填入对应的KEY值。&#xD;&#xA;只有在IWDT_KEY等于0x8778时，对本寄存器的写入才有效" />
-        <Bit Name="BUSY" Authority="RW" Bits="12" Description="看门狗工作状态。&#xD;&#xA;0h：看门狗未使能。&#xD;&#xA;1h：看门狗已使能。" />
-        <Bit Name="DBGEN" Authority="RW" Bits="11" Description="SHORT工作模式，该模式用于缩短IWDT的溢出时间。正常使用时，保持该位为零。&#xD;&#xA;0h：禁止SHORT模式。&#xD;&#xA;1h：使能SHORT模式。" />
+        <Bit Name="BUSY" Authority="RO" Bits="12" Description="看门狗工作状态。&#xD;&#xA;0h：看门狗未使能。&#xD;&#xA;1h：看门狗已使能。" />
+        <Bit Name="DBGEN" Authority="RW" Bits="11" Description="调试使能控制。调试使能时，在 CPU 被调试器挂起时，时&#xD;&#xA;基计数器的计数时钟同时也被挂起。&#xD;&#xA;0h：调试禁止&#xD;&#xA;1h：调试使能" />
         <Bit Name="OVTIME" Authority="RW" Bits="10-8" Description="总溢出时间设置。当看门狗计数器计数溢出时，产生复位。&#xD;&#xA;0h：128ms。&#xD;&#xA;1h：256ms。&#xD;&#xA;2h：512ms。&#xD;&#xA;3h：1.024s。&#xD;&#xA;4h：2.048s。&#xD;&#xA;5h：3.096s。&#xD;&#xA;6h：4.12s。&#xD;&#xA;7h：8.196s。" />
         <Bit Name="INTVAL" Authority="RW" Bits="4-2" Description="看门狗报警中断的时间设置。当看门狗计数器计数到总溢出时间的一定比例时，产生报警中断。&#xD;&#xA;0h：1/8总溢出时间。&#xD;&#xA;1h：2/8总溢出时间。&#xD;&#xA;2h：3/8总溢出时间。&#xD;&#xA;3h：4/8总溢出时间。&#xD;&#xA;4h：5/8总溢出时间。&#xD;&#xA;5h：6/8总溢出时间。&#xD;&#xA;6h：7/8总溢出时间。&#xD;&#xA;7h：7/8总溢出时间。" />
         <Bit Name="SHORT" Authority="RW" Bits="0" Description="SHORT工作模式，该模式用于缩短IWDT的溢出时间。正常使用时，保持该位为零。&#xD;&#xA;0h：禁止SHORT模式。&#xD;&#xA;1h：使能SHORT模式。" />
@@ -482,14 +631,19 @@
         <Bit Name="CFGVAL0" Authority="RW" Bits="3-0" Description="" />
       </Register>
       <Register Name="SYSCON_UID0" Authority="RW" Address="0x400110e4" Width="32" Description="UID寄存器0">
-        <Bit Name="UID" Authority="RO" Bits="31-0" Description="唯一ID寄存器。&#xD;&#xA;在出厂时，由工厂写入的唯一ID码。" />
+        <Bit Name="UID0" Authority="RO" Bits="31-0" Description="唯一ID寄存器。&#xD;&#xA;在出厂时，由工厂写入的唯一ID码。" />
       </Register>
-      <Register Name="SYSCON_UID1" Authority="RW" Address="0x400110e8" Width="32" Description="UID寄存器1" />
-      <Register Name="SYSCON_UID2" Authority="RW" Address="0x400110ec" Width="32" Description="UID寄存器2" />
+      <Register Name="SYSCON_UID1" Authority="RW" Address="0x400110e8" Width="32" Description="UID寄存器1">
+        <Bit Name="UID1" Authority="RO" Bits="31-0" Description="唯一ID寄存器。&#xD;&#xA;在出厂时，由工厂写入的唯一ID码。" />
+      </Register>
+      <Register Name="SYSCON_UID2" Authority="RW" Address="0x400110ec" Width="32" Description="UID寄存器2">
+        <Bit Name="UID2" Authority="RO" Bits="31-0" Description="唯一ID寄存器。&#xD;&#xA;在出厂时，由工厂写入的唯一ID码。" />
+      </Register>
       <Register Name="SYSCON_PWROPT" Authority="RW" Address="0x400110f0" Width="32" Description="供电恢复时间调整寄存器">
+        <Bit Name="PWR_KEY" Authority="RW" Bits="31-24" Description="" />
         <Bit Name="EFLR_CTL" Authority="RW" Bits="21-20" Description="EFLASH的内部参考源使能硬件控制策略设置。&#xD;&#xA;0h：参考源不随模式改变切换供电开关。&#xD;&#xA;1h：参考源在 SLEEP模式下自动关闭。&#xD;&#xA;3h：参考源在 SLEEP模式、EFL_PD或 EFLASH LP模式下自动关闭。&#xD;&#xA;2h：保留。&#xD;&#xA;EFLASH LP模式通过OPT1[EFL_LPMD]控制位设置。" />
-        <Bit Name="EFLR_PD" Authority="RW" Bits="19-18" Description="EFLASH的内部参考软件使能控制。&#xD;&#xA;当EFLASH断电时，可以关闭EFLASH的参考源，以降低功耗。当写入‘11’时，关闭参考源的供电；当写入其他值时，打开参考源的供电。EFLASH参考源必须在EFLASH断电后，才能关闭；同样在恢复时，需要先恢复参考源，然后再打开EFLASH供电。" />
-        <Bit Name="EFL_PD" Authority="RW" Bits="17-16" Description="EFLASH 的电源控制。&#xD;&#xA;当程序在SRAM中运行时，为降低功耗，可以临时将EFLASH的供电关闭。当写入‘11’时，关闭EFLASH的供电；当写入其他值时，打开EFLASH的供电。" />
+        <Bit Name="EFLR_PD" Authority="RW" Bits="19-18" Description="EFLASH的内部参考软件使能控制。&#xD;&#xA;当EFLASH断电时，可以关闭EFLASH的参考源，以降低功耗。当写入‘11’时，关闭参考源的供电，读取时，18位为1表示EFLASH参考电源关闭；当写入其他值时，打开参考源的供电。EFLASH参考源必须在EFLASH断电后，才能关闭；同样在恢复时，需要先恢复参考源，然后再打开EFLASH供电。" />
+        <Bit Name="EFL_PD" Authority="RW" Bits="17-16" Description="EFLASH 的电源控制。&#xD;&#xA;当程序在SRAM中运行时，为降低功耗，可以临时将EFLASH的供电关闭。当写入‘11’时，关闭EFLASH的供电，读取的时候16位为1表示，EFLASH供电关闭；当写入其他值时，打开EFLASH的供电。" />
         <Bit Name="TPWRCV_SLP" Authority="RW" Bits="15-8" Description="从SLEEP模式唤醒后的电源稳定时间调整。稳定时间计数器的工作时钟为2MHz。" />
         <Bit Name="TPWRCV_DSL" Authority="RW" Bits="7-0" Description="从DEEPSLEEP模式唤醒后的电源稳定时间调整。稳定时间计数器的工作时钟为2MHz。" />
       </Register>
@@ -531,17 +685,17 @@
         <Bit Name="EV0SWF" Authority="RW" Bits="0" Description="软件产生一次EV0的触发&#xD;&#xA;0h：写入‘0’无效&#xD;&#xA;1h：软件产生一次触发" />
       </Register>
       <Register Name="SYSCON_UREG0" Authority="RW" Address="0x40011100" Width="32" Description="32位用户寄存器">
-        <Bit Name="UREG" Authority="RW" Bits="31-0" Description="用户寄存器。&#xD;&#xA;可用于用户自定义信息临时保存的寄存器。此寄存器中的内容只有在POR复位时才会清除。" />
+        <Bit Name="UREG0" Authority="RW" Bits="31-0" Description="用户寄存器。&#xD;&#xA;可用于用户自定义信息临时保存的寄存器。此寄存器中的内容只有在POR复位时才会清除。" />
       </Register>
       <Register Name="SYSCON_UREG1" Authority="RW" Address="0x40011104" Width="32" Description="32位用户寄存器">
-        <Bit Name="UREG1" Authority="RW" Bits="31-0" Description="" />
+        <Bit Name="UREG1" Authority="RW" Bits="31-0" Description="用户寄存器。&#xD;&#xA;可用于用户自定义信息临时保存的寄存器。此寄存器中的内容只有在POR复位时才会清除。" />
       </Register>
       <Register Name="SYSCON_UREG2" Authority="RW" Address="0x40011108" Width="32" Description="16位用户寄存器">
-        <Bit Name="UREG2" Authority="RW" Bits="15-0" Description="" />
+        <Bit Name="UREG2" Authority="RW" Bits="15-0" Description="用户寄存器。&#xD;&#xA;可用于用户自定义信息临时保存的寄存器。此寄存器中的内容只有在POR复位时才会清除。" />
       </Register>
       <Register Name="SYSCON_UREG3" Authority="RW" Address="0x4001110c" Width="32" Description="16位用户寄存器">
         <Bit Name="KEY" Authority="RW" Bits="31-16" Description="" />
-        <Bit Name="UREG3" Authority="RW" Bits="15-0" Description="" />
+        <Bit Name="UREG3" Authority="RW" Bits="15-0" Description="用户寄存器。&#xD;&#xA;可用于用户自定义信息临时保存的寄存器。此寄存器中的内容只有在POR复位时才会清除。" />
       </Register>
       <Register Name="SYSCON_DBGCR" Authority="RW" Address="0x40011128" Width="32" Description="调试控制寄存器">
         <Bit Name="DBG_UNLOCK" Authority="RW" Bits="7-0" Description="调试管脚复用功能解锁控制：&#xD;&#xA;5A：调试管脚锁定为调试功能。软件设置GPIO的控制寄存器，虽然值会变化，但实际仍然为调试功能。&#xD;&#xA;others：调试管脚可设置为其他任意功能&#xD;&#xA;该控制位段，只有在POR时会恢复复位值。" />
@@ -552,7 +706,18 @@
         <Bit Name="ENABLE" Authority="RW" Bits="0" Description="ETCB模块使能控制&#xD;&#xA;&#xD;&#xA;0 : 禁止&#xD;&#xA;1 : 使能" />
       </Register>
       <Register Name="ETCB_SWTRG" Authority="RW" Address="0x40012004" Width="32" Description="ETCB软件触发寄存器">
-        <Bit Name="SWTRG_CHx" Authority="RW" Bits="7-0" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH11" Authority="RW" Bits="11" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH10" Authority="RW" Bits="10" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH9" Authority="RW" Bits="9" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH8" Authority="RW" Bits="8" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH7" Authority="RW" Bits="7" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH6" Authority="RW" Bits="6" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH5" Authority="RW" Bits="5" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH4" Authority="RW" Bits="4" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH3" Authority="RW" Bits="3" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH2" Authority="RW" Bits="2" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH1" Authority="RW" Bits="1" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
+        <Bit Name="SWTRG_CH0" Authority="RW" Bits="0" Description="软件触发控制&#xD;&#xA;&#xD;&#xA;0 : 无效&#xD;&#xA;1 : 触发该通道的事件" />
       </Register>
       <Register Name="ETCB_CH0CON0" Authority="RW" Address="0x40012008" Width="32" Description="ETCB通道0控制寄存器0">
         <Bit Name="SRC2_SEL" Authority="RW" Bits="26-21" Description="触发源2的事件选择位&#xD;&#xA;参考事件对应表" />
@@ -581,7 +746,8 @@
         <Bit Name="CH1_EN" Authority="RW" Bits="0" Description="通1使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
       <Register Name="ETCB_CH2CON0" Authority="RW" Address="0x40012018" Width="32" Description="ETCB通道2控制寄存器0">
-        <Bit Name="DST2_EN" Authority="RW" Bits="26-20" Description="触发目标2使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
+        <Bit Name="DST2_SEL" Authority="RW" Bits="26-21" Description="触发目标2的事件选择位&#xD;&#xA;参考事件对应表" />
+        <Bit Name="DST2_EN" Authority="RW" Bits="20" Description="触发目标2使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
         <Bit Name="DST1_SEL" Authority="RW" Bits="16-11" Description="触发目标1的事件选择位&#xD;&#xA;参考事件对应表" />
         <Bit Name="DST1_EN" Authority="RW" Bits="10" Description="触发目标1使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
         <Bit Name="DST0_SEL" Authority="RW" Bits="6-1" Description="触发目标0的事件选择位&#xD;&#xA;参考事件对应表" />
@@ -594,33 +760,58 @@
       </Register>
       <Register Name="ETCB_CH3CON" Authority="RW" Address="0x40012030" Width="32" Description="ETCB通道3控制寄存器">
         <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
-        <Bit Name="SRC_SEL" Authority="RW" Bits="18-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
         <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
         <Bit Name="CH3_EN" Authority="RW" Bits="0" Description="通道3使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
       <Register Name="ETCB_CH4CON" Authority="RW" Address="0x40012034" Width="32" Description="ETCB通道4控制寄存器">
         <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
-        <Bit Name="SRC_SEL" Authority="RW" Bits="18-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
         <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
         <Bit Name="CH5_EN" Authority="RW" Bits="0" Description="通道5使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
       <Register Name="ETCB_CH5CON" Authority="RW" Address="0x40012038" Width="32" Description="ETCB通道5控制寄存器">
         <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
-        <Bit Name="SRC_SEL" Authority="RW" Bits="18-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
         <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
         <Bit Name="CH4_EN" Authority="RW" Bits="0" Description="通道4使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
       <Register Name="ETCB_CH6CON" Authority="RW" Address="0x4001203c" Width="32" Description="ETCB通道6控制寄存器">
         <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
-        <Bit Name="SRC_SEL" Authority="RW" Bits="18-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="DMA_EN" Authority="" Bits="2" Description="DMA功能&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
         <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
         <Bit Name="CH6_EN" Authority="RW" Bits="0" Description="通道6使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
       <Register Name="ETCB_CH7CON" Authority="RW" Address="0x40012040" Width="32" Description="ETCB通道7控制寄存器">
         <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
-        <Bit Name="SRC_SEL" Authority="RW" Bits="18-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
         <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
         <Bit Name="CH7_EN" Authority="RW" Bits="0" Description="通道7使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
+      </Register>
+      <Register Name="ETCB_CH8CON" Authority="RW" Address="0x40012044" Width="32" Description="ETCB通道8控制寄存器">
+        <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
+        <Bit Name="CH8_EN" Authority="RW" Bits="0" Description="通道8使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
+      </Register>
+      <Register Name="ETCB_CH9CON" Authority="RW" Address="0x40012048" Width="32" Description="ETCB通道9控制寄存器">
+        <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
+        <Bit Name="CH9_EN" Authority="RW" Bits="0" Description="通道9使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
+      </Register>
+      <Register Name="ETCB_CH10CON" Authority="RW" Address="0x4001204c" Width="32" Description="ETCB通道10控制寄存器">
+        <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
+        <Bit Name="CH10_EN" Authority="RW" Bits="0" Description="通道10使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
+      </Register>
+      <Register Name="ETCB_CH11CON" Authority="RW" Address="0x40012050" Width="32" Description="ETCB通道11控制寄存器">
+        <Bit Name="DST_SEL" Authority="RW" Bits="31-26" Description="触发目标选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="SRC_SEL" Authority="RW" Bits="17-12" Description="触发源选择&#xD;&#xA;参考事件对应表" />
+        <Bit Name="TRIG_MODE" Authority="RW" Bits="1" Description="触发模式选择&#xD;&#xA;0: 硬件触发&#xD;&#xA;1: 软件触发 (由ETCB_SWTRG寄存器触发)" />
+        <Bit Name="CH11_EN" Authority="RW" Bits="0" Description="通道11使能控制&#xD;&#xA;0: 禁止&#xD;&#xA;1: 使能" />
       </Register>
     </Peripheral>
     <Peripheral Name="TOUCH">
@@ -670,35 +861,33 @@
         <Bit Name="TCHCNT" Authority="RO" Bits="15-0" Description="扫描时间计数器当前值 " />
       </Register>
       <Register Name="TCH_TKST" Authority="RW" Address="0x4002001c" Width="32" Description="Touch State Register">
-        <Bit Name="CUR_SEQ" Authority="RW" Bits="28-24" Description="当前的序列号" />
-        <Bit Name="CUR_TRIM" Authority="RW" Bits="19-18" Description="当前的TRIM选择位&#xD;&#xA;0h：芯片校准值&#xD;&#xA;1h：TRIM0&#xD;&#xA;2h：TRIM1&#xD;&#xA;3h：TRIM2" />
-        <Bit Name="CUR_OFFSET" Authority="RW" Bits="17-16" Description="当前OFFSET值" />
-        <Bit Name="BUSY" Authority="RW" Bits="12" Description="模块工作状态位：&#xD;&#xA;0h：空闲&#xD;&#xA;1h：运行中" />
-        <Bit Name="CUR_ICON" Authority="RW" Bits="11-8" Description="当前ICON值" />
+        <Bit Name="CUR_SEQ" Authority="RO" Bits="28-24" Description="当前的序列号" />
+        <Bit Name="CUR_TRIM" Authority="RO" Bits="19-18" Description="当前的TRIM选择位&#xD;&#xA;0h：芯片校准值&#xD;&#xA;1h：TRIM0&#xD;&#xA;2h：TRIM1&#xD;&#xA;3h：TRIM2" />
+        <Bit Name="CUR_OFFSET" Authority="RO" Bits="17-16" Description="当前OFFSET值" />
+        <Bit Name="BUSY" Authority="RO" Bits="12" Description="模块工作状态位：&#xD;&#xA;0h：空闲&#xD;&#xA;1h：运行中" />
+        <Bit Name="CUR_ICON" Authority="RO" Bits="11-8" Description="当前ICON值" />
       </Register>
       <Register Name="TCH_CHINF" Authority="RW" Address="0x40020020" Width="32" Description="Touch CH Information Register">
-        <Bit Name="OVR_TIME" Authority="RO" Bits="5" Description="扫描超时中断" />
-        <Bit Name="OVR_OVW" Authority="RO" Bits="4" Description="TCH_CHxVAL over write 中断" />
-        <Bit Name="OVR_FLW" Authority="RO" Bits="3" Description="TCHCNT溢出中断" />
-        <Bit Name="OVR_THR" Authority="RO" Bits="2" Description="两次扫描OFFSET值超出扫描OFFSET阈值中断" />
-        <Bit Name="SEQ_DNE" Authority="RO" Bits="1" Description="SEQUENCE模式所有通道扫描完成中断" />
-        <Bit Name="SIN_DNE" Authority="RO" Bits="0" Description="SEQ模式一个通道扫描完成中断" />
+        <Bit Name="OVTLIM_CH" Authority="RO" Bits="28-24" Description="当前扫描超时通道" />
+        <Bit Name="OVTHR_CH" Authority="RO" Bits="20-16" Description="当前触发THROVR标志的通道" />
+        <Bit Name="ERR_CH" Authority="RO" Bits="12-8" Description="当前扫描出错通道" />
+        <Bit Name="CUR_CH" Authority="RO" Bits="4-0" Description="当前通道" />
       </Register>
       <Register Name="TCH_RISR" Authority="RW" Address="0x40020024" Width="32" Description="Touch Senor Raw Interrupt Status Register">
-        <Bit Name="OVR_TIME" Authority="RW" Bits="5" Description="扫描超时中断使能" />
-        <Bit Name="OVR_OVW" Authority="RW" Bits="4" Description="TCH_CHxVAL over write 中断使能" />
-        <Bit Name="OVR_FLW" Authority="RW" Bits="3" Description="TCHCNT溢出中断使能" />
-        <Bit Name="OVR_THR" Authority="RW" Bits="2" Description="两次扫描OFFSET值超出扫描OFFSET阈值中断使能" />
-        <Bit Name="SEQ_DNE" Authority="RW" Bits="1" Description="SEQUENCE模式所有通道扫描完成中断使能" />
-        <Bit Name="SIN_DNE" Authority="RW" Bits="0" Description="SEQ模式一个通道扫描完成中断使能" />
+        <Bit Name="THROVR" Authority="RO" Bits="5" Description="扫描偏差标志位" />
+        <Bit Name="REFOVF" Authority="RO" Bits="4" Description="扫描计数器溢出标志位" />
+        <Bit Name="TIMOVF" Authority="RO" Bits="3" Description="扫描超时中断" />
+        <Bit Name="CH_ERR" Authority="RO" Bits="2" Description="通道扫描出错中断" />
+        <Bit Name="CH_DNE" Authority="RO" Bits="1" Description="单通道扫描完成中断" />
+        <Bit Name="SEQ_DNE" Authority="RO" Bits="0" Description="SEQUENCE模式所有通道扫描完成中断" />
       </Register>
       <Register Name="TCH_MISR" Authority="RW" Address="0x40020028" Width="32" Description="Touch Senor Interrupt Reported Status Register">
-        <Bit Name="OVR_TIME" Authority="RW" Bits="5" Description="清除扫描超时中断" />
-        <Bit Name="OVR_OVW" Authority="RW" Bits="4" Description="清除TCH_CHxVAL over write 中断" />
-        <Bit Name="OVR_FLW" Authority="RW" Bits="3" Description="清除TCHCNT溢出中断" />
-        <Bit Name="OVR_THR" Authority="RW" Bits="2" Description="清除两次扫描OFFSET值超出扫描OFFSET阈值中断" />
-        <Bit Name="SEQ_DNE" Authority="RW" Bits="1" Description="清除SEQUENCE模式所有通道扫描完成中断" />
-        <Bit Name="SIN_DNE" Authority="RW" Bits="0" Description="清除SEQ模式一个通道扫描完成中断" />
+        <Bit Name="THROVR" Authority="RO" Bits="5" Description="扫描偏差标志位" />
+        <Bit Name="REFOVF" Authority="RO" Bits="4" Description="扫描计数器溢出标志位" />
+        <Bit Name="TIMOVF" Authority="RO" Bits="3" Description="扫描超时中断" />
+        <Bit Name="CH_ERR" Authority="RO" Bits="2" Description="通道扫描出错中断" />
+        <Bit Name="CH_DNE" Authority="RO" Bits="1" Description="单通道扫描完成中断" />
+        <Bit Name="SEQ_DNE" Authority="RO" Bits="0" Description="SEQUENCE模式所有通道扫描完成中断" />
       </Register>
       <Register Name="TCH_IMCR" Authority="RW" Address="0x4002002c" Width="32" Description="Touch Senor Interrupt Masking Control Register">
         <Bit Name="THROVR" Authority="RW" Bits="5" Description="扫描偏差标志位" />
@@ -709,139 +898,160 @@
         <Bit Name="SEQ_DNE" Authority="RW" Bits="0" Description="SEQUENCE模式所有通道扫描完成中断" />
       </Register>
       <Register Name="TCH_ICR" Authority="RW" Address="0x40020030" Width="32" Description="Touch Senor Interrupt Clear Control Register">
-        <Bit Name="CHx_OVW_THR(x=0~16)" Authority="" Bits="16-0" Description="当TCH_CON0[11]=0时，该状态寄存器表示通道采样值OVW状态。&#xD;&#xA;0h：采样值寄存器的值是最新的&#xD;&#xA;1h: 采样值寄存器当前值未被软件读取时，有新的采样值存入&#xD;&#xA;当CH_CON0[11]=1时，该状态寄存器表示通道采样值偏差状态寄存器&#xD;&#xA;0h：通道相邻两次采样值偏差没有超出阈值&#xD;&#xA;1h：通道相邻两次采样值偏差超出阈值" />
+        <Bit Name="THROVR" Authority="RW" Bits="5" Description="清除扫描偏差标志位" />
+        <Bit Name="REFOVF" Authority="RW" Bits="4" Description="清除扫描计数器溢出标志位" />
+        <Bit Name="TIMOVF" Authority="RW" Bits="3" Description="清除扫描超时中断" />
+        <Bit Name="CH_ERR" Authority="RW" Bits="2" Description="清除通道扫描出错中断" />
+        <Bit Name="CH_DNE" Authority="RW" Bits="1" Description="清除扫描计数器溢出标志位" />
+        <Bit Name="SEQ_DNE" Authority="RW" Bits="0" Description="清除扫描偏差标志位" />
+      </Register>
+      <Register Name="EVTRG" Authority="RW" Address="0x40020034" Width="32" Description="Touch Trigger Event Generation Control Register">
+        <Bit Name="SYNCOE1" Authority="RW" Bits="9" Description="事件1的触发使能。&#xD;&#xA;0h：禁止触发输出。&#xD;&#xA;1h：允许触发输出。" />
+        <Bit Name="SYNCOE0" Authority="RW" Bits="8" Description="事件0的触发使能。&#xD;&#xA;0h：禁止触发输出。&#xD;&#xA;1h：允许触发输出。" />
+        <Bit Name="SYNCSRC1" Authority="RW" Bits="6-4" Description="TRGEV1的触发源选择&#xD;&#xA;3‘b000: SEQUENCE模式所有通道扫描完成事件&#xD;&#xA;3'b001: 单通道扫描完成事件&#xD;&#xA;3'b010:  通道扫描出错事件&#xD;&#xA;3'b011: 扫描超时事件&#xD;&#xA;3'b100: 扫描计数器溢出事件&#xD;&#xA;3'b101: 扫描偏差事件" />
+        <Bit Name="SYNCSRC0" Authority="RW" Bits="2-0" Description="TRGEV0的触发源选择&#xD;&#xA;3‘b000: SEQUENCE模式所有通道扫描完成事件&#xD;&#xA;3'b001: 单通道扫描完成事件&#xD;&#xA;3'b010:  通道扫描出错事件&#xD;&#xA;3'b011: 扫描超时事件&#xD;&#xA;3'b100: 扫描计数器溢出事件&#xD;&#xA;3'b101: 扫描偏差事件" />
+      </Register>
+      <Register Name="EVPS" Authority="RW" Address="0x40020038" Width="32" Description="Touch Trigger Event Generation Prescaler">
+        <Bit Name="TRGEV1CNT" Authority="RO" Bits="15-12" Description="当前TRGEV1事件计数器值。&#xD;&#xA;读取时，返回当前事件计数器值。此计数器不能设置初始值，在更新EVPS寄存器时将事件计数器值进行清零。" />
+        <Bit Name="TRGEV0CNT" Authority="RO" Bits="11-8" Description="当前TRGEV0事件计数器值。&#xD;&#xA;读取时，返回当前事件计数器值。此计数器不能设置初始值，在更新EVPS寄存器时将事件计数器值进行清零。" />
+        <Bit Name="TRGEV1PRD" Authority="RW" Bits="7-4" Description="TRGEV1的事件计数器周期设置。&#xD;&#xA;当TRGEV1事件发生时，TRGEV1CNT递增一次，当TRGEV1CNT的计数值等于TRGEV1PRD设置周期时，产生TRGEV1触发事件" />
+        <Bit Name="TRGEV0PRD" Authority="RW" Bits="3-0" Description="TRGEV0的事件计数器周期设置。&#xD;&#xA;当TRGEV0事件发生时，TRGEV0CNT递增一次，当TRGEV0CNT的计数值等于TRGEV0PRD设置周期时，产生TRGEV0触发事件" />
+      </Register>
+      <Register Name="EVSWF" Authority="RW" Address="0x4002003c" Width="32" Description="Touch Trigger Event Software Force Generation">
+        <Bit Name="EV1SWF" Authority="RW" Bits="1" Description="软件产生一次EV0的触发&#xD;&#xA;0h：写入‘0’无效&#xD;&#xA;1h：软件产生一次触发" />
+        <Bit Name="EV0SWF" Authority="RW" Bits="0" Description="软件产生一次EV0的触发&#xD;&#xA;0h：写入‘0’无效&#xD;&#xA;1h：软件产生一次触发" />
       </Register>
       <Register Name="TCH_DAT[32]0" Authority="RW" Address="0x40021000" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]1" Authority="RW" Address="0x40021004" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]2" Authority="RW" Address="0x40021008" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]3" Authority="RW" Address="0x4002100c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]4" Authority="RW" Address="0x40021010" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]5" Authority="RW" Address="0x40021014" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]6" Authority="RW" Address="0x40021018" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]7" Authority="RW" Address="0x4002101c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]8" Authority="RW" Address="0x40021020" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]9" Authority="RW" Address="0x40021024" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]10" Authority="RW" Address="0x40021028" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]11" Authority="RW" Address="0x4002102c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]12" Authority="RW" Address="0x40021030" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]13" Authority="RW" Address="0x40021034" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]14" Authority="RW" Address="0x40021038" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]15" Authority="RW" Address="0x4002103c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]16" Authority="RW" Address="0x40021040" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]17" Authority="RW" Address="0x40021044" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]18" Authority="RW" Address="0x40021048" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]19" Authority="RW" Address="0x4002104c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]20" Authority="RW" Address="0x40021050" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]21" Authority="RW" Address="0x40021054" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]22" Authority="RW" Address="0x40021058" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]23" Authority="RW" Address="0x4002105c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]24" Authority="RW" Address="0x40021060" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]25" Authority="RW" Address="0x40021064" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]26" Authority="RW" Address="0x40021068" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]27" Authority="RW" Address="0x4002106c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]28" Authority="RW" Address="0x40021070" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]29" Authority="RW" Address="0x40021074" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]30" Authority="RW" Address="0x40021078" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]31" Authority="RW" Address="0x4002107c" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_DAT[32]32" Authority="RW" Address="0x40021080" Width="32" Description="Sample Value Register">
-        <Bit Name="TRGOE" Authority="RW" Bits="8" Description="外部触发端口输出使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
-        <Bit Name="TRGSEL" Authority="RW" Bits="2-0" Description="TRGEVT事件的触发源选择&#xD;&#xA;000：禁止TRGOUT触发输出&#xD;&#xA;001：SINGLE_DONE事件&#xD;&#xA;010：SEQ_DONE事件&#xD;&#xA;011：OVR_THR事件&#xD;&#xA;100：OVR_OVF事件&#xD;&#xA;101：OVR_OVW事件&#xD;&#xA;110：OVR_OVT事件" />
+        <Bit Name="CH_NO" Authority="RO" Bits="28-24" Description="采样值对应的通道" />
+        <Bit Name="SCANDAT" Authority="RO" Bits="23-0" Description="通道采样值寄存器" />
       </Register>
       <Register Name="TCH_SEQ0CON[32]" Authority="RW" Address="0x40022000" Width="32" Description="SEQ Mode Control Register for each sub-sequence">
         <Bit Name="TRIM_SEL" Authority="RW" Bits="28-27" Description="TRIM值选择" />
@@ -1078,13 +1288,12 @@
     <Peripheral Name="ADC">
       <Register Name="ADC_ECR" Authority="RW" Address="0x40030000" Width="32" Description="时钟使能寄存器">
         <Bit Name="" Authority="" Bits="31-0" Description="" />
+        <Bit Name="ADCCLKEN" Authority="RW" Bits="1" Description="ADC: ADC时钟使能&#xD;&#xA;0: 无效&#xD;&#xA;1: 使能ADC时钟" />
       </Register>
       <Register Name="ADC_DCR" Authority="RW" Address="0x40030004" Width="32" Description="时钟禁止寄存器">
-        <Bit Name="DBGEN" Authority="RW" Bits="31" Description="DBGEN: ADC调试模式禁止&#xD;&#xA;0: 无效&#xD;&#xA;1: 禁止ADC调试模式" />
         <Bit Name="ADCCLKEN" Authority="RW" Bits="1" Description="ADC: ADC时钟禁止&#xD;&#xA;0: 无效&#xD;&#xA;1: 禁止ADC时钟" />
       </Register>
       <Register Name="ADC_PMSR" Authority="RW" Address="0x40030008" Width="32" Description="功耗管理状态寄存器">
-        <Bit Name="DBGEN" Authority="RO" Bits="31" Description="DBGEN : 调试模式&#xD;&#xA;0: ADC在调试模式下不停止 &#xD;&#xA;1: ADC 在调试模式下停止工作" />
         <Bit Name="IPICODE" Authority="RO" Bits="29-4" Description="IPICODE[25:0] : IP识别码&#xD;&#xA;模块的版本号，共26位" />
         <Bit Name="ADCCLKEN" Authority="RO" Bits="1" Description="ADC : ADC时钟状态&#xD;&#xA;0: ADC时钟被禁止&#xD;&#xA;1: ADC时钟被使能" />
       </Register>
@@ -1633,7 +1842,7 @@
       </Register>
     </Peripheral>
     <Peripheral Name="GPT">
-      <Register Name="GPTA_CEDR" Authority="RW" Address="0x40055000" Width="32" Description="ID &amp; Clock Enable/Disable Register">
+      <Register Name="GPTA_CEDR" Authority="RW" Address="0x40055000" Width="32" Description="ID和时钟控制寄存器">
         <Bit Name="IDCODE" Authority="RO" Bits="31-16" Description="当前GPTA模块的版本信息。" />
         <Bit Name="FLTCKPRS" Authority="RW" Bits="15-8" Description="数字滤波器的时钟分频控制。&#xD;&#xA;数字滤波器的时钟频率为PCLK/( FLTCKPRS+1)" />
         <Bit Name="SHDWSTP" Authority="RW" Bits="6" Description="START控制位的Shadow功能使能控制。START置位不受此位控制，清除时受此位控制。当选择Shadow模式时，START控制位在周期结束时清除。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
@@ -1641,20 +1850,20 @@
         <Bit Name="DBGEN" Authority="RW" Bits="2-1" Description="调试使能控制。调试使能时，在CPU被调试器挂起时，时基计数器的计数时钟同时也被挂起。&#xD;&#xA;0h：调试禁止&#xD;&#xA;1h：调试使能，PWM输出高阻&#xD;&#xA;其他：调试使能，PWM输出保持" />
         <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时基计数器的时钟使能控制。&#xD;&#xA;0h：计数器计数时钟禁止。&#xD;&#xA;1h：计数器计数时钟使能。" />
       </Register>
-      <Register Name="GPTA_RSSR" Authority="RW" Address="0x40055004" Width="32" Description="RESET/START/STOP Register">
+      <Register Name="GPTA_RSSR" Authority="RW" Address="0x40055004" Width="32" Description="启停控制寄存器">
         <Bit Name="SRR" Authority="RW" Bits="15-12" Description="软件复位控制位。&#xD;&#xA;当对当前控制位写入‘0x5’时，TIMER模块会被复位。复位后，所有寄存器都恢复为RESET状态。" />
         <Bit Name="CNTDIR" Authority="RO" Bits="3" Description="当前计数器计数方向状态。&#xD;&#xA;0h：当前计数器方向为递减&#xD;&#xA;1h：当前计数器方向为递增" />
         <Bit Name="START" Authority="RW" Bits="0" Description="计数器启动控制位。&#xD;&#xA;0h：当写‘0’时，停止计数器&#xD;&#xA;1h：当写‘1’时，启动计数器&#xD;&#xA;当对START位进行读取时，返回当前计数器工作状态&#xD;&#xA;0h：计数器处于IDLE状态&#xD;&#xA;1h：计数器正在工作&#xD;&#xA;&#xD;&#xA;当GPTA_CR[SWSYNEN]控制位为低时，START控制位用于控制GPTA的启动，当GPTA启动后，再次写入START将被忽略；&#xD;&#xA;当GPTA_CR[SWSYNEN]控制位为高时，START控制位用于软件触发同步事件，每次对START的写入，会产生一次外部Sync事件（等同于SYNCR中的SYNCIN0触发）。" />
       </Register>
-      <Register Name="GPTA_PSCR" Authority="RW" Address="0x40055008" Width="32" Description="Counter Clock Prescaler Register">
+      <Register Name="GPTA_PSCR" Authority="RW" Address="0x40055008" Width="32" Description="时钟分频控制寄存器">
         <Bit Name="PSC" Authority="RW" Bits="15-0" Description="时钟分频控制。&#xD;&#xA;TCLK作为时基模块的计时时钟和工作时钟。TCLK的时钟从PCLK分频得到。TCLK的频率：FTCLK = FPCLK / (PSC+1)&#xD;&#xA;此寄存器具有Shadow寄存器，可通过GPTA_CR[PSCLD]设置载入的条件。" />
       </Register>
-      <Register Name="GPTA_CR(WAVE=0)" Authority="RW" Address="0x4005500c" Width="32" Description="General Control Register">
+      <Register Name="GPTA_CR(WAVE=0)" Authority="RW" Address="0x4005500c" Width="32" Description="控制寄存器，捕捉模式 WAVE=0">
         <Bit Name="LDDRST" Authority="RW" Bits="26" Description="CMPB(Active)捕捉载入后，计数器值计数状态控制位。&#xD;&#xA;0h：当前捕获触发后，计数器值不进行重置&#xD;&#xA;1h：当前捕获触发后，计数器值进行重置" />
         <Bit Name="LDCRST" Authority="RW" Bits="25" Description="CMPA(Active)捕捉载入后，计数器值计数状态控制位。&#xD;&#xA;0h：当前捕获触发后，计数器值不进行重置&#xD;&#xA;1h：当前捕获触发后，计数器值进行重置" />
         <Bit Name="LDBRST" Authority="RW" Bits="24" Description="CMPB(Shadow)捕捉载入后，计数器值计数状态控制位。&#xD;&#xA;0h：当前捕获触发后，计数器值不进行重置&#xD;&#xA;1h：当前捕获触发后，计数器值进行重置" />
         <Bit Name="LDARST" Authority="RW" Bits="23" Description="CMPA(Shadow)捕捉载入后，计数器值计数状态控制位。&#xD;&#xA;0h：当前捕获触发后，计数器值不进行重置&#xD;&#xA;1h：当前捕获触发后，计数器值进行重置" />
-        <Bit Name="STOP_WRAP" Authority="RW" Bits="22-21" Description="Capture模式下，捕获事件计数器周期设置值。（GPTA最大可设为2）" />
+        <Bit Name="STOP_WRAP" Authority="RW" Bits="22-21" Description="Capture模式下，捕获事件计数器周期设置值。（GPTA最大可设为3）" />
         <Bit Name="CAPMD" Authority="RW" Bits="20" Description="捕捉模式设置。&#xD;&#xA;0h：连续捕捉模式&#xD;&#xA;1h：一次性捕捉模式" />
         <Bit Name="REARM" Authority="RW" Bits="19" Description="重置CAPTURE控制。&#xD;&#xA;0h：无效&#xD;&#xA;1h：重置捕捉&#xD;&#xA;重置时，捕捉事件计数器被清零，自动打开CAPLDEN" />
         <Bit Name="WAVE" Authority="RW" Bits="18" Description="GPTA工作模式选择。&#xD;&#xA;0h：捕捉模式&#xD;&#xA;1h：波形发生模式" />
@@ -1669,7 +1878,7 @@
         <Bit Name="SWSYNEN" Authority="RW" Bits="2" Description="软件使能同步触发使能控制（RSSR中START控制位）。&#xD;&#xA;0h：设置SW START控制只用于启动。&#xD;&#xA;1h：设置SW START控制用于启动和以产生一次SYNCIN0事件，以外部触发的方式重新启动。" />
         <Bit Name="CNTMD" Authority="RW" Bits="1-0" Description="计数模式设置。&#xD;&#xA;计数模式一般只设置一次，并且在计数过程中不做改变。如果计数模式被改变，变化将发生在下一个TCLK的边沿，并且基于上一个计数器值进行递增或者递减。&#xD;&#xA;00b：递增模式&#xD;&#xA;01b：递减模式&#xD;&#xA;10b：递增递减模式&#xD;&#xA;11b：保留" />
       </Register>
-      <Register Name="GPTA_CR(WAVE=1)" Authority="RW" Address="0x4005500c" Width="32" Description="General Control Register">
+      <Register Name="GPTA_CR(WAVE=1)" Authority="RW" Address="0x4005500c" Width="32" Description="控制寄存器，波形输出模式：WAVE=1">
         <Bit Name="WAVE" Authority="RW" Bits="18" Description="GPTA工作模式选择。&#xD;&#xA;0h：捕捉模式&#xD;&#xA;1h：波形发生模式" />
         <Bit Name="PSCLD" Authority="RW" Bits="17-16" Description="PSCR活动寄存器载入控制。活动寄存器在配置条件满足时，从影子寄存器载入更新值。&#xD;&#xA;00b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;01b：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;10b：当CNT=ZRO或者PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;11b：不进行载入" />
         <Bit Name="CGFLT" Authority="RW" Bits="15-13" Description="门控输入数字滤波控制。此控制定义了滤波器监测的步数，只有连续N次监测结果一致时，滤波器才输出有效的电平翻转。滤波器的采样时钟频率通过CEDR[FLTCKPRS] 控制位定义。&#xD;&#xA;000b：Bypass&#xD;&#xA;001b：N = 2&#xD;&#xA;010b：N = 3&#xD;&#xA;011b：N = 4&#xD;&#xA;100b：N = 6&#xD;&#xA;101b：N = 8&#xD;&#xA;110b：N = 16&#xD;&#xA;111b：N = 32" />
@@ -1682,7 +1891,7 @@
         <Bit Name="SWSYNEN" Authority="RW" Bits="2" Description="软件使能同步触发使能控制（RSSR中START控制位）。&#xD;&#xA;0h：设置SW START控制只用于启动。&#xD;&#xA;1h：设置SW START控制用于启动和以产生一次SYNCIN0事件，以外部触发的方式重新启动。" />
         <Bit Name="CNTMD" Authority="RW" Bits="1-0" Description="计数模式设置。&#xD;&#xA;计数模式一般只设置一次，并且在计数过程中不做改变。如果计数模式被改变，变化将发生在下一个TCLK的边沿，并且基于上一个计数器值进行递增或者递减。&#xD;&#xA;00b：递增模式&#xD;&#xA;01b：递减模式&#xD;&#xA;10b：递增递减模式&#xD;&#xA;11b：保留" />
       </Register>
-      <Register Name="GPTA_SYNCR" Authority="RW" Address="0x40055010" Width="32" Description="Synchronization Control Register">
+      <Register Name="GPTA_SYNCR" Authority="RW" Address="0x40055010" Width="32" Description="同步控制寄存器">
         <Bit Name="AREARM" Authority="RW" Bits="31-30" Description="硬件自动REARM控制位。&#xD;&#xA;0：禁止硬件自动REARM&#xD;&#xA;1：CNT = ZRO时，自动REARM&#xD;&#xA;2：CNT = PRD时，自动REARM&#xD;&#xA;3：CNT = ZRO or CNT = PRD时，自动REARM" />
         <Bit Name="TRGO1SEL" Authority="RW" Bits="29-27" Description="输入触发通道直通作为TRGSRC1的ExtSync条件的选择。只有当EVTRG寄存器中TRGSRC1控制位选择为ExtSync条件时有效。&#xD;&#xA;0h：选择SYNCIN0作为TRGSRC1的ExtSync触发&#xD;&#xA;1h：选择SYNCIN1作为TRGSRC1的ExtSync触发&#xD;&#xA;2h：选择SYNCIN2作为TRGSRC1的ExtSync触发&#xD;&#xA;3h：选择SYNCIN3作为TRGSRC1的ExtSync触发&#xD;&#xA;4h：选择SYNCIN4作为TRGSRC1的ExtSync触发&#xD;&#xA;5h：选择SYNCIN5作为TRGSRC1的ExtSync触发&#xD;&#xA;其他：保留" />
         <Bit Name="TRGO0SEL" Authority="RW" Bits="26-24" Description="输入触发通道直通作为TRGSRC0的ExtSync条件的选择。只有当EVTRG寄存器中TRGSRC0控制位选择为ExtSync条件时有效。&#xD;&#xA;0h：选择SYNCIN0作为TRGSRC0的ExtSync触发&#xD;&#xA;1h：选择SYNCIN1作为TRGSRC0的ExtSync触发&#xD;&#xA;2h：选择SYNCIN2作为TRGSRC0的ExtSync触发&#xD;&#xA;3h：选择SYNCIN3作为TRGSRC0的ExtSync触发&#xD;&#xA;4h：选择SYNCIN4作为TRGSRC0的ExtSync触发&#xD;&#xA;5h：选择SYNCIN5作为TRGSRC0的ExtSync触发&#xD;&#xA;其他：保留" />
@@ -1706,14 +1915,14 @@
         <Bit Name="SYNCEN1" Authority="RW" Bits="1" Description="" />
         <Bit Name="SYNCEN0" Authority="RW" Bits="0" Description="" />
       </Register>
-      <Register Name="GPTA_GLDCR" Authority="RW" Address="0x40055014" Width="32" Description="Global Load Control Register">
+      <Register Name="GPTA_GLDCR" Authority="RW" Address="0x40055014" Width="32" Description="全局载入控制寄存器">
         <Bit Name="GLDCNT" Authority="RW" Bits="12-10" Description="全局载入事件计数器。&#xD;&#xA;计数器值表示当前已发生多少次事件触发。" />
         <Bit Name="GLDPRD" Authority="RW" Bits="9-7" Description="全局载入触发周期选择。&#xD;&#xA;可以选择N次触发条件满足后，才进行一次全局载入。&#xD;&#xA;000b：Disable Counter（立即触发）&#xD;&#xA;001b：第2次条件满足时触发&#xD;&#xA;010b：第3次条件满足时触发&#xD;&#xA;011b：第4次条件满足时触发&#xD;&#xA;100b：第5次条件满足时触发&#xD;&#xA;101b：第6次条件满足时触发&#xD;&#xA;110b：第7次条件满足时触发&#xD;&#xA;111b：第8次条件满足时触发" />
         <Bit Name="OSTMD" Authority="RW" Bits="5" Description="One Shot 载入模式使能控制位&#xD;&#xA;0h：禁止One Shot模式，只要条件满足，Active寄存器都会从Shadow寄存器载入&#xD;&#xA;1h：使能One Shot模式，只有在GLDCR2[OSREARM]写入‘1’后，才会进行一次载入。一旦载入被触发，需要再次对GLDCR2[OSREARM]写入‘1’，才能允许下一次载入触发。" />
         <Bit Name="GLDMD" Authority="RW" Bits="4-1" Description="全局载入触发事件选择。&#xD;&#xA;0h：CNT = ZRO&#xD;&#xA;1h：CNT = PRD&#xD;&#xA;2h：CNT = ZRO or CNT = PRD&#xD;&#xA;3h：CNT = ZRO or 外部LOAD触发或SYNC触发&#xD;&#xA;4h：CNT = PRD or 外部LOAD触发或SYNC触发&#xD;&#xA;5h：CNT = ZRO or CNT = PRD or 外部LOAD触发或SYNC触发&#xD;&#xA;Others：Reserved&#xD;&#xA;Fh：在GLDCR2[GFRCLD]写入‘1’时  [1]" />
         <Bit Name="GLDEN" Authority="RW" Bits="0" Description="全局的Shadow到Active寄存器载入控制。&#xD;&#xA;0：使用独立的单个配置（在各个寄存器中LDMD控制位分别指派的载入控制）&#xD;&#xA;1：使用GLDMD中的设置，其他设置被屏蔽" />
       </Register>
-      <Register Name="GPTA_GLDCFG" Authority="RW" Address="0x40055018" Width="32" Description="Global Load Configuration Register">
+      <Register Name="GPTA_GLDCFG" Authority="RW" Address="0x40055018" Width="32" Description="全局载入配置">
         <Bit Name="AQCSF" Authority="RW" Bits="12" Description="AQCSF寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="AQCRB" Authority="RW" Bits="9" Description="AQCRB寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="AQCRA" Authority="RW" Bits="8" Description="AQCRA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
@@ -1721,38 +1930,40 @@
         <Bit Name="CMPA" Authority="RW" Bits="1" Description="CMPA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="PRDR" Authority="RW" Bits="0" Description="PRDR寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
       </Register>
-      <Register Name="GPTA_GLDCR2" Authority="RW" Address="0x4005501c" Width="32" Description="Global Load Control Register2">
+      <Register Name="GPTA_GLDCR2" Authority="RW" Address="0x4005501c" Width="32" Description="全局载入控制寄存器2">
         <Bit Name="GFRCLD" Authority="RW" Bits="1" Description="软件产生一次GLD触发。&#xD;&#xA;0：写入‘0’无效，读取时总是返回‘0’&#xD;&#xA;1：软件产生一次GLD触发事件" />
         <Bit Name="OSREARM" Authority="RW" Bits="0" Description="重置ONE SHOT模式&#xD;&#xA;0：写入‘0’无效，读取时总是返回‘0’&#xD;&#xA;1：重置ONE SHOT模式。ONE SHOT模式下，一次触发后，需要重置模式才允许再次触发" />
       </Register>
-      <Register Name="GPTA_PRDR" Authority="RW" Address="0x40055024" Width="32" Description="Period Register">
+      <Register Name="GPTA_PRDR" Authority="RW" Address="0x40055024" Width="32" Description="周期设置寄存器">
         <Bit Name="PRDR" Authority="RW" Bits="15-0" Description="时基控制周期寄存器。&#xD;&#xA;此控制位决定了PWM输出波形的周期值。通过设置GPTA_CR[PRDLD]可以选择Shadow到Active载入的触发条件。" />
       </Register>
-      <Register Name="GPTA_CMPA" Authority="RW" Address="0x4005502c" Width="32" Description="Compare A Register">
+      <Register Name="GPTA_CMPA" Authority="RW" Address="0x4005502c" Width="32" Description="比较值A寄存器">
         <Bit Name="OVWRT" Authority="RO" Bits="31" Description="Over Write Flag 标志位。&#xD;&#xA;表示当前Capture值是否被Over Written。当连续两次针对于当前寄存器的捕获事件发生，而两次捕获之间未对当前寄存器进行过读取操作，则Over Written标志被置位。读取当前寄存器会自动清除Over Written标志。&#xD;&#xA;此标志位只有在Capture模式下有效。" />
         <Bit Name="CMPA" Authority="RW" Bits="15-0" Description="比较值A寄存器。&#xD;&#xA;此寄存器有Shadow寄存器，Shadow模式可以通过CMPLDR[SHDWCMPA]进行设置。在Shadow模式下，可以通过CMPLDR[LDAMD]选择Shadow到Active载入的触发条件。在写入前，可以通过SHDWAFULL控制位检测当前寄存器状态。&#xD;&#xA;&#xD;&#xA;当工作于Capture模式下，此寄存器对应CAPLD0事件触发的捕获值。" />
       </Register>
-      <Register Name="GPTA_CMPB" Authority="RW" Address="0x40055030" Width="32" Description="Compare B Register">
+      <Register Name="GPTA_CMPB" Authority="RW" Address="0x40055030" Width="32" Description="比较值B寄存器">
         <Bit Name="OVWRT" Authority="RO" Bits="31" Description="Over Write Flag 标志位。&#xD;&#xA;表示当前Capture值是否被Over Written。当连续两次针对于当前寄存器的捕获事件发生，而两次捕获之间未对当前寄存器进行过读取操作，则Over Written标志被置位。读取当前寄存器会自动清除Over Written标志。&#xD;&#xA;此标志位只有在Capture模式下有效。" />
         <Bit Name="CMPB" Authority="RW" Bits="15-0" Description="比较值B寄存器。&#xD;&#xA;此寄存器有Shadow寄存器，Shadow模式可以通过CMPLDR[SHDWCMPB]进行设置。在Shadow模式下，可以通过CMPLDR[LDBMD]选择Shadow到Active载入的触发条件。在写入前，可以通过SHDWBFULL控制位检测当前寄存器状态。&#xD;&#xA;&#xD;&#xA;当工作于Capture模式下，此寄存器对应CAPLD1事件触发的捕获值。" />
       </Register>
-      <Register Name="GPTA_CMPLDR" Authority="RW" Address="0x4005503c" Width="32" Description="Compare Data Load Control Register">
+      <Register Name="GPTA_CMPLDR" Authority="RW" Address="0x4005503c" Width="32" Description="比较值载入控制寄存器">
         <Bit Name="SHDWAFULL" Authority="RO" Bits="21-20" Description="CMPB的Shadow寄存器非空标志位。&#xD;&#xA;当对CMPB进行写操作时，该标志位置位。该标志位在Shadow被载入到Active后，会自动清除。&#xD;&#xA;0h：Shadow空&#xD;&#xA;1h：Shadow非空，对当前CMP寄存器写入会覆盖Shadow中未被载入的值" />
-        <Bit Name="LDBMD" Authority="RW" Bits="9-7" Description="Shadow模式下，Active CMPB从Shadow CMPB载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入" />
-        <Bit Name="LDAMD" Authority="RW" Bits="6-4" Description="Shadow模式下，Active CMPA从Shadow CMPA载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWCMPB" Authority="RW" Bits="1" Description="CMPB的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式 [1]" />
-        <Bit Name="SHDWCMPA" Authority="RW" Bits="0" Description="CMPA的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式 [1]" />
+        <Bit Name="SHDWLDBMD" Authority="RW" Bits="9" Description="Shadow模式下，Active CMPB从Shadow CMPB载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入" />
+        <Bit Name="LDBMD" Authority="RW" Bits="8-7" Description="" />
+        <Bit Name="SHDWLDAMD" Authority="RW" Bits="6" Description="Shadow模式下，Active CMPA从Shadow CMPA载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="LDAMD" Authority="RW" Bits="5-4" Description="" />
+        <Bit Name="LDCMPBMD" Authority="RW" Bits="1" Description="CMPB的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式 [1]" />
+        <Bit Name="LDCMPAMD" Authority="RW" Bits="0" Description="CMPA的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式 [1]" />
       </Register>
-      <Register Name="GPTA_CNT" Authority="RW" Address="0x40055040" Width="32" Description="Counter Register">
+      <Register Name="GPTA_CNT" Authority="RW" Address="0x40055040" Width="32" Description="时基计数器寄存器">
         <Bit Name="CNT" Authority="RW" Bits="15-0" Description="时基计数器寄存器。&#xD;&#xA;对CNT读取时，返回当前计数器值。对CNT写入时，将直接更新CNT的计数值。CNT计数器没有Shadow寄存器，CPU的写入将直接影响当前计数器值。" />
       </Register>
-      <Register Name="GPTA_AQLDR" Authority="RW" Address="0x40055044" Width="32" Description="Action Qualifier Load Control Register">
-        <Bit Name="LDBMD" Authority="RW" Bits="7-5" Description="Shadow模式下，Active AQCRB从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="LDAMD" Authority="RW" Bits="4-2" Description="Shadow模式下，Active AQCRA从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWAQB" Authority="RW" Bits="1" Description="AQCRB寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
-        <Bit Name="SHDWAQA" Authority="RW" Bits="0" Description="AQCRA寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
+      <Register Name="GPTA_AQLDR" Authority="RW" Address="0x40055044" Width="32" Description="波形输出载入控制寄存器">
+        <Bit Name="SHDWLD2MD" Authority="RW" Bits="7-5" Description="Shadow模式下，Active AQCR2从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="SHDWLD1MD" Authority="RW" Bits="4-2" Description="Shadow模式下，Active AQCR1从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="LDAQ2MD" Authority="RW" Bits="1" Description="AQCR2寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="LDAQ1MD" Authority="RW" Bits="0" Description="AQCR1寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
       </Register>
-      <Register Name="GPTA_AQCRA" Authority="RW" Address="0x40055048" Width="32" Description="Action Qualifier Control Register A">
+      <Register Name="GPTA_AQCRA" Authority="RW" Address="0x40055048" Width="32" Description="PWM1波形输出控制寄存器">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道A上做出的波形输出动作定义。&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -1766,7 +1977,7 @@
         <Bit Name="PRD" Authority="RW" Bits="3-2" Description="当CNT值等于PRDR时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于PRDR时，计数方向为递减模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="ZRO" Authority="RW" Bits="1-0" Description="当CNT值等于零时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于零时，计数方向为递增模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
       </Register>
-      <Register Name="GPTA_AQCRB" Authority="RW" Address="0x4005504c" Width="32" Description="Action Qualifier Control Register B">
+      <Register Name="GPTA_AQCRB" Authority="RW" Address="0x4005504c" Width="32" Description="PWM2波形输出控制寄存器">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道B上做出的波形输出动作定义。&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -1780,28 +1991,28 @@
         <Bit Name="PRD" Authority="RW" Bits="3-2" Description="当CNT值等于PRDR时，在通道B上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于PRDR时，计数方向为递减模式&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="ZRO" Authority="RW" Bits="1-0" Description="当CNT值等于零时，在通道B上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于零时，计数方向为递增模式&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
       </Register>
-      <Register Name="GPTA_AQOSF" Authority="RW" Address="0x4005505c" Width="32" Description="Action Qualifier One Shot Force Register">
+      <Register Name="GPTA_AQOSF" Authority="RW" Address="0x4005505c" Width="32" Description="一次性软件强制输出控制">
         <Bit Name="RLDCSF" Authority="RW" Bits="17-16" Description="AQCSF寄存器从Shadow载入到Active的控制。&#xD;&#xA;01b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;10b：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;11b：当CNT=ZRO或者PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;00b：立即载入" />
         <Bit Name="ACTB" Authority="RW" Bits="6-5" Description="当软件强制输出时，通道B上做出的波形输出动作定义。&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="OSTSFB" Authority="RW" Bits="4" Description="在通道B上产生一次性软件强制输出。&#xD;&#xA;0h：对当前位写‘0’无效&#xD;&#xA;1h：产生一次性软件强制输出，此输出状态保持，直到有其他改变通道A输出状态的触发事件发生。" />
         <Bit Name="ACTA" Authority="RW" Bits="2-1" Description="当软件强制输出时，通道A上做出的波形输出动作定义。&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="OSTSFA" Authority="RW" Bits="0" Description="在通道A上产生一次性软件强制输出。&#xD;&#xA;0h：对当前位写‘0’无效&#xD;&#xA;1h：产生一次性软件强制输出，此输出状态保持，直到有其他改变通道A输出状态的触发事件发生。" />
       </Register>
-      <Register Name="GPTA_AQCSF" Authority="RW" Address="0x40055060" Width="32" Description="Action Qualifier Continuous Force Register">
+      <Register Name="GPTA_AQCSF" Authority="RW" Address="0x40055060" Width="32" Description="连续软件强制输出控制">
         <Bit Name="CSFB" Authority="RW" Bits="3-2" Description="通过软件对通道B做连续强制赋值。在立即更新模式下，赋值将在配置后下一个TCLK输出。在Shadow模式下，在Shadow更新到Active后的下一个TCLK后输出。对Shadow更新到Active的控制，可以通过AQOSF寄存器中的RLDCSF控制位进行配置。&#xD;&#xA;0h：禁止强制赋值&#xD;&#xA;1h：强制输出低&#xD;&#xA;2h：强制输出高&#xD;&#xA;3h：禁止强制赋值" />
         <Bit Name="CSFA" Authority="RW" Bits="1-0" Description="通过软件对通道A做连续强制赋值。在立即更新模式下，赋值将在配置后下一个TCLK输出。在Shadow模式下，在Shadow更新到Active后的下一个TCLK后输出。对Shadow更新到Active的控制，可以通过AQOSF寄存器中的RLDCSF控制位进行配置。&#xD;&#xA;0h：禁止强制赋值&#xD;&#xA;1h：强制输出低&#xD;&#xA;2h：强制输出高&#xD;&#xA;3h：禁止强制赋值" />
       </Register>
-      <Register Name="GPTA_TRGFTCR" Authority="RW" Address="0x400550b8" Width="32" Description="Digital Compare Filter Control Register">
+      <Register Name="GPTA_TRGFTCR" Authority="RW" Address="0x400550b8" Width="32" Description="数字比较器滤波窗控制寄存器">
         <Bit Name="CROSSMD" Authority="RW" Bits="7" Description="允许滤波窗跨越多个TB的周期。&#xD;&#xA;缺省条件下，当滤波窗在周期结束时若任然有效，将跨过周期点，一直持续到窗口计数器溢出。当禁止跨周期时，在周期结束时，窗口计数器将被停止。&#xD;&#xA;0h：禁止跨周期&#xD;&#xA;1h：允许跨周期" />
         <Bit Name="ALIGNMD" Authority="RW" Bits="6-5" Description="窗口对齐模式选择。&#xD;&#xA;0h：CNT=PRD&#xD;&#xA;1h：CNT=ZRO&#xD;&#xA;2h：CNT=PRD or CNT=ZRO&#xD;&#xA;3h：T1事件" />
         <Bit Name="BLKINV" Authority="RW" Bits="4" Description="窗口使能反转控制。&#xD;&#xA;0h：窗口不反转&#xD;&#xA;1h：窗口反转" />
         <Bit Name="SRC_SEL" Authority="RW" Bits="2-0" Description="滤波模块的输入信号选择。&#xD;&#xA;0h：禁止滤波&#xD;&#xA;1h：使能SYNCIN0滤波&#xD;&#xA;2h：使能SYNCIN1滤波&#xD;&#xA;3h：使能SYNCIN2滤波&#xD;&#xA;4h：使能SYNCIN3滤波&#xD;&#xA;5h：使能SYNCIN4滤波&#xD;&#xA;6h：使能SYNCIN5滤波&#xD;&#xA;7h：保留" />
       </Register>
-      <Register Name="GPTA_TRGFTWR" Authority="RW" Address="0x400550bc" Width="32" Description="Digital Compare Filter Window Register">
+      <Register Name="GPTA_TRGFTWR" Authority="RW" Address="0x400550bc" Width="32" Description="数字比较器滤波窗时序寄存器">
         <Bit Name="WINDOW" Authority="RW" Bits="31-16" Description="滤波窗的宽度设置。&#xD;&#xA;此16bit控制位定义了滤波窗的宽度，窗口宽度是基于TCLK的计数值。当OFFSET计数器溢出时，WINDOW计数器被重置，并开始计数直到溢出。当OFFSET计数器溢出，但WINDOW状态已经激活时，WINDOW计数器不会重置。在应用时必须注意此条件的设置。" />
         <Bit Name="OFFSET" Authority="RW" Bits="15-0" Description="滤波窗的OFFSET设置。&#xD;&#xA;此16bit控制位定义了从窗口参考起始位置开始计数多少个TCLK后，开始有效的滤波窗口。参考位置的定义，在TRGFTCR[ALIGNMD]控制位中进行选择。OFFSET的Shadow寄存器在ALIGNMD指定的条件满足时，载入到Active寄存器中，并重新开始计数。" />
       </Register>
-      <Register Name="GPTA_EVTRG" Authority="RW" Address="0x400550c0" Width="32" Description="Event Generation Control Register">
+      <Register Name="GPTA_EVTRG" Authority="RW" Address="0x400550c0" Width="32" Description="事件触发选择寄存器">
         <Bit Name="CNT1INITFRC" Authority="RO" Bits="25" Description="TRGEV1CNT软件触发更新&#xD;&#xA;0h：无效&#xD;&#xA;1h：EVCNT1INIT内容更新到EVCNT1中" />
         <Bit Name="CNT0INITFRC" Authority="RO" Bits="24" Description="TRGEV0CNT软件触发更新&#xD;&#xA;0h：无效&#xD;&#xA;1h：EVCNT0INIT内容更新到EVCNT0中" />
         <Bit Name="TRG1OE" Authority="RW" Bits="21" Description="外部触发端口TRGOUT1使能&#xD;&#xA;0h：禁止触发输出&#xD;&#xA;1h：允许触发输出" />
@@ -1811,67 +2022,98 @@
         <Bit Name="TRGSEL1" Authority="RW" Bits="7-4" Description="TRGEV1事件的触发源选择。&#xD;&#xA;0000：禁止TRGOUT触发输出&#xD;&#xA;0001：当 CNT = ZRO 产生TRGEV事件&#xD;&#xA;0010：当 CNT = PRD 产生TRGEV事件&#xD;&#xA;0011：当 CNT = ZRO or CNT = PRD 产生TRGEV事件&#xD;&#xA;0100：当 CNT = CMPA 且计数方向为递增时，产生TRGEV事件&#xD;&#xA;0101：当 CNT = CMPA 且计数方向为递减时，产生TRGEV事件&#xD;&#xA;0110：当 CNT = CMPB 且计数方向为递增时，产生TRGEV事件&#xD;&#xA;0111：当 CNT = CMPB 且计数方向为递减时，产生TRGEV事件&#xD;&#xA;1100：ExtSync通道&#xD;&#xA;1101：PE0 event&#xD;&#xA;1110：PE1 event&#xD;&#xA;1111：PE2 event" />
         <Bit Name="TRGSEL0" Authority="RW" Bits="3-0" Description="TRGEV0事件的触发源选择。&#xD;&#xA;0000：禁止TRGOUT触发输出&#xD;&#xA;0001：当 CNT = ZRO 产生TRGEV事件&#xD;&#xA;0010：当 CNT = PRD 产生TRGEV事件&#xD;&#xA;0011：当 CNT = ZRO or CNT = PRD 产生TRGEV事件&#xD;&#xA;0100：当 CNT = CMPA 且计数方向为递增时，产生TRGEV事件&#xD;&#xA;0101：当 CNT = CMPA 且计数方向为递减时，产生TRGEV事件&#xD;&#xA;0110：当 CNT = CMPB 且计数方向为递增时，产生TRGEV事件&#xD;&#xA;0111：当 CNT = CMPB 且计数方向为递减时，产生TRGEV事件&#xD;&#xA;1100：ExtSync通道&#xD;&#xA;1101：PE0 event&#xD;&#xA;1110：PE1 event&#xD;&#xA;1111：PE2 event" />
       </Register>
-      <Register Name="GPTA_EVPS" Authority="RW" Address="0x400550c4" Width="32" Description="Event Counter Prescaler">
+      <Register Name="GPTA_EVPS" Authority="RW" Address="0x400550c4" Width="32" Description="事件触发计数寄存器">
         <Bit Name="TRGEV1CNT" Authority="RW" Bits="23-20" Description="TRGEV1事件计数器设置。&#xD;&#xA;读取时，返回当前事件计数器值；&#xD;&#xA;写入时，直接更新事件计数器值。" />
         <Bit Name="TRGEV0CNT" Authority="RW" Bits="19-16" Description="TRGEV0事件计数器设置。&#xD;&#xA;读取时，返回当前事件计数器值；&#xD;&#xA;写入时，直接更新事件计数器值。" />
         <Bit Name="TRGEV1PRD" Authority="RW" Bits="7-4" Description="TRGEV1事件计数的周期设置。&#xD;&#xA;当TRGEV1事件发生次数满足周期时，才产生TRGEV1触发事件" />
         <Bit Name="TRGEV0PRD" Authority="RW" Bits="3-0" Description="TRGEV0事件计数的周期设置。&#xD;&#xA;当TRGEV0事件发生次数满足周期时，才产生TRGEV0触发事件" />
       </Register>
-      <Register Name="GPTA_EVCNTINIT" Authority="RW" Address="0x400550c8" Width="32" Description="Event Counter Initial Value">
+      <Register Name="GPTA_EVCNTINIT" Authority="RW" Address="0x400550c8" Width="32" Description="事件触发计数器初始化值寄存器">
         <Bit Name="CNT1INIT" Authority="RW" Bits="7-4" Description="TRGEV1CNT计数器的初始化值设置。&#xD;&#xA;当EVTRG[CNT1INITEN]控制位有效时，CNT1INIT的值将在触发条件满足时(LOAD事件)，或EVTRG[CNT1INITFRC]软件置位时，被载入到TRGEV1CNT寄存器中。" />
         <Bit Name="CNT0INIT" Authority="RW" Bits="3-0" Description="TRGEV0CNT计数器的初始化值设置。&#xD;&#xA;当EVTRG[CNT0INITEN]控制位有效时，CNT0INIT的值将在触发条件满足时(LOAD事件)，或EVTRG[CNT0INITFRC]软件置位时，被载入到TRGEV0CNT寄存器中。" />
       </Register>
-      <Register Name="GPTA_EVSWF" Authority="RW" Address="0x400550cc" Width="32" Description="Event Counter Load Control Register">
+      <Register Name="GPTA_EVSWF" Authority="RW" Address="0x400550cc" Width="32" Description="事件计数器载入控制寄存器">
         <Bit Name="EV1SWF" Authority="RW" Bits="1" Description="软件产生一次EV1的触发&#xD;&#xA;0h：写入‘0’无效&#xD;&#xA;1h：软件产生一次触发" />
         <Bit Name="EV0SWF" Authority="RW" Bits="0" Description="软件产生一次EV0的触发&#xD;&#xA;0h：写入‘0’无效&#xD;&#xA;1h：软件产生一次触发" />
       </Register>
-      <Register Name="GPTA_RISR" Authority="RW" Address="0x400550d0" Width="32" Description="Raw Interrupt Status Register">
+      <Register Name="GPTA_RISR" Authority="RW" Address="0x400550d0" Width="32" Description="原始中断状态寄存器">
         <Bit Name="PEND" Authority="RO" Bits="16" Description="周期结束中断请求原始标志状态" />
         <Bit Name="CBD" Authority="RO" Bits="11" Description="递减阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CBU" Authority="RO" Bits="10" Description="递增阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CAD" Authority="RO" Bits="9" Description="递减阶段CNT = CMPA中断请求原始标志状态" />
         <Bit Name="CAU" Authority="RO" Bits="8" Description="递增阶段CNT = CMPA中断请求原始标志状态" />
+        <Bit Name="CAP_LD3" Authority="RO" Bits="7" Description="Capture Load to CMPBA Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD2" Authority="RO" Bits="6" Description="Capture Load to CMPAA Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD1" Authority="RO" Bits="5" Description="Capture Load to CMPB Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD0" Authority="RO" Bits="4" Description="Capture Load to CMPA Shadow中断请求原始标志状态" />
-        <Bit Name="TRGEV1" Authority="RW" Bits="1" Description="TRGEV1中断请求原始标志状态" />
-        <Bit Name="TRGEV0" Authority="RW" Bits="0" Description="TRGEV0中断请求原始标志状态" />
+        <Bit Name="TRGEV1" Authority="RO" Bits="1" Description="TRGEV1中断请求原始标志状态" />
+        <Bit Name="TRGEV0" Authority="RO" Bits="0" Description="TRGEV0中断请求原始标志状态" />
       </Register>
-      <Register Name="GPTA_MISR" Authority="RW" Address="0x400550d4" Width="32" Description="Masked Interrupt Status Register">
+      <Register Name="GPTA_MISR" Authority="RW" Address="0x400550d4" Width="32" Description="中断状态寄存器">
         <Bit Name="PEND" Authority="RO" Bits="16" Description="周期结束中断请求原始标志状态" />
         <Bit Name="CBD" Authority="RO" Bits="11" Description="递减阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CBU" Authority="RO" Bits="10" Description="递增阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CAD" Authority="RO" Bits="9" Description="递减阶段CNT = CMPA中断请求原始标志状态" />
         <Bit Name="CAU" Authority="RO" Bits="8" Description="递增阶段CNT = CMPA中断请求原始标志状态" />
+        <Bit Name="CAP_LD3" Authority="RO" Bits="7" Description="Capture Load to CMPBA Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD2" Authority="RO" Bits="6" Description="Capture Load to CMPAA Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD1" Authority="RO" Bits="5" Description="Capture Load to CMPB Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD0" Authority="RO" Bits="4" Description="Capture Load to CMPA Shadow中断请求原始标志状态" />
-        <Bit Name="TRGEV1" Authority="RW" Bits="1" Description="TRGEV1中断请求标志状态" />
-        <Bit Name="TRGEV0" Authority="RW" Bits="0" Description="TRGEV0中断请求标志状态" />
+        <Bit Name="TRGEV1" Authority="RO" Bits="1" Description="TRGEV1中断请求标志状态" />
+        <Bit Name="TRGEV0" Authority="RO" Bits="0" Description="TRGEV0中断请求标志状态" />
       </Register>
-      <Register Name="GPTA_IMCR" Authority="RW" Address="0x400550d8" Width="32" Description="Interrupt Masking Control Register">
+      <Register Name="GPTA_IMCR" Authority="RW" Address="0x400550d8" Width="32" Description="中断状态使能控制寄存器">
         <Bit Name="PEND" Authority="RW" Bits="16" Description="周期结束中断请求原始标志状态" />
         <Bit Name="CBD" Authority="RW" Bits="11" Description="递减阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CBU" Authority="RW" Bits="10" Description="递增阶段CNT = CMPB中断请求原始标志状态" />
         <Bit Name="CAD" Authority="RW" Bits="9" Description="递减阶段CNT = CMPA中断请求原始标志状态" />
         <Bit Name="CAU" Authority="RW" Bits="8" Description="递增阶段CNT = CMPA中断请求原始标志状态" />
+        <Bit Name="CAP_LD3" Authority="RW" Bits="7" Description="Capture Load to CMPBA Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD2" Authority="RW" Bits="6" Description="Capture Load to CMPAA Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD1" Authority="RW" Bits="5" Description="Capture Load to CMPB Shadow中断请求原始标志状态" />
         <Bit Name="CAP_LD0" Authority="RW" Bits="4" Description="Capture Load to CMPA Shadow中断请求原始标志状态" />
         <Bit Name="TRGEV1" Authority="RW" Bits="1" Description="TRGEV1中断使能控制位" />
         <Bit Name="TRGEV0" Authority="RW" Bits="0" Description="TRGEV0中断使能控制位" />
       </Register>
-      <Register Name="GPTA_ICR" Authority="RW" Address="0x400550dc" Width="32" Description="Interrupt Clear Register">
-        <Bit Name="PEND" Authority="RO" Bits="16" Description="周期结束中断请求原始标志状态" />
-        <Bit Name="CBD" Authority="RO" Bits="11" Description="递减阶段CNT = CMPB中断请求原始标志状态" />
-        <Bit Name="CBU" Authority="RO" Bits="10" Description="递增阶段CNT = CMPB中断请求原始标志状态" />
-        <Bit Name="CAD" Authority="RO" Bits="9" Description="递减阶段CNT = CMPA中断请求原始标志状态" />
-        <Bit Name="CAU" Authority="RO" Bits="8" Description="递增阶段CNT = CMPA中断请求原始标志状态" />
-        <Bit Name="CAP_LD1" Authority="RO" Bits="5" Description="Capture Load to CMPB Shadow中断请求原始标志状态" />
-        <Bit Name="CAP_LD0" Authority="RO" Bits="4" Description="Capture Load to CMPA Shadow中断请求原始标志状态" />
+      <Register Name="GPTA_ICR" Authority="RW" Address="0x400550dc" Width="32" Description="中断状态清除寄存器">
+        <Bit Name="PEND" Authority="RW" Bits="16" Description="周期结束中断请求原始标志状态" />
+        <Bit Name="CBD" Authority="RW" Bits="11" Description="递减阶段CNT = CMPB中断请求原始标志状态" />
+        <Bit Name="CBU" Authority="RW" Bits="10" Description="递增阶段CNT = CMPB中断请求原始标志状态" />
+        <Bit Name="CAD" Authority="RW" Bits="9" Description="递减阶段CNT = CMPA中断请求原始标志状态" />
+        <Bit Name="CAU" Authority="RW" Bits="8" Description="递增阶段CNT = CMPA中断请求原始标志状态" />
+        <Bit Name="CAP_LD3" Authority="RW" Bits="7" Description="Capture Load to CMPBA Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD2" Authority="RO" Bits="6" Description="Capture Load to CMPAA Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD1" Authority="RW" Bits="5" Description="Capture Load to CMPB Shadow中断请求原始标志状态" />
+        <Bit Name="CAP_LD0" Authority="RW" Bits="4" Description="Capture Load to CMPA Shadow中断请求原始标志状态" />
         <Bit Name="TRGEV1" Authority="RW" Bits="1" Description="清除TRGEV1原始中断状态位" />
         <Bit Name="TRGEV0" Authority="RW" Bits="0" Description="清除TRGEV0原始中断状态位" />
       </Register>
+      <Register Name="GPTA_REGLK" Authority="RW" Address="0x400550e0" Width="32" Description="寄存器链接控制器">
+        <Bit Name="RSSR" Authority="RW" Bits="27-24" Description="RSSR寄存器链接目标" />
+        <Bit Name="GLD2" Authority="RW" Bits="23-20" Description="GLDCR2寄存器链接目标" />
+        <Bit Name="CMPB" Authority="RW" Bits="11-8" Description="CMPB寄存器链接目标" />
+        <Bit Name="CMPA" Authority="RW" Bits="7-4" Description="CMPA寄存器链接目标" />
+        <Bit Name="PRDR" Authority="RW" Bits="3-0" Description="PRDR寄存器链接目标" />
+      </Register>
+      <Register Name="GPTA_REGLK2" Authority="RW" Address="0x400550e4" Width="32" Description="寄存器链接控制器2">
+        <Bit Name="AQCSF" Authority="RW" Bits="23-20" Description="AQCSF寄存器链接目标" />
+        <Bit Name="AQOSF" Authority="RW" Bits="19-16" Description="AQOSF寄存器链接目标" />
+        <Bit Name="EMFRCR" Authority="RW" Bits="15-12" Description="EMFRCR寄存器链接目标" />
+        <Bit Name="EMICR" Authority="RW" Bits="11-8" Description="EMICR寄存器链接目标" />
+        <Bit Name="EMHLCLR" Authority="RW" Bits="7-4" Description="EMHLCLR寄存器链接目标" />
+        <Bit Name="EMSLCLR" Authority="RW" Bits="3-0" Description="EMSLCLR寄存器链接目标" />
+      </Register>
       <Register Name="GPTA_REGPROT" Authority="RW" Address="0x400550e8" Width="32" Description="寄存器写保护控制器">
-        <Bit Name="WRKEY" Authority="RW" Bits="31-16" Description="写入保护KEY&#xD;&#xA;当对PROTKEY进行写操作时，必须将KEY设置为A55Ah，否则写入无效" />
+        <Bit Name="WRKEY" Authority="RO" Bits="31-16" Description="写入保护KEY&#xD;&#xA;当对PROTKEY进行写操作时，必须将KEY设置为A55Ah，否则写入无效" />
         <Bit Name="PROTKEY" Authority="RW" Bits="15-0" Description="写保护使能控制。&#xD;&#xA;当此寄存器的值不等于C73Ah时，具有写保护功能的寄存器将禁止写入操作。只有解锁后，具有写保护功能的寄存器才允许写操作。对于具有写保护寄存器的写操作完成后，写保护寄存器会自动清除（自动保护使能），所以每次对任意具有写保护功能的寄存器写入之前，都必须进行解锁操作" />
+      </Register>
+      <Register Name="GPTA_ CMPAA" Authority="RW" Address="0x4005582c" Width="32" Description="比较值A active寄存器">
+        <Bit Name="OVWRT" Authority="RO" Bits="31" Description="Over Write Flag 标志位。&#xD;&#xA;表示当前Capture值是否被Over Written。当连续两次针对于当前寄存器的捕获事件发生，而两次捕获之间未对当前寄存器进行过读取操作，则Over Written标志被置位。读取当前寄存器会自动清除Over Written标志。&#xD;&#xA;此标志位只有在Capture模式下有效。" />
+        <Bit Name="CMPAA" Authority="RO" Bits="15-0" Description="比较值A寄存器。&#xD;&#xA;当工作于Capture模式下，此寄存器对应CAPLD2事件触发的捕获值。" />
+      </Register>
+      <Register Name="GPTA_ CMPBA" Authority="RW" Address="0x40055830" Width="32" Description="比较值B active寄存器">
+        <Bit Name="OVWRT" Authority="RO" Bits="31" Description="Over Write Flag 标志位。&#xD;&#xA;表示当前Capture值是否被Over Written。当连续两次针对于当前寄存器的捕获事件发生，而两次捕获之间未对当前寄存器进行过读取操作，则Over Written标志被置位。读取当前寄存器会自动清除Over Written标志。&#xD;&#xA;此标志位只有在Capture模式下有效。" />
+        <Bit Name="CMPBA" Authority="RO" Bits="15-0" Description="比较值B active寄存器。&#xD;&#xA;当工作于Capture模式下，此寄存器对应CAPLD3事件触发的捕获值。" />
       </Register>
     </Peripheral>
     <Peripheral Name="EPT">
@@ -1916,7 +2158,7 @@
         <Bit Name="WAVE" Authority="RW" Bits="18" Description="EPT工作模式选择。&#xD;&#xA;0h：捕捉模式&#xD;&#xA;1h：波形发生模式" />
         <Bit Name="PSCLD" Authority="RO" Bits="17-16" Description="PSCR活动寄存器载入控制。活动寄存器在配置条件满足时，从影子寄存器载入更新值。&#xD;&#xA;00b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;01b：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;10b：当CNT=ZRO或者PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;11b：不进行载入" />
         <Bit Name="CGFLT" Authority="RW" Bits="15-13" Description="门控输入数字滤波控制。此控制定义了滤波器监测的步数，只有连续N次监测结果一致时，滤波器才输出有效的电平翻转。滤波器的采样时钟频率在通过CKS控制位定义。&#xD;&#xA;000b：Bypass&#xD;&#xA;001b：N = 2&#xD;&#xA;010b：N = 3&#xD;&#xA;011b：N = 4&#xD;&#xA;100b：N = 6&#xD;&#xA;101b：N = 8&#xD;&#xA;110b：N = 16&#xD;&#xA;111b：N = 32" />
-        <Bit Name="CGSRC" Authority="RW" Bits="12-11" Description="群脉冲模式下，时钟门控的输入源选择。&#xD;&#xA;0h：CHAX作为CG的输入源&#xD;&#xA;1h：CHBX作为CG的输入源&#xD;&#xA;2h：TIN作为CG的输入源&#xD;&#xA;3h：保留" />
+        <Bit Name="CGSRC" Authority="RW" Bits="12-11" Description="群脉冲模式下，时钟门控的输入源选择。&#xD;&#xA;0h：CHAX作为CG的输入源&#xD;&#xA;1h：CHBX作为CG的输入源&#xD;&#xA;2h：保留&#xD;&#xA;3h：保留" />
         <Bit Name="FLTIPSCLD" Authority="RW" Bits="10" Description="数字滤波器初始化控制。对该控制写’1’可以初始化数字滤波器计数器，计数器值被初始化为CEDR[FLTCKPRS]中的设置值。&#xD;&#xA;0h：无效&#xD;&#xA;1h：执行初始化" />
         <Bit Name="BURST" Authority="RW" Bits="9" Description="群脉冲模式。&#xD;&#xA;0h：禁止群脉冲模式&#xD;&#xA;1h：使能群脉冲模式" />
         <Bit Name="PHSEN" Authority="RO" Bits="7" Description="PHSR使能控制位，当控制位有效时，计数器将在启动时被初始化为PHSR中的设置值。&#xD;&#xA;0h：禁止通过PHSR初始化&#xD;&#xA;1h：使能通过PHSR初始化" />
@@ -2005,12 +2247,12 @@
       <Register Name="AQLDR" Authority="RW" Address="0x40059044" Width="32" Description="Action Qualifier Load Control Register">
         <Bit Name="LDDMD" Authority="RW" Bits="15-13" Description="Shadow模式下，Active AQCRD从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
         <Bit Name="LDCMD" Authority="RW" Bits="12-10" Description="Shadow模式下，Active AQCRC从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWAQD" Authority="RW" Bits="9" Description="AQCRD寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
-        <Bit Name="SHDWAQC" Authority="RW" Bits="8" Description="AQCRC寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
+        <Bit Name="SHDWAQD" Authority="RW" Bits="9" Description="AQCRD寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="SHDWAQC" Authority="RW" Bits="8" Description="AQCRC寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
         <Bit Name="LDBMD" Authority="RW" Bits="7-5" Description="Shadow模式下，Active AQCRB从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
         <Bit Name="LDAMD" Authority="RW" Bits="4-2" Description="Shadow模式下，Active AQCRA从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWAQB" Authority="RW" Bits="1" Description="AQCRB寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
-        <Bit Name="SHDWAQA" Authority="RW" Bits="0" Description="AQCRA寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Immediate模式&#xD;&#xA;1h：Shadow模式" />
+        <Bit Name="SHDWAQB" Authority="RW" Bits="1" Description="AQCRB寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式I&#xD;&#xA;1h：mmediate模式" />
+        <Bit Name="SHDWAQA" Authority="RW" Bits="0" Description="AQCRA寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
       </Register>
       <Register Name="AQCRA" Authority="RW" Address="0x40059048" Width="32" Description="Action Qualifier Control Register A">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
@@ -2427,6 +2669,17 @@
         <Bit Name="TRGEV2" Authority="RO" Bits="2" Description="TRGEV2中断清除。" />
         <Bit Name="TRGEV1" Authority="RO" Bits="1" Description="TRGEV1中断清除。" />
         <Bit Name="TRGEV0" Authority="RO" Bits="0" Description="TRGEV0中断清除。" />
+      </Register>
+      <Register Name="REGLK" Authority="RW" Address="0x400590e0" Width="32" Description="Register Link Control Register">
+        <Bit Name="RSSR" Authority="RW" Bits="27-24" Description="RSSR寄存器链接目标。" />
+        <Bit Name="GLD2" Authority="RW" Bits="23-20" Description="GLDCR2寄存器链接目标。" />
+        <Bit Name="CMPB" Authority="RW" Bits="11-8" Description="CMPB寄存器链接目标。" />
+        <Bit Name="CMPA" Authority="RW" Bits="7-4" Description="CMPA寄存器链接目标。" />
+        <Bit Name="PRDR" Authority="RW" Bits="3-0" Description="PRDR寄存器链接目标。" />
+      </Register>
+      <Register Name="REGLK2" Authority="RW" Address="0x400590e4" Width="32" Description="Register Link Control Register2">
+        <Bit Name="AQCSF" Authority="RW" Bits="23-20" Description="AQCSF寄存器链接目标" />
+        <Bit Name="AQOSF" Authority="RW" Bits="19-16" Description="AQOSF寄存器链接目标" />
       </Register>
       <Register Name="PROT" Authority="RW" Address="0x400590e8" Width="32" Description="Protection Register">
         <Bit Name="WRKEY" Authority="RW" Bits="31-16" Description="写入保护KEY&#xD;&#xA;当对PROTKEY进行写操作时，必须将KEY设置为A55Ah，否则写入无效。" />
@@ -2914,13 +3167,13 @@
         <Bit Name="CLKO" Authority="RW" Bits="18" Description="时钟输出选择&#xD;&#xA;0 = USART不输出USARTCLK &#xD;&#xA;1 = 如果CLKS[1]是0，且SYNC是1，USART输出USARTCLK" />
         <Bit Name="MODE9" Authority="RW" Bits="17" Description="9位字节长度&#xD;&#xA;0 = CHRL位定义字节长度&#xD;&#xA;1 = 9位字节长度" />
         <Bit Name="SMCARDPT" Authority="RW" Bits="16" Description="Smart Card协议&#xD;&#xA;0 = 禁止smart card协议&#xD;&#xA;1 = 使能smart card协议" />
-        <Bit Name="CHMODE" Authority="RW" Bits="15-14" Description="通道模式&#xD;&#xA;• 通道模式位&#xD;&#xA;CHMODE [1:0]                    模式描述&#xD;&#xA;00                           普通模式USART通道工作为正常的Rx/Tx功能&#xD;&#xA;01                           自动回应收到的数据自动通过USARTTX发送&#xD;&#xA;10                           本地回环发送端的输出信号短接到接收端的输入信号&#xD;&#xA;11                           远程回环USARTRX管脚内部直接短接到USARTTX管脚" />
-        <Bit Name="NBSTOP" Authority="RW" Bits="13-12" Description="停止位的个数&#xD;&#xA;停止位个数跟SYNC设置的模式有关&#xD;&#xA;&#xD;&#xA;• NBSTOP配置位&#xD;&#xA;NBSTOP [1:0]           异步模式 (SYNC = 0)       同步模式 (SYNC = 1)&#xD;&#xA;00                            1个停止位                      1个停止位&#xD;&#xA;01                            1.5个停止位                   保留&#xD;&#xA;10                            2个停止位                      2个停止位&#xD;&#xA;11                            保留                               保留" />
-        <Bit Name="PAR" Authority="RW" Bits="11-9" Description="校验类型&#xD;&#xA;• 校验类型位&#xD;&#xA;&#xD;&#xA;PAR[2:0]                     校验类型&#xD;&#xA;000                            偶校验&#xD;&#xA;001                            奇校验&#xD;&#xA;010                            0校验(Space)&#xD;&#xA;011                            1校验(Mark)&#xD;&#xA;10X                            无校验&#xD;&#xA;11X                            Multi-drop模式&#xD;&#xA;注意：如果使用LIN，PAR[2:0]必须设置为‘10X’." />
+        <Bit Name="CHMODE" Authority="RW" Bits="15-14" Description="通道模式&#xD;&#xA;• 通道模式位&#xD;&#xA;CHMODE [1:0]        模式描述&#xD;&#xA;00      普通模式USART通道工作为正常的Rx/Tx功能&#xD;&#xA;01      自动回应收到的数据自动通过USARTTX发送&#xD;&#xA;10      本地回环发送端的输出信号短接到接收端的输入信号&#xD;&#xA;11      远程回环USARTRX管脚内部直接短接到USARTTX管脚" />
+        <Bit Name="NBSTOP" Authority="RW" Bits="13-12" Description="停止位的个数&#xD;&#xA;• NBSTOP配置位&#xD;&#xA;NBSTOP [1:0]    停止位个数    &#xD;&#xA;00           1个停止位                      &#xD;&#xA;01           保留                              &#xD;&#xA;10           2个停止位                   &#xD;&#xA;11           保留     " />
+        <Bit Name="PAR" Authority="RW" Bits="11-9" Description="校验类型&#xD;&#xA;• 校验类型位&#xD;&#xA;PAR[2:0]     校验类型&#xD;&#xA;000        偶校验&#xD;&#xA;001        奇校验&#xD;&#xA;010        0校验(Space)&#xD;&#xA;011        1校验(Mark)&#xD;&#xA;10X        无校验&#xD;&#xA;11X        Multi-drop模式&#xD;&#xA;注意：如果使用LIN，PAR[2:0]必须设置为‘10X’." />
         <Bit Name="SYNC" Authority="RW" Bits="8" Description="同步模式选择&#xD;&#xA;0 = USART工作在异步模式&#xD;&#xA;1 = USART工作在同步模式" />
-        <Bit Name="CHRL" Authority="RW" Bits="7-6" Description="字节长度 (除开始位，停止位和校验位外的字节长度)&#xD;&#xA;• 字节长度位&#xD;&#xA;&#xD;&#xA;CHRL[1:0]                字节长度&#xD;&#xA;0  0                          5位&#xD;&#xA;0  1                          6位&#xD;&#xA;1  0                          7位&#xD;&#xA;1  1                          8位" />
-        <Bit Name="CLKS" Authority="RW" Bits="5-4" Description="时钟选择 (波特率发生器的输入时钟).&#xD;&#xA;• CLKS 时钟选择位&#xD;&#xA;&#xD;&#xA;CLKS[1:0]     选择的时钟&#xD;&#xA;0  0                PCLK&#xD;&#xA;0  1                PCLK/8&#xD;&#xA;1  0                时钟为USART_CK0引脚输入时钟&#xD;&#xA;1  1                保留" />
-        <Bit Name="SENDTIME" Authority="RW" Bits="3-1" Description="表示USART被配置成Smart Card协议时，重复发送最多的次数0-7&#xD;&#xA;" />
+        <Bit Name="CHRL" Authority="RW" Bits="7-6" Description="字节长度 (除开始位，停止位和校验位外的字节长度)&#xD;&#xA;• 字节长度位&#xD;&#xA;CHRL[1:0]     字节长度&#xD;&#xA;00           5位&#xD;&#xA;01           6位&#xD;&#xA;10           7位&#xD;&#xA;11           8位" />
+        <Bit Name="CLKS" Authority="RW" Bits="5-4" Description="时钟选择 (波特率发生器的输入时钟).&#xD;&#xA;• CLKS 时钟选择位&#xD;&#xA;CLKS[1:0]     选择的时钟&#xD;&#xA;00          PCLK&#xD;&#xA;01          PCLK/8&#xD;&#xA;10          时钟为USART_CK0引脚输入时钟&#xD;&#xA;11          保留" />
+        <Bit Name="SENDTIME" Authority="RW" Bits="3-1" Description="表示USART被配置成Smart Card协议时，重复发送最多的次数0-7 &#xD;&#xA;•SENDTIME配置位&#xD;&#xA;SENDTIME[2:0]	发送次数&#xD;&#xA;000	0&#xD;&#xA;001	1&#xD;&#xA;–&#xD;&#xA;111	7" />
         <Bit Name="LIN" Authority="RW" Bits="0" Description="LIN模式&#xD;&#xA;0 = USART上禁止LIN协议&#xD;&#xA;1 = USART上使能LIN协议" />
       </Register>
       <Register Name="US_IMSCR" Authority="RW" Address="0x40083014" Width="32" Description="中断使能/禁止寄存器">
@@ -3035,20 +3288,20 @@
         <Bit Name="TXCHR" Authority="RO" Bits="8-0" Description="需要发送的字节&#xD;&#xA;当TXRDY有效时，存储下一个要发送的字节。如果TXRDY是0，那么当前US_THR寄存器的值会被覆盖。当位数小于9时，数据为右对齐。" />
       </Register>
       <Register Name="US_BRGR" Authority="RW" Address="0x40083030" Width="32" Description="波特率配置寄存器">
-        <Bit Name="CD" Authority="RW" Bits="15-4" Description="分频&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式):CD = FLOOR[ Fclk / (Baud Rate x 16), 1 ]&#xD;&#xA;同步模式):CD = FLOOR[ Fclk / Baud Rate, 1 ]&#xD;&#xA;&#xD;&#xA;CD[15:4]                           Action&#xD;&#xA;0                                      关闭时钟&#xD;&#xA;1                                      无分频 (1分频)&#xD;&#xA;2 to 65535                         &#xD;&#xA;波特率(异步模式)= Fclk /(16 × (CD+FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk /(CD+FRACTION/16)" />
-        <Bit Name="FRACTION" Authority="RW" Bits="3-0" Description="小数修正值(0-15)&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式:FRACTION = ROUND[((Fclk / (Baud Rate x 16)) - CD) x 16, 0]&#xD;&#xA;同步模式:FRACTION = ROUND[((Fclk / Baud Rate) - CD) x 16, 0]&#xD;&#xA;&#xD;&#xA;波特率(异步模式)= Fclk / (16 x (CD + FRACTION/16))&#xD;&#xA;波特率(同步模式)= Fclk / (CD + FRACTION/16)" />
+        <Bit Name="CD" Authority="RW" Bits="15-4" Description="分频&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。&#xD;&#xA;异步模式):CD = FLOOR[ Fclk / (Baud Rate x 16), 1 ]&#xD;&#xA;同步模式):CD = FLOOR[ Fclk / Baud Rate, 1 ]&#xD;&#xA;&#xD;&#xA;CD[15:4]        Action&#xD;&#xA;0                  关闭时钟&#xD;&#xA;1                  无分频 (1分频)&#xD;&#xA;2 to 4095       波特率(异步模式)= Fclk /(16 × (CD+FRACTION/16))&#xD;&#xA;                     波特率(同步模式)= Fclk /(CD+FRACTION/16)" />
+        <Bit Name="FRACTION" Authority="RW" Bits="3-0" Description="小数修正值&#xD;&#xA;同步模式下如果选择了外部时钟，此寄存器无效。 &#xD;&#xA;异步模式)&#xD;&#xA;FRACTION = ROUND[((Fclk / (Baud Rate x 16)) - CD) x 16, 0]&#xD;&#xA;同步模式)&#xD;&#xA;FRACTION = ROUND[((Fclk / Baud Rate) - CD) x 16, 0] &#xD;&#xA; &#xD;&#xA;FRACTION[3:0]	Action&#xD;&#xA;0 to 15	          波特率(异步模式)= Fclk / (16 x (CD + FRACTION/16))&#xD;&#xA;                        波特率(同步模式) = Fclk / (CD + FRACTION/16)" />
       </Register>
       <Register Name="US_RTOR" Authority="RW" Address="0x40083034" Width="32" Description="接收超时配置寄存器">
-        <Bit Name="TO" Authority="RW" Bits="15-0" Description="超时配置&#xD;&#xA;给这个寄存器写值后，会自动开启超时接收的指令&#xD;&#xA;• 超时配置位&#xD;&#xA;TO[15:0]                       Action&#xD;&#xA;0                         禁止接收端的超时功能&#xD;&#xA;1–65565             当开启超时接收时，或者每当收到一个数据字节时，超时计数                                   器会被载入TO[15:0]的值&#xD;&#xA;&#xD;&#xA;异步模式：超时时长= TO[15:0] × 位周期&#xD;&#xA;同步模式：超时时长= TO[15:0] × 16 × 位周期&#xD;&#xA;&#xD;&#xA;注意： 当设置US_CR寄存器的RXDIS位禁止接收端后，超时功能被停止，这时如果又通过US_CR的RXEN位重新使能了接收端，那么超时计数器会从刚才停止的地方继续开始(不会被复位)。" />
+        <Bit Name="TO" Authority="RW" Bits="15-0" Description="超时配置&#xD;&#xA;给这个寄存器写值后，会自动开启超时接收的指令&#xD;&#xA;• 超时配置位&#xD;&#xA;TO[15:0]                       Action&#xD;&#xA;0                         禁止接收端的超时功能&#xD;&#xA;1–65565             当开启超时接收时，或者每当收到一个数据字节时，超时计数 器会被载入TO[15:0]的值&#xD;&#xA;&#xD;&#xA;异步模式：超时时长= TO[15:0] × 位周期&#xD;&#xA;同步模式：超时时长= TO[15:0] × 16 × 位周期&#xD;&#xA;&#xD;&#xA;注意： 当设置US_CR寄存器的RXDIS位禁止接收端后，超时功能被停止，这时如果又通过US_CR的RXEN位重新使能了接收端，那么超时计数器会从刚才停止的地方继续开始(不会被复位)。" />
       </Register>
       <Register Name="US_TTGR" Authority="RW" Address="0x40083038" Width="32" Description="发送端Time-Guard寄存器">
-        <Bit Name="TG" Authority="RW" Bits="7-0" Description="Time-Guard配置&#xD;&#xA;• Time-Guard配置位&#xD;&#xA;TO[15:0]                              Action&#xD;&#xA;0                                      禁止发送端的time-guard功能&#xD;&#xA;1–255                               USARTTX在每发送完一个字节后，会变高一段时间，                                                这个时间段为time-guard时长&#xD;&#xA;&#xD;&#xA;Time-guard时长= TG[7:0] × 位周期" />
+        <Bit Name="TG" Authority="RW" Bits="7-0" Description="Time-Guard配置&#xD;&#xA;• Time-Guard配置位&#xD;&#xA;TO[15:0]                              Action&#xD;&#xA;0                   禁止发送端的time-guard功能&#xD;&#xA;1–255            USARTTX在每发送完一个字节后，会变高一段时间，这个时间段为time-guard时长&#xD;&#xA;&#xD;&#xA;Time-guard时长= TG[7:0] × 位周期" />
       </Register>
       <Register Name="US_LIR" Authority="RW" Address="0x4008303c" Width="32" Description="LIN标识寄存器">
         <Bit Name="WAKE_UP_TIME" Authority="RW" Bits="31-16" Description="LIN2.0版本的唤醒时间&#xD;&#xA;设置唤醒时间计数器。重启后计数器加载0x3AD4，该值对应于PCLK = 20 MHz 时至少为 753us。" />
         <Bit Name="CHK_SEL" Authority="RW" Bits="9" Description="校验和选择&#xD;&#xA;0 = 经典校验和&#xD;&#xA;1 = 增强型校验和（兼容LIN2.0版本）" />
         <Bit Name="NDATA" Authority="RW" Bits="8-6" Description="LIN2.0 版本的数据字段数&#xD;&#xA;指定要发送或接收的数据字段的数量。范围是从0到7，对应于1到8数据字段。" />
-        <Bit Name="IDENTIFIER" Authority="RW" Bits="5-0" Description="LIN标识符&#xD;&#xA;指示将被发送的下一个&quot;HEADER MESSAGE&quot;的LIN标识符内容。对于LIN1.2版，标识符[5：4]字段指定数据字段的数量。&#xD;&#xA;标识符[5:4]	                数据字段的数量&#xD;&#xA;0	                              2&#xD;&#xA;1	                              2&#xD;&#xA;2	                              4&#xD;&#xA;3	                              8" />
+        <Bit Name="IDENTIFIER" Authority="RW" Bits="5-0" Description="LIN标识符&#xD;&#xA;指示将被发送的下一个&quot;HEADER MESSAGE&quot;的LIN标识符内容。对于LIN1.2版，标识符[5：4]字段指定数据字段的数量。&#xD;&#xA;标识符[5:4]	   数据字段的数量&#xD;&#xA;0	2&#xD;&#xA;1            2&#xD;&#xA;2            4&#xD;&#xA;3            8" />
       </Register>
       <Register Name="US_DFWR0" Authority="RW" Address="0x40083040" Width="32" Description="LIN写数据字段0寄存器">
         <Bit Name="DATA3" Authority="RW" Bits="31-24" Description="待发送的LIN字节字段&#xD;&#xA;当CR寄存器上的STRESP进行配置时，&quot;LIN响应消息&quot;上待发送的数据消息。" />
@@ -3147,6 +3400,16 @@
       <Register Name="SSP_ICR" Authority="RW" Address="0x40090020" Width="32" Description="SSP中断清除寄存器">
         <Bit Name="RTIC " Authority="RW" Bits="1" Description="接收超时中断清除&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除SSPRTINTR中断" />
         <Bit Name="RORIC" Authority="RW" Bits="0" Description="接收溢出中断清除&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 清除SSPRORINTR中断" />
+      </Register>
+      <Register Name="SPI_DMACR" Authority="RW" Address="0x40090024" Width="32" Description="SPI DMA收发控制器">
+        <Bit Name="TXMODE" Authority="RW" Bits="3" Description="TX DMA MODE&#xD;&#xA;0=发送FIFO未满，产生DMA数据请求&#xD;&#xA;1=发送FIFO数据占用&lt;=1/2时，产生DMA数据请求" />
+        <Bit Name="RXMODE" Authority="RW" Bits="2" Description="RX DMA MODE&#xD;&#xA;0=接收FIFO非空，产生DMA数据请求&#xD;&#xA;1=接收FIFO数据达到中断触发点，产生DMA数据请求" />
+        <Bit Name="TXDMAEN" Authority="RW" Bits="1" Description="TX DMA enable" />
+        <Bit Name="RXDMAEN" Authority="RW" Bits="0" Description="RX DMA enable" />
+      </Register>
+      <Register Name="SPI_SRR" Authority="RW" Address="0x40090028" Width="32" Description="SPI软件复位寄存器">
+        <Bit Name="SCLK_ SWRST" Authority="RW" Bits="1" Description="SPICLK时钟域软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位" />
+        <Bit Name="PCLK_SWRST" Authority="RW" Bits="0" Description="PCLK时钟域软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位 " />
       </Register>
     </Peripheral>
     <Peripheral Name="I2C">
