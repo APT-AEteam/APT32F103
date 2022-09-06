@@ -89,155 +89,213 @@ void syscon_int_handler(void)
 
 void ifc_int_handler(void) 
 {	
+#if	IFC_INT_HANDLE_EN
 	// ISR content ...
-//	ifc_irqhandler();
+	ifc_irqhandler();
+#endif
 }
 
 void adc0_int_handler(void) 
 {
+#if	ADC_INT_HANDLE_EN
 	// ISR content ...
-	//adc_irqhandler(ADC0);
-	
+	adc_irqhandler(ADC0);
+#endif	
 }
 
 void ept0_int_handler(void) 
 {	
-	// ISR content ...
-//	ept_initen_irqhandler(EPT0);
 	
+#if	EPT_INT_HANDLE_EN
+	// ISR content ...
+	ept_initen_irqhandler(EPT0);
+#endif		
 }
 void dma_int_handler(void)
 {
+#if DMA_INT_HANDLE_EN
 	// ISR content ...	 
-//	dma_irqhandler(DMA);
+	dma_irqhandler(DMA);
+	
+#endif
 }
 
 void wwdt_int_handler(void)
 {
+#if WWDT_INT_HANDLE_EN
 	 // ISR content ...
-	// wwdt_irqhandler();
+	wwdt_irqhandler();
+	
+#endif
 }
 
 void gpta0_int_handler(void) 
 {
-    gpta0_initen_irqhandler(GPTA0);
+#if GPTA0_INT_HANDLE_EN
+// ISR content ...
+	gpta0_initen_irqhandler(GPTA0);
+
+#endif
 }
 
 
 void rtc_int_handler(void) 
 {
+#if	RTC_INT_HANDLE_EN
     //ISR content ...
-//	rtc_irqhandler(RTC);
+	rtc_irqhandler(RTC);
+#endif
 }
 
 void uart0_int_handler(void) 
 {
+#if	UART0_INT_HANDLE_EN
     // ISR content ...
-//	uart_irqhandler(UART0, 0);
+	uart_irqhandler(UART0, 0);
+
+#endif
 }
 void uart1_int_handler(void) 
 {
+#if	UART1_INT_HANDLE_EN
     // ISR content ...
-//	uart_irqhandler(UART1, 1);
+	uart_irqhandler(UART1, 1);
+
+#endif
 }
 void uart2_int_handler(void) 
 {
+#if	UART2_INT_HANDLE_EN
     // ISR content ...
-//	uart_irqhandler(UART2, 2);
+	uart_irqhandler(UART2, 2);
+
+#endif
 }
 
 void usart0_int_handler(void) 
-{// when use lin demo,please uncomment lin_irqhandler function,and comment USART0_irqhandler function.
-
+{
+// when use lin demo,please uncomment lin_irqhandler function,and comment USART0_irqhandler function.
+#if	USART0_INT_HANDLE_EN
 	// ISR content ...
-//	usart_irqhandler(USART0, 0);
+	usart_irqhandler(USART0, 0);
 	//lin_irqhandler(LIN0, 0);
+#endif
 }
 
 void sio_int_handler(void) 
 {
+#if	SIO_INT_HANDLE_EN
    // ISR content ...
-//   sio_irqhandler(SIO0);
+   sio_irqhandler(SIO0);
+#endif
 }
 
 void i2c_int_handler(void) 
 {
+#if	I2C_INT_HANDLE_EN
     // ISR content ...
-//	i2c_irqhandler(I2C0);
+	i2c_irqhandler(I2C0);
+	
+#endif
 }
 void spi0_int_handler(void) 
 {
+#if	SPI_INT_HANDLE_EN
     // ISR content ...
-//	spi_irqhandler(SPI0);
+	spi_irqhandler(SPI0);
+#endif
 }
 
 void exi0_int_handler(void) 			
 {
+#if	EXI0_INT_HANDLE_EN
     // ISR content ...
-//	gpio_irqhandler(0);
+	gpio_irqhandler(0);
+#endif
 }
 void exi1_int_handler(void) 
 {
+#if	EXI1_INT_HANDLE_EN
     // ISR content ...
-//	gpio_irqhandler(1);
+	gpio_irqhandler(1);
+#endif
 }
 void exi2_3_int_handler(void) 
 {
+#if	EXI2_3_INT_HANDLE_EN
     // ISR content ...
-//	gpio_irqhandler(2);
+	gpio_irqhandler(2);
+#endif
 }
 void exi4_9_int_handler(void) 
 {
+#if	EXI4_9_INT_HANDLE_EN
     // ISR content ...
-//	gpio_irqhandler(3);
+	gpio_irqhandler(3);
+#endif
 }
 void exi10_15_int_handler(void) 
 {
+#if	EXI10_15_INT_HANDLE_EN
     // ISR content ...
-//	gpio_irqhandler(4);
+	gpio_irqhandler(4);
+#endif
 }
 
 void cnta_int_handler(void) 
 {
+#if	CNTA_INT_HANDLE_EN
     // ISR content ...
-//	cnta_irqhandler(CNTA);
+	cnta_irqhandler(CNTA);
+#endif
 }
 void tkey_int_handler(void) 
 {
+#if	TKEY_INT_HANDLE_EN
     // ISR content ...
 
-
+#endif
 }
 void lpt_int_handler(void) 
 {
+#if	LPT_INT_HANDLE_EN
     // ISR content ...
-//	lpt_irqhandler(LPT);
+	lpt_irqhandler(LPT);
+#endif
 }
 
 void bt0_int_handler(void) 
 {
+#if	BT0_INT_HANDLE_EN
     // ISR content ...
-//	bt_irqhandler(BT0);
+	bt_irqhandler(BT0);
+#endif
 }
 
 void bt1_int_handler(void) 
 {
+#if	BT1_INT_HANDLE_EN	
     // ISR content ...
-	//bt_irqhandler(BT1);
+	bt_irqhandler(BT1);
+#endif
 }
 
 void bt2_int_handler(void) 
 {
+#if	BT2_INT_HANDLE_EN
     // ISR content ...
-	//bt_irqhandler(BT2);
+	bt_irqhandler(BT2);
+#endif
 }
 void bt3_int_handler(void) 
 {
+#if	BT3_INT_HANDLE_EN
     // ISR content ...
-//	csi_tick_increase();
+	csi_tick_increase();
 	
-//	bt_irqhandler(BT3);
-	//csi_pin_toggle(PB05);
+	bt_irqhandler(BT3);
+	
+#endif
 }
 
 /*************************************************************/

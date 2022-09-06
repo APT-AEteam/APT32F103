@@ -41,58 +41,36 @@ extern "C" {
 #define XOUT_PIN_FUNC					PA04_OSC_XO
 
 
-#define EXI_PIN                      	PA09
-#define EXI_PIN_FUNC                 	PIN_FUNC_INPUT
+//csi Interrupt Handling Enable, 1/0(OPEN/CLOSE)
+//系统中断处理配置默认是全部打开，对应的中断处理会调用处理函数，会占用的代码空间
+//用户不需要用到某个中断时，可以将对应中断宏定义值设置为0可节约代码空间
 
-#define SPI_IDX                 		0
-#define SPI_MOSI_PIN            		PA014            
-#define SPI_MISO_PIN            		PA015            
-#define SPI_NSS_PIN             		PB05             
-#define SPI_SCK_PIN             		PB04             
-#define SPI_MOSI_PIN_FUNC       		PA014
-#define SPI_MISO_PIN_FUNC       		PA015
-#define SPI_NSS_PIN_FUNC        		PB05
-#define SPI_SCK_PIN_FUNC				PB04
-
-#define IIC_IDX		            		0
-#define IIC_SDA_PIN             		PA013        
-#define IIC_SCL_PIN             		PB00        
-#define IIC_SDA_PIN_FUNC        		PA013
-#define IIC_SCL_PIN_FUNC        		PB00
-
-#define GPIO_IDX						1
-#define GPIO_PIN                		PB02
-#define GPIO_PIN_MSK	     			0x4
-#define GPIO_PIN_FUNC           		PIN_FUNC_OUTPUT
-
-
-#define EPT_IDX                 		0
-#define EPT_PWMCHAY_PIN              	PA012
-#define EPT_PWMCHAX_PIN					PA010
-#define EPT_PWMCHAX_PIN_FUNC            PA010
-#define EPT_PWMCHAY_PIN_FUNC			PA012
-#define EPT_EBI_PIN						PB02
-#define EPT_EBI							PB02
-
-#define ADC_IDX							0
-#define ADC_PIN							PA011
-#define ADC_PIN_FUNC					PA011
-#define ADC_CH							ADCIN12
-#define ADC_PIN1						PA13
-#define ADC_PIN1_FUNC					PA13
-#define ADC_CH1							ADCIN14
-
-
-#define TCH_IDX							0
-#define TCH_PIN1						PB03
-#define TCH_PIN2						PA08
-#define	TCH_PIN1_FUNC					PB03
-#define TCH_PIN2_FUNC					PA08
-
-#define SIO_IDX					        0
-#define SIO_PIN					        PA02
-#define SIO_PIN_FUNC					PA02
-
+#define	IFC_INT_HANDLE_EN				1		//IFC 
+#define	ADC_INT_HANDLE_EN				1		//ADC
+#define	EPT_INT_HANDLE_EN				1		//EPT 
+#define	DMA_INT_HANDLE_EN				1		//DMA
+#define	WWDT_INT_HANDLE_EN				1		//WWDT
+#define	GPTA0_INT_HANDLE_EN				1		//GPTA0
+#define	RTC_INT_HANDLE_EN				1		//RTC
+#define	UART0_INT_HANDLE_EN				1		//UART0
+#define	UART1_INT_HANDLE_EN				1		//UART1
+#define	UART2_INT_HANDLE_EN				1		//UART2
+#define	USART0_INT_HANDLE_EN			1		//USART0
+#define	SIO_INT_HANDLE_EN				1		//SIO
+#define	I2C_INT_HANDLE_EN				1		//I2C
+#define	SPI_INT_HANDLE_EN				1		//SPI
+#define	EXI0_INT_HANDLE_EN				1		//EXI0(GPIO external interrupt), EXI GROUP0 or GROUP16
+#define	EXI1_INT_HANDLE_EN				1		//EXI1(GPIO external interrupt), EXI GROUP1 or GROUP17
+#define	EXI2_3_INT_HANDLE_EN			1		//EXI2~3(GPIO external interrupt), EXI GROUP2~3 or GROUP18~19
+#define	EXI4_9_INT_HANDLE_EN			1		//EXI4~9(GPIO external interrupt), EXI GROUP4~9 
+#define	EXI10_15_INT_HANDLE_EN			1		//EXI10~15(GPIO external interrupt), EXI GROUP10~15 
+#define	CNTA_INT_HANDLE_EN				1		//CNTA
+#define	LPT_INT_HANDLE_EN				1		//LPT
+#define	BT0_INT_HANDLE_EN				1		//BT0
+#define	BT1_INT_HANDLE_EN				1		//BT1
+#define	BT2_INT_HANDLE_EN				1		//BT2
+#define	BT3_INT_HANDLE_EN				1		//BT3,用作系统时钟，默认开启。
+#define	TKEY_INT_HANDLE_EN				1		//TOUCH
 
 __attribute__((weak)) void board_init(void);
 

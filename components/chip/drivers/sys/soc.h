@@ -30,7 +30,7 @@ extern "C" {
 #endif
 
 #ifndef EMOSC_VALUE
-#define EMOSC_VALUE         2000000U
+#define EMOSC_VALUE         24000000U
 #endif
 
 #ifndef EMOSC_32K_VALUE

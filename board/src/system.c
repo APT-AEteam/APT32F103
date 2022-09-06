@@ -26,19 +26,14 @@
   \return      None
 */
 
-extern void irq_vectors_init(void);
 
 void system_init(void)		//__attribute__((weak))
 {
 	uint32_t i;
-	__disable_excp_irq();
 	
-//    /* enable mstatus FS */
-//    uint32_t mstatus = __get_MSTATUS();
-//    mstatus |= (1 << 13);
-//    __set_MSTATUS(mstatus);
-
-	//__disable_irq();
+	
+	__disable_excp_irq(); // disable all interrupts
+	
 	
 	/* get interrupt level from info */
     CLIC->CLICCFG = (((CLIC->CLICINFO & CLIC_INFO_CLICINTCTLBITS_Msk) >> CLIC_INFO_CLICINTCTLBITS_Pos) << CLIC_CLICCFG_NLBIT_Pos);
@@ -48,20 +43,12 @@ void system_init(void)		//__attribute__((weak))
         CLIC->CLICINT[i].ATTR = 1; /* use vector interrupt */
     }
 
-    /* tspend use positive interrupt */
-    //CLIC->CLICINT[SOFTWARE_IRQn].ATTR = 0x3;
-	
-	//csi_icache_enable();
-    //csi_vic_enable_irq(SOFTWARE_IRQn);
-
-//	csi_iwdt_close();				//close iwdt
-	csp_iwdt_disable(SYSCON);
+	csp_iwdt_disable(SYSCON);		//disable iwdt
 	csi_sysclk_config();			//sysclk config
-	csi_get_sclk_freq();
-	csi_get_pclk_freq();
-	//csi_tick_init();
+	csi_get_sclk_freq();			//get sysclk
+	csi_get_pclk_freq();			//get PCLK
+	csi_tick_init();                //init systick(BT3)
 	
-	__enable_excp_irq();
-	//__enable_irq();
+	__enable_excp_irq(); //enable all interrupts
 	
 }

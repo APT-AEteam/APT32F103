@@ -25,10 +25,17 @@ extern int gpio_port_irq_demo(void);
 extern int pin_output_demo(void);
 extern int pin_input_demo(void);
 extern int pin_irq_demo(void);
+int pin_ioremap_demo(void);
 
 //bt demo
 extern int bt_timer_demo(void);
 extern int bt_pwm_demo(void);
+int bt_sync_trg_start_demo(void);
+int bt_sync_trg_count_demo(void);
+int bt_sync_trg_stop_demo(void);
+int bt_trg_out_demo(void);
+int bt_soft_trg_out_demo(void);
+
 
 //iwdt demo
 extern int iwdt_normal_demo(void);
@@ -48,11 +55,13 @@ int etcb_mix_demo(void);
 int uart_char_demo(void);
 int uart_send_demo(void);
 int uart_send_int_demo(void);
+int uart_send_dma_demo(void);
 //uart receive
 int uart_receive_demo(void);
 int uart_recv_int_demo(void);
 int uart_recv_dynamic_demo(void);
 int uart_recv_dynamic_int_demo(void);
+int uart_recv_dma_demo(void);
 
 //adc demo
 //normal mode(no interrupt)
@@ -97,7 +106,8 @@ void rtc_timer_demo(void);
 void rtc_trgev_demo(void);
 
 //low power demo
-void lp_exi_wakeup_demo(void);
+void lp_wakeup_demo(void);
+void lp_lpt_wakeup_deepsleep_demo(void);
 
 //iic demo
 extern void iic_master_demo(void);
@@ -109,24 +119,16 @@ extern int cnta_timer_demo(void);
 extern int cnta_pwm_demo(void);
 
 //spi demo
-extern int spi_sync_sendbuff(void);
-extern int spi_async_sendbuff(void);
-extern int spi_w25q16jvsiq_write_read(void);
-extern int spi_sync_test_speed(void);
-extern void spi_master_sync_send_sync_receive(void); //主机示例1
-extern void spi_slave_sync_send_sync_receive(void);  //从机示例1
-extern void spi_master_sync_send_async_receive(void);//主机示例2
-extern void spi_slave_async_send_async_receive(void);//从机示例2
-extern void test_clr_txrxfifo(void);//接收fifo清除测试
-extern void spi_etcb_dma_send(void);//etcb硬件触发dma发spi数据
-extern void spi_dma_send(void); //dma软件触发，发spi数据
-extern void spi_dma_send_receive(void);//dma软件触发，收发spi数据
-extern void spi_etcb_dma_send_receive(void);//etcb硬件触发dma收发spi数据
-//extern int spi_w25q16jvsiq_write_read_demo(void);
-//extern void spi_master_sync_send_sync_receive_demo(void); //主机示例1
-//extern void spi_slave_sync_send_sync_receive_demo(void);  //从机示例1
-//extern void spi_master_sync_send_async_receive_demo(void);//主机示例2
-//extern void spi_slave_async_send_async_receive_demo(void);//从机示例2
+void spi_master_send_demo(void);
+void spi_master_send_int_demo(void);
+void spi_slave_receive_int_demo(void);
+void spi_master_send_receive_demo(void);
+void spi_slave_send_receive_int_demo(void);
+void spi_etcb_dma_send(void);
+void spi_etcb_dma_send_receive(void);
+
+
+
 
 //touch demo
 extern void touch_lowpower_demo(void);
@@ -146,6 +148,20 @@ extern int gpta_pwm_demo();
 //crc demo
 extern csi_error_t crc_demo();
 
-extern int usart_recv_int_test(void);
+
+//usart demo
+int usart_char_demo(void);
+int usart_send_demo(void);
+int usart_send_int_demo(void);
+int usart_recv_demo(void);
+int usart_recv_int_demo(void);
+int usart_recv_dynamic_demo(void);
+int usart_send_dma_demo(void);
+int usart_recv_dma_demo(void);
+
+int lin_send_test(void);
+int lin_send_recv_test(void);
+
+
 
 #endif

@@ -151,14 +151,8 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 void lp_wakeup_demo(void)
 {
 	csi_pm_mode_e ePmMode = PM_MODE_DEEPSLEEP;		//PM_MODE_SLEEP/PM_MODE_DEEPSLEEP
-	uint16_t hwRstSrc = csi_get_rst_reason();
-	
-	
-	if(hwRstSrc)									//获取并打印复位信息
-	{
-		//my_printf("System Reset Source = 0x%x \n", hwRstSrc);
-		csi_clr_rst_reason(hwRstSrc);				//清除复位信息
-	}
+
+
 	
 	csi_pin_set_mux(PB01,PB01_OUTPUT);				//PB01 OUTPUT
 	
@@ -251,10 +245,8 @@ void lp_wakeup_demo(void)
 	//	csi_iwdt_feed();
 		//mdelay(100);
 		csi_pin_toggle(PB01);
-		delay_ums(200000);
-	//	delay_ums(10000);
-		//delay_nms(10000);
-		//my_printf("Wakeup From Sleep Mode...\n");
+		mdelay(100);
+		my_printf("Wakeup From Sleep Mode...\n");
 	}
 }
 
@@ -302,104 +294,3 @@ static void read_sram1(uint8_t byData)
 		my_printf("Read Sram1 Data = 0x%x Success!\n", byData);
 }
 
-/** \brief test ram1 of shutdown/snooze mode 
- * 
- *  \param  none
- *  \return none
- */
-//void lp_shutdown_sram1_demo(void)
-//{
-//	csi_pm_mode_e ePmMode = PM_MODE_SNOOZE;		//PM_MODE_SNOOZE/PM_MODE_SHUTDOWN
-//	uint16_t hwRstSrc; 
-//	
-//	hwRstSrc = csi_get_rst_reason(); 				//获取复位信息并打印
-//	my_printf("System Reset Source = 0x%x \n", hwRstSrc);
-//	if((hwRstSrc & RST_SRC_SHD_WKUP) || (hwRstSrc &RST_SRC_SNOOZE_WKUP))	//snooze或者shutdown模式						
-//	{
-//		read_sram1(0xaa);							//shutdown复位，读SRAM1数据，根据写入的数据（0x55/0xaa）
-//	}
-//	else
-//	{
-//		write_sram1(0xaa);							//非shutdown复位写入数据
-//	}
-//	csi_clr_rst_reason(hwRstSrc);					//清除复位信息
-//	
-//	csi_pin_set_mux(PA19,PA19_OUTPUT);				//PA01 OUTPUT
-//	csi_pin_set_low(PA19);	
-//	
-//	csi_pin_set_mux(PA05,PA05_OUTPUT);				//PA05 OUTPUT
-//	
-//	csi_pin_toggle(PA05);							//延时处理4ms
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);							
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//	csi_pin_toggle(PA05);
-//	mdelay(250);
-//
-//
-//#ifdef CONFIG_USER_PM	
-//	csi_pm_attach_callback(ePmMode, prepare_lp, wkup_lp);	//需要在工程设置compiler tab下加入define CONFIG_USER_PM=1;
-//#endif
-//	
-//	csi_pm_clk_enable(DP_ISOSC, DISABLE);					//关闭deepsleep 模式下OSC
-//	csi_pm_clk_enable(DP_IMOSC, DISABLE);
-//	csi_pm_clk_enable(DP_ESOSC, DISABLE);
-//	csi_pm_clk_enable(DP_EMOSC, DISABLE);
-//	
-//	csi_pm_config_wakeup_source(WKUP_LVD, ENABLE);			//lvd 唤醒
-//	
-//	//LVD WAKEUP	DeepSleep/snooze/shutdown
-//	csi_lvd_int_enable(LVD_INTF,LVD_30);  					//VDD掉电到3.9V即触发LVD中断
-//	
-//	switch(ePmMode)
-//	{
-//		case PM_MODE_SLEEP:
-//			my_printf("Enter Sleep Mode\n");
-//			break;
-//		case PM_MODE_DEEPSLEEP:
-//			my_printf("Enter Deep-Sleep mode\n");
-//			break;
-//		case PM_MODE_SNOOZE:
-//			my_printf("Enter Snooze Mode\n");
-//			break;
-//		case PM_MODE_SHUTDOWN:
-//			my_printf("Enter ShutDown Mode\n");
-//			break;
-//		default:
-//			break;
-//	}
-//	
-//	while(1) 
-//	{
-//		csi_pin_set_high(PA19);
-//		
-//		csi_pm_enter_sleep(ePmMode);
-//		//mdelay(100);
-//		csi_pin_set_low(PA19);
-//		mdelay(100);
-//	}
-//}

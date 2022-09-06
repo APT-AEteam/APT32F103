@@ -23,7 +23,13 @@
 
 /* Private variablesr------------------------------------------------------*/
 
-/////使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
+
+/** \brief 示例lin发送完整数据帧
+ *  \brief 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
+ * 
+ *  \param[in] none
+ *  \return error code
+ */
 int lin_send_test(void)
 {
 	int iRet = 0;
@@ -78,6 +84,13 @@ int lin_send_test(void)
 	return iRet;
 }
 
+
+/** \brief 示例lin发送帧头，等待应答数据
+ *  \brief 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
+ * 
+ *  \param[in] none
+ *  \return error code
+ */
 int lin_send_recv_test(void)
 {
 	volatile int iRet = 0;
