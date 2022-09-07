@@ -20,7 +20,7 @@
 //!!!This function will be called AUTOMATICALLY when "/" is used.
 int __divsi3(int wDividend, int wDivisor)
 {
-	uint32_t wPsr;
+	uint32_t wPsr,wQt;
 
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -31,15 +31,16 @@ int __divsi3(int wDividend, int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 	
+	wQt = ptHwdivBase->QUOTIENT;
 	__set_MSTATUS(wPsr);
-	return (ptHwdivBase->QUOTIENT);
+	return (wQt);
 }
 
 //!!!This function is to replace the mod function in stdio.h
 //!!!This function will be called AUTOMATICALLY when "%" is used.
 int __modsi3(int wDividend, int wDivisor)
 {
-	uint32_t wPsr;
+	uint32_t wPsr,wRm;
 
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -50,15 +51,16 @@ int __modsi3(int wDividend, int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 
+	wRm = ptHwdivBase->REMAIN;
 	__set_MSTATUS(wPsr);
-	return (ptHwdivBase->REMAIN);
+	return (wRm);
 }
 
 //!!!This function is to replace the div function in stdio.h
 //!!!This function will be called AUTOMATICALLY when "/" is used.
 unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 {
-	uint32_t wPsr;
+	uint32_t wPsr,wQt;
 
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -69,15 +71,16 @@ unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 
+	wQt = ptHwdivBase->QUOTIENT;
 	__set_MSTATUS(wPsr);
-	return (ptHwdivBase->QUOTIENT);
+	return (wQt);
 }
 
 //!!!This function is to replace the mod function in stdio.h
 //!!!This function will be called AUTOMATICALLY when "%" is used.
 unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 {
-	uint32_t wPsr;
+	uint32_t wPsr,wRm;
 	
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -88,6 +91,7 @@ unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
 
+	wRm = ptHwdivBase->REMAIN;
 	__set_MSTATUS(wPsr);
-	return (ptHwdivBase->REMAIN);
+	return (wRm);
 }
