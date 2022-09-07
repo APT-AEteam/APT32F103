@@ -21,8 +21,6 @@
 int __divsi3(int wDividend, int wDivisor)
 {
 	uint32_t wPsr;
-//	wPsr = __get_PSR();
-//	__disable_excp_irq(); 
 
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -32,7 +30,7 @@ int __divsi3(int wDividend, int wDivisor)
 	
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
-	//__set_PSR(wPsr);
+	
 	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->QUOTIENT);
 }
@@ -42,8 +40,6 @@ int __divsi3(int wDividend, int wDivisor)
 int __modsi3(int wDividend, int wDivisor)
 {
 	uint32_t wPsr;
-//	wPsr = __get_PSR();
-//	__disable_excp_irq();  
 
 	wPsr = __get_MSTATUS();
 	__disable_irq();
@@ -53,7 +49,6 @@ int __modsi3(int wDividend, int wDivisor)
 	
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
-//	__set_PSR(wPsr);
 
 	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->REMAIN);
@@ -64,9 +59,7 @@ int __modsi3(int wDividend, int wDivisor)
 unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 {
 	uint32_t wPsr;
-//	wPsr = __get_PSR();
-//	__disable_excp_irq(); 
-//
+
 	wPsr = __get_MSTATUS();
 	__disable_irq();
 	
@@ -75,7 +68,6 @@ unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 	
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
-//	__set_PSR(wPsr);
 
 	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->QUOTIENT);
@@ -86,8 +78,7 @@ unsigned int __udivsi3(unsigned int wDividend, unsigned int wDivisor)
 unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 {
 	uint32_t wPsr;
-//	wPsr = __get_PSR();
-//	__disable_excp_irq(); 
+	
 	wPsr = __get_MSTATUS();
 	__disable_irq();
 	
@@ -96,7 +87,7 @@ unsigned int __umodsi3(unsigned int wDividend, unsigned int wDivisor)
 	
 	ptHwdivBase->DIVIDEND = wDividend;
 	ptHwdivBase->DIVISOR = wDivisor;
-//	__set_PSR(wPsr);
+
 	__set_MSTATUS(wPsr);
 	return (ptHwdivBase->REMAIN);
 }
