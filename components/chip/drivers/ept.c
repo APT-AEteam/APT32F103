@@ -54,7 +54,7 @@ __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 		gEptTick++;if(gEptTick>=5){	
 								   //load();	
 	                               gEptTick=0;
-								    //csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));						 
+								    csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));						 
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPA);
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPB);
 									csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_IMM, EPT_LDCMP_ZRO ,EPT_CAMPC);
@@ -62,7 +62,7 @@ __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPA, 20);
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPB, 20);
 									csi_ept_change_ch_duty(EPT0,EPT_CAMPC, 20);							 
-									//csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
+									csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
 								   
 		                         }
 						 

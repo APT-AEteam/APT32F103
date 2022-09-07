@@ -38,9 +38,9 @@ int uart_send_dma_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -58,7 +58,7 @@ int uart_send_dma_demo(void)
 		byRecv = csi_uart_getc(UART1);
 		if(byRecv == 0x06)
 			csi_uart_send_dma(UART1, DMA_CH1, (void *)bySdData, 26);	
-		//mdelay(10);
+		mdelay(10);
 		if(csi_dma_get_msg(DMA_CH1, ENABLE))	//获取发送完成消息，并清除消息
 		{
 			//添加用户代码
@@ -81,9 +81,9 @@ int uart_recv_dma_demo(void)
 	int iRet = 0;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -140,7 +140,7 @@ int uart_char_demo(void)
 		byRecv = csi_uart_getc(UART1);
 		csi_uart_putc(UART1, byRecv+1);
 		
-		//mdelay(10);
+		mdelay(10);
 	}
 	
 	return iRet;
@@ -160,9 +160,9 @@ int uart_send_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -179,9 +179,9 @@ int uart_send_demo(void)
 		if(byRecv == 0x06)
 			byRecv = csi_uart_send(UART1,(void *)bySendData,18);		//采用轮询方式,调用该函数时，UART发送中断关闭
 		
-//		mdelay(5);
-//		if(byRecv == 16)
-//			csi_uart_putc(UART1, 0x03);
+		mdelay(5);
+		if(byRecv == 16)
+			csi_uart_putc(UART1, 0x03);
 	}
 	
 	return iRet;
@@ -200,9 +200,9 @@ int uart_send_int_demo(void)
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -216,8 +216,8 @@ int uart_send_int_demo(void)
 	while(1)
 	{
 		byRecv = csi_uart_getc(UART1);
-		//if(byRecv == 0x06)
-		csi_uart_send(UART1,(void *)bySendData,28);		//采用中断方式。调用改函数时，UART发送中断使能
+		if(byRecv == 0x06)
+			 csi_uart_send(UART1,(void *)bySendData,28);		//采用中断方式。调用改函数时，UART发送中断使能
 		
 		while(1)			
 		{
@@ -226,14 +226,12 @@ int uart_send_int_demo(void)
 			{
 				//发送状态有三种，IDLE(空闲)/SEND(发送中)/DONE(发送完成)
 				//具体定义参考：uart.h中csi_uart_state_e,
-				//csi_uart_clr_send_status(UART1);						//清除发送状态位，状态设置为空闲(idle)
 				nop;
 				break;
 			}
 		}
-		
-		//TODO
-		//mdelay(10);
+
+		mdelay(10);
 	}
 	
 	return iRet;
@@ -248,14 +246,13 @@ int uart_send_int_demo(void)
 int uart_receive_demo(void)
 {
 	int iRet = 0;
-	//uint8_t bySendData[20]={1,2,3,4,5,6,7,8,9,21,22,23,24,25,26,27,28,29};
 	uint8_t byRecvData[20]={0};
 	volatile uint8_t byRecv;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
@@ -291,10 +288,10 @@ int uart_recv_int_demo(void)
 	volatile uint16_t hwRecvLen;
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
-//	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
@@ -347,9 +344,9 @@ int uart_recv_dynamic_demo(void)
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度
@@ -391,9 +388,9 @@ int uart_recv_dynamic_int_demo(void)
 	
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
 	
-//	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
-//	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
-//	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
+	csi_pin_set_mux(PA03, PA03_UART1_TX);		//TX
+	csi_pin_set_mux(PA04, PA04_UART1_RX);		//RX
+	csi_pin_pull_mode(PA04,GPIO_PULLUP);		//RX管脚上拉使能, 建议配置
 	
 	//接收缓存配置，实例化接收ringbuf，将ringbuf接收数据缓存指向用户定义的的接收buffer(g_byRxBuf)
 	//需要传入参数：串口设备/ringbuf结构体指针/接收buffer/接收buffer长度

@@ -115,18 +115,18 @@ int ept_pwm_demo(void)
 {
 	int iRet = 0;
 //	uint32_t wPinMask = (0x01ul << 0);				            //GPIOA0端口
-//	csi_gpio_port_dir(GPIOA0, (0x01ul << 0), GPIO_DIR_OUTPUT);	//GPIOA0 端口配置为输出
-//	csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));				//输出高
-//	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));		
+	csi_gpio_port_dir(GPIOA0, (0x01ul << 0), GPIO_DIR_OUTPUT);	//GPIOA0 端口配置为输出
+	csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));				//输出高
+	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));		
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
-//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
-//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
 
-//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
-//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
-//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
-//	csi_pin_set_mux(PB03, PB03_EPT_CHD);						
+	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+	csi_pin_set_mux(PB03, PB03_EPT_CHD);						
 //------------------------------------------------------------------------------------------------------------------------
 //    csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPA);
 //	  csi_ept_channel_cmpload_config(EPT0, EPT_CMPLD_SHDW, EPT_LDCMP_ZRO ,EPT_CAMPB);
@@ -229,13 +229,13 @@ int ept_pwm_dz_demo(void)
 {
 	int iRet = 0;	
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
-//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
-//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
 
-//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
-//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
-//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
 //	csi_pin_set_mux(PB03, PB03_EPT_CHD);
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_config_t tPwmCfg;								  
@@ -269,7 +269,7 @@ int ept_pwm_dz_demo(void)
 	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_1);//channel
 	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_2);
 	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_3);
-//	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_4);	
+	csi_ept_channel_config(EPT0, &tEptchannelCfg,  EPT_CHANNEL_4);	
 	csp_ept_set_aqtscr(EPT0,EPT_T1,EP1);//波形输出T事件选择
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_deadzone_config_t  tEptDeadZoneTime;
@@ -333,19 +333,19 @@ int ept_pwm_dz_em_demo(void)
 {
 	int iRet = 0;	
 //------------------------------------------------------------------------------------------------------------------------	
-//	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
-//	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
-//	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
+	csi_pin_set_mux(PB06, PB06_EPT_CHAX);						
+	csi_pin_set_mux(PB08, PB08_EPT_CHBX);						
+	csi_pin_set_mux(PB05, PB05_EPT_CHCX);						
 
-//	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
-//	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
-//	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
-//	csi_pin_set_mux(PB03, PB03_EPT_CHD);
+	csi_pin_set_mux(PB07, PB07_EPT_CHAY);						
+	csi_pin_set_mux(PB09, PB09_EPT_CHBY);						
+	csi_pin_set_mux(PB04, PB04_EPT_CHCY);						
+	csi_pin_set_mux(PB03, PB03_EPT_CHD);
 
-//	csi_pin_set_mux(PA07, PA07_EPI0);
-//	csi_pin_set_mux(PB013, PB013_EPI1);
-//	csi_pin_set_mux(PB03, PB03_EPI2);
-//	csi_pin_set_mux(PB02, PB02_EPI3);
+	csi_pin_set_mux(PA07, PA07_EPI0);
+	csi_pin_set_mux(PB013, PB013_EPI1);
+	csi_pin_set_mux(PB03, PB03_EPI2);
+	csi_pin_set_mux(PB02, PB02_EPI3);
 //------------------------------------------------------------------------------------------------------------------------	
 	csi_ept_pwmconfig_t tPwmCfg;								  
 	tPwmCfg.byWorkmod       = EPT_WAVE;                        //WAVE or CAPTURE    //计数或捕获	
@@ -422,7 +422,7 @@ int ept_pwm_dz_em_demo(void)
 //	csi_ept_set_evtrg(EPT0, EPT_TRG_OUT0, EPT_TRGSRC_EP2);    //EPx用trg0输出，
 //	csi_ept_int_enable(EPT0, EPT_INTSRC_TRGEV0,true);
 	
-	csi_ept_feglk_config_t  FEGLKcfg2;                                                                       //
+//	csi_ept_feglk_config_t  FEGLKcfg2;                                                                       //
 //	FEGLKcfg2.byPrdr	   = 1;                                                                                 //0x0  不链接
 //	FEGLKcfg2.byRssr    = 1;																                    //0x1  EPT0
 //	FEGLKcfg2.byCmpa    = 1;																					//0x2  GPTA0
