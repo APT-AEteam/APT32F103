@@ -19,12 +19,6 @@
 /* externs function---------------------------------------------------*/
 /* externs variablesr-------------------------------------------------*/
 /* Private variablesr-------------------------------------------------*/
-static uint8_t	s_byBtCtrl	= 0;
-static uint8_t	s_byIdleBk	= 0;			//idle level backup
-static uint8_t	s_byStaBk	= 0;			//start level backup
-static uint16_t	s_hwPscrVal	= 0;			//pscr value backup
-static uint32_t	s_wPrdrVal	= 0;			//prdr value backup
-static uint32_t	s_wCmpVal	= 0;			//cmp value backup
 
 
 /** \brief bt interrupt handle function
@@ -71,7 +65,6 @@ csi_error_t csi_bt_timer_init(csp_bt_t *ptBtBase, uint32_t wTimeOut)
 	if(0 == wTimeOut)
 		return CSI_ERROR;
 	
-	s_byBtCtrl =0;
 	csi_clk_enable(ptBtBase);													//bt clk enable
 	csp_bt_soft_rst(ptBtBase);													//reset bt
 	
@@ -113,10 +106,7 @@ void csi_bt_count_mode(csp_bt_t *ptBtBase, csi_bt_cntmode_e eCntMode)
  */ 
 void csi_bt_start(csp_bt_t *ptBtBase)
 {
-	if(0 == s_byBtCtrl)
-		csp_bt_start(ptBtBase);
-	else
-		csp_bt_stop(ptBtBase);
+	csp_bt_start(ptBtBase);
 }
 /** \brief stop bt
  * 
@@ -192,54 +182,33 @@ bool csi_bt_is_running(csp_bt_t *ptBtBase)
  */ 
 csi_error_t csi_bt_pwm_init(csp_bt_t *ptBtBase, csi_bt_pwm_config_t *ptBtPwmCfg)
 {
-	//uint32_t wClkDiv;
-	//uint32_t wCmpLoad; 
-	//uint32_t wPrdrLoad; 
+	uint32_t wClkDiv;
 	uint32_t wCrVal;
+	uint32_t wCmpLoad; 
+	uint32_t wPrdrLoad; 
 	
-	s_byBtCtrl = 1;
-	s_byIdleBk = ptBtPwmCfg->byIdleLevel;
-	s_byStaBk  = ptBtPwmCfg->byStartLevel;
-	
-	if(ptBtPwmCfg->byDutyCycle == 0)
-	{
-		if(ptBtPwmCfg->byStartLevel)
-			ptBtPwmCfg->byIdleLevel = BT_PWM_START_LOW;
-		else
-			ptBtPwmCfg->byIdleLevel = BT_PWM_START_HIGH;
-	}
-	else if(ptBtPwmCfg->byDutyCycle >= 100)
-	{
-		ptBtPwmCfg->byDutyCycle = 100;
-		
-		if(ptBtPwmCfg->byStartLevel)
-			ptBtPwmCfg->byIdleLevel = BT_PWM_START_HIGH;
-		else
-			ptBtPwmCfg->byIdleLevel = BT_PWM_START_LOW;
-	}
-	else
-	{
-		s_byBtCtrl = 0;
-		if(ptBtPwmCfg->wFreq == 0)
-			return CSI_ERROR;
-	}
+	if(ptBtPwmCfg->wFreq == 0)
+		return CSI_ERROR;
 	
 	csi_clk_enable((uint32_t *)ptBtBase);								//bt clk enable
 	csp_bt_soft_rst(ptBtBase);											//reset bt
 		
-	s_hwPscrVal = (csi_get_pclk_freq() / ptBtPwmCfg->wFreq / 30000);		//bt clk div value
-	if(s_hwPscrVal == 0)
-		s_hwPscrVal = 1;
+	wClkDiv = (csi_get_pclk_freq() / ptBtPwmCfg->wFreq / 30000);		//bt clk div value
+	if(wClkDiv == 0)
+		wClkDiv = 1;
 	
-	s_wPrdrVal  = csi_get_pclk_freq() / (s_hwPscrVal * ptBtPwmCfg->wFreq);	//prdr load value
-	s_wCmpVal = s_wPrdrVal * ptBtPwmCfg->byDutyCycle / 100;					//cmp load value	
+	wPrdrLoad  = csi_get_pclk_freq() / (wClkDiv * ptBtPwmCfg->wFreq);	//prdr load value
+	if(ptBtPwmCfg->byDutyCycle >= 100)
+		wCmpLoad = wPrdrLoad + 1;
+	else
+		wCmpLoad = wPrdrLoad * ptBtPwmCfg->byDutyCycle / 100;			//cmp load value	
+	
 	wCrVal = BT_CLK_EN | (BT_SHDOW << BT_SHDW_POS) | (BT_CONTINUOUS << BT_OPM_POS) | (BT_PCLKDIV << BT_EXTCKM_POS) |
 				(BT_CNTRLD_EN << BT_CNTRLD_POS) | (ptBtPwmCfg->byIdleLevel << BT_IDLEST_POS) | (ptBtPwmCfg->byStartLevel << BT_STARTST_POS);
-	
 	csp_bt_set_cr(ptBtBase, wCrVal);									//set bt work mode
-	csp_bt_set_pscr(ptBtBase, (uint16_t)s_hwPscrVal - 1);					//bt clk div
-	csp_bt_set_prdr(ptBtBase, (uint16_t)s_wPrdrVal);						//bt prdr load value
-	csp_bt_set_cmp(ptBtBase, (uint16_t)s_wCmpVal);						//bt cmp load value
+	csp_bt_set_pscr(ptBtBase, (uint16_t)wClkDiv - 1);					//bt clk div
+	csp_bt_set_prdr(ptBtBase, (uint16_t)wPrdrLoad);						//bt prdr load value
+	csp_bt_set_cmp(ptBtBase, (uint16_t)wCmpLoad);						//bt cmp load value
 	
 	if(ptBtPwmCfg->byInt)
 	{
@@ -269,42 +238,14 @@ void csi_bt_prdr_cmp_updata(csp_bt_t *ptBtBase, uint16_t hwPrdr, uint16_t hwCmp)
  */
 void csi_bt_pwm_duty_cycle_updata(csp_bt_t *ptBtBase, uint8_t byDutyCycle) 
 {
-	volatile uint32_t wCmpVal;		// = s_wPrdrVal * byDutyCycle /100;
-	uint8_t  byIdleLev = 0;
+	uint32_t wCmpLoad;			
 	
 	if(byDutyCycle >= 100)
-		byDutyCycle = 100;
+		wCmpLoad = csp_bt_get_prdr(ptBtBase) + 1;
+	else
+		wCmpLoad = csp_bt_get_prdr(ptBtBase) * byDutyCycle / 100;	
 	
-	switch(byDutyCycle)
-	{
-		case 0:
-			s_byBtCtrl =1;
-			if(s_byStaBk)
-				byIdleLev = BT_PWM_START_LOW;
-			else
-				byIdleLev = BT_PWM_START_HIGH;
-				
-			csp_bt_set_idlelev(ptBtBase, byIdleLev);
-			csp_bt_stop(ptBtBase);
-			csp_bt_set_cmp(ptBtBase, 0);
-			break;
-		case 100:
-			s_byBtCtrl =1;
-			csp_bt_set_idlelev(ptBtBase, s_byStaBk);
-			csp_bt_stop(ptBtBase);
-			csp_bt_set_cmp(ptBtBase, s_wPrdrVal);
-			break;
-		default:
-			wCmpVal = s_wPrdrVal * byDutyCycle /100;
-			csp_bt_set_cmp(ptBtBase, wCmpVal);
-			if(s_byBtCtrl)
-			{
-				csp_bt_set_idlelev(ptBtBase, s_byIdleBk);
-				csp_bt_start(ptBtBase);
-				s_byBtCtrl = 0;
-			}
-			break;
-	}
+	csp_bt_set_cmp(ptBtBase, (uint16_t)wCmpLoad);
 }
 
 /** \brief  updata bt pwm freq and duty cycle
@@ -316,58 +257,27 @@ void csi_bt_pwm_duty_cycle_updata(csp_bt_t *ptBtBase, uint8_t byDutyCycle)
  */
 csi_error_t csi_bt_pwm_updata(csp_bt_t *ptBtBase, uint32_t wFreq, uint8_t byDutyCycle) 
 {
-	uint8_t  byIdleLev = 0;
+	uint32_t wCmpLoad;
+	uint32_t wPrdrLoad; 
+	uint16_t hwClkDiv; 
 	
 	if(wFreq == 0)
 		return CSI_ERROR;
-		
+	
+	hwClkDiv = (csi_get_pclk_freq() / wFreq / 30000);		//bt clk div value
+	if(0 == hwClkDiv)
+		hwClkDiv = 1;
+
+	wPrdrLoad  = (csi_get_pclk_freq() / (hwClkDiv * wFreq));		//prdr value
+	
 	if(byDutyCycle >= 100)
-		byDutyCycle = 100;
-	
-	s_hwPscrVal = (csi_get_pclk_freq() / wFreq / 30000);		//bt clk div value
-	if(s_hwPscrVal == 0)
-		s_hwPscrVal = 1;
-	
-	s_wPrdrVal = (csi_get_pclk_freq() / (s_hwPscrVal * wFreq));
-	
-	switch(byDutyCycle)
-	{
-		case 0:
-			s_byBtCtrl =1;
-			if(s_byStaBk)
-				byIdleLev = BT_PWM_START_LOW;
-			else
-				byIdleLev = BT_PWM_START_HIGH;
-				
-			csp_bt_set_idlelev(ptBtBase, byIdleLev);
-			csp_bt_stop(ptBtBase);
-			
-			csp_bt_set_pscr(ptBtBase, s_hwPscrVal - 1);			//bt clk div
-			csp_bt_set_prdr(ptBtBase, s_wPrdrVal);				//bt prdr load value
-			csp_bt_set_cmp(ptBtBase, 0);						//bt cmp load value
-			break;
-		case 100:
-			s_byBtCtrl =1;
-			csp_bt_set_idlelev(ptBtBase, s_byStaBk);
-			csp_bt_stop(ptBtBase);
-			
-			csp_bt_set_pscr(ptBtBase, s_hwPscrVal - 1);			//bt clk div
-			csp_bt_set_prdr(ptBtBase, s_wPrdrVal);				//bt prdr load value
-			csp_bt_set_cmp(ptBtBase, 100);		
-			break;
-		default:
-			s_wCmpVal = s_wPrdrVal * byDutyCycle /100;
-			csp_bt_set_pscr(ptBtBase, s_hwPscrVal - 1);			//bt clk div
-			csp_bt_set_prdr(ptBtBase, s_wPrdrVal);				//bt prdr load value
-			csp_bt_set_cmp(ptBtBase, s_wCmpVal);	
-			if(s_byBtCtrl)
-			{
-				csp_bt_set_idlelev(ptBtBase, s_byIdleBk);
-				csp_bt_start(ptBtBase);
-				s_byBtCtrl = 0;
-			}
-			break;
-	}
+		wCmpLoad = wPrdrLoad + 1;
+	else
+		wCmpLoad = wPrdrLoad * byDutyCycle / 100;			//cmp load value	
+
+	csp_bt_set_pscr(ptBtBase, hwClkDiv - 1);				//bt clk div
+	csp_bt_set_prdr(ptBtBase, (uint16_t)wPrdrLoad);			//bt prdr load value
+	csp_bt_set_cmp(ptBtBase, (uint16_t)wCmpLoad);			//bt cmp load value
 
 	return CSI_OK;
 }
