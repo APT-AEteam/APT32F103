@@ -27,6 +27,7 @@ typedef enum{
 	LVD_33,
 	LVD_36,
 	LVD_39,
+	LVD_EXTIN_10,
 }csi_lvd_level_e;
 
 typedef enum {
