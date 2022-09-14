@@ -471,6 +471,7 @@ static csp_error_t apt_ifc_wr_nword(csp_ifc_t * ptIfcBase, uint8_t bFlashType, u
 			if (*(uint32_t *)(wPageStAddr+4*i) != wBuff[i]){
 				tRet = CSP_FAIL;
 				g_bFlashCheckPass = 0;
+				g_bFlashPgmDne = 1;
 				return tRet;
 			}
 		}

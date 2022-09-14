@@ -82,8 +82,17 @@ extern "C" {
 #define USART_RECV_MAX_LEN	128
 
 //FLASH
-#define PFLASH_PAGES		256
-#define DFLASH_PAGES		32
+
+#define PFLASHBASE			0x00000000  
+#define PFLASHSIZE			0x00014000  //80K
+#define PFLASHPAGE			320          
+#define PFLASHLIMIT			(PFLASHBASE + PFLASHSIZE) 
+#define USEROPTION_ADDR		0x000800C0
+#define DFLASHBASE			0x10000000
+#define DFLASHSIZE			0x00000C00 //3k
+#define DFLASHPAGE			48  
+#define DFLASHLIMIT 		(DFLASHBASE + DFLASHSIZE) 
+
 
 typedef enum {
 	
@@ -529,16 +538,6 @@ typedef enum{
 	SWD_GRP2
 }swd_grp_e;
 
-//APT32F103
-#define PFLASHBASE			0x00000000  
-#define PFLASHSIZE			0x00014000  //80K
-#define PFLASHPAGE			320          
-#define PFLASHLIMIT			(PFLASHBASE + PFLASHSIZE) 
-#define USEROPTION_ADDR		0x000800C0
-#define DFLASHBASE			0x10000000
-#define DFLASHSIZE			0x00001000 //4k
-#define DFLASHPAGE			64  
-#define DFLASHLIMIT 		(DFLASHBASE + DFLASHSIZE) 
 
 
 //APB for APT32F103
@@ -582,44 +581,6 @@ typedef enum{
 //#define CK801_ADDR_BASE  	0xE000E000	
 
 
-//--Interrupt Bit Position
-
-//#define CORET_INT					(0x01ul<<7U)					 					
-//#define SYSCON_INT					(0x01ul<<33U)
-//#define IFC_INT						(0x01ul<<34U)
-//#define ADC0_INT					(0x01ul<<35U)	
-//#define EPTA_INT					(0x01ul<<36U)	
-//#define DMA_INT   	  				(0x01ul<<37U)	
-//#define WWDT_INT					(0x01ul<<38U)
-//#define EXI0_INT					(0x01ul<<39U)
-//#define EXI1_INT					(0x01ul<<40U)	
-//#define GPTA0_INT					(0x01ul<<41U)	
-////#define DUMMY1_INT    			(0x01ul<<42U)
-////#define DUMMY2_INT    			(0x01ul<<43U)
-//#define RTC_INT						(0x01ul<<44U)
-//#define UART0_INT      				(0x01ul<<45U)
-//#define UART1_INT      				(0x01ul<<46U)
-//#define UART2_INT      				(0x01ul<<47U)
-//#define USART_INT    				(0x01ul<<48U)
-//#define I2C_INT    					(0x01ul<<49U)
-////#define DUMMY3_INT    			(0x01ul<<50U)
-//#define SPI0_INT					(0x01ul<<51U)
-//#define SIO0_INT					(0x01ul<<52U)
-//#define EXI2_INT    				(0x01ul<<53U)
-//#define EXI3_INT    				(0x01ul<<54U)
-//#define EXI4_INT    				(0x01ul<<55U)
-//#define CNTA_INT					(0x01ul<<56U)
-//#define TKEY_INT					(0x01ul<<57U)
-//#define LPT_INT						(0x01ul<<58U)
-////#define DUMMY4_INT    			(0x01ul<<59U)
-//#define BT0_INT      				(0x01ul<<60U)
-//#define BT1_INT      				(0x01ul<<61U)	
-////#define DUMMY5_INT    			(0x01ul<<62U)
-////#define DUMMY6_INT    			(0x01ul<<63U)
-
-//#define CONFIG_IRQ_NUM				32U
-//#define CK_CPU_ENALLNORMALIRQ		asm ("psrset ee,ie")
-//#define CK_CPU_DISALLNORMALIRQ		asm ("psrclr ie")
 #define CONFIG_IRQ_NUM				32U
 #define CK_CPU_ENALLNORMALIRQ		__enable_irq()
 #define CK_CPU_DISALLNORMALIRQ		__disable_irq()

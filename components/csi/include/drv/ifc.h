@@ -81,7 +81,7 @@ csi_error_t csi_ifc_pflash_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, ui
  *  \param[in] ptIfcBase：pointer of ifc register structure
  *  \param[in] wAddr：Data address (SHOULD BE WORD ALLIGNED)
  *  \param[in] pwData: data  Pointer to a buffer containing the data to be programmed to Flash.
- *  \param[in] wDataNum: Number of data(BYTES) items to program.
+ *  \param[in] wDataNum: Number of data(WORDS) items to program.
  *  \return error code
  */
 csi_error_t csi_ifc_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataNum);
@@ -93,7 +93,7 @@ csi_error_t csi_ifc_page_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t 
   \param[in]   ptIfcBase  pointer of ifc register structure.
   \param[in]   wAddr  Data address (SHOULD BE WORD ALLIGNED)
   \param[in]   data  Pointer to a buffer containing the data to be programmed to Flash.
-  \param[in]   wDataNum   Number of data(BYTES) items to program.
+  \param[in]   wDataNum   Number of data(WORDS) items to program.
   \return      error code
 */
 csi_error_t csi_ifc_program(csp_ifc_t *ptIfcBase, uint32_t wAddr, uint32_t *pwData, uint32_t wDataNum);
