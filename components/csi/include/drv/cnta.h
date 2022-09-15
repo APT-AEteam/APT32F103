@@ -166,7 +166,7 @@ void csi_cnta_pwm_para_updata(csp_cnta_t *ptCntaBase, uint16_t hwDatah, uint16_t
  */
 csi_error_t csi_cnta_bt0_sync(csp_cnta_t *ptCntaBase, csi_cnta_tcpend_e eTcPendRem, csi_cnta_tcmatch_e eTcMatchRem,csi_cnta_hw_updata_e eHwUpdata);
 
-
+void csi_swd_unlock(csp_syscon_t *ptSysconBase);
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
