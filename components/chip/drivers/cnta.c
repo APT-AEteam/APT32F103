@@ -71,13 +71,11 @@ csi_error_t csi_cnta_timer_init(csp_cnta_t *ptCntaBase,uint32_t wTimeOut)
     csp_cnta_soft_rst(ptCntaBase);
 	csp_cnta_set_ckdiv(ptCntaBase, byClkDiv);
 	csp_cnta_count_mode(ptCntaBase, CNTA_REPEAT_MODE);
-	
 	csp_cnta_set_datal(ptCntaBase, wTempLoad);
 	csp_cnta_set_datah(ptCntaBase, wTempLoad);
 	csp_cnta_soft_updata(ptCntaBase);	
 	csp_cnta_set_int(ptCntaBase, CNTA_PENDL_INT, true);
 	csi_irq_enable((uint32_t *)ptCntaBase);
-
 	csp_cnta_set_carrier(ptCntaBase, CNTA_CARRIER_EN);
 	csp_cnta_set_envelope(ptCntaBase,CNTA_CARRIER_OUT);
 	csp_cnta_set_carrier_start_level(ptCntaBase,CNTA_OSP_LOW);
@@ -194,17 +192,14 @@ csi_error_t csi_cnta_pwm_init(csp_cnta_t *ptCntaBase,csi_cnta_pwm_config_t *ptCn
 		
 	csp_cnta_set_ckdiv(ptCntaBase, CNTA_CK_DIV1);		//cnta clk = pclk/eClkDiv
 	csp_cnta_count_mode(ptCntaBase, CNTA_REPEAT_MODE);
-	
 	csp_cnta_set_carrier(ptCntaBase, CNTA_CARRIER_EN);
 	csp_cnta_set_envelope(ptCntaBase,CNTA_CARRIER_OUT);
 	csp_cnta_set_carrier_start_level(ptCntaBase,eOsp);
 	csp_cnta_set_carrier_stop_level(ptCntaBase,eRemStat);
-
 	csp_cnta_set_datah(ptCntaBase, wDatahLoad);
 	csp_cnta_set_datal(ptCntaBase, wDatalLoad);
 	csp_cnta_soft_updata(ptCntaBase);
 	csp_cnta_set_int(ptCntaBase, ptCntaPwmCfg->byInt, true);
-
 	return ret;
 }
 
@@ -240,7 +235,6 @@ csi_error_t csi_cnta_bt0_sync(csp_cnta_t *ptCntaBase, csi_cnta_tcpend_e eTcPendR
 	csp_cnta_set_btpend_rem_con(ptCntaBase, eTcPendRem);
 	csp_cnta_set_btmatch_rem_con(ptCntaBase,eTcMatchRem);
 	csp_cnta_set_hw_strobe_data(ptCntaBase,eHwUpdata);
-	
 	return CSI_OK;
 }
 
@@ -251,7 +245,8 @@ csi_error_t csi_cnta_bt0_sync(csp_cnta_t *ptCntaBase, csi_cnta_tcpend_e eTcPendR
  */ 
 __attribute__((weak)) void cnta_irqhandler(csp_cnta_t *ptCntaBase)
 {
-	
+	 //for(int i=100;i>0;i--);					//delay 100ms
+	//	csi_pin_toggle(PA09);				//PC01 toggle
 	//The time to enter the interrupt is: set in csi_cnta_timer_init
 	//add you code         
 }
