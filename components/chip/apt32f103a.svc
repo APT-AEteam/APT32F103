@@ -225,7 +225,7 @@
         <Bit Name="LVD_KEY" Authority="RW" Bits="31-16" Description="" />
         <Bit Name="LVDFLAG" Authority="RO" Bits="15" Description="LVD的当前状态查询&#xD;&#xA;0h：VDD 的当前电压高于 INTLVL 设置的检测阈值。&#xD;&#xA;1h：VDD 的当前电压低于 INTLVL 设置的检测阈值。" />
         <Bit Name="RSTLVL" Authority="RW" Bits="14-12" Description="低电压复位触发的电压选择。&#xD;&#xA;0h：1.9V&#xD;&#xA;1h：2.2V&#xD;&#xA;2h：2.5V&#xD;&#xA;3h：2.8V&#xD;&#xA;4h：3.1V&#xD;&#xA;5h：3.4V&#xD;&#xA;6h：3.7V&#xD;&#xA;7h：4.0V" />
-        <Bit Name="INTLVL" Authority="RW" Bits="10-8" Description="低电压检测中断触发电压选择。&#xD;&#xA;0h：2.4V&#xD;&#xA;1h：2.1V&#xD;&#xA;2h：2.7V&#xD;&#xA;3h：3.0V&#xD;&#xA;4h：3.3V&#xD;&#xA;5h：3.6V&#xD;&#xA;6h：3.9V&#xD;&#xA;注：比较电压为VDD电压和选择的电压进行比较。" />
+        <Bit Name="INTLVL" Authority="RW" Bits="10-8" Description="低电压检测中断触发电压选择。&#xD;&#xA;0h：2.4V&#xD;&#xA;1h：2.1V&#xD;&#xA;2h：2.7V&#xD;&#xA;3h：3.0V&#xD;&#xA;4h：3.3V&#xD;&#xA;5h：3.6V&#xD;&#xA;6h：3.9V&#xD;&#xA;7h：EXTIN_1.0V&#xD;&#xA;注1：比较电压为VDD电压和选择的电压进行比较。&#xD;&#xA;注2：EXTIN_1.0V，外部输入1.0V电压；使用时对应输入引脚选择ELVI复用功能" />
         <Bit Name="INTPOL" Authority="RW" Bits="7-6" Description="低电压检测中断触发的极性选择。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：当电压下降到低于LVDLVL(falling)设置时，触发中断。&#xD;&#xA;2h：当电压升高到超过LVDLVL(rising)设置时，触发中断。&#xD;&#xA;3h：当电压下降到低于或者升高到超过LVDLVL(both)时，触发中断。" />
         <Bit Name="LVDEN" Authority="RW" Bits="3-0" Description="使能/禁止LVD模块控制位。使能LVD模块后，当VDD电压低于RSTLVL设置值时，系统将产生低电压异常的复位。&#xD;&#xA;0Ah：禁止LVD模块。&#xD;&#xA;其他：使能LVD模块。" />
       </Register>
