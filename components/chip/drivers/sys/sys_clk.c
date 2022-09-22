@@ -195,7 +195,7 @@ uint32_t csi_get_sclk_freq(void)
 			tClkConfig.wSclk = ISOSC_VALUE;
 			break;
 		case (SRC_EMOSC): 	
-			tClkConfig.wSclk = EMOSC_32K_VALUE;
+			tClkConfig.wSclk = EMOSC_VALUE;
 			break;
 		case (SRC_IMOSC):	
 			wImoFreq = csp_get_imosc_fre(SYSCON);
