@@ -55,7 +55,7 @@ csi_error_t csi_tick_init(void)
 
 void csi_tick_uninit(void)
 {
-	csi_irq_enable((uint32_t *)BT3);	
+	csi_irq_disable((uint32_t *)BT3);	
 }
 
 uint32_t csi_tick_get(void)
