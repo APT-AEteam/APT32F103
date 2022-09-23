@@ -74,6 +74,7 @@ csi_error_t csi_cnta_timer_init(csp_cnta_t *ptCntaBase,uint32_t wTimeOut)
 	csp_cnta_set_datal(ptCntaBase, wTempLoad);
 	csp_cnta_set_datah(ptCntaBase, wTempLoad);
 	csp_cnta_soft_updata(ptCntaBase);	
+	apt_cnta_int_arrt_set(CLIC_INTATTR_TRIG_UP); 
 	csp_cnta_set_int(ptCntaBase, CNTA_PENDL_INT, true);
 	csi_irq_enable((uint32_t *)ptCntaBase);
 	csp_cnta_set_carrier(ptCntaBase, CNTA_CARRIER_EN);
