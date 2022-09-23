@@ -85,7 +85,7 @@ static void _500usdelay(void)
     uint32_t start = csp_bt_get_cnt(BT3);
     uint32_t load = csp_bt_get_prdr(BT3);
     uint32_t cur;
-    volatile  uint32_t cnt = ((long long)csi_get_pclk_freq()) / (csp_bt_get_pscr(BT3)+1) /2000U  ;
+    volatile  uint32_t cnt = csi_get_pclk_freq() / (csp_bt_get_pscr(BT3)+1) /2000U  ;
 
     while (1) {
         cur = csp_bt_get_cnt(BT3);
@@ -107,7 +107,7 @@ void _10udelay(void)
 {
     uint32_t start = csp_bt_get_cnt(BT3);
     uint32_t load  = csp_bt_get_prdr(BT3);
-    uint32_t cnt   = ((long long)csi_get_pclk_freq() /(csp_bt_get_pscr(BT3)+1) / 1000U / 100U);
+    uint32_t cnt   = (csi_get_pclk_freq() /(csp_bt_get_pscr(BT3)+1) / 1000U / 100U);
 
     while (1) {
         uint32_t cur = csp_bt_get_cnt(BT3);

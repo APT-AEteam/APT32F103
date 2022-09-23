@@ -289,7 +289,7 @@ void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase);
  *  \param[in] hwWindow: filtering window width
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffsetRate, uint16_t hwWindowRate);
+//csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffsetRate, uint16_t hwWindowRate);
 
 #ifdef __cplusplus
 }

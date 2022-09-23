@@ -20,7 +20,7 @@
 //extern system_clk_config_t g_tSystemClkConfig[];
 
 
-
+static uint32_t wTmLoad = 0,wClkDivn = 0;
 
 ///to match the real div to reg setting
 const uint32_t g_wHclkDiv[] = {
@@ -327,4 +327,64 @@ uint32_t soc_get_bt_freq(uint8_t byIdx)
 	}
 	
 	return csi_get_pclk_freq()/(csp_bt_get_pscr(bt_base) + 1);
+}
+
+/** \brief       timer set load times out
+ *  \param[in]   wTimeOut: the timeout, unit: us, 20us < wTimeOut < 3S
+ *  \return      none
+*/
+void apt_timer_set_load_value(uint32_t wTimesOut)
+{
+	if((csi_get_pclk_freq() % 1000000) == 0)
+	{
+		wClkDivn = csi_get_pclk_freq() / 1000000 * wTimesOut / 60000;		//bt clk div value
+		if(wClkDivn == 0)
+			wClkDivn  = 1;
+		wTmLoad = csi_get_pclk_freq() / 1000000 * wTimesOut / wClkDivn;	//bt prdr load value
+		if(wTmLoad > 0xffff)
+		{
+			wClkDivn += 1;
+			wTmLoad = csi_get_pclk_freq() / 1000000 * wTimesOut / wClkDivn ;	//bt prdr load value
+		}			
+	}
+	else if((csi_get_pclk_freq() % 4000) <= 2000)              //×î´ó5556000 
+	{
+		wClkDivn = csi_get_pclk_freq() / 4000 * wTimesOut / 250 / 60000;		//bt clk div value
+		if(wClkDivn == 0)
+			wClkDivn  = 1;
+		wTmLoad = csi_get_pclk_freq() / 4000 * wTimesOut / 250 / wClkDivn;	//bt prdr load value
+		if(wTmLoad > 0xffff)
+		{
+			wClkDivn += 1;
+			wTmLoad = csi_get_pclk_freq() / 4000 * wTimesOut / 250 / wClkDivn ;	//bt prdr load value
+		}				
+	}
+	else
+	{
+		wClkDivn = csi_get_pclk_freq() / 1000 * wTimesOut / 1000 / 60000;		//bt clk div value
+		if(wClkDivn == 0)
+			wClkDivn  = 1;
+		wTmLoad = csi_get_pclk_freq() / 1000 * wTimesOut / 1000 / wClkDivn;	//bt prdr load value
+		if(wTmLoad > 0xffff)
+		{
+			wClkDivn += 1;
+			wTmLoad = csi_get_pclk_freq() / 1000 * wTimesOut / 1000 / wClkDivn ;	//bt prdr load value
+		}
+	}
+}
+
+/** \brief       get timer prdr load value
+ *  \return      load prdr value 
+*/
+uint32_t apt_timer_get_prdrload_value(void)
+{
+	return wTmLoad;
+}
+
+/** \brief       get timer clk div
+ *  \return      clk div 
+*/
+uint32_t apt_timer_get_clkdiv_value(void)
+{
+	return wClkDivn;
 }
