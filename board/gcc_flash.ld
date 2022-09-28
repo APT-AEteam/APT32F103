@@ -59,18 +59,11 @@ SECTIONS {
 		. = ALIGN(0x4) ;
         *(.rodata) 
         *(.rodata.*)
-		. = ALIGN(0x4) ; 
-        _end_rodata = .;
-    } > REGION_RODATA
-	
-	/*.srodata :
-	{
-		. = ALIGN(0x4) ;
-        *(.srodata) 
+		*(.srodata) 
         *(.srodata.*)
 		. = ALIGN(0x4) ; 
         _end_rodata = .;
-	} > ROM */
+    } > REGION_RODATA
 	
     .data : 
     { 
@@ -81,6 +74,10 @@ SECTIONS {
 		
     	*( .data );
 		*( .data.* );
+		
+		*( .sdata );
+		*( .sdata.* );
+		
 		. = ALIGN(0x4) ;						/* Align the start of the section */
     	_end_data = .; 							/* Provide the name for the end of this section */
     } > REGION_DATA AT > REGION_RODATA			
