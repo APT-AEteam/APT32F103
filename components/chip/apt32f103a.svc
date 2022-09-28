@@ -225,7 +225,7 @@
         <Bit Name="LVD_KEY" Authority="RW" Bits="31-16" Description="" />
         <Bit Name="LVDFLAG" Authority="RO" Bits="15" Description="LVD的当前状态查询&#xD;&#xA;0h：VDD 的当前电压高于 INTLVL 设置的检测阈值。&#xD;&#xA;1h：VDD 的当前电压低于 INTLVL 设置的检测阈值。" />
         <Bit Name="RSTLVL" Authority="RW" Bits="14-12" Description="低电压复位触发的电压选择。&#xD;&#xA;0h：1.9V&#xD;&#xA;1h：2.2V&#xD;&#xA;2h：2.5V&#xD;&#xA;3h：2.8V&#xD;&#xA;4h：3.1V&#xD;&#xA;5h：3.4V&#xD;&#xA;6h：3.7V&#xD;&#xA;7h：4.0V" />
-        <Bit Name="INTLVL" Authority="RW" Bits="10-8" Description="低电压检测中断触发电压选择。&#xD;&#xA;0h：2.4V&#xD;&#xA;1h：2.1V&#xD;&#xA;2h：2.7V&#xD;&#xA;3h：3.0V&#xD;&#xA;4h：3.3V&#xD;&#xA;5h：3.6V&#xD;&#xA;6h：3.9V&#xD;&#xA;注：比较电压为VDD电压和选择的电压进行比较。" />
+        <Bit Name="INTLVL" Authority="RW" Bits="10-8" Description="低电压检测中断触发电压选择。&#xD;&#xA;0h：2.4V&#xD;&#xA;1h：2.1V&#xD;&#xA;2h：2.7V&#xD;&#xA;3h：3.0V&#xD;&#xA;4h：3.3V&#xD;&#xA;5h：3.6V&#xD;&#xA;6h：3.9V&#xD;&#xA;7h：EXTIN_1.0V&#xD;&#xA;注1：比较电压为VDD电压和选择的电压进行比较。&#xD;&#xA;注2：EXTIN_1.0V，外部输入1.0V电压；使用时对应输入引脚选择ELVI复用功能" />
         <Bit Name="INTPOL" Authority="RW" Bits="7-6" Description="低电压检测中断触发的极性选择。&#xD;&#xA;0h：无效。&#xD;&#xA;1h：当电压下降到低于LVDLVL(falling)设置时，触发中断。&#xD;&#xA;2h：当电压升高到超过LVDLVL(rising)设置时，触发中断。&#xD;&#xA;3h：当电压下降到低于或者升高到超过LVDLVL(both)时，触发中断。" />
         <Bit Name="LVDEN" Authority="RW" Bits="3-0" Description="使能/禁止LVD模块控制位。使能LVD模块后，当VDD电压低于RSTLVL设置值时，系统将产生低电压异常的复位。&#xD;&#xA;0Ah：禁止LVD模块。&#xD;&#xA;其他：使能LVD模块。" />
       </Register>
@@ -1559,7 +1559,6 @@
         <Bit Name="OSTMDx" Authority="RW" Bits="26-24" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。&#xD;&#xA;注：通道2不支持" />
         <Bit Name="AREARM1" Authority="RW" Bits="21-20" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC1触发REARM" />
         <Bit Name="AREARM0" Authority="RW" Bits="19-18" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC0触发REARM" />
-        <Bit Name="" Authority="RO" Bits="17" Description="" />
         <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
         <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
         <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
@@ -1632,7 +1631,6 @@
         <Bit Name="OSTMDx" Authority="RW" Bits="26-24" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。&#xD;&#xA;注：通道2不支持" />
         <Bit Name="AREARM1" Authority="RW" Bits="21-20" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC1触发REARM" />
         <Bit Name="AREARM0" Authority="RW" Bits="19-18" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC0触发REARM" />
-        <Bit Name="" Authority="RO" Bits="17" Description="" />
         <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
         <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
         <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
@@ -1705,7 +1703,6 @@
         <Bit Name="OSTMDx" Authority="RW" Bits="26-24" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。&#xD;&#xA;注：通道2不支持" />
         <Bit Name="AREARM1" Authority="RW" Bits="21-20" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC1触发REARM" />
         <Bit Name="AREARM0" Authority="RW" Bits="19-18" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC0触发REARM" />
-        <Bit Name="" Authority="RO" Bits="17" Description="" />
         <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
         <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
         <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />
@@ -1778,7 +1775,6 @@
         <Bit Name="OSTMDx" Authority="RW" Bits="26-24" Description="一次性同步触发模式选择。&#xD;&#xA;0h：连续触发模式&#xD;&#xA;1h：一次性触发模式&#xD;&#xA;当该输入通道被设置为一次性触发模式后，在一次触发事件被检测到后，该通道将不允许后续的触发事件通过，直到被软件重置（REARM）后才允许新的触发事件通过。&#xD;&#xA;注：通道2不支持" />
         <Bit Name="AREARM1" Authority="RW" Bits="21-20" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC1触发REARM" />
         <Bit Name="AREARM0" Authority="RW" Bits="19-18" Description="硬件自动REARM控制位。&#xD;&#xA;00：禁止硬件自动REARM&#xD;&#xA;x1：计数器周期结束时，自动REARM&#xD;&#xA;1x:  SYNC0触发REARM" />
-        <Bit Name="" Authority="RO" Bits="17" Description="" />
         <Bit Name="CNTRLD" Authority="RW" Bits="16" Description="硬件自动重载CNT值控制位。&#xD;&#xA;0：当CNT计数值等于PRDR时，CNT自动清零，重新开始计数。&#xD;&#xA;1：不进行CNT重载，计数器一直计数直到溢出后重新开始计数。" />
         <Bit Name="SYNCMD" Authority="RW" Bits="15" Description="同步触发结果控制位。&#xD;&#xA;0h：同步触发发生时，计数器重置并触发所有具有缓存（Shadow）的寄存器将缓存内容更新到活动寄存器中。&#xD;&#xA;1h：同步触发发生时，只是计数器重置。" />
         <Bit Name="REARM1" Authority="RW" Bits="13" Description="在一次性同步触发模式下，软件重置当前通道状态控制位。&#xD;&#xA;当读取时，返回当前通道状态&#xD;&#xA;0h：允许触发&#xD;&#xA;1h：已经检测到触发，不允许后续触发&#xD;&#xA;当写入时，&#xD;&#xA;0h：无效&#xD;&#xA;1h：清除当前通道状态，并允许新的触发" />

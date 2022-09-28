@@ -255,18 +255,12 @@ csi_error_t csi_gpta_timer_init(csp_gpta_t *ptGptaBase, uint32_t wTimeOut)
 	
 	csp_gpta_clken(ptGptaBase);
 	csp_gpta_wr_key(ptGptaBase);                                           //Unlocking
-	csp_gpta_reset(ptGptaBase);											// reset 
+	csp_gpta_reset(ptGptaBase);											   // reset 
 	
-	
-	wClkDiv = (long long)csi_get_pclk_freq() * wTimeOut / 1000000 / 60000;		//gpta clk div value
-	if(wClkDiv == 0)
-		wClkDiv  = 1;
-	wPrdrLoad = (long long)csi_get_pclk_freq() * wTimeOut / 1000000 / wClkDiv;	//gpta prdr load value
-	if(wPrdrLoad > 0xffff)
-	{
-		wClkDiv += 1;
-		wPrdrLoad = (long long)csi_get_pclk_freq() * wTimeOut / 1000000 / wClkDiv ;	//gpta prdr load value
-	}
+	apt_timer_set_load_value(wTimeOut);
+	wPrdrLoad = apt_timer_get_prdrload_value();
+	wClkDiv = apt_timer_get_clkdiv_value();
+
 	wCrVal =GPTA_UPCNT | (GPTA_SYNC_START<<GPTA_STARTSRC_POS) | (GPTA_WAVE<<GPTA_MODE_POS);
 	wCrVal=(wCrVal & ~(GPTA_PSCLD_MSK))   |((GPTA_LDPSCR_ZRO&0x03)   <<GPTA_PSCLD_POS);	
 

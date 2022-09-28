@@ -167,7 +167,7 @@
           <IP>localhost</IP>
           <PORT>1025</PORT>
           <CPUNumber>0</CPUNumber>
-          <Clock>50</Clock>
+          <Clock>10000</Clock>
           <Delay>10</Delay>
           <NResetDelay>100</NResetDelay>
           <WaitReset>50</WaitReset>

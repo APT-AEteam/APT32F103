@@ -626,6 +626,8 @@ void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase)
 	csp_lpt_trg_enable(ptLptBase, ENABLE);
 	csp_lpt_evswf_en(ptLptBase);
 }
+
+
 /** \brief lpt sync window config  
  * 
  *  \param[in] lpt: LPT handle to operate
@@ -635,24 +637,24 @@ void csi_lpt_soft_evtrg(csp_lpt_t *ptLptBase)
  *  \param hwWindow: window width, us
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffset, uint16_t hwWindow)
-{
-	uint32_t wOffset, wWindow;
-	
-	wOffset = (long long )csi_get_pclk_freq() * hwOffset / 1000000;
-	wWindow = (long long )csi_get_pclk_freq() * hwWindow / 1000000;
-	
-	if((wWindow > 0xffff) || (wOffset > 0xffff))
-		return CSI_ERROR;
-		
-	csp_lpt_sync_window_cross_enable(ptLptBase, bCrossEnable);
-	csp_lpt_sync_window_inv_enable(ptLptBase, bInvEnable);
-	
-	csp_lpt_set_sync_offset(ptLptBase, (uint16_t)wOffset);
-	csp_lpt_set_sync_window(ptLptBase, (uint16_t)wWindow);	
-	csp_lpt_sync_window_enable(ptLptBase, ENABLE);
-	
-	return CSI_OK;
+//csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, bool bInvEnable, uint16_t hwOffset, uint16_t hwWindow)
+//{
+//	uint32_t wOffset, wWindow;
+//	
+//	wOffset = (long long )csi_get_pclk_freq() * hwOffset / 1000000;
+//	wWindow = (long long )csi_get_pclk_freq() * hwWindow / 1000000;
+//	
+//	if((wWindow > 0xffff) || (wOffset > 0xffff))
+//		return CSI_ERROR;
+//		
+//	csp_lpt_sync_window_cross_enable(ptLptBase, bCrossEnable);
+//	csp_lpt_sync_window_inv_enable(ptLptBase, bInvEnable);
+//	
+//	csp_lpt_set_sync_offset(ptLptBase, (uint16_t)wOffset);
+//	csp_lpt_set_sync_window(ptLptBase, (uint16_t)wWindow);	
+//	csp_lpt_sync_window_enable(ptLptBase, ENABLE);
+//	
+//	return CSI_OK;
 //	
 //	hwOffset = wLptPrd * hwOffsetRate/100;
 //	hwWindow = wLptPrd * hwWindowRate/100;
@@ -667,5 +669,4 @@ csi_error_t csi_lpt_set_sync_window(csp_lpt_t *ptLptBase, bool bCrossEnable, boo
 //	
 //	csp_lpt_sync_window_enable(ptLptBase, ENABLE);
 
-
-}
+//}

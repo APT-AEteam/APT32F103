@@ -150,6 +150,12 @@ typedef enum
 	CNTA_PENDHL_INT		= (0x03ul << 0),
 }cnta_int_e;
 
+#define CLIC_INTATTR_TRIG_LEVE                  (0x0UL << CLIC_INTATTR_TRIG_Pos)  
+#define CLIC_INTATTR_TRIG_UP                    (0x1UL << CLIC_INTATTR_TRIG_Pos)  
+#define CLIC_INTATTR_TRIG_DOWN                  (0x3UL << CLIC_INTATTR_TRIG_Pos)  
+
+#define apt_cnta_int_arrt_set(x)                 CLIC->CLICINT[40].ATTR |= x
+
 /******************************************************************************
 ********************* CNTA inline Functions Declaration ***********************
 ******************************************************************************/
