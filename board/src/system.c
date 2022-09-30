@@ -38,9 +38,9 @@ void system_init(void)		//__attribute__((weak))
 	/* get interrupt level from info */
     CLIC->CLICCFG = (((CLIC->CLICINFO & CLIC_INFO_CLICINTCTLBITS_Msk) >> CLIC_INFO_CLICINTCTLBITS_Pos) << CLIC_CLICCFG_NLBIT_Pos);
 
-    for (i = 0; i < 64; i++) {
-        CLIC->CLICINT[i].IP = 0;
-        CLIC->CLICINT[i].ATTR = 1; /* use vector interrupt */
+    for (i = 0; i < IRQNUM; i++) {
+		CLIC->CLICINT[i].ATTR &= 0xfffffff9;	// tigger mode: level
+        CLIC->CLICINT[i].ATTR |= 1;  			// use vector interrupt
     }
 
 	csp_iwdt_disable(SYSCON);		//disable iwdt

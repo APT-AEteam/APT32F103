@@ -93,7 +93,7 @@ extern "C" {
 #define DFLASHPAGE			48  
 #define DFLASHLIMIT 		(DFLASHBASE + DFLASHSIZE) 
 
-
+#define IRQNUM				48
 typedef enum {
 	
 	NMI_EXP_NUM                     = -2,      /* NMI Exception */
