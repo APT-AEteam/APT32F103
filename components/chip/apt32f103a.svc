@@ -1920,8 +1920,8 @@
       </Register>
       <Register Name="GPTA_GLDCFG" Authority="RW" Address="0x40055018" Width="32" Description="全局载入配置">
         <Bit Name="AQCSF" Authority="RW" Bits="12" Description="AQCSF寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRB" Authority="RW" Bits="9" Description="AQCRB寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRA" Authority="RW" Bits="8" Description="AQCRA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR2" Authority="RW" Bits="9" Description="AQCR2寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR1" Authority="RW" Bits="8" Description="AQCR1寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="CMPB" Authority="RW" Bits="2" Description="CMPB寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="CMPA" Authority="RW" Bits="1" Description="CMPA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="PRDR" Authority="RW" Bits="0" Description="PRDR寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
@@ -1959,7 +1959,7 @@
         <Bit Name="LDAQ2MD" Authority="RW" Bits="1" Description="AQCR2寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
         <Bit Name="LDAQ1MD" Authority="RW" Bits="0" Description="AQCR1寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
       </Register>
-      <Register Name="GPTA_AQCRA" Authority="RW" Address="0x40055048" Width="32" Description="PWM1波形输出控制寄存器">
+      <Register Name="GPTA_AQCR1" Authority="RW" Address="0x40055048" Width="32" Description="PWM1波形输出控制寄存器">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道A上做出的波形输出动作定义。&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -1973,7 +1973,7 @@
         <Bit Name="PRD" Authority="RW" Bits="3-2" Description="当CNT值等于PRDR时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于PRDR时，计数方向为递减模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="ZRO" Authority="RW" Bits="1-0" Description="当CNT值等于零时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于零时，计数方向为递增模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
       </Register>
-      <Register Name="GPTA_AQCRB" Authority="RW" Address="0x4005504c" Width="32" Description="PWM2波形输出控制寄存器">
+      <Register Name="GPTA_AQCR2" Authority="RW" Address="0x4005504c" Width="32" Description="PWM2波形输出控制寄存器">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择。&#xD;&#xA;0h：CMPA寄存器作为CA的数据源。&#xD;&#xA;1h：CMPB寄存器作为CA的数据源。&#xD;&#xA;其他：保留。" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道B上做出的波形输出动作定义。&#xD;&#xA;0h：保持原来的输出（不动作）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -2183,10 +2183,10 @@
       <Register Name="GLDCFG" Authority="RW" Address="0x40059018" Width="32" Description="Global Load Configuration Register">
         <Bit Name="EMOSR" Authority="RW" Bits="13" Description="EMOSR寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="AQCSF" Authority="RW" Bits="12" Description="AQCSF寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRD" Authority="RW" Bits="11" Description="AQCRB寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRC" Authority="RW" Bits="10" Description="AQCRA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRB" Authority="RW" Bits="9" Description="AQCRB寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
-        <Bit Name="AQCRA" Authority="RW" Bits="8" Description="AQCRA寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR4" Authority="RW" Bits="11" Description="AQCR4寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR3" Authority="RW" Bits="10" Description="AQCR3寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR2" Authority="RW" Bits="9" Description="AQCR2寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
+        <Bit Name="AQCR1" Authority="RW" Bits="8" Description="AQCR1寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="DBCR" Authority="RW" Bits="7" Description="DBCR寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="DBDTF" Authority="RW" Bits="6" Description="DBDTF寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
         <Bit Name="DBDTR" Authority="RW" Bits="5" Description="DBDTR寄存器Shadow到Active寄存器载入控制。&#xD;&#xA;0：即使GLDEN=1，仍旧使用独立的载入配置&#xD;&#xA;1：当GLDEN=1时，使用全局载入配置" />
@@ -2242,15 +2242,15 @@
       </Register>
       <Register Name="AQLDR" Authority="RW" Address="0x40059044" Width="32" Description="Action Qualifier Load Control Register">
         <Bit Name="LDDMD" Authority="RW" Bits="15-13" Description="Shadow模式下，Active AQCRD从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="LDCMD" Authority="RW" Bits="12-10" Description="Shadow模式下，Active AQCRC从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWAQD" Authority="RW" Bits="9" Description="AQCRD寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
-        <Bit Name="SHDWAQC" Authority="RW" Bits="8" Description="AQCRC寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
-        <Bit Name="LDBMD" Authority="RW" Bits="7-5" Description="Shadow模式下，Active AQCRB从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="LDAMD" Authority="RW" Bits="4-2" Description="Shadow模式下，Active AQCRA从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
-        <Bit Name="SHDWAQB" Authority="RW" Bits="1" Description="AQCRB寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式I&#xD;&#xA;1h：mmediate模式" />
-        <Bit Name="SHDWAQA" Authority="RW" Bits="0" Description="AQCRA寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="LDCMD" Authority="RW" Bits="12-10" Description="Shadow模式下，Active AQCR3从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="SHDWAQ4" Authority="RW" Bits="9" Description="AQCR4寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="SHDWAQ3" Authority="RW" Bits="8" Description="AQCR3寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
+        <Bit Name="LDBMD" Authority="RW" Bits="7-5" Description="Shadow模式下，Active AQCR2从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="LDAMD" Authority="RW" Bits="4-2" Description="Shadow模式下，Active AQCR1从Shadow载入控制。&#xD;&#xA;xx1b：当CNT=ZRO时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;x1xb：当CNT=PRD时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;1xxb：外部LOAD触发或SYNC触发时，Shadow寄存器载入到Active寄存器中&#xD;&#xA;000b：不进行载入&#xD;&#xA;每个控制位分别对应一个触发条件，可以同时使能多个触发条件。例如，当设置011b时，CNT=ZRO或CNT=PRD时，都会触发寄存器载入。" />
+        <Bit Name="SHDWAQ2" Authority="RW" Bits="1" Description="AQCR2寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式I&#xD;&#xA;1h：mmediate模式" />
+        <Bit Name="SHDWAQ1" Authority="RW" Bits="0" Description="AQCR1寄存器的Shadow功能使能控制。&#xD;&#xA;0h：Shadow模式&#xD;&#xA;1h：Immediate模式" />
       </Register>
-      <Register Name="AQCRA" Authority="RW" Address="0x40059048" Width="32" Description="Action Qualifier Control Register A">
+      <Register Name="AQCR1" Authority="RW" Address="0x40059048" Width="32" Description="Action Qualifier Control Register A">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道A上做出的波形输出动作定义。&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -2264,7 +2264,7 @@
         <Bit Name="PRD" Authority="RW" Bits="3-2" Description="当CNT值等于PRDR时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于PRDR时，计数方向为递减模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="ZRO" Authority="RW" Bits="1-0" Description="当CNT值等于零时，在通道A上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于零时，计数方向为递增模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
       </Register>
-      <Register Name="AQCRB" Authority="RW" Address="0x4005904c" Width="32" Description="Action Qualifier Control Register B">
+      <Register Name="AQCR2" Authority="RW" Address="0x4005904c" Width="32" Description="Action Qualifier Control Register B">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道B上做出的波形输出动作定义。&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
@@ -2278,7 +2278,7 @@
         <Bit Name="PRD" Authority="RW" Bits="3-2" Description="当CNT值等于PRDR时，在通道B上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于PRDR时，计数方向为递减模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
         <Bit Name="ZRO" Authority="RW" Bits="1-0" Description="当CNT值等于零时，在通道B上做出的波形输出动作定义。&#xD;&#xA;在递增递减模式时，当计数器值等于零时，计数方向为递增模式&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
       </Register>
-      <Register Name="AQCRC" Authority="RW" Address="0x40059050" Width="32" Description="Action Qualifier Control Register C">
+      <Register Name="AQCR3" Authority="RW" Address="0x40059050" Width="32" Description="Action Qualifier Control Register C">
         <Bit Name="CBSEL" Authority="RW" Bits="23-22" Description="CB比较值数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="CASEL" Authority="RW" Bits="21-20" Description="CA比较值的数据源选择&#xD;&#xA;0h：CMPA寄存器作为CA的数据源&#xD;&#xA;1h：CMPB寄存器作为CA的数据源&#xD;&#xA;2h：CMPC寄存器作为CA的数据源&#xD;&#xA;3h：CMPD寄存器作为CA的数据源" />
         <Bit Name="T2D" Authority="RW" Bits="19-18" Description="当T2事件发生，且此时计数方向为递减时，在通道C上做出的波形输出动作定义。&#xD;&#xA;0h：不动作（过滤该处理事件）&#xD;&#xA;1h：清除输出（低电平）&#xD;&#xA;2h：置位输出（高电平）&#xD;&#xA;3h：反向（翻转）" />
