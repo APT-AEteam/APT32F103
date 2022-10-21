@@ -131,10 +131,10 @@ extern uint32_t g_wSystemClk;
 /** 
   \brief sysctem clock (HCLK) configuration
    To set CPU frequence according to tClkConfig
-  \param[in] none.
+  \param[in] tClkCfg：system clk.
   \return csi_error_t.
  */ 
-csi_error_t csi_sysclk_config(void);
+csi_error_t csi_sysclk_config(csi_clk_config_t tClkCfg);
 /** 
   \brief Clock output configuration
   \param[in] eCloSrc: source to output

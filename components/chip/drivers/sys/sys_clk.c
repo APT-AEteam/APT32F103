@@ -42,15 +42,15 @@ static uint32_t apt_get_hclk(void)
  *  \return csi_error_t.
  */ 
  
-csi_error_t csi_sysclk_config(void)
+csi_error_t csi_sysclk_config(csi_clk_config_t tClkCfg)
 {	csi_error_t ret = CSI_OK;
 	uint8_t byFreqIdx = 0;
 	uint32_t wFreq,wTargetSclk,wHFreq;
 	cclk_src_e eSrc;
 	uint8_t byFlashLp = 0;
-	wFreq = tClkConfig.wFreq;
-	wTargetSclk = wFreq/tClkConfig.eSdiv;
-	eSrc = tClkConfig.eClkSrc;
+	wFreq = tClkCfg.wFreq;
+	wTargetSclk = wFreq/tClkCfg.eSdiv;
+	eSrc = tClkCfg.eClkSrc;
 	wHFreq = apt_get_hclk();
 	
 	
@@ -79,8 +79,8 @@ csi_error_t csi_sysclk_config(void)
 				byFlashLp = 1;
 			break;
 		case (SRC_EMOSC):	
-			//csi_pin_set_mux(PA03, PA03_OSC_XI);
-			//csi_pin_set_mux(PA04, PA04_OSC_XO);
+//			csi_pin_set_mux(PA03, PA03_OSC_XI);
+//			csi_pin_set_mux(PA04, PA04_OSC_XO);
 			if (wFreq == EMOSC_32K_VALUE)
 				csp_set_em_lfmd(SYSCON, 1);
 			ret = csi_emosc_enable(wFreq);
@@ -113,11 +113,11 @@ csi_error_t csi_sysclk_config(void)
 			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK))| HIGH_SPEED | PF_WAIT3; //PF_WAIT2; WNN
 		else 
 			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK)) | HIGH_SPEED | PF_WAIT2;//PF_WAIT1; WNN
-		csp_set_sdiv(SYSCON, tClkConfig.eSdiv);
+		csp_set_sdiv(SYSCON, tClkCfg.eSdiv);
 		csp_set_clksrc(SYSCON, eSrc);
 	}
 	else {
-		csp_set_sdiv(SYSCON, tClkConfig.eSdiv);
+		csp_set_sdiv(SYSCON, tClkCfg.eSdiv);
 		csp_set_clksrc(SYSCON, eSrc);
 		IFC->CEDR = IFC_CLKEN;
 		IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK)) | LOW_SPEED | PF_WAIT0;
@@ -126,11 +126,11 @@ csi_error_t csi_sysclk_config(void)
 	
 	csp_eflash_lpmd_enable(SYSCON, (bool)byFlashLp);
 	
-	csp_set_pdiv(SYSCON, tClkConfig.ePdiv);
+	csp_set_pdiv(SYSCON, tClkCfg.ePdiv);
 	
 	//update wSclk and wPclk in tClkConfig
 	tClkConfig.wSclk = wHFreq;
-	tClkConfig.wPclk = tClkConfig.wSclk/(0x1<<tClkConfig.ePdiv);
+	tClkConfig.wPclk = tClkConfig.wSclk/(0x1<<tClkCfg.ePdiv);
 	return ret;
 }
 
@@ -347,7 +347,7 @@ void apt_timer_set_load_value(uint32_t wTimesOut)
 			wTmLoad = csi_get_pclk_freq() / 1000000 * wTimesOut / wClkDivn ;	//bt prdr load value
 		}			
 	}
-	else if((csi_get_pclk_freq() % 4000) <= 2000)              //×î´ó5556000 
+	else if((csi_get_pclk_freq() % 4000) <= 2000)              //Ã—Ã®Â´Ã³5556000 
 	{
 		wClkDivn = csi_get_pclk_freq() / 4000 * wTimesOut / 250 / 60000;		//bt clk div value
 		if(wClkDivn == 0)

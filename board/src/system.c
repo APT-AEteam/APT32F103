@@ -44,7 +44,7 @@ void system_init(void)		//__attribute__((weak))
     }
 
 	csp_iwdt_disable(SYSCON);		//disable iwdt
-	csi_sysclk_config();			//sysclk config
+	csi_sysclk_config(tClkConfig);			//sysclk config
 	csi_get_sclk_freq();			//get sysclk
 	csi_get_pclk_freq();			//get PCLK
 	csi_tick_init();                //init systick(BT3)

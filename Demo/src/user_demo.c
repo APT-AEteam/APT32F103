@@ -156,7 +156,7 @@ void user_demo(void)
 //	usart_recv_demo();
 //	usart_recv_int_demo();
 //	usart_recv_dynamic_demo();
-	usart_send_dma_demo();  
+//	usart_send_dma_demo();  
 //	usart_recv_dma_demo();
 //	
 //	lin_send_test();        
