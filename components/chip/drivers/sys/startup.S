@@ -10,7 +10,7 @@
  * @date     29. July 2019
  ******************************************************************************/
 //#include <csi_config.h>
-#define CONFIG_ARCH_INTERRUPTSTACK 2048	
+//#define CONFIG_ARCH_INTERRUPTSTACK 2048	
 	
 .section .vectors, "aw", @progbits
     .align  6
