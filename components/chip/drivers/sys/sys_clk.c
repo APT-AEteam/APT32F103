@@ -52,7 +52,7 @@ csi_error_t csi_sysclk_config(csi_clk_config_t tClkCfg)
 	wTargetSclk = wFreq/tClkCfg.eSdiv;
 	eSrc = tClkCfg.eClkSrc;
 	wHFreq = apt_get_hclk();
-	
+	csp_eflash_lpmd_enable(SYSCON, 0);			//disable Flash LP Mode	
 	
 	switch (eSrc)
 	{
