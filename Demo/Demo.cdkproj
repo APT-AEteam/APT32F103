@@ -17,6 +17,18 @@
     <VendorName>NULL</VendorName>
   </VendorInfo>
   <PackPathes>$(ProjectPath)/../components|$(ProjectPath)/../board|$(ProjectPath)/../Demo|</PackPathes>
+  <DebugSessions>
+    <watchExpressions/>
+    <memoryExpressions>;;;</memoryExpressions>
+    <statistics>E0011100;1;32;10;MHZ;E0011104</statistics>
+    <peripheralTabs>
+      <Tab disFormat="Hex">DMA</Tab>
+    </peripheralTabs>
+    <WatchDisplayFormat>0</WatchDisplayFormat>
+    <LocalDisplayFormat>0</LocalDisplayFormat>
+    <debugLayout/>
+    <memoryTabColSizeExpressions>100:8;100:8;100:8;100:8;</memoryTabColSizeExpressions>
+  </DebugSessions>
   <BuildConfigs>
     <BuildConfig Name="BuildSet">
       <Target>
@@ -188,6 +200,7 @@
           <RemoteICEEnablePCSampling>yes</RemoteICEEnablePCSampling>
           <RemoteICESamplingPort>1026</RemoteICESamplingPort>
           <Version>latest</Version>
+          <SupportRemoteICEAsyncDebug>no</SupportRemoteICEAsyncDebug>
         </ConfigICE>
         <ConfigSIM>
           <SIMTarget>soccfg/riscv32/smartl_902_v0.8.0_cfg.xml</SIMTarget>
@@ -224,16 +237,4 @@
       </Flash>
     </BuildConfig>
   </BuildConfigs>
-  <DebugSessions>
-    <watchExpressions/>
-    <memoryExpressions>;;;</memoryExpressions>
-    <statistics>E0011100;1;32;10;MHZ;E0011104</statistics>
-    <peripheralTabs>
-      <Tab disFormat="Hex">DMA</Tab>
-    </peripheralTabs>
-    <WatchDisplayFormat>0</WatchDisplayFormat>
-    <LocalDisplayFormat>0</LocalDisplayFormat>
-    <debugLayout/>
-    <memoryTabColSizeExpressions>100:8;100:8;100:8;100:8;</memoryTabColSizeExpressions>
-  </DebugSessions>
 </Project>

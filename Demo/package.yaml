@@ -7,6 +7,7 @@ hw_info:
   ld_script: ../board/gcc_flash.ld
   flash_program: ""
 def_config:
+  CONFIG_ARCH_INTERRUPTSTACK: 2048
   CONFIG_DEBUG_MODE: 1
   CONFIG_KERNEL_NONE: 1
   CONFIG_SUPPORT_TSPEND: 1
@@ -22,8 +23,8 @@ author:
 license: ""
 type: solution
 depends:
-  - apt32f103x_demo: v1.0.0
-  - sdk_103x: v1.0.0
+  - apt32f103x_demo: v0.0.0
+  - sdk_103x: v0.0.0
 build_config:
   include:
     - include
