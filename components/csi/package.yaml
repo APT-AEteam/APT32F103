@@ -1,5 +1,5 @@
 name: csi
-version: v1.0.0
+version: v0.0.0
 description: chip system interface.
 tag: 核心模块
 keywords:
@@ -15,14 +15,14 @@ build_config:
     - include
     - include/core
     - include/drv
-  internal_include: ~
+  internal_include: 
   cflag: -Os
   cxxflag: -Os
   asmflag: ""
   define:
     - include
-  libs: ~
-  libpath: ~
+  libs: 
+  libpath: 
 source_file:
   - src/*.c
 install:
@@ -36,14 +36,14 @@ install:
     source:
       - include/drv/*.h
 author: ""
-depends: ~
-defconfig: ~
+depends: 
+defconfig: 
 link_config:
-  path: ~
-  library: ~
-field: ~
-suitableChip: ~
-hidden: ~
-homepage: ~
-soc_config: ~
-depends_forward: ~
+  path: 
+  library: 
+field: 
+suitableChip: 
+hidden: 
+homepage: 
+soc_config: 
+depends_forward: 

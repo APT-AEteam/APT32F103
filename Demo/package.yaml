@@ -39,7 +39,7 @@ source_file:
   - src/main.c
   - src/user_demo.c
 depends_forward:
-  - apt32f103x_demo: v1.0.0
-  - sdk_103x: v1.0.0
+  - apt32f103x_demo: v0.0.0
+  - sdk_103x: v0.0.0
 install: 
 homepage: 

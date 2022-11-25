@@ -1,15 +1,15 @@
 name: apt32f103x_demo
-version: v1.0.0
+version: v0.0.0
 description: demo code for reference
 tag: ""
-keywords: ~
+keywords: 
 author:
   name: ""
 license: ""
-homepage: ~
+homepage: 
 type: common
-depends: ~
-yoc_version: ~
+depends: 
+yoc_version: 
 hw_info:
   cpu_id: ""
   cpu_name: ""
@@ -21,15 +21,15 @@ hw_info:
 build_config:
   include:
     - include
-  internal_include: ~
+  internal_include: 
   cflag: -O3  -g1
   cxxflag: -O3  -g1
   asmflag: ""
-  define: ~
-  libs: ~
-  libpath: ~
+  define: 
+  libs: 
+  libpath: 
 source_file:
   - src/*.c
-def_config: ~
-install: ~
-depends_forward: ~
+def_config: 
+install: 
+depends_forward: 

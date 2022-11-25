@@ -1,6 +1,6 @@
 ## 第一部分： 基础信息
 name: apt32f103x_evb
-version: v1.0.0
+version: v0.0.0
 description: apt32f173 board configure
 type: board
 yoc_version: V7.2.2
@@ -86,13 +86,13 @@ board:
 build_config:
   include:
     - include
-  internal_include: ~
+  internal_include: 
   cflag: -Og  -g  -Wall  -ffunction-sections -nostdlib -Wpointer-arith -Wl,-EL -fdata-sections -fdata-sections -g
   cxxflag: -Og  -g  -Wall  -ffunction-sections -nostdlib -Wpointer-arith -Wl,-EL -fdata-sections -fdata-sections -g
   asmflag: -Wa,--gdwarf2
-  define: ~
-  libs: ~
-  libpath: ~
+  define: 
+  libs: 
+  libpath: 
 #source_file:                              # <可选项> 指定参与编译的源代码文件，支持通配符，采用相对路径
 #   - src/*.c                              # 例：组件 src 目录下所有的扩展名为 c 的源代码文件                  
 ## 第五部分：配置信息
@@ -121,18 +121,18 @@ export:
   - dest: <SOLUTION_PATH>
     source:
       - bootimgs/danica_flash.elf
-keywords: ~
+keywords: 
 author: ""
-depends: ~
-defconfig: ~
+depends: 
+defconfig: 
 source_file:
   - src/*.c
   - gcc_flash.ld
 link_config:
-  path: ~
-  library: ~
-install: ~
-hidden: ~
-homepage: ~
-soc_config: ~
-depends_forward: ~
+  path: 
+  library: 
+install: 
+hidden: 
+homepage: 
+soc_config: 
+depends_forward: 
