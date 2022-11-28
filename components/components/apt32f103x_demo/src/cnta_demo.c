@@ -25,11 +25,12 @@
 
 /**
   \brief       counterA 定时中断示例
-  \return      int
+  \param[in]   none
+  \return      error code
 */
 int cnta_timer_demo(void)
 {	
-	int iRet = 0;
+	int iRet = CSI_OK;
 //  csi_pin_set_mux(PA011,PA011_CNTA_BUZ);//set counter output pin	该管脚的周期即为设置的时间
 //	csi_pin_set_mux(PA05,PA05_CNTA_BUZ);  //PA05为烧录管脚，调试该管脚功能时需修改烧录口管脚
   csi_pin_set_mux(PB01,PB01_CNTA_BUZ);
@@ -40,7 +41,7 @@ int cnta_timer_demo(void)
 //极限时间最大:byDivTemp=8 tmp_load=65533 代入得到 (8 / pclk) * (65533+3) *1000000*2 
 //当pclk确定后，如果设置的时间超出了范围，将会被设置成默认最大值
 //当pclk为48000000hz时，极限范围为0.167-21.845us  实际我们用到的是1-21845 us
-	csi_cnta_timer_init(CNTA,16000);//1000us 进入一次中断
+	iRet = csi_cnta_timer_init(CNTA,16000);//1000us 进入一次中断
 	csi_cnta_start(CNTA);
 	while(1)
 	{
@@ -51,11 +52,12 @@ int cnta_timer_demo(void)
 
 /**
   \brief       counterA pwm示例
-  \return      int
+  \param[in]   none
+  \return      error code
 */
 int cnta_pwm_demo(void)
 {		
-	int iRet = 0;
+	int iRet = CSI_OK;
 	csi_cnta_pwm_config_t tPwmCfg;
 	tPwmCfg.byStartLevel = CNTA_POLAR_LOW;		//开始极性(0:DATAL控制计数器A输出的低电平宽度 1:DATAL控制计数器A输出的高电平宽度)
 	tPwmCfg.byStopLevel = CNTA_STOP_LOW;    	 //结束极性低:用在CARRIERON为1，ENVELOPE为0时的条件下
@@ -74,7 +76,7 @@ int cnta_pwm_demo(void)
 //  csi_pin_set_mux(PB011,PB011_CNTA_BUZ);
 //	csi_pin_set_mux(PB012,PB012_CNTA_BUZ);
 	csi_cnta_pwm_init(CNTA,&tPwmCfg);
-	csi_cnta_bt0_sync(CNTA, CNTA_PEND_CARR_SET, CNTA_MATCH_CARR_CLR,CNTA_HW_DIS);//结合bt0的定时器和pwm示例，设置硬件自动打开或者关闭载波
+	iRet = csi_cnta_bt0_sync(CNTA, CNTA_PEND_CARR_SET, CNTA_MATCH_CARR_CLR,CNTA_HW_DIS);//结合bt0的定时器和pwm示例，设置硬件自动打开或者关闭载波
 	csi_cnta_start(CNTA);
  //  delay_ums(1000);
 

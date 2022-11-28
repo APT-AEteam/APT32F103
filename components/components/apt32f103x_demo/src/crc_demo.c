@@ -31,6 +31,7 @@ uint8_t byTransData[] = {0x4, 0x3, 0x2, 0x1, 0x8, 0x44, 0x33, 0x22, 0x11, 0x44, 
    *将数组byTransData中的数据进行各种模式的CRC计算，并判断计算结果。
    *CRC的计算结果可参考网址 http://www.ip33.com/crc.html ，该网址可输入数据和选择计算模式输出CRC结果，方便校验CRC模块输出结果。
    *
+  \param[in]   none 
   \return      csi_error_t
 */
 csi_error_t crc_demo(void)

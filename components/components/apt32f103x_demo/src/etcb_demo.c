@@ -23,10 +23,12 @@
 /* Private macro-----------------------------------------------------------*/
 /* Private variablesr------------------------------------------------------*/
 
-/*
- * 多个一对一触发模式
- *EXI1 		 --> BT_SYNC0 
- *BT0_TRGOUT --> LPT_SYNC0 
+/**
+*  \brief 多个一对一触发模式
+*	EXI1 		 --> BT_SYNC0 
+*	BT0_TRGOUT --> LPT_SYNC0 
+*  \param[in] none
+*  \return error code
 */
 int etcb_one_trg_one_demo0(void)
 {
@@ -72,9 +74,12 @@ int etcb_one_trg_one_demo0(void)
 	return iRet;
 }
 
-/*
- * 一对一触发模式
- *EPT --> ADC_SYNC0 
+
+/**
+*  \brief 一对一触发模式
+*	EPT --> ADC_SYNC0 
+*  \param[in] none
+*  \return error code
 */
 uint8_t  byAdcChnlNum;                                          //采样序列的通道数
 const csi_adc_seq_t SeqCfg1[] =
