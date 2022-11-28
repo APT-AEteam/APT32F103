@@ -470,35 +470,4 @@ int ept_pwm_dz_em_demo(void)
 	return iRet;
 };
 
-void load(void)
-{   
-	csi_ept_channel_aqload_config(EPT0, EPT_LD_IMM, EPT_LDCMP_ZRO ,EPT_CHANNEL_1);
-	csi_ept_channel_aqload_config(EPT0, EPT_LD_IMM, EPT_LDCMP_ZRO ,EPT_CHANNEL_2);
-	csi_ept_channel_aqload_config(EPT0, EPT_LD_IMM, EPT_LDCMP_ZRO ,EPT_CHANNEL_3);
-	csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));
-	csi_ept_pwmchannel_config_t  channel1;
-	channel1.byActionZro    =   LO;
-	channel1.byActionPrd    =   LO;
-	channel1.byActionC1u    =   LO;
-	channel1.byActionC1d    =   LO;
-	channel1.byActionC2u    =   LO;
-	channel1.byActionC2d    =   LO;
-	channel1.byActionT1u    =   LO;
-	channel1.byActionT1d    =   LO;
-	channel1.byActionT2u    =   LO;
-	channel1.byActionT2d    =   LO;
-	channel1.byChoiceC1sel  =   EPT_CMPA;
-	channel1.byChoiceC2sel  =   EPT_CMPA;	
-	csi_ept_channel_config(EPT0, &channel1,  EPT_CHANNEL_1);//channel
-//	channel.byChoiceC1sel  =   EPT_CMPB;
-//	channel.byChoiceC2sel  =   EPT_CMPB;
-	csi_ept_channel_config(EPT0, &channel1,  EPT_CHANNEL_2);
-//	channel.byChoiceC1sel  =   EPT_CMPC;
-//	channel.byChoiceC2sel  =   EPT_CMPC;
-	csi_ept_channel_config(EPT0, &channel1,  EPT_CHANNEL_3);
-//	channel.byChoiceC1sel  =   EPT_CMPD;
-//	channel.byChoiceC2sel  =   EPT_CMPD;
-	csi_ept_channel_config(EPT0, &channel1,  EPT_CHANNEL_4);
-	
-	csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
-}
+
