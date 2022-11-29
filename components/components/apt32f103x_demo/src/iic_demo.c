@@ -112,15 +112,15 @@ void iic_master_slave_demo(void)
 }
 
 /** \brief I2C从机示例代码
- *  \param[in] none
- *  \return none
- *	作为从机时需要在IIC中断里调用 i2c_irqhandler(I2C0) 函数；
+ *  作为从机时需要在IIC中断里调用 i2c_irqhandler(I2C0) 函数；
  * 	如下：
  *	void i2c_int_handler(void) 
  *	{
  *		// ISR content ...
  *		i2c_irqhandler(I2C0);
  *	}
+ *  \param[in] none
+ *  \return none
  */
 void iic_slave_demo(void)
 {

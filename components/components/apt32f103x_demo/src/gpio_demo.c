@@ -33,7 +33,7 @@
 #define		PINMASK_PB013		(0x01ul << 13)
 /* Private variablesr------------------------------------------------------*/
 
-/** \brief gpio port output demo 
+/** \brief gpio端口输出配置：普通输出，开漏输出和推挽输出
  * 
  *  \param[in] none
  *  \return error code
@@ -72,7 +72,7 @@ int gpio_port_ouput_demo(void)
 	return iRet;
 }
 
-/** \brief gpio port output demo 
+/** \brief gpio 端口输入配置：上拉，下拉和无上下拉
  * 
  *  \param[in] none
  *  \return error code
@@ -102,7 +102,7 @@ int gpio_port_input_demo(void)
 	return iRet;
 }
 
- /** \brief gpio port interrupt
+ /** \brief gpio 端口中断配置：下降沿触发
  * 
  *  \param[in] none
  *  \return error code

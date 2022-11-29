@@ -50,7 +50,7 @@ uint8_t	byDipData[24] =
 uint32_t	g_wSioRxBuf[24];		//接收缓存
 
 /** \brief sio rgb led demo
- *  \brief sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
+ *       - sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
  * 
  *  \param[in] none
  *  \return error code
@@ -102,7 +102,7 @@ int sio_led_rgb_demo(void)
 	return iRet;
 }
 /** \brief sio rgb led demo,use interrupt
- *  \brief sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
+ *   	 - sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
  * 
  *  \param[in] none
  *  \return error code
@@ -156,7 +156,7 @@ int sio_led_rgb_int_demo(void)
 	return iRet;
 }
 /** \brief sio rgb led demo,use dma send 
- *  \brief sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
+ *  	 - sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
  * 
  *  \param[in] none
  *  \return error code
@@ -245,8 +245,8 @@ int sio_led_rgb_send_dma_demo(void)
 	}
 }
 
-/** \brief sio rgb led demo,use dma send 
- *  \brief sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
+/** \brief sio rgb led demo,use dma recieve 
+ *  	 - sio 驱动RGB LED(ws2812), RGB DATA = 24bit; 驱动数据输出排列方式:GRB
  * 
  *  \param[in] none
  *  \return error code
@@ -320,7 +320,7 @@ int sio_led_rgb_recv_dma_demo(void)
 }
 
 /** \brief sio rgb led recv demo
- *  \brief sio 接收RGB LED驱动数据，采用RXFULL中断模式；每收到byRxBufLen个bit，产生中断
+ *  	 - sio 接收RGB LED驱动数据，采用RXFULL中断模式；每收到byRxBufLen个bit，产生中断
  * 
  *  \param[in] none
  *  \return error code
@@ -369,7 +369,7 @@ int sio_led_rgb_recv_rxfull_demo(void)
 }
 
 /** \brief sio rgb led recv demo
- *  \brief sio 接收RGB LED驱动数据，采用RXDNE中断模式；每收到byRxCnt个bit，产生中断；此中断效率大于RXBUFFULL中断
+ *  	 - sio 接收RGB LED驱动数据，采用RXDNE中断模式；每收到byRxCnt个bit，产生中断；此中断效率大于RXBUFFULL中断
  * 
  *  \param[in] none
  *  \return error code
@@ -414,7 +414,7 @@ int sio_led_rgb_recv_rxdone_demo(void)
 }
 
 /** \brief sio ti hdq send demo
- *  \brief sio 实现TI HDQ单线通讯协议，主机发送数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
+ *  	 - sio 实现TI HDQ单线通讯协议，主机发送数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
  * 
  *  \param[in] none
  *  \return error code
@@ -466,7 +466,7 @@ int sio_hdq_send_demo(void)
 }
 
 /** \brief sio ti hdq receive write cmd demo
- *  \brief sio 实现TI HDQ单线通讯协议，接收主机写命令数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
+ *  	 - sio 实现TI HDQ单线通讯协议，接收主机写命令数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
  * 
  *  \param[in] none
  *  \return error code
@@ -512,7 +512,7 @@ int sio_hdq_recv_wrcmd_demo(void)
 }
 
 /** \brief sio ti hdq send demo
- *  \brief sio 实现TI HDQ单线通讯协议，主机读取数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
+ *  	 - sio 实现TI HDQ单线通讯协议，主机读取数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
  * 
  *  \param[in] none
  *  \return error code
@@ -608,7 +608,7 @@ int sio_hdq_send_recv_demo(void)
 	return iRet;
 }
 /** \brief sio ti hdq receive write cmd demo
- *  \brief sio 实现TI HDQ单线通讯协议，接收主机读命令数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
+ *  	 - sio 实现TI HDQ单线通讯协议，接收主机读命令数据；数据传输方式LSB, 低7位是地址，最高位是R/W(0/1)控制位；一次传输两个字节
  * 
  *  \param[in] none
  *  \return error code

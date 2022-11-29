@@ -25,8 +25,7 @@
 
 
 /** \brief 示例lin发送完整数据帧
- *  \brief 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
- * 
+ *  \attention 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
  *  \param[in] none
  *  \return error code
  */
@@ -86,8 +85,7 @@ int lin_send_test(void)
 
 
 /** \brief 示例lin发送帧头，等待应答数据
- *  \brief 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
- * 
+ *  \attention 使用Lin demo时，请先打开interrupt.c中的lin_irqhandler 函数
  *  \param[in] none
  *  \return error code
  */

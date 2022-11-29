@@ -19,8 +19,8 @@
 /* externs variablesr------------------------------------------------------*/
 /* Private variablesr------------------------------------------------------*/
 
-/** \brief 函数示例LVD的配置方法
- * 
+/** \brief 函数示例LVD的配置
+ * 		-  VDD电压降到2.4V触发LVD中断
  *  \param[in] none
  *  \return error code
  */
@@ -28,7 +28,7 @@ void lvd_demo(void)
 {
 	uint8_t byLevel;
 	
-	csi_lvd_int_enable(LVD_INTFR,LVD_24);  //VDD掉电到3.0V即触发LVD中断
+	csi_lvd_int_enable(LVD_INTFR,LVD_24);  //VDD掉电到2.4V即触发LVD中断
 	byLevel = csi_get_lvdlevel();
 	
 	my_printf("lvd level: %d\n", byLevel); //执行board_init()对串口进行配置后才有打印
@@ -47,7 +47,8 @@ void lvd_demo(void)
 }
 
 /** \brief 函数示例LVR的配置方法,及复位源查询方式
- * 
+ * 		 - VDD电压降到4.0V，芯片会产生LVR复位
+ * 		 - 通过复位源寄存器（SYSCON->RSR），查看是否是LVR复位
  *  \param[in] none
  *  \return error code
  */
@@ -56,7 +57,7 @@ void lvr_demo(void)
 	uint8_t byLevel;
 	uint8_t byRstSrc;	
 
-	csi_lvr_enable(LVR_40);				  	//VDD掉电到2.8V，芯片复位	
+	csi_lvr_enable(LVR_40);				  	//VDD掉电到4.0V，芯片复位	
 	byLevel = csi_get_lvrlevel();
 	my_printf("lvr level: %d\n", byLevel);	//执行board_init()对串口进行配置后才有打印
 	byRstSrc = csi_get_rst_reason(); 		//查询复位源，值为csi_rst_rsr_e枚举量之一
@@ -68,7 +69,7 @@ void lvr_demo(void)
 /** \brief 内存检查的使用方法
  * 
  *  \param[in] none
- *  \return error code
+ *  \return none
  */
 void memorycheck_demo(void)
 {	
@@ -85,9 +86,10 @@ void memorycheck_demo(void)
 }
 
 /** \brief 外部主时钟监测的使用方法。必须外接晶振。
- * 
+ * 		 - 检测到外部晶振失常，触发中断/系统复位
+ *
  *  \param[in] none
- *  \return error code
+ *  \return none
  */
 void emcm_demo(void)
 {

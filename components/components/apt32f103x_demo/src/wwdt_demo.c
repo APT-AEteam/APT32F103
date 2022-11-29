@@ -19,6 +19,11 @@
 /* Private variablesr------------------------------------------------------*/
 
 
+/** \brief 窗口看门狗配置
+ * 
+ *  \param[in] none
+ *  \return error code
+ */
 csi_error_t wwdt_demo(void)
 {
 	volatile uint32_t temp1, temp2, temp3;	
