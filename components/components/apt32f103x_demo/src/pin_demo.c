@@ -56,8 +56,8 @@ int pin_output_demo(void)
 	return iRet;
 }
 
-/** \brief gpio pin output demo 
- * 
+/** \brief gpio 管脚输入模式
+ * 		 - 输入分别配置为：无上下拉，上拉和下拉
  *  \param[in] none
  *  \return error code
  */
@@ -86,8 +86,8 @@ int pin_input_demo(void)
 	return iRet;
 }
 
-/** \brief gpio pin output demo 
- * 
+/** \brief gpio 管脚中断配置 
+ * 		 - 管脚配置为下降沿产生中断
  *  \param[in] none
  *  \return error code
  */
@@ -104,8 +104,8 @@ int pin_irq_demo(void)
 	
 	return iRet;
 }
-/** \brief gpio pin ioremap demo 
- * 
+/** \brief gpio 管脚remap配置
+ * 		 - 将相应的IO配置为group0/group1的功能
  *  \param[in] none
  *  \return error code
  */
@@ -132,7 +132,7 @@ int pin_ioremap_demo(void)
 //	csi_pin_set_iomap(PA06, IOMAP0_SPI_SCK);
 //	csi_pin_set_iomap(PA07, IOMAP0_SPI_NSS);
 	
-	//IOMAP GROUP0
+	//IOMAP GROUP1
 //	csi_pin_set_iomap(PB02, IOMAP1_UART0_TX);
 //	csi_pin_set_iomap(PB03, IOMAP1_UART0_RX);
 //	csi_pin_set_iomap(PA08, IOMAP1_EPT_CHAX);

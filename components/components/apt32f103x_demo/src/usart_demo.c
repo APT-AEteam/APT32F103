@@ -26,7 +26,7 @@ uint8_t 	 g_byRxBuf1[USART_RECV_MAX_LEN];		//接收缓存
 volatile uint8_t byRvUsart[30]={0};
 
 /** \brief usart dma send data
- *  \brief USART通过DMA发送数据，确保ETCB模块初始化(使能)，etcb初始化函数：csi_etb_init()
+ *  	 - USART通过DMA发送数据
  * 
  *  \param[in] none
  *  \return error code
@@ -83,7 +83,7 @@ int usart_send_dma_demo(void)
 }
 
 /** \brief usart dma receive data
- *  \brief USART通过DMA接收数据，确保ETCB模块初始化(使能)，etcb初始化函数：csi_etb_init()
+ *  	 - USART通过DMA接收数据
  * 
  *  \param[in] none
  *  \return error code
@@ -138,7 +138,7 @@ int usart_recv_dma_demo(void)
 }
 
 /** \brief usart char receive and send 
- *  \brief USART接收/发送一个字符，轮询方式
+ *  	 - USART接收一个字符，并发送出去，轮询方式
  * 
  *  \param[in] none
  *  \return error code
@@ -181,7 +181,7 @@ int usart_char_demo(void)
 }
 
 /** \brief usart send a bunch of data; polling(sync,no interrupt)mode
- *  \brief USART发送一串数据，TX使用轮询
+ *  	 - USART发送一串数据，TX使用轮询
  * 
  *  \param[in] none
  *  \return error code
@@ -226,7 +226,7 @@ int usart_send_demo(void)
 }
 
 /** \brief usart send a bunch of data; interrupt(nsync) mode
- *  \brief USART发送一串数据，TX使用中断
+ *  	 - USART发送一串数据，TX使用中断
  * 
  *  \param[in] none
  *  \return error code
@@ -286,7 +286,9 @@ int usart_send_int_demo(void)
 	return iRet;	
 }
 /** \brief usart receive a bunch of data; interrupt(async) mode
- *  \brief USART接收到一串字符串，RX使用中断模式，TX不使用中断
+ *       - USART接收到一串字符串，并发送出去。
+ * 		 - RX使用中断模式，TX不使用中断
+ * 		 - 数据长度不定
  *
  *  \param[in] none
  *  \return error code
@@ -340,7 +342,8 @@ int usart_recv_dynamic_demo(void)
 }
 
 /** \brief usart receive assign(fixed) length data; interrupt(async) mode
- *  \brief USART接收指定长度数据，RX使用中断，TX不使用中断
+ *       - USART接收指定长度数据，长度由变量hwRecvNum指定
+ * 		 - RX使用中断，TX不使用中断
  * 
  *  \param[in] none
  *  \return error code
@@ -400,7 +403,9 @@ int usart_recv_int_demo(void)
 	return iRet;
 }
 /** \brief usart receive a bunch of data; polling(sync) mode
- *  \brief USART接收指定长度数据，RX使用轮询(不使用中断)，带超时处理(单位：ms)
+ *  	 - USART接收指定长度数据（16）
+ * 		 - RX使用轮询(不使用中断)
+ * 		 - 带超时处理(单位：ms)，超时时间通过tUsartCfg.hwRecvTo配置
  * 
  *  \param[in] none
  *  \return error code

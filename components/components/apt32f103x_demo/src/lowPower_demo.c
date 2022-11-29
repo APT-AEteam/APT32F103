@@ -36,15 +36,7 @@ uint8_t *bypSramAddr = (uint8_t *)0x20002000;
 
 volatile uint8_t byExiFlg = 0x00;
 
-static void delay_nms(unsigned int t)
-{
-	volatile unsigned int i,j ,k=0;
-	j = 25* t;
-	for ( i = 0; i < j; i++ )
-	{
-		k++;
-	}
-}
+
 /** \brief 进入低功耗模式前的准备动作
  *  \param[in] none
  *  \return error code
@@ -63,17 +55,6 @@ void wkup_lp(void)
 	//USER CODE，如恢复管脚状态
 	csi_pin_set_low(PB02);
 }
-
-void delay_ms(unsigned int t)
-{
-	volatile unsigned int i,j ,k=0;
-	j = 25* t;
-	for ( i = 0; i < j; i++ )
-	{
-		k++;
-	}
-}
-
 
 
 /** \brief 通过LPT唤醒DEEPSLEEP模式
@@ -143,8 +124,9 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 	}
 }
 
-/** \brief 各种源唤醒低功耗的示例代码，低功耗的模式=sleep/deepsleep
- * 
+/** \brief 各种源唤醒低功耗的示例代码
+ * 		 - 唤醒源分别可配置为：外部中断/LVD/LPT/RTC/iwdt
+ * 		 - 低功耗的模式为：sleep/deepsleep
  *  \param  none
  *  \return none
  */
@@ -251,8 +233,8 @@ void lp_wakeup_demo(void)
 }
 
 /** \brief write sram1
- *  \param[in] none
- *  \return error code
+ *  \param[in] byWrData 待写入数据
+ *  \return none
  */
 static void write_sram1(uint8_t byWrData)
 {
@@ -276,6 +258,12 @@ static void write_sram1(uint8_t byWrData)
 	else
 		my_printf("Write Sram1 Data = 0x%x Success!\n", byWrData);
 }
+
+
+/** \brief read sram1
+ *  \param[in] byData sram中写入的数据
+ *  \return none
+ */
 
 static void read_sram1(uint8_t byData)
 {

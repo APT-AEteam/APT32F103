@@ -222,8 +222,9 @@ void rtc_timer_demo(void)
 }
 
 
-/** \brief 示例RTC通过ETCB触发BT工作，AlarmA触发BT0 PWM输出、AlarmB触发BT1 PWM输出
- * 
+/** \brief 示例RTC通过ETCB触发BT工作
+ * 		 - AlarmA触发BT0 PWM输出
+ * 		 - AlarmB触发BT1 PWM输出
  * 
  *  \param[in] none
  *  \return    none
