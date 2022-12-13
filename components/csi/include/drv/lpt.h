@@ -47,7 +47,7 @@ typedef enum{
 
 typedef enum
 {
-	LPT_TRGOUT0	= 0,  		   
+	LPT_TRGOUT	= 0,  		   
 }csi_lpt_trgout_e;
 
 typedef enum
@@ -255,6 +255,15 @@ csi_error_t csi_lpt_rearm_sync(csp_lpt_t *ptLptBase, uint8_t bySync);
  *  \return error code \ref csi_error_t
  */
 csi_error_t csi_lpt_set_evtrg(csp_lpt_t *ptLptBase, csi_lpt_trgout_e eTrgOut, csi_lpt_trgsrc_e eTrgsrc, uint8_t byTrgprd);
+
+/** \brief lpt evtrg output enable/disable
+ * 
+ *  \param[in] ptLptBase: pointer of lpt register structure
+ *  \param[in] eTrgOut: lpt evtrg out port (0)
+ *  \param[in] bEnable: ENABLE/DISABLE
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_lpt_evtrg_enable(csp_lpt_t *ptLptBase, csi_lpt_trgout_e eTrgOut, bool bEnable);
 
 /** \brief lpt set frequency 
  * 

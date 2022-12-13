@@ -25,8 +25,8 @@
 static void apt_rtc_alm_set_time(csp_rtc_t *ptRtc, csi_rtc_alarm_e eAlm, uint8_t wday, csi_rtc_ampm_e ePm, uint8_t byHor, uint8_t byMin,uint8_t bySec);
 static csp_error_t apt_rtc_set_time(csp_rtc_t *ptRtc, csi_rtc_ampm_e ePm, uint8_t byHor, uint8_t byMin,uint8_t bySec);
 static csp_error_t apt_rtc_set_date(csp_rtc_t *ptRtc, uint8_t byYear, uint8_t byMon, uint8_t byWday, uint8_t byDay);
-csp_error_t apt_rtc_set_trgsrc(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eTrg, csp_rtc_trgsrc_e eSrc);
-csp_error_t apt_rtc_set_trgprd(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eTrg, uint8_t byPrd);
+csp_error_t apt_rtc_set_trgsrc(csp_rtc_t *ptRtc, csi_rtc_trgout_e eTrg, csp_rtc_trgsrc_e eSrc);
+csp_error_t apt_rtc_set_trgprd(csp_rtc_t *ptRtc, csi_rtc_trgout_e eTrg, uint8_t byPrd);
 
 /* externs variablesr------------------------------------------------------*/
 
@@ -445,7 +445,7 @@ uint32_t csi_rtc_get_alarm_remaining_time(csp_rtc_t *ptRtc, csi_rtc_alarm_e eAlm
  *  \param[in] byTrgPrd: event count period 
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_rtc_set_evtrg(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eEvtrg, csi_rtc_trgsrc_e eTrgSrc, uint8_t byTrgPrd)
+csi_error_t csi_rtc_set_evtrg(csp_rtc_t *ptRtc, csi_rtc_trgout_e eEvtrg, csi_rtc_trgsrc_e eTrgSrc, uint8_t byTrgPrd)
 {
 	
 	csi_error_t ret = CSI_OK;
@@ -457,6 +457,22 @@ csi_error_t csi_rtc_set_evtrg(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eEvtrg, csi_rtc
 	return ret;
 }
 
+/** \brief rtc evtrg output enable/disable
+ * 
+ *  \param[in] ptRtc: pointer of rtc register structure
+ *  \param[in] eTrgOut: rtc evtrg out port (0~1)
+ *  \param[in] bEnable: ENABLE/DISABLE
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_rtc_evtrg_enable(csp_rtc_t *ptRtc, csi_rtc_trgout_e eTrgOut, bool bEnable)
+{
+	if(eTrgOut <= RTC_TRGOUT1)
+		ptRtc->EVTRG = (ptRtc->EVTRG & ~RTC_TRGOE_MSK(eTrgOut)) | (bEnable << RTC_TRGOE_POS(eTrgOut));
+	else
+		return CSI_ERROR;
+		
+	return CSI_OK;
+}
 
 //*****************************************************************************//
 
@@ -534,11 +550,11 @@ static void apt_rtc_alm_set_time(csp_rtc_t *ptRtc, csi_rtc_alarm_e eAlm, uint8_t
 
 
 
-csp_error_t apt_rtc_set_trgsrc(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eTrg, csp_rtc_trgsrc_e eSrc)
+csp_error_t apt_rtc_set_trgsrc(csp_rtc_t *ptRtc, csi_rtc_trgout_e eTrg, csp_rtc_trgsrc_e eSrc)
 {
-	if(eTrg == RTC_TRGSEL0)
+	if(eTrg == RTC_TRGOUT0)
 		ptRtc -> EVTRG = (ptRtc->EVTRG & ~(RTC_TRGSEL0_MSK)) | eSrc | RTC_TRGSEL0_EN;
-	else if(eTrg == RTC_TRGSEL1)
+	else if(eTrg == RTC_TRGOUT1)
 		ptRtc -> EVTRG = (ptRtc->EVTRG & ~(RTC_TRGSEL1_MSK)) | (eSrc << RTC_TRGSEL1_POS) | RTC_TRGSEL1_EN;
 	else
 		return CSP_FAIL;
@@ -546,11 +562,11 @@ csp_error_t apt_rtc_set_trgsrc(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eTrg, csp_rtc_
 }
 
 
-csp_error_t apt_rtc_set_trgprd(csp_rtc_t *ptRtc, csi_rtc_trgsel_e eTrg, uint8_t byPrd)
+csp_error_t apt_rtc_set_trgprd(csp_rtc_t *ptRtc, csi_rtc_trgout_e eTrg, uint8_t byPrd)
 {	
-	if(eTrg == RTC_TRGSEL0)
+	if(eTrg == RTC_TRGOUT0)
 		ptRtc -> EVPS = (ptRtc->EVPS & ~(RTC_TRGEV0PRD_MSK)) | byPrd ;
-	else if(eTrg == RTC_TRGSEL1)
+	else if(eTrg == RTC_TRGOUT1)
 		ptRtc -> EVPS = (ptRtc->EVPS & ~(RTC_TRGSEL1_MSK)) | (byPrd << RTC_TRGEV1PRD_POS);
 	else
 		return CSP_FAIL;

@@ -328,7 +328,7 @@ csi_error_t csi_lpt_rearm_sync(csp_lpt_t *ptLptBase, uint8_t bySync)
 /** \brief lpt evtrg source output config  
  * 
  *  \param[in] ptLptBase:pointer of lpt register structure
- *  \param[in] eTrgOut: LPT_TRGOUT0
+ *  \param[in] eTrgOut: LPT_TRGOUT
  *  \param[in] eTrgsrc: lpt evtrg source(1~4) 
  *  \param[in] byTrgprd: event count period 
  *  \return error code \ref csi_error_t
@@ -347,6 +347,24 @@ csi_error_t csi_lpt_set_evtrg(csp_lpt_t *ptLptBase, csi_lpt_trgout_e eTrgOut, cs
 	
 	return ret;
 }
+
+/** \brief lpt evtrg output enable/disable
+ * 
+ *  \param[in] ptLptBase: pointer of lpt register structure
+ *  \param[in] eTrgOut: lpt evtrg out port (0)
+ *  \param[in] bEnable: ENABLE/DISABLE
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_lpt_evtrg_enable(csp_lpt_t *ptLptBase, csi_lpt_trgout_e eTrgOut, bool bEnable)
+{
+	if(eTrgOut == LPT_TRGOUT)
+		csp_lpt_trg_enable(ptLptBase, bEnable);
+	else
+		return CSI_ERROR;
+		
+	return CSI_OK;
+}
+
 /** \brief lpt set frequency 
  * 
  *  \param[in] ptLptBase:pointer of lpt register structure

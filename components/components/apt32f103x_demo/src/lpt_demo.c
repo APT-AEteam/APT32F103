@@ -139,7 +139,7 @@ int lbt_trg_out_demo(void)
 	csi_etb_config_t tEtbConfig;				    				//ETB 参数配置结构体
 
 	csi_lpt_timer_init(LPT,LPT_CLK_PCLK_DIV4,50);   				//初始化lpt,选用内部超低功耗时钟,定时50ms,默认采用PEND中断
-	csi_lpt_set_evtrg(LPT, LPT_TRGOUT0, LPT_TRGSRC_CMP, 1);
+	csi_lpt_set_evtrg(LPT, LPT_TRGOUT, LPT_TRGSRC_CMP, 1);
 	
 	csi_bt_timer_init(BT1,5000);									//BT定时1ms
 	csi_bt_set_sync(BT1, BT_TRG_SYNCIN0, BT_TRG_ONCE, DISABLE);	//外部触发bt启动(SYNCIN0)
