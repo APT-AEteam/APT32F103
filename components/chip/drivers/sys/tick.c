@@ -66,11 +66,11 @@ uint32_t csi_tick_get(void)
 uint32_t csi_tick_get_ms(void)
 {
     uint32_t time;
-	uint16_t cnttm;
+	uint32_t cnttm;
 	
     while (1) 
 	{
-		cnttm = (csp_bt_get_cnt(BT3) * (csp_bt_get_pscr(BT3)+1) * 1000) / csi_get_pclk_freq();
+		cnttm = (csp_bt_get_cnt(BT3) * (csp_bt_get_pscr(BT3)+1)) / csi_get_pclk_freq() / 1000U;
 		time = (csi_tick * (1000U / CONFIG_SYSTICK_HZ))+ cnttm;
         if (time >= last_time_ms) 
             break;
