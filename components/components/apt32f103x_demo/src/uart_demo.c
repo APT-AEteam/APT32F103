@@ -270,9 +270,8 @@ int uart_receive_demo(void)
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
 	tUartConfig.hwRecvTo = 88;					//UART接收超时时间，单位：bit位周期，8个bytes(11bit*8=88, 115200波特率时=764us)
-	tUartConfig.bRecvToEn = DISABLE;					//禁止接收超时
+	tUartConfig.bRecvToEn = DISABLE;			//禁止接收超时
 	tUartConfig.wInt = UART_INTSRC_NONE;		//串口中断关闭
-	
 	tUartConfig.byTxMode = UART_TX_MODE_POLL;	//发送 轮询模式
 	tUartConfig.byRxMode = UART_RX_MODE_POLL;	//接收 轮询模式
 	
@@ -281,8 +280,8 @@ int uart_receive_demo(void)
 	
 	while(1)
 	{
-		byRecv = csi_uart_receive(UART1,byRecvData,16,2000);	//UART接收采用轮询方式(同步)	
-		if(byRecv  == 16)
+		byRecv = csi_uart_receive(UART1,byRecvData,16,1000);	//UART接收采用轮询方式(同步)	
+		if(byRecv == 16)
 			csi_uart_send(UART1,(void *)byRecvData,byRecv);		//UART发送采用轮询方式(同步)	
 	}
 	
@@ -301,7 +300,6 @@ void uart_irqhandler(csp_uart_t *ptUartBase,uint8_t byIdx)
 	{
 		case UART_RXFIFO_INT_S:		
 			//使用RXFIFO中断接收数据
-			csp_uart_rto_en(ptUartBase);									//使能接收超时(若需要进字节接收超时中断，需使能)	
 			while(csp_uart_get_sr(ptUartBase) & UART_RNE)					//接收FIFO非空
 			{
 				s_byRecvBuf[s_byRecvLen] = csp_uart_get_data(ptUartBase);
@@ -315,7 +313,6 @@ void uart_irqhandler(csp_uart_t *ptUartBase,uint8_t byIdx)
 			break;
 		case UART_RX_INT_S:
 			//使用RX中断接收数据			
-			//csp_uart_rto_en(ptUartBase);									//使能接收超时(若需要进字节接收超时中断，需使能)		
 			csp_uart_clr_isr(ptUartBase, UART_RX_INT_S);					//清除中断标志(状态)
 			s_byRecvBuf[s_byRecvLen] = csp_uart_get_data(ptUartBase);
 			s_byRecvLen ++;
@@ -341,21 +338,25 @@ void uart_irqhandler(csp_uart_t *ptUartBase,uint8_t byIdx)
 		case UART_RXTO_INT_S:
 			//字节接收超时中断，可以作为一串字符是否结束的依据，若使用此功能，需在接收数据时使能接收超时
 			//用户添加自己的处理
-			csp_uart_clr_isr(ptUartBase, UART_RXTO_INT_S);					//清除中断状态							
-			csp_uart_rto_dis(ptUartBase);									//关闭接收超时	
+			while(csp_uart_get_sr(ptUartBase) & UART_RNE)
+			{
+				s_byRecvBuf[s_byRecvLen] = csp_uart_get_data(ptUartBase);
+				s_byRecvLen ++;
+			}
+			csp_uart_clr_isr(ptUartBase, UART_RXTO_INT_S);		//清除中断标志(状态)
+			csp_uart_rto_en(ptUartBase);						//使能字节接收超时
 			break;
 		default:
 			break;
 	}
 }
 
-/** \brief uart receive assign(fixed) length data; interrupt(async) mode
- *  \brief 串口接收指定长度数据，RX使用中断，TX不使用中断
+/** \brief 串口接收中断，RX使用接收中断，TX不使用中断
  * 
  *  \param[in] none
  *  \return error code
  */
-int uart_recv_int_demo(void)
+int uart_recv_rx_int_demo(void)
 {
 	int iRet = 0;
 	csi_uart_config_t tUartConfig;				//UART1 参数配置结构体
@@ -367,7 +368,7 @@ int uart_recv_int_demo(void)
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
 	tUartConfig.hwRecvTo = 88;					//UART接收超时时间，单位：bit位周期，8个bytes(11bit*8=88, 115200波特率时=764us)
-	tUartConfig.bRecvToEn = DISABLE;					//禁止接收超时
+	tUartConfig.bRecvToEn = DISABLE;			//禁止接收超时
 	tUartConfig.wInt = UART_INTSRC_RX;			//串口接收中断打开，使用RX中断
 	tUartConfig.byTxMode = UART_TX_MODE_POLL;	//发送模式：轮询模式
 	tUartConfig.byRxMode = UART_RX_MODE_INT;	//接收模式：中断模式
@@ -396,7 +397,7 @@ int uart_recv_rxfifo_int_demo(void)
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
 	tUartConfig.hwRecvTo = 88;					//UART接收超时时间，单位：bit位周期，8个bytes(11bit*8=88, 115200波特率时=764us)
-	tUartConfig.bRecvToEn = ENABLE;					//使能接收超时
+	tUartConfig.bRecvToEn = ENABLE;				//使能接收超时
 	tUartConfig.wInt = UART_INTSRC_RXFIFO 
 					| UART_INTSRC_RXTO;;		//串口接收中断打开，使用RXFIFO中断(默认推荐使用)和接收超时中断
 	tUartConfig.byTxMode = UART_TX_MODE_POLL;	//发送模式：轮询模式
