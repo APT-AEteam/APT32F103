@@ -178,8 +178,18 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 	
 	//databits = 8/stopbits = 1; fixed, can not be configured 
 	csp_uart_set_parity(ptUartBase, eParity);							//parity
+
 	csp_uart_set_fifo(ptUartBase, UART_RXFIFO_1_2, ENABLE);				//set /fx fifo = 1_2/fifo enable
 	csp_uart_set_rtor(ptUartBase, ptUartCfg->hwRecvTo);									//set receive timeout(8 bytes, one byte = 11bit) 
+	
+	if(ptUartCfg->bRecvToEn == ENABLE)    //Recieve time enable /disable
+	{
+		csp_uart_rto_en(ptUartBase);
+	}
+	else 
+	{
+		csp_uart_rto_dis(ptUartBase);
+	}
 	
 	if(ptUartCfg->wInt)													//use interrupt				
 	{

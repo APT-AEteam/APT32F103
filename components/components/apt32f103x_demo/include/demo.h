@@ -59,9 +59,8 @@ int uart_send_dma_demo(void);
 //uart receive
 int uart_receive_demo(void);
 int uart_recv_int_demo(void);
-int uart_recv_dynamic_demo(void);
-int uart_recv_dynamic_int_demo(void);
-int uart_recv_dma_demo(void);
+int uart_recv_rxfifo_int_demo(void);
+
 
 //adc demo
 //normal mode(no interrupt)
@@ -70,6 +69,8 @@ int adc_samp_continuous_demo(void);
 //interrupt mode
 int adc_samp_oneshot_int_demo(void);
 int adc_samp_continuous_int_demo(void);
+//DMA传输
+int adc_samp_continuous_dma_transfer_demo(void);
 
 //sio demo
 //sio led
@@ -155,7 +156,7 @@ int usart_send_demo(void);
 int usart_send_int_demo(void);
 int usart_recv_demo(void);
 int usart_recv_int_demo(void);
-int usart_recv_dynamic_demo(void);
+int usart_recv_rxfifo_int_demo(void);
 int usart_send_dma_demo(void);
 int usart_recv_dma_demo(void);
 
