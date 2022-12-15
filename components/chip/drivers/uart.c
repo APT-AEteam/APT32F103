@@ -180,7 +180,7 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 	csp_uart_set_parity(ptUartBase, eParity);							//parity
 
 	csp_uart_set_fifo(ptUartBase, UART_RXFIFO_1_2, ENABLE);				//set /fx fifo = 1_2/fifo enable
-	csp_uart_set_rtor(ptUartBase, ptUartCfg->hwRecvTo);									//set receive timeout(8 bytes, one byte = 11bit) 
+	csp_uart_set_rtor(ptUartBase, ptUartCfg->hwRecvTo);					//set receive timeout(8 bytes, one byte = 11bit) 
 	
 	if(ptUartCfg->bRecvToEn == ENABLE)    //Recieve time enable /disable
 	{
@@ -198,22 +198,15 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 			csp_uart_set_fifo(ptUartBase, UART_RXFIFO_1_2, DISABLE);	//disable fifo
 		}
 		
-		if(ptUartCfg->byRxMode != UART_RX_MODE_POLL)					//receive use interrupt
-		{
-			csp_uart_rto_en(ptUartBase);								//enable  receive timeout 
-			ptUartCfg->wInt |= UART_RXTO_INT;							//open receive timeout interrupt
-		}
-		else if(ptUartCfg->byTxMode == UART_TX_MODE_POLL)				
-		{
+		if((ptUartCfg->byTxMode == UART_TX_MODE_POLL) && (ptUartCfg->byRxMode == UART_RX_MODE_POLL))
 			return CSI_ERROR;
-		}
-
+			
 		csp_uart_int_enable(ptUartBase, ptUartCfg->wInt, ENABLE);	
 		csi_irq_enable((uint32_t *)ptUartBase);							//enable uart vic irq			
 	}
 	else
 	{
-		if((ptUartCfg->byRxMode) || (ptUartCfg->byTxMode))
+		if((ptUartCfg->byRxMode != UART_RX_MODE_POLL) || (ptUartCfg->byTxMode != UART_TX_MODE_POLL))
 			return CSI_ERROR;
 	}
 		
