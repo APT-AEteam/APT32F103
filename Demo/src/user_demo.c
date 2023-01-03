@@ -119,6 +119,7 @@ void user_demo(void)
 //	adc_samp_continuous_demo();
 //	adc_samp_oneshot_int_demo();
 //	adc_samp_continuous_int_demo();
+//	adc_samp_continuous_dma_transfer_demo();
 	
 /// ***************************************************
 ///  CRC相关的示例代码

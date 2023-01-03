@@ -30,7 +30,7 @@ const csi_adc_seq_t tSeqCfg[] =
 	//输入通道		//连续重复采样次数		//平均系数			//触发源选择
 	{ADCIN1,		ADC_CV_COUNT_16,			ADC_AVG_COF_16,		ADCSYNC_NONE},
 	{ADCIN2,		ADC_CV_COUNT_16,			ADC_AVG_COF_16,		ADCSYNC_NONE},
-	{ADCIN4,		ADC_CV_COUNT_16,			ADC_AVG_COF_16,		ADCSYNC_NONE},
+	{ADCIN3,		ADC_CV_COUNT_16,			ADC_AVG_COF_16,		ADCSYNC_NONE},
 }; 
 
 //采样序列的通道数
@@ -194,6 +194,29 @@ int adc_samp_continuous_demo(void)
 	}while(0);
 	
 	return iRet;
+}
+
+/** \brief adc中断处理函数,用户使能ADC中断时，可在中断函数中读取采样序列中通道值
+ * 
+ *  \param[in] none
+ *  \return error code
+ */
+void adc_irqhandler(csp_adc_t *ptAdcBase)
+{
+	uint8_t i;
+ 	volatile uint16_t hwDataBuf[3];
+	
+	uint32_t wIntStat = csp_adc_get_sr(ptAdcBase) & csp_adc_get_isr(ptAdcBase);
+	
+	for(i = 0; i < s_byChnlNum; i++)						
+	{
+		if(wIntStat & ADC12_SEQ(i))								//ADC采样序列状态
+		{
+			hwDataBuf[i] = csp_adc_get_data(ptAdcBase, i);		//读取采样序列中ADC通道值
+			csp_adc_clr_sr(ptAdcBase, ADC12_SEQ(i));			//清除状态
+			my_printf("ADC channel value of seq: %d \n", hwDataBuf[i]);
+		}
+	}
 }
 
 /** 
