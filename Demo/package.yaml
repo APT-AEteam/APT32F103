@@ -14,7 +14,7 @@ def_config:
   CONFIG_XIP: 1
   DBG_PRINT2PC: 1
 name: Demo
-version: v1.0.0
+version: v0.0.0
 description: 我的第一个方案工程
 tag: ""
 keywords: 
