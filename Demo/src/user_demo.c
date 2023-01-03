@@ -141,7 +141,7 @@ void user_demo(void)
 //	uart_send_demo();
 //	uart_send_int_demo();
 //	uart_receive_demo();
-	uart_recv_int_demo();
+	uart_recv_rx_int_demo();
 //	uart_recv_rxfifo_int_demo();
 //	uart_send_dma_demo();
 //	uart_recv_dma_demo();
