@@ -1,7 +1,13 @@
 # Chip组件信息：外设CSI驱动。依赖于SDK组件。
 
 # Release Notes
+======================================================
+Version: V0.0.1
+Release Date: 2023.1.4
 
+Release Notes
+
+TouchKey驱动修改
 ======================================================
 Version: V0.0.0
 Release Date: 2023.1.3

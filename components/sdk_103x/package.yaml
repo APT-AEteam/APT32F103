@@ -1,5 +1,5 @@
 name: sdk_103x
-version: v0.0.0
+version: v0.0.1
 description: ""
 tag: ""
 keywords: ~
@@ -9,10 +9,10 @@ license: ""
 homepage: ~
 type: sdk
 depends:
-  - apt32f103x_chip: v0.0.0
-  - apt32f103x_evb: v0.0.0
+  - apt32f103x_chip: v0.0.1
+  - apt32f103x_evb: v0.0.1
   - console: v0.0.0
-  - csi: v0.0.0
+  - csi: v0.0.1
 hw_info:
   cpu_id: ""
   cpu_name: ""
@@ -34,7 +34,7 @@ source_file: ~
 def_config: ~
 install: ~
 depends_forward:
-  - apt32f103x_chip: v0.0.0
-  - apt32f103x_evb: v0.0.0
+  - apt32f103x_chip: v0.0.1
+  - apt32f103x_evb: v0.0.1
   - console: v0.0.0
-  - csi: v0.0.0
+  - csi: v0.0.1
