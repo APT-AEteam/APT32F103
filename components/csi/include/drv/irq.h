@@ -63,6 +63,15 @@ void csi_irq_attach(uint32_t irq_num, void *irq_handler, csi_dev_t *dev);
 */
 void csi_irq_detach(uint32_t irq_num);
 
+/** \brief irq priority set
+ * 
+ *  Set all irq priorities to the same value
+ * 
+ *  \param[in] Priority:Priority to set
+ *  \return none.
+ */
+void csi_set_all_irq_priority(uint32_t priority);
+
 /**
   \brief       set irq priority
   \param[in]   irq_num Number of IRQ.

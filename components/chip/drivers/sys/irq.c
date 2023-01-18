@@ -92,4 +92,15 @@ void csi_irq_disable(void *pIpBase)
 //        g_nmivector = (void *)Default_Handler;
 //    }
 //}
-
+/** \brief irq priority set
+ * 
+ *  Set all irq priorities to the same value
+ * 
+ *  \param[in] priority:Priority to set
+ *  \return none
+ */
+void csi_set_all_irq_priority(uint32_t priority)
+{
+	for(uint8_t irq_num = 0;irq_num < IRQNUM;irq_num++)
+		csi_irq_priority(irq_num,priority);
+}
