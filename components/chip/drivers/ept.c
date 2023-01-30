@@ -364,23 +364,23 @@ csi_error_t csi_ept_channel_config(csp_ept_t *ptEptBase, csi_ept_pwmchannel_conf
  *  \param[in] ptEptBase: pointer of ept register structure
  *  \param[in] tld: refer to csp_ept_ld_e
  *  \param[in] tldamd: refer to csp_ept_ldamd_e
- *  \param[in] eChannel: refer to csi_ept_channel_e
+ *  \param[in] eChannel: refer to csi_ept_comp_e
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_ept_channel_cmpload_config(csp_ept_t *ptEptBase, csp_ept_cmpdata_ldmd_e tld, csp_ept_ldamd_e tldamd ,csi_ept_camp_e eChannel)
+csi_error_t csi_ept_channel_cmpload_config(csp_ept_t *ptEptBase, csp_ept_cmpdata_ldmd_e tld, csp_ept_ldamd_e tldamd ,csi_ept_comp_e eChannel)
 {			  
 	switch (eChannel)
 	{	
-		case (EPT_CAMPA):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPA_LD_MSK) )    |  (tld    << EPT_CMPA_LD_POS);
+		case (EPT_COMPA):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPA_LD_MSK) )    |  (tld    << EPT_CMPA_LD_POS);
 		                     ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPA_LDTIME_MSK) )|  (tldamd <<EPT_CMPA_LDTIME_POS);
 			break;
-		case (EPT_CAMPB):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPB_LD_MSK) )    |  (tld    << EPT_CMPB_LD_POS);
+		case (EPT_COMPB):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPB_LD_MSK) )    |  (tld    << EPT_CMPB_LD_POS);
 		                     ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPB_LDTIME_MSK) )|  (tldamd << EPT_CMPB_LDTIME_POS);
 			break;
-		case (EPT_CAMPC):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPC_LD_MSK) )    |  (tld    << EPT_CMPC_LD_POS);
+		case (EPT_COMPC):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPC_LD_MSK) )    |  (tld    << EPT_CMPC_LD_POS);
 		                     ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPC_LDTIME_MSK) )|  (tldamd << EPT_CMPC_LDTIME_POS);
             break;
-		case (EPT_CAMPD):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPD_LD_MSK) )    |  (tld    << EPT_CMPD_LD_POS);
+		case (EPT_COMPD):ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPD_LD_MSK) )    |  (tld    << EPT_CMPD_LD_POS);
 		                     ptEptBase -> CMPLDR = (ptEptBase -> CMPLDR &~(EPT_CMPD_LDTIME_MSK) )|  (tldamd << EPT_CMPD_LDTIME_POS);
 		    break;
 		default:return CSI_ERROR;
@@ -761,30 +761,66 @@ uint16_t csi_ept_get_prdr(csp_ept_t *ptEptBase)
 	return csp_ept_get_prdr(ptEptBase);
 }
 
+/** \brief  update ept PRDR and CMPx reg value
+ * 
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eComp: select which COMP to set(COMPA or COMPB or COMPC or COMPD)
+ *  \param[in] hwPrdr: ept PRDR reg  value
+ *  \param[in] hwCmp: ept COMP reg value
+ *  \return none
+ */
+csi_error_t csi_ept_prdr_cmp_update(csp_ept_t *ptEptBase,csi_ept_comp_e eComp, uint16_t hwPrdr, uint16_t hwCmp) 
+{
+	csp_ept_set_prdr(ptEptBase, (uint16_t)hwPrdr);			//set EPT PRDR Value
+	switch (eComp)
+	{	
+		case (EPT_COMPA):
+			csp_ept_set_cmpa(ptEptBase, (uint16_t)hwCmp);	//set EPT COMPA Value
+			break;
+			
+		case (EPT_COMPB):
+			csp_ept_set_cmpb(ptEptBase, (uint16_t)hwCmp);	//set EPT COMPB Value
+			break;
+			
+		case (EPT_COMPC):
+			csp_ept_set_cmpc(ptEptBase, (uint16_t)hwCmp);	//set EPT COMPC Value
+		    break;
+			
+		case (EPT_COMPD):
+			csp_ept_set_cmpd(ptEptBase, (uint16_t)hwCmp);	//set EPT COMPD Value
+		    break;
+			
+		default: 
+			return CSI_ERROR;
+			break;
+	}
+    return (CSI_OK);
+}
+
 /** \brief change ept output dutycycle. 
  * 
  *  \param[in] ptEptBase :    pointer of ept register structure
- *  \param[in] eCh   :        refer to csi_ept_chtype_e
- *	\param[in] wActiveTime :  cmpx data to be set directly
+ *  \param[in] eCh   :        refer to csi_ept_comp_e
+ *	\param[in] wDuty :  	  duty of PWM:0%-100%
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_ept_change_ch_duty(csp_ept_t *ptEptBase, csi_ept_camp_e eCh, uint32_t wActiveTime)
+csi_error_t csi_ept_change_ch_duty(csp_ept_t *ptEptBase, csi_ept_comp_e eCh, uint32_t wDuty)
 { 
 	uint16_t  wCmpLoad;
 
-	if(wActiveTime>=100){wCmpLoad=0;}
-	else if(wActiveTime==0){wCmpLoad=gEptPrd+1;}
-	else{wCmpLoad =gEptPrd-(gEptPrd * wActiveTime /100);}
+	if(wDuty>=100){wCmpLoad=0;}
+	else if(wDuty==0){wCmpLoad=gEptPrd+1;}
+	else{wCmpLoad =gEptPrd-(gEptPrd * wDuty /100);}
 
 	switch (eCh)
 	{	
-		case (EPT_CAMPA):csp_ept_set_cmpa(ptEptBase, (uint16_t)wCmpLoad);
+		case (EPT_COMPA):csp_ept_set_cmpa(ptEptBase, (uint16_t)wCmpLoad);
 			break;
-		case (EPT_CAMPB):csp_ept_set_cmpb(ptEptBase, (uint16_t)wCmpLoad);
+		case (EPT_COMPB):csp_ept_set_cmpb(ptEptBase, (uint16_t)wCmpLoad);
 			break;
-		case (EPT_CAMPC):csp_ept_set_cmpc(ptEptBase, (uint16_t)wCmpLoad);
+		case (EPT_COMPC):csp_ept_set_cmpc(ptEptBase, (uint16_t)wCmpLoad);
 		    break;
-		case (EPT_CAMPD):csp_ept_set_cmpd(ptEptBase, (uint16_t)wCmpLoad);
+		case (EPT_COMPD):csp_ept_set_cmpd(ptEptBase, (uint16_t)wCmpLoad);
 		    break;
 		default: return CSI_ERROR;
 			break;

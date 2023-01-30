@@ -282,11 +282,11 @@ typedef enum{
 }csi_ept_channel_e;
 
 typedef enum{
-    EPT_CAMPA=1,
-	EPT_CAMPB,
-	EPT_CAMPC,
-	EPT_CAMPD
-}csi_ept_camp_e;
+    EPT_COMPA=1,
+	EPT_COMPB,
+	EPT_COMPC,
+	EPT_COMPD
+}csi_ept_comp_e;
 
 typedef enum{
     EPT_SYNCIN0 =0,
@@ -544,7 +544,7 @@ typedef enum{
  \param ptEptBase    ept handle to operate
  \param wActiveTime cmpx data
 */
-csi_error_t csi_ept_change_ch_duty(csp_ept_t *ptEptBase, csi_ept_camp_e eCh, uint32_t wActiveTime);
+csi_error_t csi_ept_change_ch_duty(csp_ept_t *ptEptBase, csi_ept_comp_e eCh, uint32_t wActiveTime);
 
 /**
  \brief chopper configuration
@@ -702,6 +702,25 @@ void csi_ept_set_stop_st(csp_ept_t *ptEptBase, csp_ept_stpst_e eSt);
  \return counter period (reg data)
  */
 uint16_t csi_ept_get_prdr(csp_ept_t *ptEptBase);
+
+/** \brief  update ept PRDR and CMPx reg value
+ * 
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eComp: select which COMP to set(COMPA or COMPB or COMPC or COMPD)
+ *  \param[in] hwPrdr: ept PRDR reg  value
+ *  \param[in] hwCmp: ept COMP reg value
+ *  \return none
+ */
+csi_error_t csi_ept_prdr_cmp_update(csp_ept_t *ptEptBase,csi_ept_comp_e eComp, uint16_t hwPrdr, uint16_t hwCmp);
+
+/** \brief change ept output dutycycle. 
+ * 
+ *  \param[in] ptEptBase :    pointer of ept register structure
+ *  \param[in] eCh   :        refer to csi_ept_chtype_e
+ *	\param[in] wDuty :  	  duty of PWM:0%-100%
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_ept_change_ch_duty(csp_ept_t *ptEptBase, csi_ept_comp_e eCh, uint32_t wDuty);
 
  /**
  \brief  Basic configuration
@@ -942,7 +961,7 @@ csi_error_t csi_ept_channel_aqload_config(csp_ept_t *ptEptBase, csp_ept_ld_e tld
  \param  channel        refer to csi_ept_channel_e
  \return CSI_OK /CSI_ERROR
 */
-csi_error_t csi_ept_channel_cmpload_config(csp_ept_t *ptEptBase, csp_ept_cmpdata_ldmd_e tld, csp_ept_ldamd_e tldamd ,csi_ept_camp_e eChannel);
+csi_error_t csi_ept_channel_cmpload_config(csp_ept_t *ptEptBase, csp_ept_cmpdata_ldmd_e tld, csp_ept_ldamd_e tldamd ,csi_ept_comp_e eChannel);
 #ifdef __cplusplus
 }
 #endif

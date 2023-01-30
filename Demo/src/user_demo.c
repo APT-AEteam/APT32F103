@@ -27,7 +27,7 @@ void user_demo(void)
 //	pin_output_demo();
 //	pin_input_demo();
 //	pin_irq_demo();
-//  pin_ioremap_demo();
+//	pin_ioremap_demo();
 	
 /// ***************************************************
 ///  通过PA02输出系统时钟，主要用于调试。
@@ -168,7 +168,7 @@ void user_demo(void)
 //	iic_master_demo();
 //	iic_master_slave_demo();
 //	iic_slave_demo();
-	
+//	
 /// ***************************************************
 ///  SIO相关的示例代码
 /// ***************************************************
