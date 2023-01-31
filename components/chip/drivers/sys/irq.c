@@ -96,11 +96,11 @@ void csi_irq_disable(void *pIpBase)
  * 
  *  Set all irq priorities to the same value
  * 
- *  \param[in] priority:Priority to set
+ *  \param[in] wPrio:Priority to set
  *  \return none
  */
-void csi_set_all_irq_priority(uint32_t priority)
+void csi_irq_set_all_prio(uint8_t wPrio)
 {
 	for(uint8_t irq_num = 0;irq_num < IRQNUM;irq_num++)
-		csi_irq_priority(irq_num,priority);
+		csi_irq_priority(irq_num,wPrio);
 }

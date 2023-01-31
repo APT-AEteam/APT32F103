@@ -67,10 +67,10 @@ void csi_irq_detach(uint32_t irq_num);
  * 
  *  Set all irq priorities to the same value
  * 
- *  \param[in] Priority:Priority to set
- *  \return none.
+ *  \param[in] wPrio:Priority to set
+ *  \return none
  */
-void csi_set_all_irq_priority(uint32_t priority);
+void csi_irq_set_all_prio(uint8_t wPrio);
 
 /**
   \brief       set irq priority
