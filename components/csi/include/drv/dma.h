@@ -148,7 +148,7 @@ typedef struct
 /** 
   \brief 	   Init dma channel parameter config structure
   \param[in]   ptDmaBase	pointer of dma reg structure.
-  \param[in]   eDmaCh		channel num of dma(4 channel: 0->3)
+  \param[in]   eDmaCh		channel num of dma(6 channel: 0->5)
   \param[in]   ptChCfg		pointer of uart parameter config structure
   \return 	   error code \ref csi_error_t
  */ 
@@ -157,7 +157,7 @@ csi_error_t csi_dma_ch_init(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_c
 /** \brief dma channel transfer start
  * 
  *  \param[in] ptDmaBase: pointer of dma reg structure.
- *  \param[in] eDmaCh: channel num of dma(4channel: 0->3)
+ *  \param[in] eDmaCh: channel num of dma(6channel: 0->5)
  *  \param[in] pSrcAddr: src addr of transfer 
  *  \param[in] pDstAddr: dst addr of transfer 
  *  \param[in] hwHTranNum: high transfer num, hwHTranNum <= 0xfff; transfer number = hwHTranNum * hwLTranNum(TSIZE = ONCE)
@@ -168,10 +168,18 @@ csi_error_t csi_dma_ch_init(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_c
  */
 csi_error_t csi_dma_ch_start(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, void *pSrcAddr, void *pDstAddr, uint16_t hwHTranNum, uint16_t hwLTranNum);
 
+/** \brief dma channel transfer restart
+ * 
+ *  \param[in] ptDmaBase: pointer of dma reg structure.
+ *  \param[in] eDmaCh: channel num of dma(6channel: 0->5)
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_dma_ch_restart(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh);
+
 /** 
   \brief 	   enable/disable dma interrupt 
   \param[in]   ptDmaBase	pointer of dma register structure
-  \param[in]   eDmaCh		channel num of dma(4 channel: 0->3)
+  \param[in]   eDmaCh		channel num of dma(6 channel: 0->5)
   \param[in]   eIntSrc		dma interrupt source
   \param[in]   bEnable		enable/disable interrupt
   \return none
@@ -181,7 +189,7 @@ void csi_dma_int_enable(csp_dma_t *ptDmaBase,  csi_dma_ch_e eDmaCh, csi_dma_ints
 /**
   \brief       Stop a dma channel
   \param[in]   ptDmaBase	pointer of dma register structure
-  \param[in]   eDmaCh		channel num of dma(4 channel: 0->3)
+  \param[in]   eDmaCh		channel num of dma(6 channel: 0->5)
   \return      none
 */
 void csi_dma_ch_stop(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh);
@@ -203,7 +211,7 @@ void csi_dma_soft_rst(csp_dma_t *ptDmaBase);
 
 /** 
   \brief 	   get dma interrupt message and (D0 not)clear message
-  \param[in]   eDmaCh		dma channel number, channel 0->3
+  \param[in]   eDmaCh		dma channel number, channel 0->5
   \param[in]   bClrEn		bClrEn: clear dma interrupt message enable; ENABLE: clear , DISABLE: Do not clear
   \return 	   bool type true/false
  */ 

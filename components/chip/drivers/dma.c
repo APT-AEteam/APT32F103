@@ -95,7 +95,7 @@ __attribute__((weak)) void dma_irqhandler(csp_dma_t *ptDmaBase)
 /** \brief Init dma channel parameter config structure
  * 
  *  \param[in] ptDmaBase: pointer of dma reg structure.
- *  \param[in] eDmaCh: channel num of dma(4channel: 0->3)
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
  *  \param[in] ptChCfg: pointer of uart parameter config structure
  *  \return error code \ref csi_error_t
  */ 
@@ -122,7 +122,7 @@ csi_error_t csi_dma_ch_init(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_c
 /** \brief dma channel transfer start
  * 
  *  \param[in] ptDmaBase: pointer of dma reg structure.
- *  \param[in] eDmaCh: channel num of dma(4channel: 0->3)
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
  *  \param[in] pSrcAddr: src addr of transfer 
  *  \param[in] pDstAddr: dst addr of transfer 
  *  \param[in] hwHTranNum: high transfer num, hwHTranNum <= 0xfff; transfer number = hwHTranNum * hwLTranNum(TSIZE = ONCE)
@@ -168,10 +168,33 @@ csi_error_t csi_dma_ch_start(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, void *pS
 	
 	return CSI_OK;
 }
+
+/** \brief dma channel transfer restart
+ * 
+ *  \param[in] ptDmaBase: pointer of dma reg structure.
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
+ *  \return error code \ref csi_error_t
+ */
+csi_error_t csi_dma_ch_restart(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh)
+{
+
+	csp_dma_t *ptDmaChBase = (csp_dma_t *)DMA_REG_BASE(ptDmaBase, eDmaCh);
+	
+	if(eDmaCh >= DMA_CH_MAX_NUM)
+		return CSI_ERROR;
+
+	if(csp_dma_get_crx(ptDmaChBase) & DMA_RELOAD_MSK)               //if reload disable,enable channel
+		csp_dma_ch_en(ptDmaChBase);										//
+	if(!csp_dma_get_rsrx(ptDmaChBase))
+		csp_dma_ch_swtrig(ptDmaChBase);								//sw triger 
+	
+	return CSI_OK;
+}
+
 /** \brief enable/disable dma interrupt 
  * 
  *  \param[in] ptDmaBase: pointer of dma register structure
- *  \param[in] eDmaCh: channel num of dma(4channel: 0->3)
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
  *  \param[in] eIntSrc: dma interrupt source
  *  \param[in] bEnable: enable/disable interrupt
  *  \return none
@@ -190,7 +213,7 @@ void csi_dma_int_enable(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_intsr
 /** \brief dma channel transfer stop
  * 
  *  \param[in] ptDmaBase: pointer of dma reg structure.
- *  \param[in] eDmaCh: channel num of dma(4 channel: 0->3)
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
  *  \return none
  */
 void csi_dma_ch_stop(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh)
