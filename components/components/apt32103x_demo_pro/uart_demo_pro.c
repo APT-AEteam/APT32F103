@@ -1,5 +1,5 @@
 /***********************************************************************//** 
- * \file  uart_demo.c
+ * \file  uart_demo_pro.c
  * \brief  UART_DEMO description and static inline functions at register level 
  * \copyright Copyright (C) 2015-2020 @ APTCHIP
  * <table>

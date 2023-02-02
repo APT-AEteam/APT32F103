@@ -1,6 +1,6 @@
 /***********************************************************************//** 
- * \file  uart_test.c
- * \brief  UART_TEST description and static inline functions at register level 
+ * \file  usart_demo_pro.c
+ * \brief  USART_DEMO description and static inline functions at register level 
  * \copyright Copyright (C) 2015-2020 @ APTCHIP
  * <table>
  * <tr><th> Date  <th>Version  <th>Author  <th>Description
