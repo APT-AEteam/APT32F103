@@ -1,6 +1,6 @@
 /***********************************************************************//** 
- * \file  lin_test.c
- * \brief  LIN_TEST description and static inline functions at register level 
+ * \file  lin_demo.c
+ * \brief  LIN_EDMO description and static inline functions at register level 
  * \copyright Copyright (C) 2015-2020 @ APTCHIP
  * <table>
  * <tr><th> Date  <th>Version  <th>Author  <th>Description
