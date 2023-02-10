@@ -17,6 +17,74 @@
     .globl  __Vectors
     .type   __Vectors, @object
 __Vectors:
+#ifdef	CONFIG_IRQ_LOOKUP				//Lookup table processing interrupt 
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   tspend_handler        // Software int of Machine mode---03
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_IRQHandler     // Timer int of Machine mode --- 07
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+    .long   Default_Handler
+
+    /* External interrupts */
+    .long   Default_IRQHandler			//16
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler			//24
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler			
+    .long   Default_IRQHandler			//32
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler			//40
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler			
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+    .long   Default_IRQHandler
+//	.long   Default_IRQHandler			//48
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler			
+//    .long   Default_IRQHandler			//56
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler
+//    .long   Default_IRQHandler			//63
+#else
     .long   Default_Handler
     .long   Default_Handler
     .long   Default_Handler
@@ -51,11 +119,11 @@ __Vectors:
     .long   uart0_int_handler
     .long   uart1_int_handler
     .long   uart2_int_handler			
-    .long   usart0_int_handler			//32
+    .long   usart_int_handler			//32
     .long   i2c_int_handler
     .long   Default_Handler
     .long   spi0_int_handler
-    .long   sio_int_handler
+    .long   sio0_int_handler
     .long   exi2_3_int_handler
     .long   exi4_9_int_handler
     .long   exi10_15_int_handler
@@ -84,9 +152,9 @@ __Vectors:
 //    .long   Default_Handler
 //    .long   Default_Handler			//63
 
-	.size   __Vectors, . - __Vectors
-	
-	
+#endif
+
+
     .text
     .align  2
 _start:
@@ -131,15 +199,15 @@ Reset_Handler:
     addi    a0, a0, 4
     bltu    a0, a1, 1b
 2:
-/*
+
 #ifndef __NO_SYSTEM_INIT
-    jal     system_init 
+ //   jal     system_init 
 #endif
 
 #ifndef __NO_BOARD_INIT
-    jal     board_init   
+ //   jal     board_init   
 #endif
-*/
+
     jal     main
 
     .size   Reset_Handler, . - Reset_Handler

@@ -172,7 +172,7 @@ void uart2_int_handler(void)
 #endif
 }
 
-void usart0_int_handler(void) 
+void usart_int_handler(void) 
 {
 // when use lin demo,please uncomment lin_irqhandler function,and comment USART0_irqhandler function.
 #if	USART0_INT_HANDLE_EN
@@ -182,7 +182,7 @@ void usart0_int_handler(void)
 #endif
 }
 
-void sio_int_handler(void) 
+void sio0_int_handler(void) 
 {
 #if	SIO_INT_HANDLE_EN
    // ISR content ...
@@ -293,7 +293,7 @@ void bt3_int_handler(void)
     // ISR content ...
 	csi_tick_increase();
 	
-	bt_irqhandler(BT3);
+	bt_irqhandler(BT3); //BT3 is for systick!!!
 	
 #endif
 }

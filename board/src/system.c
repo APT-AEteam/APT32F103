@@ -25,7 +25,7 @@
   \param[in]   none
   \return      None
 */
-
+extern void irq_vectors_init(void);
 
 void system_init(void)		//__attribute__((weak))
 {
@@ -34,6 +34,7 @@ void system_init(void)		//__attribute__((weak))
 	
 	__disable_excp_irq(); // disable all interrupts
 	
+
 	
 	/* get interrupt level from info */
     CLIC->CLICCFG = (((CLIC->CLICINFO & CLIC_INFO_CLICINTCTLBITS_Msk) >> CLIC_INFO_CLICINTCTLBITS_Pos) << CLIC_CLICCFG_NLBIT_Pos);
@@ -42,6 +43,10 @@ void system_init(void)		//__attribute__((weak))
 		CLIC->CLICINT[i].ATTR &= 0xfffffff9;	// tigger mode: level
         CLIC->CLICINT[i].ATTR |= 1;  			// use vector interrupt
     }
+
+#ifdef	CONFIG_IRQ_LOOKUP		//Table lookup method for interrupt processing 
+	irq_vectors_init();   //需要中断嵌套，必须使用查表法。
+#endif
 
 	csp_iwdt_disable(SYSCON);		//disable iwdt
 	csi_sysclk_config(tClkConfig);			//sysclk config

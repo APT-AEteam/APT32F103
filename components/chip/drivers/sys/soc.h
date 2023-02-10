@@ -592,6 +592,8 @@ typedef enum{
 
 //ISR Define for generating special interrupt related ASM (E902), with compile option -mistack
 
+#ifndef CONFIG_IRQ_LOOKUP
+
 #define  ATTRIBUTE_ISR				__attribute__ ((interrupt ("machine")))
 
 //
@@ -609,10 +611,10 @@ ATTRIBUTE_ISR 	void rtc_int_handler(void);				//Real timer clock interrupt
 ATTRIBUTE_ISR 	void uart0_int_handler(void);			//UART0 interrupt
 ATTRIBUTE_ISR 	void uart1_int_handler(void);			//UART1 interrupt
 ATTRIBUTE_ISR 	void uart2_int_handler(void);			//UART2 interrupt
-ATTRIBUTE_ISR 	void usart0_int_handler(void);			//USART0 interrupt
+ATTRIBUTE_ISR 	void usart_int_handler(void);			//USART0 interrupt
 ATTRIBUTE_ISR 	void i2c_int_handler(void);				//I2C  interrupt
 ATTRIBUTE_ISR 	void spi0_int_handler(void);			//SPI0 interrupt
-ATTRIBUTE_ISR 	void sio_int_handler(void);		    	//SIO0 interrupt
+ATTRIBUTE_ISR 	void sio0_int_handler(void);		    	//SIO0 interrupt
 ATTRIBUTE_ISR 	void exi2_3_int_handler(void);			//External Interrupt GROUP2 ~ 3, GROUP18~19
 ATTRIBUTE_ISR 	void exi4_9_int_handler(void);			//External Interrupt GROUP4 ~ 9
 ATTRIBUTE_ISR 	void exi10_15_int_handler(void);		//External Interrupt GROUP10 ~ 15
@@ -626,6 +628,41 @@ ATTRIBUTE_ISR 	void bt3_int_handler(void);				//BT3 interrupt
 //
 ATTRIBUTE_ISR	void tspend_handler(void);				//tspend interrupt
 ATTRIBUTE_ISR 	void sw_int_handler( void);				//CPU software interrupt
+
+#else
+void sw_int_handler(void);				//CPU software interrupt
+
+void coret_int_handler(void);			//CPU Systick interrupt 
+void syscon_int_handler(void);			//System controller interrupt
+void ifc_int_handler(void);				//Internal flash controller interrupt
+void adc0_int_handler(void);			//ADC0 controller interrupt
+void ept0_int_handler(void);            //EPTA interrupt
+void dma_int_handler(void);			    //DMA0 interrupt
+void wwdt_int_handler(void);			//Window watchdog timer interrupt
+void exi0_int_handler(void);			//External interrupt GROUP0, GROUP16 
+void exi1_int_handler(void);			//External interrupt GROUP1, GROUP17 
+void gpta0_int_handler(void);			//GPTA0 Interrupt
+void rtc_int_handler(void);				//Real timer clock interrupt
+void uart0_int_handler(void);			//UART0 interrupt
+void uart1_int_handler(void);			//UART1 interrupt
+void uart2_int_handler(void);			//UART2 interrupt
+void usart_int_handler(void);			//USART0 interrupt
+void i2c_int_handler(void);				//I2C  interrupt
+void spi0_int_handler(void);			//SPI0 interrupt
+void sio0_int_handler(void);			//SIO0 interrupt
+void exi2_3_int_handler(void);			//External Interrupt GROUP2 ~ 3, GROUP18~19
+void exi4_9_int_handler(void);			//External Interrupt GROUP4 ~ 9
+void exi10_15_int_handler(void);		//External Interrupt GROUP10 ~ 15
+void cnta_int_handler(void);			//COUNTER A interrupt
+void tkey_int_handler(void);            //Touch Key interrupt
+void lpt_int_handler(void);				//Low power timer interrupt
+void bt0_int_handler(void);				//BT0 interrupt
+void bt1_int_handler(void);				//BT1interrupt
+void bt2_int_handler(void);				//BT2 interrupt
+void bt3_int_handler(void);				//BT3interrupt
+
+#endif
+
 
 #ifdef __cplusplus
 }
