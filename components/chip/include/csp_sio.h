@@ -7,6 +7,7 @@
  * <tr><td> 2020-10-09 <td>V0.0  <td>XB   <td>initial
  * <tr><td> 2021-1-09 <td>V0.1  <td>ZHY   <td>modify
  * <tr><td> 2021-12-14 <td>V0.2  <td>LQ   <td>add SRR
+ * <tr><td> 2022-12-20 <td>V1.0 <td>ZJY   <td>add DMA
  * </table>
  * *********************************************************************
 */
@@ -92,7 +93,7 @@ typedef enum{
 #define SIO_WOKE_RST		(0x01ul)
 
 #define	SIO_WOKE_RSTKEY_POS	(13)		
-#define SIO_WOKE_RSTKEY_MSK	(0x05ul << SIO_WOKE_RSTKEY_POS)
+#define SIO_WOKE_RSTKEY_MSK	(0x07ul << SIO_WOKE_RSTKEY_POS)
 #define SIO_WOKE_RSTKEY		(0x05ul)
 
 #define SIO_TCKPRS_POS    	(16)		//Send CLK Div
@@ -367,7 +368,6 @@ typedef struct
 	uint32_t		wTxclk;			//TX CLK,Ftxclk 
 }csp_sio_tx_t;
 
-
 /*****************************************************************************
  ******************** SIO inline Functions Declaration ***********************
  *****************************************************************************/
@@ -388,14 +388,15 @@ static inline void csp_sio_woke_rst(csp_sio_t *ptSioBase)
 	ptSioBase->CR |= SIO_WOKE_RSTKEY_MSK | SIO_WOKE_RST_MSK;
 }
 
-//sio dma
-static inline void csp_sio_set_tx_dma(csp_sio_t *ptSioBase, sio_tdma_en_e eTxDma)
+//SIO DMA
+static inline void csp_sio_set_txdma(csp_sio_t *ptSioBase, sio_tdma_en_e eTxDmaEn) 
 {
-	ptSioBase->CR = (ptSioBase->CR & ~SIO_TDMA_EN_MSK) | (eTxDma << SIO_TDMA_EN_POS);
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_TDMA_EN_MSK) | (eTxDmaEn << SIO_TDMA_EN_POS);
 }
-static inline void csp_sio_set_rx_dma(csp_sio_t *ptSioBase, sio_rdma_en_e eRxDma)
+
+static inline void csp_sio_set_rxdma(csp_sio_t *ptSioBase, sio_rdma_en_e eRxDmaEn) 
 {
-	ptSioBase->CR = (ptSioBase->CR & ~SIO_RDMA_EN_MSK) | (eRxDma << SIO_RDMA_EN_POS);
+	ptSioBase->CR = (ptSioBase->CR & ~SIO_RDMA_EN_MSK) | (eRxDmaEn << SIO_RDMA_EN_POS);
 }
 
 //SIO TX 
@@ -528,16 +529,6 @@ static inline void csp_sio_int_enable(csp_sio_t *ptSioBase,sio_int_e eSioInt, bo
 static inline void csp_sio_soft_reset(csp_sio_t *ptSioBase)
 {
 	ptSioBase->SRR = SIO_SWRST_MSK;
-}
-
-static inline void csp_sio_set_txdma(csp_sio_t *ptSioBase, sio_tdma_en_e eTxDmaEn) 
-{
-	ptSioBase->CR = (ptSioBase->CR & ~SIO_TDMA_EN_MSK) | (eTxDmaEn << SIO_TDMA_EN_POS);
-}
-
-static inline void csp_sio_set_rxdma(csp_sio_t *ptSioBase, sio_rdma_en_e eRxDmaEn) 
-{
-	ptSioBase->CR = (ptSioBase->CR & ~SIO_RDMA_EN_MSK) | (eRxDmaEn << SIO_RDMA_EN_POS);
 }
 
 #endif
