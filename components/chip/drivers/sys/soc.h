@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 
-#ifndef ISOSC_VALU
+#ifndef ISOSC_VALUE
 #define ISOSC_VALUE			27000U
 #endif
 
@@ -663,6 +663,15 @@ void bt3_int_handler(void);				//BT3interrupt
 
 #endif
 
+void BreakPointHandler(void);
+void FetchInstruAccessHandler(void);
+void IllegalInstrHandler(void);
+void UserModeCallHandler(void) ;
+void MachineModeCallHandler(void);
+void StoreInstruMisalignedHandler(void);
+void LoadInstruMisalignedHandler(void);
+void StoreInstruAccessHandler(void);
+void LoadInstruAccessHandler(void);
 
 #ifdef __cplusplus
 }

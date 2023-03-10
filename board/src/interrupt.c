@@ -259,6 +259,7 @@ void tkey_int_handler(void)
 void lpt_int_handler(void) 
 {
 #if	LPT_INT_HANDLE_EN
+	
     // ISR content ...
 	lpt_irqhandler(LPT);
 #endif
@@ -299,21 +300,15 @@ void bt3_int_handler(void)
 }
 
 /*************************************************************/
+/*****************      Exception Handler        *************/
 /*************************************************************/
-/*************************************************************/
-void PriviledgeVioHandler(void) 
+void BreakPointHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void SystemDesPtr(void) 
-{
-    // ISR content ...
-	while(1){};
-}
-
-void MisalignedHandler(void) 
+void FetchInstruAccessHandler(void) 
 {
     // ISR content ...
 	while(1){};
@@ -325,54 +320,60 @@ void IllegalInstrHandler(void)
 	while(1){};
 }
 
-void AccessErrHandler(void) 
+void UserModeCallHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void BreakPointHandler(void) 
+void MachineModeCallHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void UnrecExecpHandler(void) 
+void StoreInstruMisalignedHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void Trap0Handler(void) 
+void LoadInstruMisalignedHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void Trap1Handler(void) 
+void StoreInstruAccessHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void Trap2Handler(void) 
+void LoadInstruAccessHandler(void) 
 {
     // ISR content ...
 	while(1){};
 }
 
-void Trap3Handler(void) 
-{
-    // ISR content ...
-	while(1){};
-
-}
-
-void PendTrapHandler(void) 
-{
-    // ISR content ...
-	while(1){};
-}
+//void Trap2Handler(void) 
+//{
+//    // ISR content ...
+//	while(1){};
+//}
+//
+//void Trap3Handler(void) 
+//{
+//    // ISR content ...
+//	while(1){};
+//
+//}
+//
+//void PendTrapHandler(void) 
+//{
+//    // ISR content ...
+//	while(1){};
+//}
 
 
 
