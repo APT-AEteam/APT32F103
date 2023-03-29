@@ -107,12 +107,14 @@ csi_error_t csi_sysclk_config(csi_clk_config_t tClkCfg)
 	
 	
 	
-	if (wTargetSclk >= 16000000) {
+	if (wTargetSclk > 8000000) {
 		IFC->CEDR = IFC_CLKEN;
 		if (wHFreq > 24000000)
-			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK))| HIGH_SPEED | PF_WAIT3; //PF_WAIT2; WNN
+			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK))| HIGH_SPEED | PF_WAIT2; 
+		else if(wTargetSclk > 16000000)
+			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK)) | HIGH_SPEED | PF_WAIT1;
 		else 
-			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK)) | HIGH_SPEED | PF_WAIT2;//PF_WAIT1; WNN
+			IFC->MR = (IFC->MR & (~PF_SPEED_MSK) & (~PF_WAIT_MSK)) | HIGH_SPEED | PF_WAIT0;
 		csp_set_sdiv(SYSCON, tClkCfg.eSdiv);
 		csp_set_clksrc(SYSCON, eSrc);
 	}

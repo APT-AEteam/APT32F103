@@ -44,7 +44,9 @@ typedef struct
     __IOM uint32_t  LCP1;       //0x0054    Limit counter protocol 1        
     __IOM uint32_t  LCP2;       //0x0058    Limit counter protocol 2        
     __IOM uint32_t  DMACR;		//0x005C    DMA control register    
-	__IM  uint32_t  RSVD[12];	//0x0060~0x008C    
+	__IM  uint32_t  RSVD1[8];	//0x0060~0x007C  
+	__IOM uint32_t  IRDA;       //0X0080
+	__IM  uint32_t  RSVD2[3];   //0X0084~0X008C
 //	__IM  uint32_t  RXFL;		//0x0090    Recieve FIFO status register  
 //	__IM  uint32_t  TXFL;		//0x0094    Transmit FIFO status register          
 } csp_usart_t; 

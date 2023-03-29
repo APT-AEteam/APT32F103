@@ -1,1 +1,3 @@
-103x
+103x系列使用RV902内核，在102x系列的基础上，新增DMA，USART等模块
+内存：80K PFLASH，3K DFLASH，8K SRAM
+主频：48MHz max
