@@ -1,4 +1,4 @@
-name: console
+name: apt_console
 version: v0.0.0
 description: mini console.
 tag: 核心模块
@@ -11,6 +11,7 @@ yoc_version:
   - v7.2
   - v7.3
 depends: 
+  - apt_csi: v0.0.1
 build_config:
   include:
     - include
@@ -38,3 +39,4 @@ suitableChip:
 homepage: 
 soc_config: 
 depends_forward: 
+  - apt_csi: v0.0.1
