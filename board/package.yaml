@@ -124,6 +124,8 @@ export:
 keywords: 
 author: ""
 depends: 
+  - apt32f103x_chip: v0.0.1
+  - apt_csi: v0.0.1
 defconfig: 
 source_file:
   - src/*.c
@@ -136,3 +138,5 @@ hidden:
 homepage: 
 soc_config: 
 depends_forward: 
+  - apt32f103x_chip: v0.0.1
+  - apt_csi: v0.0.1
