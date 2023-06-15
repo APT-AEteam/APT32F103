@@ -37,8 +37,7 @@ build_config:
   libs: 
   libpath: 
 source_file:
-  - src/main.c
-  - src/user_demo.c
+  - src/*.c
 depends_forward:
   - apt32f103x_demo: v0.0.1
   - sdk_103x: v0.0.1
