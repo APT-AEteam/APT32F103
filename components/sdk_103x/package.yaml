@@ -2,11 +2,11 @@ name: sdk_103x
 version: v0.0.1
 description: ""
 tag: ""
-keywords: ~
+keywords: 
 author:
   name: ""
 license: ""
-homepage: ~
+homepage: 
 type: sdk
 depends:
   - apt32f103x_evb: v0.0.1
@@ -21,17 +21,17 @@ hw_info:
   ld_script: ""
   flash_program: ""
 build_config:
-  include: ~
-  internal_include: ~
+  include: 
+  internal_include: 
   cflag: ""
   cxxflag: ""
   asmflag: ""
-  define: ~
-  libs: ~
-  libpath: ~
-source_file: ~
-def_config: ~
-install: ~
+  define: 
+  libs: 
+  libpath: 
+source_file: 
+def_config: 
+install: 
 depends_forward:
   - apt32f103x_evb: v0.0.1
   - apt32f103x_gui: v1.0.0
