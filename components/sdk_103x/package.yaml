@@ -10,6 +10,7 @@ homepage: ~
 type: sdk
 depends:
   - apt32f103x_evb: v0.0.1
+  - apt32f103x_gui: v1.0.0
   - apt_console: v0.0.0
 hw_info:
   cpu_id: ""
@@ -33,4 +34,5 @@ def_config: ~
 install: ~
 depends_forward:
   - apt32f103x_evb: v0.0.1
+  - apt32f103x_gui: v1.0.0
   - apt_console: v0.0.0
