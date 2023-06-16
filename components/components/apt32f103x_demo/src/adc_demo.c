@@ -433,15 +433,15 @@ int adc_samp_continuous_dma_transfer_demo(void)
  *  \param[in] ptBtBase: pointer of bt register structure
  *  \return none
  */ 
-void bt_irqhandler(csp_bt_t *ptBtBase)
-{
-	// ISR content ...
-	volatile uint32_t wMisr = csp_bt_get_isr(ptBtBase);
-	
-	if(wMisr & BT_PEND_INT)					//PEND interrupt
-	{
-		csp_bt_clr_isr(ptBtBase, BT_PEND_INT);
-		csi_adc_evtrg_enable(ADC0,ADC_TRGOUT0,ENABLE);					//使能ADC触发通道0,触发DMA传输，20ms传输一次
-		csi_pin_toggle(PA06);
-	}
-}
+//__attribute__((weak)) void bt_irqhandler(csp_bt_t *ptBtBase)
+//{
+//	// ISR content ...
+//	volatile uint32_t wMisr = csp_bt_get_isr(ptBtBase);
+//	
+//	if(wMisr & BT_PEND_INT)					//PEND interrupt
+//	{
+//		csp_bt_clr_isr(ptBtBase, BT_PEND_INT);
+//		csi_adc_evtrg_enable(ADC0,ADC_TRGOUT0,ENABLE);					//使能ADC触发通道0,触发DMA传输，20ms传输一次
+//		csi_pin_toggle(PA06);
+//	}
+//}
