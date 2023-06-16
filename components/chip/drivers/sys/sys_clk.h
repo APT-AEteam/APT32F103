@@ -86,7 +86,7 @@ typedef struct {
 	uint32_t		wPclk;
 }csi_clk_config_t;
 
-extern csi_clk_config_t tClkConfig;
+extern csi_clk_config_t g_tClkConfig;
 
 //typedef struct {
 //    cclk_src_e	eSysClkSrc;      /* select sysclk source clock */
@@ -152,6 +152,14 @@ csi_error_t csi_clo_config(clo_src_e, clo_div_e);
   \return none.
  */ 
 void csi_clk_pm_enable(clk_pm_e eClk, bool bEnable);
+
+/** 
+  \brief to calculate SCLK and PCLK frequence according to the current reg content
+   tClkConfig.wSclk and tClkConfig.wPclk will be updated after excuting this function
+  \param[in] none.
+  \return csi_error_t.
+ */
+csi_error_t csi_calc_clk_freq(void);
 
 /**
   \brief       Soc get sclk frequence.

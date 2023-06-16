@@ -22,7 +22,7 @@ void (*trap_c_callback)(void);
 
 void trap_c(uint32_t *pwRegs)
 {
-    int i;
+    //int i;
     uint32_t vec = 0;
 
     vec = __get_MCAUSE() & 0x3FF;

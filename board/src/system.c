@@ -32,9 +32,7 @@ void system_init(void)		//__attribute__((weak))
 	uint32_t i;
 	
 	
-	__disable_excp_irq(); // disable all interrupts
-	
-
+	__disable_excp_irq(); 	// disable all interrupts
 	
 	/* get interrupt level from info */
     CLIC->CLICCFG = (((CLIC->CLICINFO & CLIC_INFO_CLICINTCTLBITS_Msk) >> CLIC_INFO_CLICINTCTLBITS_Pos) << CLIC_CLICCFG_NLBIT_Pos);
@@ -48,12 +46,11 @@ void system_init(void)		//__attribute__((weak))
 	irq_vectors_init();   //需要中断嵌套，必须使用查表法。
 #endif
 
-	csp_iwdt_disable(SYSCON);		//disable iwdt
-	csi_sysclk_config(tClkConfig);			//sysclk config
-	csi_get_sclk_freq();			//get sysclk
-	csi_get_pclk_freq();			//get PCLK
-	csi_tick_init();                //init systick(BT3)
+	csp_iwdt_disable(SYSCON);			//disable iwdt
+	csi_sysclk_config(g_tClkConfig);	//sysclk config
+	csi_calc_clk_freq();				//calculate(updata) sclk and pclk
+	csi_tick_init();               	 	//init systick(BT3)
 	
-	__enable_excp_irq(); //enable all interrupts
+	__enable_excp_irq(); 				//enable all interrupts
 	
 }

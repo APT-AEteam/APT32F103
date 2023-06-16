@@ -30,13 +30,13 @@ const uint32_t g_wHclkDiv[] = {
 static uint32_t apt_get_hclk(void)
 {
 	uint32_t tRslt;
-	tRslt = tClkConfig.wFreq/tClkConfig.eSdiv;//tClkConfig.wSclk;
+	tRslt = g_tClkConfig.wFreq/g_tClkConfig.eSdiv;//g_tClkConfig.wSclk;
 	return (tRslt);
 }
 
 /** \brief sysctem clock (HCLK) configuration
  * 
- *  To set CPU frequence according to tClkConfig
+ *  To set CPU frequence according to g_tClkConfig
  * 
  *  \param[in] none.
  *  \return csi_error_t.
@@ -130,9 +130,9 @@ csi_error_t csi_sysclk_config(csi_clk_config_t tClkCfg)
 	
 	csp_set_pdiv(SYSCON, tClkCfg.ePdiv);
 	
-	//update wSclk and wPclk in tClkConfig
-	tClkConfig.wSclk = wHFreq;
-	tClkConfig.wPclk = tClkConfig.wSclk/(0x1<<tClkCfg.ePdiv);
+	//update wSclk and wPclk in g_tClkConfig
+	g_tClkConfig.wSclk = wHFreq;
+	g_tClkConfig.wPclk = g_tClkConfig.wSclk/(0x1<<tClkCfg.ePdiv);
 	return ret;
 }
 
@@ -178,104 +178,125 @@ void soc_clk_disable(int32_t wModule)
 		csp_pder1_clk_dis(SYSCON, (uint32_t)wModule - 32U);
 }
 
-/** \brief to get SCLK frequence according to the current reg content
- *  tClkConfig.wSclk will be updated after excuting this function
+/** \brief to calculate SCLK and PCLK frequence according to the current reg content
+ *  g_tClkConfig.wSclk and g_tClkConfig.wPclk will be updated after excuting this function
  *  \param[in] none.
  *  \return csi_error_t.
- */ 
-uint32_t csi_get_sclk_freq(void)
-{	
-	//csi_error_t ret = CSI_OK;
+ */
+csi_error_t csi_calc_clk_freq(void)
+{
 	cclk_src_e eClkSrc;
 	uint8_t  byHclkDiv;
 	uint32_t wHfoFreq;
 	uint32_t wImoFreq;
 	
-    eClkSrc = ((cclk_src_e) csp_get_clksrc(SYSCON));
-	switch(eClkSrc)
-	{ 	case (SRC_ISOSC): 	
-			tClkConfig.wSclk = ISOSC_VALUE;
-			break;
-		case (SRC_EMOSC): 	
-			tClkConfig.wSclk = EMOSC_VALUE;
-			break;
-		case (SRC_IMOSC):	
-			wImoFreq = csp_get_imosc_fre(SYSCON);
-			switch (wImoFreq)
-			{
-				case (0): 
-					tClkConfig.wSclk = IMOSC_5M_VALUE;
-					break;
-				case (1): 
-					tClkConfig.wSclk = IMOSC_4M_VALUE;
-					break;
-				case (2): 
-					tClkConfig.wSclk = IMOSC_2M_VALUE;	
-					break;
-				case (3): 
-					tClkConfig.wSclk = IMOSC_131K_VALUE;	
-					break;
-				default: 
-					return CSI_ERROR;	
-					break;
-			}
-			break;
-		case  (SRC_HFOSC):	
-			wHfoFreq =  csp_get_hfosc_fre(SYSCON);
-			switch (wHfoFreq)
-			{
-				case (0): 
-					tClkConfig.wSclk = HFOSC_48M_VALUE;
-					break;
-				case (1): 
-					tClkConfig.wSclk = HFOSC_24M_VALUE;
-					break;
-				case (2): 
-					tClkConfig.wSclk = HFOSC_12M_VALUE;	
-					break;
-				case (3): 
-					tClkConfig.wSclk = HFOSC_6M_VALUE;	
-					break;
-				default:  
-					return CSI_ERROR;	
-					break;
-			}
-			break;
-		default:
-			return CSI_ERROR;
-			break;
+	//calculate sclk
+	{
+		 eClkSrc = ((cclk_src_e) csp_get_clksrc(SYSCON));
+		switch(eClkSrc)
+		{ 	case (SRC_ISOSC): 	
+				g_tClkConfig.wSclk = ISOSC_VALUE;
+				break;
+			case (SRC_EMOSC): 	
+				g_tClkConfig.wSclk = EMOSC_VALUE;
+				break;
+			case (SRC_IMOSC):	
+				wImoFreq = csp_get_imosc_fre(SYSCON);
+				switch (wImoFreq)
+				{
+					case (0): 
+						g_tClkConfig.wSclk = IMOSC_5M_VALUE;
+						break;
+					case (1): 
+						g_tClkConfig.wSclk = IMOSC_4M_VALUE;
+						break;
+					case (2): 
+						g_tClkConfig.wSclk = IMOSC_2M_VALUE;	
+						break;
+					case (3): 
+						g_tClkConfig.wSclk = IMOSC_131K_VALUE;	
+						break;
+					default: 
+						return CSI_ERROR;	
+						break;
+				}
+				break;
+			case  (SRC_HFOSC):	
+				wHfoFreq =  csp_get_hfosc_fre(SYSCON);
+				switch (wHfoFreq)
+				{
+					case (0): 
+						g_tClkConfig.wSclk = HFOSC_48M_VALUE;
+						break;
+					case (1): 
+						g_tClkConfig.wSclk = HFOSC_24M_VALUE;
+						break;
+					case (2): 
+						g_tClkConfig.wSclk = HFOSC_12M_VALUE;	
+						break;
+					case (3): 
+						g_tClkConfig.wSclk = HFOSC_6M_VALUE;	
+						break;
+					default:  
+						return CSI_ERROR;	
+						break;
+				}
+				break;
+			default:
+				return CSI_ERROR;
+				break;
+		}
+		byHclkDiv = csp_get_hclk_div(SYSCON);
+	
+		g_tClkConfig.wSclk = g_tClkConfig.wSclk/g_wHclkDiv[byHclkDiv];
 	}
-	byHclkDiv = csp_get_hclk_div(SYSCON);
-
 	
-	//g_wSystemClk = g_wSystemClk / g_wHclkDiv[byHclkDiv];
-	tClkConfig.wSclk = tClkConfig.wSclk/g_wHclkDiv[byHclkDiv];
+	//calculate pclk
+	{
+		uint32_t wPdiv = 1;
+		uint32_t wSclk = csi_get_sclk_freq();
+		wPdiv = csp_get_pdiv(SYSCON);
+		
+		if(wPdiv == 0) 
+			g_tClkConfig.wPclk = wSclk;
+		else           
+			g_tClkConfig.wPclk = wSclk/(wPdiv<<1);
+			
+//		uint32_t wDiv, wPdiv = 1;
+//		wDiv = csp_get_pdiv(SYSCON);
+//		if(wDiv == 0)
+//			wPdiv = 1;
+//		else if(wDiv == 1)
+//			wPdiv = 2;
+//		else if(wDiv & 0x08)
+//			wPdiv = 16;
+//		else if(wDiv & 0x04)
+//			wPdiv = 8;
+//		else if(wDiv & 0x02)
+//			wPdiv = 4;
+//		
+//		g_tClkConfig.wPclk = g_tClkConfig.wSclk / wPdiv;
+	}
 	
-	return tClkConfig.wSclk;
+	return CSI_OK;
 }
 
-/** \brief To get PCLK frequence according to the current reg content.
- *  tClkConfig.wPclk will be updated after excuting this function.
+/** \brief To get SCLK frequence 
+ *  \param[in] none.
+ *  \return csi_error_t.
+ */ 
+uint32_t csi_get_sclk_freq(void)
+{	
+	return g_tClkConfig.wSclk;
+}
+
+/** \brief To get PCLK frequence 
  *  \param[in] none.
  *  \return csi_error_t.
  */ 
 uint32_t csi_get_pclk_freq(void)
 {
-    uint32_t wDiv, wPdiv = 1;
-	wDiv = csp_get_pdiv(SYSCON);
-	if(wDiv == 0)
-		wPdiv = 1;
-	else if(wDiv == 1)
-		wPdiv = 2;
-	else if(wDiv & 0x08)
-		wPdiv = 16;
-	else if(wDiv & 0x04)
-		wPdiv = 8;
-	else if(wDiv & 0x02)
-		wPdiv = 4;
-	
-	tClkConfig.wPclk = tClkConfig.wSclk / wPdiv;
-	return tClkConfig.wPclk;
+	return g_tClkConfig.wPclk;
 }
 
 /** \brief To get CORET frequence.
@@ -287,15 +308,15 @@ uint32_t soc_get_coret_freq(void)
 {
 //	switch ((E902CORET->CTRL & 0x4) >> 2)
 //	{
-//		case 0: return tClkConfig.wSclk/8;
+//		case 0: return g_tClkConfig.wSclk/8;
 //			break;
-//		case 1: return tClkConfig.wSclk;
+//		case 1: return g_tClkConfig.wSclk;
 //			break;
 //		default:
-//			return tClkConfig.wSclk;
+//			return g_tClkConfig.wSclk;
 //			break;
 //	}
-	return tClkConfig.wSclk;
+	return g_tClkConfig.wSclk;
 	
 }
 /** \brief to set clock status in PM mode 
