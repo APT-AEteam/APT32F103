@@ -1474,7 +1474,7 @@
         <Category>
           <label>System Clock</label>
           <Device deviceId="SystemClock">
-            <GenCodeFuncName>SysClockInitFunc</GenCodeFuncName>
+            <GenCodeFuncName>SysClock1031InitFunc</GenCodeFuncName>
             <UseOrNot>1</UseOrNot>
             <label>System Clock</label>
             <Property class="UIchoice">
