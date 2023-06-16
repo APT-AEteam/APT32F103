@@ -205,7 +205,8 @@ typedef enum {
     PA02_RTC_ALM            =  5U,
     PA02_BT0_OUT            =  6U,
     PA02_CLO           		=  7U,
-	PA02_VREF				=  8U,
+	PA02_VREFP				=  8U,
+	PA02_BUF				=  8U,
     PA02_TKEY_CH3           =  9U,
 	PA02_GROUP0_GPT_CHA     =  10U,
 
@@ -221,6 +222,7 @@ typedef enum {
     PA03_TKEY_CH4           =  9U,
 	PA03_GROUP0_GPT_CHB     =  10U,
 	PA03_ADC_AIN3           =  11U,
+	PA03_VREFN          	=  11U,
 	
 	PA04_GPD				=  0U,
 	PA04_INPUT				=  1U,		//input
