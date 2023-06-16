@@ -138,7 +138,7 @@
               <sel>RTC_ALM</sel>
               <sel>BT0_OUT</sel>
               <sel>CLO</sel>
-              <sel>VREF</sel>
+              <sel>VREFP</sel>
               <sel>BUF</sel>
               <sel>TKEY_CH3</sel>
             </Selections>
@@ -193,7 +193,7 @@
               <sel>SIO</sel>
               <sel>TKEY_CH4</sel>
               <sel>ADC_AIN3</sel>
-              <sel>VREF</sel>
+              <sel>VREFN</sel>
             </Selections>
             <Comment>管脚功能&#xD;High_Z:高阻&#xD;GPIO_INPUT:输入&#xD;GPIO_INPUT with Filter:带30ns滤波输入&#xD;GPIO_OUTPUT_Push-Pull:推挽输出&#xD;GPIO_OUTPUT_Open-Drain:开漏输出&#xD;GPIO_OUTPUT_Push-Pull with Monitor:带输出监测的推挽输出&#xD;GPIO_OUTPUT_Open-Drain with Monitor:带输出监测的开漏输出&#xD;Other:复用功能</Comment>
           </Property>
@@ -548,7 +548,7 @@
               <sel>GPIO_OUTPUT_Open-Drain</sel>
               <sel>GPIO_OUTPUT_Push-Pull with Monitor</sel>
               <sel>GPIO_OUTPUT_Open-Drain with Monitor</sel>
-              <sel>SPI_MISO</sel>
+              <sel>SPI_MOSI</sel>
               <sel>EPT_CHAX</sel>
               <sel>GPT_CHA</sel>
               <sel>GPT_CHB</sel>
@@ -704,7 +704,7 @@
               <sel>GPIO_OUTPUT_Open-Drain</sel>
               <sel>GPIO_OUTPUT_Push-Pull with Monitor</sel>
               <sel>GPIO_OUTPUT_Open-Drain with Monitor</sel>
-              <sel>EBI1</sel>
+              <sel>EPI1</sel>
               <sel>EPT_CHCY</sel>
               <sel>I2C_SDA</sel>
               <sel>UART1_RX</sel>
@@ -756,11 +756,11 @@
               <sel>GPIO_OUTPUT_Open-Drain</sel>
               <sel>GPIO_OUTPUT_Push-Pull with Monitor</sel>
               <sel>GPIO_OUTPUT_Open-Drain with Monitor</sel>
-              <sel>EPT_CHBY</sel>
+              <sel>EPT_CHBX</sel>
               <sel>BT1_OUT</sel>
               <sel>I2C_SDA</sel>
               <sel>UART1_TX</sel>
-              <sel>SPI_MISO</sel>
+              <sel>SPI_MOSI</sel>
             </Selections>
             <Comment>管脚功能&#xD;High_Z:高阻&#xD;GPIO_INPUT:输入&#xD;GPIO_INPUT with Filter:带30ns滤波输入&#xD;GPIO_OUTPUT_Push-Pull:推挽输出&#xD;GPIO_OUTPUT_Open-Drain:开漏输出&#xD;GPIO_OUTPUT_Push-Pull with Monitor:带输出监测的推挽输出&#xD;GPIO_OUTPUT_Open-Drain with Monitor:带输出监测的开漏输出&#xD;Other:复用功能</Comment>
           </Property>
@@ -908,6 +908,7 @@
               <sel>GPIO_OUTPUT_Open-Drain</sel>
               <sel>GPIO_OUTPUT_Push-Pull with Monitor</sel>
               <sel>GPIO_OUTPUT_Open-Drain with Monitor</sel>
+              <sel>CNTA_BUZ</sel>
               <sel>GPT_CHA</sel>
               <sel>GPT_CHB</sel>
               <sel>SIO</sel>
@@ -1015,7 +1016,7 @@
               <sel>EPT_CHAY</sel>
               <sel>EPT_CHD</sel>
               <sel>EPI2</sel>
-              <sel>SPI_MISO</sel>
+              <sel>SPI_MOSI</sel>
               <sel>TKEY_CH7</sel>
               <sel>ADC_AIN8</sel>
             </Selections>
@@ -1068,7 +1069,7 @@
               <sel>UART2_TX</sel>
               <sel>BT1_OUT</sel>
               <sel>SPI_SCK</sel>
-              <sel>TKEY_CH5</sel>
+              <sel>TKEY_CH15</sel>
             </Selections>
             <Comment>管脚功能&#xD;High_Z:高阻&#xD;GPIO_INPUT:输入&#xD;GPIO_INPUT with Filter:带30ns滤波输入&#xD;GPIO_OUTPUT_Push-Pull:推挽输出&#xD;GPIO_OUTPUT_Open-Drain:开漏输出&#xD;GPIO_OUTPUT_Push-Pull with Monitor:带输出监测的推挽输出&#xD;GPIO_OUTPUT_Open-Drain with Monitor:带输出监测的开漏输出&#xD;Other:复用功能</Comment>
           </Property>
@@ -1269,12 +1270,10 @@
               <sel>GPIO_OUTPUT_Open-Drain with Monitor</sel>
               <sel>USART_CK</sel>
               <sel>UART0_TX</sel>
-              <sel>SPI_MISO</sel>
+              <sel>SPI_MOSI</sel>
               <sel>EPT_CHBX</sel>
               <sel>TKEY_CH19</sel>
               <sel>ADC_AIN18</sel>
-              <sel/>
-              <sel/>
             </Selections>
             <Comment>管脚功能&#xD;High_Z:高阻&#xD;GPIO_INPUT:输入&#xD;GPIO_INPUT with Filter:带30ns滤波输入&#xD;GPIO_OUTPUT_Push-Pull:推挽输出&#xD;GPIO_OUTPUT_Open-Drain:开漏输出&#xD;GPIO_OUTPUT_Push-Pull with Monitor:带输出监测的推挽输出&#xD;GPIO_OUTPUT_Open-Drain with Monitor:带输出监测的开漏输出&#xD;Other:复用功能</Comment>
           </Property>
