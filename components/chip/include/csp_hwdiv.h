@@ -8,6 +8,11 @@
  * </table>
  * *********************************************************************
 */
+
+#ifndef _CSP_HWDIV_H
+#define _CSP_HWDIV_H
+
+
 #include <stdint.h>
 #include <csi_core.h>
 #include <csp_common.h>
@@ -30,5 +35,5 @@ typedef struct
 	UNSIGHED
  }csp_hwdiv_mode_e;
  
-
+#endif
 

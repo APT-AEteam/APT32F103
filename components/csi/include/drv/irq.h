@@ -10,6 +10,10 @@
  * @model    irq
  ******************************************************************************/
 
+
+#ifndef _IRQ_H
+#define _IRQ_H
+
 #include <stdint.h>
 #include <drv/common.h>
 #include <soc.h>
@@ -135,3 +139,4 @@ bool csi_irq_context(void);
 
 
 
+#endif
