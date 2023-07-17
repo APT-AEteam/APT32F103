@@ -441,13 +441,20 @@ void csi_adc_clr_status(csp_adc_t *adc);
 csi_adc_state_e csi_adc_get_status(csp_adc_t *ptAdcBase);
 
 /** 
-  \brief 	   enable/disable adc interrupt
+  \brief 	   enable adc interrupt
   \param[in]   ptAdcBase	pointer of adc register structure
   \param[in]   eIntSrc		interrupt source
-  \param[in]   bEnable		enable/disable
   \return 	   none
  */
-void csi_adc_int_enable(csp_adc_t *ptAdcBase, csi_adc_intsrc_e eIntSrc, bool bEnable);
+void csi_adc_int_enable(csp_adc_t *ptAdcBase, csi_adc_intsrc_e eIntSrc);
+
+/** 
+  \brief 	   disable adc interrupt
+  \param[in]   ptAdcBase	pointer of adc register structure
+  \param[in]   eIntSrc		interrupt source
+  \return 	   none
+ */
+void csi_adc_int_disable(csp_adc_t *ptAdcBase, csi_adc_intsrc_e eIntSrc);
 
 /** 
   \brief 	   adc cmp0 config

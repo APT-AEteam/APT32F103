@@ -287,13 +287,28 @@ void csi_gpio_port_input_filter(csp_gpio_t *ptGpioBase, uint32_t wPinMask, bool 
 csi_error_t csi_gpio_port_irq_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask, csi_gpio_irq_mode_e eTrgEdge);
 
 /**
-  \brief       Enable or disable gpio pin interrupt
+  \brief       Enable gpio pin interrupt
   \param[in]   ptGpioBase	pointer of gpio register structure
   \param[in]   wPinMask    	Pin mask need to be set
-  \param[in]   bEnable      0:disable  1:enable
   \return      none
 */
-void csi_gpio_port_irq_enable(csp_gpio_t *ptGpioBase, uint32_t wPinMask, bool bEnable);
+void csi_gpio_port_irq_enable(csp_gpio_t *ptGpioBase, uint32_t wPinMask);
+
+/**
+  \brief       disable gpio pin interrupt
+  \param[in]   ptGpioBase	pointer of gpio register structure
+  \param[in]   wPinMask    	Pin mask need to be set
+  \return      none
+*/
+void csi_gpio_port_irq_disable(csp_gpio_t *ptGpioBase, uint32_t wPinMask);
+
+/** 
+  \brief gpio port vic irq enable
+  \param[in] wPinMask: pin mask,0x0001~0xffff
+  \param[in] bEnable: true or false
+  \return none
+ */ 
+void csi_gpio_port_vic_irq_enable(uint32_t wPinMask, bool bEnable);
 
 //csi_error_t csi_gpio_debonce(csi_gpio_t *gpio, uint32_t pin_mask, bool enable);
 /**

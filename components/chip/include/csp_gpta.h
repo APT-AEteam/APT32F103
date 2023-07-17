@@ -829,26 +829,25 @@ static inline void csp_gpta_swf_trg(csp_gpta_t *ptGptaBase, uint8_t byCh)
 	ptGptaBase -> EVSWF |= 0x1 << byCh; 
 }
 
-static inline void csp_gpta_int_enable(csp_gpta_t *ptGptaBase, csp_gpta_int_e byInt, bool bEnable)
+static inline void csp_gpta_int_enable(csp_gpta_t *ptGptaBase, csp_gpta_int_e eInt)
 {
-	ptGptaBase -> IMCR = ptGptaBase -> IMCR & ( ~byInt);
-	if (bEnable)
-		ptGptaBase ->IMCR |= byInt;
-	
+	ptGptaBase ->IMCR |= eInt;
 }
-
+static inline void csp_gpta_int_disable(csp_gpta_t *ptGptaBase, csp_gpta_int_e eInt)
+{
+	ptGptaBase ->IMCR &= ~eInt;
+}
 static inline uint32_t csp_gpta_get_risr(csp_gpta_t *ptGptaBase)
 {
 	return (ptGptaBase -> RISR);
 }
-
-static inline uint32_t csp_gpta_get_misr(csp_gpta_t *ptGptaBase)
+static inline uint32_t csp_gpta_get_isr(csp_gpta_t *ptGptaBase)
 {
 	return (ptGptaBase -> MISR);
 }
-static inline void csp_gpta_clr_int(csp_gpta_t *ptGptaBase, csp_gpta_int_e byInt)
+static inline void csp_gpta_clr_isr(csp_gpta_t *ptGptaBase, csp_gpta_int_e eInt)
 {
-	ptGptaBase -> ICR = byInt;
+	ptGptaBase -> ICR = eInt;
 }
 
 static inline void csp_gpta_set_feglk(csp_gpta_t *ptGptaBase, uint32_t byCh)

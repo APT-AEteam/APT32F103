@@ -111,12 +111,12 @@ csi_error_t csi_dma_ch_init(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_c
 	csp_dma_set_ch(ptDmaChBase, ptChCfg->byDataWidth, ptChCfg->byReload, ptChCfg->byTransMode, ptChCfg->byTsizeMode);	//dma ch para config
 	csp_dma_set_ch_req(ptDmaChBase, ptChCfg->byReqMode);																//software or hardware request
 	
+	csi_irq_enable(ptDmaBase);										//enable dma vic interrupt	
 	if(ptChCfg->wInt)
-	{
-		csp_dma_int_enable(ptDmaChBase, ptChCfg->wInt, ENABLE);		//nable dma xxx interrupt
-		csi_irq_enable((uint32_t *)ptDmaBase);						//enable dma irq		
-	}
-	
+		csp_dma_int_enable(ptDmaChBase, ptChCfg->wInt);				//enable dma xxx interrupt
+	else 
+		csp_dma_int_disable(ptDmaChBase, (DMA_LTCIT | DMA_TCIT));	//disable dma all interrupt
+		
 	return CSI_OK;	
 }
 /** \brief dma channel transfer start
@@ -184,7 +184,7 @@ csi_error_t csi_dma_ch_restart(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh)
 		return CSI_ERROR;
 
 	if(csp_dma_get_crx(ptDmaChBase) & DMA_RELOAD_MSK)               //if reload disable,enable channel
-		csp_dma_ch_en(ptDmaChBase);										//
+		csp_dma_ch_en(ptDmaChBase);									
 	if(!csp_dma_get_rsrx(ptDmaChBase))
 		csp_dma_ch_swtrig(ptDmaChBase);								//sw triger 
 	
@@ -196,19 +196,24 @@ csi_error_t csi_dma_ch_restart(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh)
  *  \param[in] ptDmaBase: pointer of dma register structure
  *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
  *  \param[in] eIntSrc: dma interrupt source
- *  \param[in] bEnable: enable/disable interrupt
  *  \return none
  */
-void csi_dma_int_enable(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc, bool bEnable)
+void csi_dma_int_enable(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc)
 {
 	csp_dma_t *ptDmaChBase = (csp_dma_t *)DMA_REG_BASE(ptDmaBase, eDmaCh);
-	
-	csp_dma_int_enable(ptDmaChBase, eIntSrc, bEnable);
-	
-	if(bEnable)
-		csi_irq_enable((uint32_t *)ptDmaBase);
-	else
-		csi_irq_disable((uint32_t *)ptDmaBase);
+	csp_dma_int_enable(ptDmaChBase, (dma_int_e)eIntSrc);
+}
+/** \brief disable dma interrupt 
+ * 
+ *  \param[in] ptDmaBase: pointer of dma register structure
+ *  \param[in] eDmaCh: channel num of dma(6 channel: 0->5)
+ *  \param[in] eIntSrc: dma interrupt source
+ *  \return none
+ */
+void csi_dma_int_disable(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc)
+{
+	csp_dma_t *ptDmaChBase = (csp_dma_t *)DMA_REG_BASE(ptDmaBase, eDmaCh);
+	csp_dma_int_disable(ptDmaChBase, (dma_int_e)eIntSrc);
 }
 /** \brief dma channel transfer stop
  * 
