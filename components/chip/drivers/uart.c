@@ -182,7 +182,7 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 	csp_uart_set_fifo(ptUartBase, UART_RXFIFO_1_2, ENABLE);				//set /fx fifo = 1_2/fifo enable
 	csp_uart_set_rtor(ptUartBase, ptUartCfg->hwRecvTo);					//set receive timeout(8 bytes, one byte = 11bit) 
 	
-	if(ptUartCfg->bRecvToEn == ENABLE)    //Recieve time enable /disable
+	if(ptUartCfg->bRecvToEn == ENABLE)    								//Recieve time enable /disable
 	{
 		csp_uart_rto_en(ptUartBase);
 	}
@@ -191,6 +191,7 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 		csp_uart_rto_dis(ptUartBase);
 	}
 	
+	csi_irq_enable(ptUartBase);											//enable uart vic irq	
 	if(ptUartCfg->wInt)													//use interrupt				
 	{
 		if(ptUartCfg->wInt & UART_RX_INT)								//use rx interrupt
@@ -201,11 +202,12 @@ csi_error_t csi_uart_init(csp_uart_t *ptUartBase, csi_uart_config_t *ptUartCfg)
 		if((ptUartCfg->byTxMode == UART_TX_MODE_POLL) && (ptUartCfg->byRxMode == UART_RX_MODE_POLL))
 			return CSI_ERROR;
 			
-		csp_uart_int_enable(ptUartBase, ptUartCfg->wInt, ENABLE);	
-		csi_irq_enable((uint32_t *)ptUartBase);							//enable uart vic irq			
+		csp_uart_int_enable(ptUartBase, ptUartCfg->wInt);	
+				
 	}
 	else
 	{
+		csp_uart_int_disable(ptUartBase, 0x6c30bc);	
 		if((ptUartCfg->byRxMode != UART_RX_MODE_POLL) || (ptUartCfg->byTxMode != UART_TX_MODE_POLL))
 			return CSI_ERROR;
 	}
@@ -227,21 +229,25 @@ void csi_uart_recv_timeout(csp_uart_t *ptUartBase, uint16_t hwTimeOut, bool bEna
 	else
 		csp_uart_rto_dis(ptUartBase);
 }
-/** \brief enable/disable uart interrupt 
+/** \brief enableuart interrupt 
  * 
  *  \param[in] ptUartBase: pointer of uart register structure
  *  \param[in] eIntSrc: uart interrupt source
- *  \param[in] bEnable: enable/disable interrupt
  *  \return none
  */
-void csi_uart_int_enable(csp_uart_t *ptUartBase, csi_uart_intsrc_e eIntSrc, bool bEnable)
+void csi_uart_int_enable(csp_uart_t *ptUartBase, csi_uart_intsrc_e eIntSrc)
 {
-	csp_uart_int_enable(ptUartBase, eIntSrc, bEnable);
-	
-	if(bEnable)
-		csi_irq_enable((uint32_t *)ptUartBase);
-	else
-		csi_irq_disable((uint32_t *)ptUartBase);
+	csp_uart_int_enable(ptUartBase, (uart_int_e)eIntSrc);
+}
+/** \brief disable uart interrupt 
+ * 
+ *  \param[in] ptUartBase: pointer of uart register structure
+ *  \param[in] eIntSrc: uart interrupt source
+ *  \return none
+ */
+void csi_uart_int_disable(csp_uart_t *ptUartBase, csi_uart_intsrc_e eIntSrc)
+{
+	csp_uart_int_disable(ptUartBase, (uart_int_e)eIntSrc);
 }
 /** \brief start(enable) uart rx/tx
  * 

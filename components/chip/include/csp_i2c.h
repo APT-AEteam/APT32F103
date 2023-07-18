@@ -522,15 +522,6 @@ static inline uint16_t csp_i2c_get_status(csp_i2c_t *ptI2cBase)
 {
 	return (uint16_t)ptI2cBase->STATUS;
 }
-static inline uint16_t csp_i2c_get_risr(csp_i2c_t *ptI2cBase)
-{
-	return (uint16_t)ptI2cBase->RISR;
-}
-static inline uint16_t csp_i2c_get_isr(csp_i2c_t *ptI2cBase)
-{
-	return (uint16_t)ptI2cBase->MISR;
-}
-
 static inline uint32_t csp_i2c_get_i2cenable(csp_i2c_t *ptI2cBase)
 {
 	return ptI2cBase->I2CENABLE;
@@ -545,22 +536,38 @@ static inline void csp_i2c_clr_isr(csp_i2c_t *ptI2cBase,i2c_int_e eIntNum)
 {
 	ptI2cBase->ICR = eIntNum;
 }
-static inline void csp_i2c_clr_all_int(csp_i2c_t *ptI2cBase)
+static inline void csp_i2c_clr_all_isr(csp_i2c_t *ptI2cBase)
 {
 	ptI2cBase->ICR = 0x7fff;
+}
+static inline uint16_t csp_i2c_get_isr(csp_i2c_t *ptI2cBase)
+{
+	return (uint16_t)ptI2cBase->MISR;
+}
+static inline uint16_t csp_i2c_get_risr(csp_i2c_t *ptI2cBase)
+{
+	return (uint16_t)ptI2cBase->RISR;
+}
+static inline void csp_i2c_int_enable(csp_i2c_t *ptI2cBase,i2c_int_e eI2cInt)
+{
+	ptI2cBase->IMCR |= eI2cInt;
+}
+static inline void csp_i2c_int_disable(csp_i2c_t *ptI2cBase,i2c_int_e eI2cInt)
+{
+	ptI2cBase->IMCR &= ~eI2cInt;
 }
 static inline void csp_i2c_set_imcr(csp_i2c_t *ptI2cBase,uint32_t wIntNum)
 {
 	ptI2cBase->IMCR = wIntNum;
 }
-static inline void csp_i2c_imcr_enable(csp_i2c_t *ptI2cBase,uint32_t wIntNum)
-{
-	ptI2cBase->IMCR |= wIntNum;
-}
-static inline void csp_i2c_imcr_disable(csp_i2c_t *ptI2cBase,uint32_t wIntNum)
-{
-	ptI2cBase->IMCR &= (~wIntNum);
-}
+//static inline void csp_i2c_imcr_enable(csp_i2c_t *ptI2cBase,uint32_t wIntNum)
+//{
+//	ptI2cBase->IMCR |= wIntNum;
+//}
+//static inline void csp_i2c_imcr_disable(csp_i2c_t *ptI2cBase,uint32_t wIntNum)
+//{
+//	ptI2cBase->IMCR &= (~wIntNum);
+//}
 //
 static inline void csp_i2c_restart_en(csp_i2c_t *ptI2cBase)
 {

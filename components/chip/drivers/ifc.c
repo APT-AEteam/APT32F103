@@ -40,17 +40,17 @@ __attribute__((weak)) void ifc_irqhandler(void)
 {
 	uint32_t i;
 
-	if (csp_ifc_get_misr(IFC) == IFCINT_ERS_END)
+	if (csp_ifc_get_isr(IFC) == IFCINT_ERS_END)
 	{
-		csp_ifc_int_enable(IFC, IFCINT_ERS_END, DISABLE);
-		csp_ifc_clr_int(IFC, IFCINT_ERS_END);
+		csp_ifc_int_disable(IFC, IFCINT_ERS_END);
+		csp_ifc_clr_isr(IFC, IFCINT_ERS_END);
 		///DFLASH step6
 		apt_ifc_step_async(IFC, PROGRAM, g_wPageStAddr);
 	}
-	if (csp_ifc_get_misr(IFC) == IFCINT_PGM_END)
+	if (csp_ifc_get_isr(IFC) == IFCINT_PGM_END)
 	{
-		csp_ifc_int_enable(IFC, IFCINT_PGM_END, DISABLE);
-		csp_ifc_clr_int(IFC, IFCINT_PGM_END);
+		csp_ifc_int_disable(IFC, IFCINT_PGM_END);
+		csp_ifc_clr_isr(IFC, IFCINT_PGM_END);
 		///whole page check, only DFlash Write would use INT scheme
 		g_bFlashCheckPass = 1;
 		for (i=0; i<DFLASH_PAGE_SZ; i++)
@@ -372,7 +372,7 @@ static void apt_ifc_step_sync(csp_ifc_t * ptIfcBase, ifc_cmd_e eStepn, uint32_t 
 	///TODO do NOT support all sync operations for now
 	if (eStepn == PROGRAM && ((ptIfcBase -> MR) & DFLASH_PMODE) && (wPageStAddr >= 0x10000000) ){
 		while(ptIfcBase->RISR != IFCINT_PEP_END); /*// Wait for operation done*/
-		csp_ifc_clr_int(ptIfcBase, IFCINT_PEP_END);
+		csp_ifc_clr_isr(ptIfcBase, IFCINT_PEP_END);
 	}
 	else {
 		while(ptIfcBase->CR != 0);
@@ -385,10 +385,10 @@ void apt_ifc_step_async(csp_ifc_t * ptIfcBase, ifc_cmd_e eStepn, uint32_t wPageS
 	switch (eStepn)
 	{
 		case (PAGE_ERASE):
-			csp_ifc_int_enable(ptIfcBase, IFCINT_ERS_END, ENABLE);
+			csp_ifc_int_enable(ptIfcBase, IFCINT_ERS_END);
 			break;
 		case (PROGRAM):
-			csp_ifc_int_enable(ptIfcBase, IFCINT_PGM_END, ENABLE);
+			csp_ifc_int_enable(ptIfcBase, IFCINT_PGM_END);
 			break;
 		default: 
 			break;

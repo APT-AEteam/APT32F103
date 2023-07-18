@@ -11,6 +11,7 @@
 
 /* include ----------------------------------------------------------------*/
 #include "rtc.h"
+#include "irq.h"
 #include "bt.h"
 #include "etb.h"
 #include "pin.h"
@@ -279,10 +280,10 @@ void rtc_timer_demo(void)
 	csi_rtc_set_alarm(RTC,RTC_ALMB,&tBlmTime);	//设置闹钟B	
 	
 	/*** RTC触发输出配置 ***/	
-	csi_rtc_set_evtrg(RTC, RTC_TRGOUT0, RTC_TRGOUT_ALRMA, 0);  //RTC TRGEV0 闹铃A到时产生trigger event
-	csi_rtc_int_enable(RTC, RTC_INTSRC_TRGEV0 , ENABLE);       //使能TRGEV0中断
-	csi_rtc_set_evtrg(RTC, RTC_TRGOUT1, RTC_TRGOUT_ALRMB, 0);  //RTC TRGEV1 闹铃B到时产生trigger event
-	csi_rtc_int_enable(RTC, RTC_INTSRC_TRGEV1 , ENABLE);       //使能TRGEV1中断
+	csi_rtc_set_evtrg(RTC, RTC_TRGOUT0, RTC_TRGOUT_ALRMA, 0);  	//RTC TRGEV0 闹铃A到时产生trigger event
+	csi_rtc_int_enable(RTC, RTC_INTSRC_TRGEV0);       			//使能TRGEV0中断
+	csi_rtc_set_evtrg(RTC, RTC_TRGOUT1, RTC_TRGOUT_ALRMB, 0);  	//RTC TRGEV1 闹铃B到时产生trigger event
+	csi_rtc_int_enable(RTC, RTC_INTSRC_TRGEV1);       			//使能TRGEV1中断
 	
 	/*** 触发目标事件BT0配置 ***/
 	csi_pin_set_mux(PA015, PA015_BT0_OUT);					//PA015 作为BT0 PWM输出引脚

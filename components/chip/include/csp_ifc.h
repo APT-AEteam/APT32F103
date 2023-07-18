@@ -134,27 +134,28 @@ static inline void csp_ifc_addr(csp_ifc_t *ptIfcBase, uint32_t wAddr)
 	ptIfcBase->ADDR = wAddr;
 }
 
-static inline void csp_ifc_int_enable(csp_ifc_t *ptIfcBase, ifc_int_e eInt, bool bEnable)
+static inline void csp_ifc_int_enable(csp_ifc_t *ptIfcBase, ifc_int_e eInt)
 {
-	if (bEnable)
-		ptIfcBase->IMCR |= eInt;
-	else
-		ptIfcBase->IMCR &= ~eInt;
+	ptIfcBase->IMCR |= eInt;
 }
 
-static inline uint32_t csp_ifc_get_misr(csp_ifc_t *ptIfcBase)
+static inline void csp_ifc_int_disable(csp_ifc_t *ptIfcBase, ifc_int_e eInt)
+{
+	ptIfcBase->IMCR &= ~eInt;
+}
+static inline uint32_t csp_ifc_get_isr(csp_ifc_t *ptIfcBase)
 {
 	return (ptIfcBase->MISR);
 }
-
 static inline uint32_t csp_ifc_get_risr(csp_ifc_t *ptIfcBase)
 {
 	return (ptIfcBase->RISR);
 }
-static inline void csp_ifc_clr_int(csp_ifc_t *ptIfcBase, ifc_int_e eInt)
+static inline void csp_ifc_clr_isr(csp_ifc_t *ptIfcBase, ifc_int_e eInt)
 {
 	ptIfcBase->ICR = eInt;
 }
+
 static inline void csp_ifc_unlock(csp_ifc_t *ptIfcBase)
 {
 	ptIfcBase->KR = IFC_USER_KEY;
