@@ -22,6 +22,7 @@
 #include "csp.h"
 #include "ifc.h"
 #include "iic.h"
+#include "tkey.h"
 
 /* externs function--------------------------------------------------------*/
 extern void bt_irqhandler(csp_bt_t *ptBtBase);
@@ -253,7 +254,7 @@ void tkey_int_handler(void)
 {
 #if	TKEY_INT_HANDLE_EN
     // ISR content ...
-
+	tkey_int_process();
 #endif
 }
 void lpt_int_handler(void) 
@@ -285,15 +286,15 @@ void bt2_int_handler(void)
 {
 #if	BT2_INT_HANDLE_EN
     // ISR content ...
+	tkey_basecnt_process();
 	bt_irqhandler(BT2);
+	
 #endif
 }
 void bt3_int_handler(void) 
 {
 #if	BT3_INT_HANDLE_EN
     // ISR content ...
-	csi_tick_increase();
-	
 	bt_irqhandler(BT3); //BT3 is for systick!!!
 	
 #endif

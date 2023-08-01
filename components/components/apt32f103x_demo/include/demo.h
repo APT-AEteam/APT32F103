@@ -133,9 +133,10 @@ void spi_etcb_dma_send_receive(void);
 
 
 //touch demo
-extern void touch_lowpower_demo(void);
-extern void touch_timer_demo(void);
-extern void touch_main_demo(void);
+//extern void touch_lowpower_demo(void);
+//extern void touch_timer_demo(void);
+//extern void touch_main_demo(void);
+extern void tkey_demo(void);
 
 //ept demo
 extern csi_error_t ept_capture_demo();
