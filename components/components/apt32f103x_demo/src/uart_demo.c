@@ -43,7 +43,7 @@ int uart_send_dma_demo(void)
 	tUartConfig.byParity = UART_PARITY_ODD;		//校验位，奇校验
 	tUartConfig.wBaudRate = 115200;				//波特率，115200
 	tUartConfig.hwRecvTo = 88;					//UART接收超时时间，单位：bit位周期，8个bytes(11bit*8=88, 115200波特率时=764us)
-	tUartConfig.bRecvToEn = DISABLE;					//禁止接收超时
+	tUartConfig.bRecvToEn = DISABLE;			//禁止接收超时
 	tUartConfig.wInt = UART_INTSRC_NONE;		//UART中断关闭，轮询(同步)方式
 	tUartConfig.byTxMode = UART_TX_MODE_POLL;	//发送 轮询模式
 	tUartConfig.byRxMode = UART_RX_MODE_POLL;	//接收 轮询模式

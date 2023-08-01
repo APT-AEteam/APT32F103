@@ -919,21 +919,37 @@ void csp_ept_clr_sftlck(csp_ept_t *ptEptBase, csp_ept_ep_e eEpi);
  */
 void csi_ept_debug_enable(csp_ept_t *ptEptBase, bool bEnable);
 
-/**
-  \brief       enable/disable ept emergencyinterruption
-  \param[in]   ptEptBase       EPT handle to operate
-  \param[in]   eEbi		       refer to csp_ept_emint_e
-*/
-void csi_ept_emergency_int_enable(csp_ept_t *ptEptBase, csp_ept_emint_e eEm);
-/** \brief ept  input  config  
+/** \brief enable ept emergencyinterruption
+ * 
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eEbi: refer to csi_ept_emint_e
+ *  \return none
+ */
+void csi_ept_emint_enable(csp_ept_t *ptEptBase, csi_ept_emint_e eEm);
+
+/** \brief disable ept emergencyinterruption
+ * 
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eEbi: refer to csi_ept_emint_e
+ *  \return none
+ */
+void csi_ept_emint_disable(csp_ept_t *ptEptBase, csi_ept_emint_e eEm);
+
+/** \brief ept interrupt enable 
  *  \param[in] ptEptBase: pointer of ept register structure
  *  \param[in] eInt:     refer to to csp_ept_int_e
  *  \param[in] bEnable:  ENABLE/DISABLE
  *  \return none;
  */
-void csi_ept_int_enable(csp_ept_t *ptEptBase, csp_ept_int_e eInt, bool bEnable);
+void csi_ept_int_enable(csp_ept_t *ptEptBase, csp_ept_int_e eInt);
 
-__attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase);
+/** \brief ept interrupt disable 
+ *
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eInt: refer to to csi_ept_intsrc_e
+ *  \return none;
+ */
+void csi_ept_int_disable(csp_ept_t *ptEptBase, csi_ept_intsrc_e eInt);
 
 /**
  \brief  ept configuration Loading

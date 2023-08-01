@@ -66,7 +66,7 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 			else
 			{
 				//csp_usart_rxfifo_rst(ptUsartBase);  			// reset rxfifo 
-				csp_usart_cr_cmd(USART0, US_RSTRX );	//reset rx 
+				csp_usart_cr_cmd(USART0, US_RSTRX );			//reset rx 
 				csp_usart_set_fifo(USART0, US_FIFO_EN , US_RXFIFO_1_2);
 				g_tUsartTran[byIdx].ptRingBuf->hwDataLen = 0;						//clear hwDataLen			
 			}
@@ -79,7 +79,7 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 			if(g_tUsartTran[byIdx].hwTxSize == 0)
 			{	
 				//disable usart tx interrupt
-				csp_usart_int_enable(ptUsartBase, US_TXRIS_INT, DISABLE);		
+				csp_usart_int_disable(ptUsartBase, US_TXRIS_INT);		
 				g_tUsartTran[byIdx].bySendStat = USART_STATE_DONE;					//send complete
 				
 			}
@@ -100,12 +100,11 @@ __attribute__((weak)) void usart_irqhandler(csp_usart_t *ptUsartBase,uint8_t byI
 				csp_usart_cr_cmd(USART0, US_RSTRX );	//reset rx 
 				csp_usart_set_fifo(USART0, US_FIFO_EN , US_RXFIFO_1_2);
 			}
-				//csp_usart_rxfifo_rst(ptUsartBase);
 			
 			g_tUsartTran[byIdx].byRecvStat = USART_STATE_FULL;						//receive complete
 			csp_usart_clr_isr(USART0,US_TIMEOUT_INT);								//clear interrupt status
-			csp_usart_cr_cmd(USART0, US_STTTO); // | US_FIFO_EN | US_RXFIFO_1_2);		//enable receive timeover
-			csp_usart_set_fifo(USART0,  US_FIFO_EN , US_RXFIFO_1_2);
+			csp_usart_cr_cmd(USART0, US_STTTO); 									//enable receive timeover
+			//csp_usart_set_fifo(USART0,  US_FIFO_EN , US_RXFIFO_1_2);
 			break;
 			
 		default:
@@ -172,11 +171,6 @@ csi_error_t csi_usart_init(csp_usart_t *ptUsartBase, csi_usart_config_t *ptUsart
 		else 
 			byClkDiv = 1;
 
-//		if(csp_usart_get_mode(ptUsartBase) == US_ASYNC)
-//			csp_usart_set_brdiv(ptUsartBase, ptUsartCfg->wBaudRate, (csi_get_pclk_freq() >> 4)/byClkDiv);
-//		else 
-//			csp_usart_set_brdiv(ptUsartBase, ptUsartCfg->wBaudRate, csi_get_pclk_freq()/byClkDiv);
-
 		if(csp_usart_get_mode(ptUsartBase) == US_ASYNC)
 			csp_usart_set_brdiv(ptUsartBase, ptUsartCfg->wBaudRate, csi_get_pclk_freq()/byClkDiv);
 		else 
@@ -186,8 +180,10 @@ csi_error_t csi_usart_init(csp_usart_t *ptUsartBase, csi_usart_config_t *ptUsart
 	if(ptUsartCfg->bClkOutEn == ENABLE)
 		csp_usart_set_clko(ptUsartBase, US_CLKO_EN); 				//Enable usartclk output
 		
-	csp_usart_set_rtor(ptUsartBase, ptUsartCfg->hwRecvTo);							//set receive timeover time
-	//csp_usart_cr_cmd(ptUsartBase, US_FIFO_EN | US_RXFIFO_1_2);		//set fifo
+	csp_usart_set_rtor(ptUsartBase, ptUsartCfg->hwRecvTo);			//set receive timeover time
+	if(ptUsartCfg->bRecvToEn == ENABLE)
+		csp_usart_cr_cmd(ptUsartBase, US_STTTO);					//open receive timeover
+		
 	csp_usart_set_fifo(ptUsartBase, US_FIFO_EN, US_RXFIFO_1_2);		//set fifo
 	
 	//get usart rx/tx mode 
@@ -197,41 +193,48 @@ csi_error_t csi_usart_init(csp_usart_t *ptUsartBase, csi_usart_config_t *ptUsart
 	g_tUsartTran[byIdx].byRecvStat = USART_STATE_IDLE;
 	g_tUsartTran[byIdx].bySendStat = USART_STATE_IDLE;
 	
+	csi_irq_enable(ptUsartBase);													//enable usart irq	
 	if(ptUsartCfg->wInt)
 	{
 		ptUsartCfg->wInt &= 0xbdfd;													//clear tx all interrupt
 		if((ptUsartCfg->wInt) && (ptUsartCfg->byRxMode))							//receive iterrupt mode
 		{
 			//csp_usart_cr_cmd(ptUsartBase, US_STTTO | US_FIFO_EN | US_RXFIFO_1_2);	//enable receive timeover
-			csp_usart_cr_cmd(ptUsartBase, US_STTTO);
-			ptUsartCfg->wInt |= US_TIMEOUT_INT;										//open receive timeout interrupt
-			csp_usart_int_enable(ptUsartBase, ptUsartCfg->wInt, ENABLE);			//enable usart interrupt
+			//ptUsartCfg->wInt |= US_TIMEOUT_INT;									//open receive timeout interrupt
+			csp_usart_clr_isr(ptUsartBase, ptUsartCfg->wInt);
+			csp_usart_int_enable(ptUsartBase, ptUsartCfg->wInt);					//enable usart interrupt
 		}
-		csi_irq_enable(ptUsartBase);												//enable usart irq			
+				
 	}
 	else
 	{
+		csp_usart_int_disable(ptUsartBase, 0xffff);	
 		if((ptUsartCfg->byRxMode) || (ptUsartCfg->byTxMode))
 			return CSI_ERROR;
 	}
 	
 	return CSI_OK;
 }
-/** \brief enable/disable usart interrupt 
+/** \brief enable usart interrupt 
  * 
  *  \param[in] ptSioBase: pointer of usart register structure
  *  \param[in] eIntSrc: usart interrupt source
- *  \param[in] bEnable: enable/disable interrupt
  *  \return none
  */
-void csi_usart_int_enable(csp_usart_t *ptUsartBase, csi_usart_intsrc_e eIntSrc, bool bEnable)
+void csi_usart_int_enable(csp_usart_t *ptUsartBase, csi_usart_intsrc_e eIntSrc)
 {
-	csp_usart_int_enable(ptUsartBase, eIntSrc, bEnable);
-	
-	if(bEnable)
-		csi_irq_enable((uint32_t *)ptUsartBase);
-	else
-		csi_irq_disable((uint32_t *)ptUsartBase);
+	csp_usart_clr_isr(ptUsartBase, (usart_int_e)eIntSrc);
+	csp_usart_int_enable(ptUsartBase, (usart_int_e)eIntSrc);
+}
+/** \brief disable usart interrupt 
+ * 
+ *  \param[in] ptSioBase: pointer of usart register structure
+ *  \param[in] eIntSrc: usart interrupt source
+ *  \return none
+ */
+void csi_usart_int_disable(csp_usart_t *ptUsartBase, csi_usart_intsrc_e eIntSrc)
+{
+	csp_usart_int_disable(ptUsartBase, (usart_int_e)eIntSrc);
 }
 /** \brief start(enable) usart rx/tx
  * 
@@ -366,7 +369,7 @@ int16_t csi_usart_send(csp_usart_t *ptUsartBase, const void *pData, uint16_t hwS
 			else
 			{
 				g_tUsartTran[byIdx].bySendStat = USART_STATE_SEND;				//set usart send status, sending
-				csp_usart_int_enable(ptUsartBase, USART_INTSRC_TXRIS, ENABLE);	//enable usart txfifo interrupt
+				csp_usart_int_enable(ptUsartBase, USART_INTSRC_TXRIS);			//enable usart txfifo interrupt
 			}
 			return CSI_OK;
 			

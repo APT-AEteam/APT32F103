@@ -508,13 +508,19 @@ csi_error_t csi_gpta_continuous_software_waveform(csp_gpta_t *ptGptaBase, csi_gp
  */
 void csi_gpta_swf_trg(csp_gpta_t *ptGptaBase, csi_gpta_trgout_e byCh);
 
-/** \brief gpta  input  config  
+/** \brief gpta interrupt enable
  *  \param[in] ptGptaBase:pointer of gpta register structure
- *  \param[in] eInt:     refer to to csp_gpta_int_e
- *  \param[in] bEnable:  ENABLE/DISABLE
- *  \return CSI_OK;
+ *  \param[in] eInt:     refer to to csi_gpta_intsrc_e
+ *  \return none;
  */
-void csi_gpta_int_enable(csp_gpta_t *ptGptaBase, csp_gpta_int_e eInt, bool bEnable);
+void csi_gpta_int_enable(csp_gpta_t *ptGptaBase, csi_gpta_intsrc_e eInt);
+
+/** \brief gpta interrupt disable
+ *  \param[in] ptGptaBase:pointer of gpta register structure
+ *  \param[in] eInt:     refer to to csi_gpta_intsrc_e
+ *  \return none;
+ */
+void csi_gpta_int_disable(csp_gpta_t *ptGptaBase, csi_gpta_intsrc_e eInt);
 
 /** \brief gpta sync input evtrg config  
  * 

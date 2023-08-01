@@ -29,26 +29,26 @@ uint32_t val_BUFF[4];
  */
 __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 {
-	if(((csp_ept_get_emmisr(ptEptBase) & EPT_INT_CPUF))==EPT_INT_CPUF)
+	if(((csp_ept_get_emisr(ptEptBase) & EPT_INT_CPUF))==EPT_INT_CPUF)
 	{
-	 ptEptBase -> EMHLCLR |=  EPT_INT_CPUF;
-	 csp_ept_clr_emint(ptEptBase,EPT_INT_CPUF);	
+		 ptEptBase -> EMHLCLR |=  EPT_INT_CPUF;
+		 csp_ept_clr_emisr(ptEptBase,EPT_INT_CPUF);	
 	}
 	
-	if(((csp_ept_get_emmisr(ptEptBase) & EPT_INT_EP6))==EPT_INT_EP6)
+	if(((csp_ept_get_emisr(ptEptBase) & EPT_INT_EP6))==EPT_INT_EP6)
 	{
-	 csp_ept_clr_emHdlck(EPT0, EP6);
-	 csp_ept_clr_emint(ptEptBase,EPT_INT_EP6);	
+		 csp_ept_clr_emHdlck(EPT0, EP6);
+		 csp_ept_clr_emisr(ptEptBase,EPT_INT_EP6);	
 	}	
 	
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_TRGEV0))==EPT_INT_TRGEV0)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_TRGEV0))==EPT_INT_TRGEV0)
 	{	
 	  
-	  csp_ept_clr_int(ptEptBase, EPT_INT_TRGEV0);
+	  csp_ept_clr_isr(ptEptBase, EPT_INT_TRGEV0);
 	  nop;
 	  
 	}
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CBU))==EPT_INT_CBU)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CBU))==EPT_INT_CBU)
 	{		
 			//csi_ept_change_ch_duty(EPT0,EPT_CH_1, 50);
 		/*gEptTick++;if(gEptTick>=5){	
@@ -66,50 +66,50 @@ __attribute__((weak)) void ept_initen_irqhandler(csp_ept_t *ptEptBase)
 								   
 		                         }*/
 						 
-	  csp_ept_clr_int(ptEptBase, EPT_INT_CBU);
+	  csp_ept_clr_isr(ptEptBase, EPT_INT_CBU);
 	    
 	}
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CBD))==EPT_INT_CBD)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CBD))==EPT_INT_CBD)
 	{		
 	  //csi_ept_change_ch_duty(EPT0,EPT_CH_1, 20);
 			
 	  //csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));	
-	  csp_ept_clr_int(ptEptBase, EPT_INT_CBD);
+	  csp_ept_clr_isr(ptEptBase, EPT_INT_CBD);
 	    
 	}
 	
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_PEND))==EPT_INT_PEND)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_PEND))==EPT_INT_PEND)
 	{		
 	   //csi_gpio_port_set_high(GPIOA0, (0x01ul << 0));			
       nop;
        //csi_gpio_port_set_low (GPIOA0, (0x01ul << 0));
-	  csp_ept_clr_int(ptEptBase, EPT_INT_PEND);
+	  csp_ept_clr_isr(ptEptBase, EPT_INT_PEND);
 	    
 	}
 	
-    if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CAPLD0))==EPT_INT_CAPLD0)
+    if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CAPLD0))==EPT_INT_CAPLD0)
 	{		
 		
-	 csp_ept_clr_int(ptEptBase, EPT_INT_CAPLD0);			
+	 csp_ept_clr_isr(ptEptBase, EPT_INT_CAPLD0);			
 	}
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CAPLD1))==EPT_INT_CAPLD1)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CAPLD1))==EPT_INT_CAPLD1)
 	{		
 
-	 csp_ept_clr_int(ptEptBase, EPT_INT_CAPLD1);			
+	 csp_ept_clr_isr(ptEptBase, EPT_INT_CAPLD1);			
 	}
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CAPLD2))==EPT_INT_CAPLD2)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CAPLD2))==EPT_INT_CAPLD2)
 	{		
 	 
-	 csp_ept_clr_int(ptEptBase, EPT_INT_CAPLD2);			
+	 csp_ept_clr_isr(ptEptBase, EPT_INT_CAPLD2);			
 	}
-	if(((csp_ept_get_misr(ptEptBase) & EPT_INT_CAPLD3))==EPT_INT_CAPLD3)
+	if(((csp_ept_get_isr(ptEptBase) & EPT_INT_CAPLD3))==EPT_INT_CAPLD3)
 	{		
 	   
 		val_BUFF[0]=csp_ept_get_cmpa(ptEptBase);
 		val_BUFF[1]=csp_ept_get_cmpb(ptEptBase);
 		val_BUFF[2]=csp_ept_get_cmpc(ptEptBase);
 		val_BUFF[3]=csp_ept_get_cmpd(ptEptBase);
-	 csp_ept_clr_int(ptEptBase, EPT_INT_CAPLD3);
+	 csp_ept_clr_isr(ptEptBase, EPT_INT_CAPLD3);
      csp_ept_set_crrearm(ptEptBase);//单次模式下 rearm				
 	}
 }
@@ -180,12 +180,11 @@ csi_error_t csi_ept_config_init(csp_ept_t *ptEptBase, csi_ept_config_t *pteptPwm
 	csp_ept_set_cmpc(ptEptBase, (uint16_t)wCmpLoad);
 	csp_ept_set_cmpd(ptEptBase, (uint16_t)wCmpLoad);
 	
-	
+	csi_irq_enable(ptEptBase);											//enable ept vic interrupt
 	if(pteptPwmCfg->wInt)
-	{
-		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt, true);			//enable interrupt
-		csi_irq_enable((uint32_t *)ptEptBase);							//enable  irq
-	}
+		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt);				//enable ept interrupt
+	else
+		csp_ept_int_disable(ptEptBase, 0x1ffff);						//disable ept all interrupt
 	
 	gEptPrd=wPrdrLoad;
 	
@@ -228,16 +227,16 @@ csi_error_t csi_ept_capture_init(csp_ept_t *ptEptBase, csi_ept_captureconfig_t *
 	wCrVal|=EPT_CAPREARM;
 	wPrdrLoad=0xFFFF;
 
-    csp_ept_clken(ptEptBase);                                           // clkEN
-	csp_ept_set_cr(ptEptBase, wCrVal);									// set bt work mode
+    csp_ept_clken(ptEptBase);                                       // clkEN
+	csp_ept_set_cr(ptEptBase, wCrVal);								// set bt work mode
 	csp_ept_set_pscr(ptEptBase, (uint16_t)wClkDiv);					// clk div
-	csp_ept_set_prdr(ptEptBase, (uint16_t)wPrdrLoad);				    // prdr load value
+	csp_ept_set_prdr(ptEptBase, (uint16_t)wPrdrLoad);				// prdr load value
 	
+	csi_irq_enable(ptEptBase);										//enable ept vic interrupt
 	if(pteptPwmCfg->wInt)
-	{
-		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt, true);		//enable interrupt
-		csi_irq_enable((uint32_t *)ptEptBase);							//enable  irq
-	}
+		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt);			//enable ept interrupt
+	else
+		csp_ept_int_disable(ptEptBase, 0x1ffff);					//disable ept all interrupt
 	
 	gEptPrd=wPrdrLoad;
 	
@@ -295,12 +294,11 @@ csi_error_t  csi_ept_wave_init(csp_ept_t *ptEptBase, csi_ept_pwmconfig_t *pteptP
 	csp_ept_set_cmpc(ptEptBase, (uint16_t)wCmpLoad);
 	csp_ept_set_cmpd(ptEptBase, (uint16_t)wCmpLoad);
 	
-	
+	csi_irq_enable(ptEptBase);											//enable ept vic interrupt
 	if(pteptPwmCfg->wInt)
-	{
-		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt, true);		//enable interrupt
-		csi_irq_enable((uint32_t *)ptEptBase);							//enable  irq
-	}
+		csp_ept_int_enable(ptEptBase, pteptPwmCfg->wInt);				//enable ept interrupt
+	else
+		csp_ept_int_disable(ptEptBase, 0x1ffff);						//disable ept all interrupt
 	
 	gEptPrd=wPrdrLoad;
 	
@@ -892,15 +890,27 @@ void csi_ept_debug_enable(csp_ept_t *ptEptBase, bool bEnable)
 	csp_ept_dbg_enable(ptEptBase, bEnable);
 }
 
-/** \brief enable/disable ept emergencyinterruption
+/** \brief enable ept emergencyinterruption
  * 
  *  \param[in] ptEptBase: pointer of ept register structure
- *  \param[in] eEbi: refer to csp_ept_emint_e
+ *  \param[in] eEbi: refer to csi_ept_emint_e
  *  \return none
  */
-void csi_ept_emergency_int_enable(csp_ept_t *ptEptBase, csp_ept_emint_e eEm)
-{   csi_irq_enable((uint32_t *)ptEptBase);		//enable  irq
-    csp_ept_Emergency_emimcr(ptEptBase,eEm);
+void csi_ept_emint_enable(csp_ept_t *ptEptBase, csi_ept_emint_e eEm)
+{   
+	csp_ept_clr_emisr(ptEptBase,(csp_ept_emint_e)eEm);
+    csp_ept_emint_enable(ptEptBase,(csp_ept_emint_e)eEm);
+}
+
+/** \brief disable ept emergencyinterruption
+ * 
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eEbi: refer to csi_ept_emint_e
+ *  \return none
+ */
+void csi_ept_emint_disable(csp_ept_t *ptEptBase, csi_ept_emint_e eEm)
+{   
+    csp_ept_emint_disable(ptEptBase,(csp_ept_emint_e)eEm);
 }
 
 /** \brief enable/disable ept out trigger 
@@ -979,17 +989,28 @@ csi_error_t csi_ept_continuous_software_output(csp_ept_t *ptEptBase, csi_ept_cha
 	return CSI_OK;
 }
 
-/** \brief ept  input  config 
+/** \brief ept interrupt enable
  *
  *  \param[in] ptEptBase: pointer of ept register structure
  *  \param[in] eInt: refer to to csp_ept_int_e
+ *  \return none;
+ */
+void csi_ept_int_enable(csp_ept_t *ptEptBase, csp_ept_int_e eInt)
+{  
+	csp_ept_clr_isr(ptEptBase,(csp_ept_int_e)eInt);
+	csp_ept_int_enable(ptEptBase,(csp_ept_int_e)eInt);
+}
+
+/** \brief ept interrupt disable
+ *
+ *  \param[in] ptEptBase: pointer of ept register structure
+ *  \param[in] eInt: refer to to csi_ept_intsrc_e
  *  \param[in] bEnable: ENABLE/DISABLE
  *  \return none;
  */
-void csi_ept_int_enable(csp_ept_t *ptEptBase, csp_ept_int_e eInt, bool bEnable)
+void csi_ept_int_disable(csp_ept_t *ptEptBase, csi_ept_intsrc_e eInt)
 {  
-	csp_ept_int_enable(ptEptBase,eInt,bEnable);
-	csi_irq_enable((uint32_t *)ptEptBase);							//enable  irq
+	csp_ept_int_disable(ptEptBase,(csp_ept_int_e)eInt);
 }
 
 /** \brief ept sync input evtrg config  

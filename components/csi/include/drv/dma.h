@@ -181,10 +181,18 @@ csi_error_t csi_dma_ch_restart(csp_dma_t *ptDmaBase, csi_dma_ch_e eDmaCh);
   \param[in]   ptDmaBase	pointer of dma register structure
   \param[in]   eDmaCh		channel num of dma(6 channel: 0->5)
   \param[in]   eIntSrc		dma interrupt source
-  \param[in]   bEnable		enable/disable interrupt
   \return none
  */
-void csi_dma_int_enable(csp_dma_t *ptDmaBase,  csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc, bool bEnable);
+void csi_dma_int_enable(csp_dma_t *ptDmaBase,  csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc);
+
+/** 
+  \brief 	   enable/disable dma interrupt 
+  \param[in]   ptDmaBase	pointer of dma register structure
+  \param[in]   eDmaCh		channel num of dma(6 channel: 0->5)
+  \param[in]   eIntSrc		dma interrupt source
+  \return none
+ */
+void csi_dma_int_disable(csp_dma_t *ptDmaBase,  csi_dma_ch_e eDmaCh, csi_dma_intsrc_e eIntSrc);
 
 /**
   \brief       Stop a dma channel

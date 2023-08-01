@@ -36,7 +36,7 @@ const uint8_t  byExiNumMap[] =
 __attribute__((weak)) void gpio_irqhandler(uint8_t byExiNum)
 {
 	volatile uint32_t wExiSta; 
-	wExiSta = csp_exi_get_port_irq(SYSCON);
+	wExiSta = csp_exi_port_get_isr(SYSCON);
 	
     switch(byExiNum)
 	{
@@ -109,7 +109,7 @@ __attribute__((weak)) void gpio_irqhandler(uint8_t byExiNum)
 			break;
 		
 	}
-	csp_exi_clr_port_irq(SYSCON,wExiSta);				//clear interrput 
+	csp_exi_port_clr_isr(SYSCON,wExiSta);				//clear interrput 
 }
 
 /** \brief get gpio port total number 
@@ -311,17 +311,18 @@ csi_error_t csi_gpio_port_irq_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask, cs
 	if((byPortNum > 16) || (eTrgEdge >  GPIO_IRQ_BOTH_EDGE))
 		return CSI_ERROR;
 		
-	csp_gpio_set_port_irq(ptGpioBase, wPinMask, ENABLE);		//to make exi to be visible by syscon
-		
 	for(i = 0; i < byPortNum; i++)
 	{
 		if(wPinMask & 0x01)
 		{
 			gpio_intgroup_set(ptGpioBase,i, i);					//interrupt group
-			exi_trg_edge_set(SYSCON, i, eTrgEdge);				//interrupt edge
+			exi_trg_edge_set(SYSCON,i,(exi_trigger_e)eTrgEdge);	//interrupt edge
 		}
 		wPinMask = (wPinMask >> 1);
 	}
+	
+	csp_exi_port_clr_isr(SYSCON,wPinMask);						//clear interrput status before enable irq 
+	csp_exi_port_int_enable(SYSCON, wPinMask, ENABLE);			//EXI INT enable
 	
 	return CSI_OK;
 }
@@ -332,14 +333,10 @@ csi_error_t csi_gpio_port_irq_mode(csp_gpio_t *ptGpioBase, uint32_t wPinMask, cs
  *  \param[in] bEnable: true or false
  *  \return none
  */ 
-void csi_gpio_port_irq_enable(csp_gpio_t *ptGpioBase, uint32_t wPinMask, bool bEnable)
+void csi_gpio_port_vic_irq_enable(uint32_t wPinMask, bool bEnable)
 {
 	uint8_t  i,k = 0;
 	uint8_t  byIrqbuf[5];
-	
-	csp_gpio_set_port_irq(ptGpioBase, wPinMask, bEnable);	//GPIO INT enable Control reg(setting IEER)
-	csp_exi_set_port_irq(SYSCON,wPinMask, bEnable);			//EXI INT enable
-	csp_exi_clr_port_irq(SYSCON,wPinMask);					//clear interrput status before enable irq 
 	
 	for(i = 0; i < 5; i++)
 	{
@@ -356,6 +353,28 @@ void csi_gpio_port_irq_enable(csp_gpio_t *ptGpioBase, uint32_t wPinMask, bool bE
 		else
 			csi_vic_disable_irq((uint32_t)byIrqbuf[i]);
 	}
+}
+/** \brief gpio port irq enable
+ * 
+ *  \param[in] ptGpioBase: pointer of gpio register structure
+ *  \param[in] wPinMask: pin mask,0x0001~0xffff
+ *  \param[in] bEnable: true or false
+ *  \return none
+ */ 
+void csi_gpio_port_irq_enable(csp_gpio_t *ptGpioBase, uint32_t wPinMask)
+{
+	csp_gpio_port_int_enable(ptGpioBase, wPinMask);			
+}
+/** \brief gpio port irq disable
+ * 
+ *  \param[in] ptGpioBase: pointer of gpio register structure
+ *  \param[in] wPinMask: pin mask,0x0001~0xffff
+ *  \param[in] bEnable: true or false
+ *  \return none
+ */ 
+void csi_gpio_port_irq_disable(csp_gpio_t *ptGpioBase, uint32_t wPinMask)
+{
+	csp_gpio_port_int_disable(ptGpioBase, wPinMask);		
 }
 /** \brief  set gpio toggle
  * 
