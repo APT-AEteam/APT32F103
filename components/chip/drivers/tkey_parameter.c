@@ -16,10 +16,9 @@ void tkey_parameter_init(void)
 /****************************************************
 //TK basic parameters
 *****************************************************/
-	/*dwTkeyIoEnable=TCH_EN(0)|TCH_EN(1)|TCH_EN(2)|TCH_EN(4)|TCH_EN(5)|TCH_EN(6)|TCH_EN(7)|TCH_EN(8)|TCH_EN(9)|TCH_EN(10)|TCH_EN(11)
+	dwTkeyIoEnable=TCH_EN(0)|TCH_EN(1)|TCH_EN(2)|TCH_EN(4)|TCH_EN(5)|TCH_EN(6)|TCH_EN(7)|TCH_EN(8)|TCH_EN(9)|TCH_EN(10)|TCH_EN(11)
 				   |TCH_EN(12)|TCH_EN(13)|TCH_EN(14)|TCH_EN(15)|TCH_EN(16)|TCH_EN(17)|TCH_EN(18)|TCH_EN(19)|TCH_EN(20)
-				   |TCH_EN(21)|TCH_EN(22)|TCH_EN(23)|TCH_EN(24);*/
-	dwTkeyIoEnable=TCH_EN(0)|TCH_EN(1)|TCH_EN(2);
+				   |TCH_EN(21)|TCH_EN(22)|TCH_EN(23)|TCH_EN(24);
 	byTkeyGlobalSens=2;								//TK Global Tkey Sensitivity,0=invalid;
 	hwTkeyGlobalTrigger=50;							//TK Global Tkey Trigger,0=invalid;
 	byTkeyGlobalIcon=4;								//TK Global Tkey Icon,0=invalid;
