@@ -96,7 +96,7 @@ int lpt_pwm_duty_demo(void)
  *  \param[in] none
  *  \return error code
  */
-int lbt_sync_trg_start_demo(void)
+int lpt_sync_trg_start_demo(void)
 {
 	int iRet = 0;
 	volatile uint8_t ch;
@@ -132,7 +132,7 @@ int lbt_sync_trg_start_demo(void)
  *  \param[in] none
  *  \return error code
  */
-int lbt_trg_out_demo(void)
+int lpt_trg_out_demo(void)
 {
 	int iRet = 0;
 	volatile uint8_t ch;
@@ -142,7 +142,7 @@ int lbt_trg_out_demo(void)
 	csi_lpt_set_evtrg(LPT, LPT_TRGOUT, LPT_TRGSRC_CMP, 1);
 	
 	csi_bt_timer_init(BT1,5000);									//BT定时1ms
-	csi_bt_set_sync(BT1, BT_TRG_SYNCIN0, BT_TRG_ONCE, DISABLE);	//外部触发bt启动(SYNCIN0)
+	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_SYCAREARM);	//外部触发bt启动(SYNCIN0)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  						//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_LPT_TRGOUT0;  	    				//LPT作为触发源
@@ -165,7 +165,7 @@ int lbt_trg_out_demo(void)
  *  \param[in] none
  *  \return error code
  */
-int lbt_soft_trg_out_demo(void)
+int lpt_soft_trg_out_demo(void)
 {
 	int iRet = 0;
 	volatile uint8_t ch;
@@ -175,7 +175,7 @@ int lbt_soft_trg_out_demo(void)
 //	csi_lpt_set_evtrg(LPT, LPT_TRGOUT0, LPT_TRGSRC_CMP, 1);
 	
 	csi_bt_timer_init(BT1,5000);									//BT定时1ms
-	csi_bt_set_sync(BT1, BT_TRG_SYNCIN0, BT_TRG_ONCE, DISABLE);	//外部触发bt启动(SYNCIN0)
+	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_AUTOAREARM);	//外部触发bt启动(SYNCIN0)
 	
 	tEtbConfig.byChType = ETB_ONE_TRG_ONE;  						//单个源触发单个目标
 	tEtbConfig.bySrcIp  = ETB_LPT_TRGOUT0;  	    				//LPT作为触发源
