@@ -11,8 +11,8 @@
  ******************************************************************************/
 
 
-#ifndef _DRV_IRQ_H
-#define _DRV_IRQ_H
+#ifndef _IRQ_H
+#define _IRQ_H
 
 #include <stdint.h>
 #include <drv/common.h>

@@ -284,26 +284,19 @@ csi_error_t csi_bt_pwm_updata(csp_bt_t *ptBtBase, uint32_t wFreq, uint8_t byDuty
  *  \param[in] bAutoRearm: auto rearm, ENABLE/DISABLE(true/false)
  *  \return error code \ref csi_error_t
  */
-csi_error_t csi_bt_set_sync(csp_bt_t *ptBtBase,csi_bt_trgin_e eTrgin, csi_bt_trgmode_e eTrgMode, csi_bt_arearm_e eAutoRearm)
+csi_error_t csi_bt_set_sync(csp_bt_t *ptBtBase,csi_bt_trgin_e eTrgin, csi_bt_trgmode_e eTrgMode, bool bAutoRearm)
 {
-	if(eTrgin > BT_TRGIN_SYNCEN2)
+	if(eTrgin > BT_TRG_SYNCIN2)
 		return CSI_ERROR;
+		
+	ptBtBase->CR = ptBtBase->CR & ~(BT_SYNCCMD_MSK | BT_OSTMD_MSK(eTrgin) | BT_AREARM_MSK);
 	
-//	ptBtBase->CR = ptBtBase->CR & ~(BT_SYNCCMD_MSK | BT_OSTMD_MSK(eTrgin) | BT_AREARM_MSK(eTrgin));
-//	
-//	ptBtBase->CR |=  (BT_SYNC_EN << BT_SYNC_POS(eTrgin)) | (BT_SYNCMD_DIS << BT_SYNCCMD_POS) | 
-//				(eTrgMode << BT_OSTMD_POS(eTrgin)) | (eAutoRearm << BT_AREARM_POS(eTrgin));
+	ptBtBase->CR |=  (BT_SYNC_EN << BT_SYNC_POS(eTrgin)) | (BT_SYNCMD_DIS << BT_SYNCCMD_POS) | 
+				(eTrgMode << BT_OSTMD_POS(eTrgin)) | (bAutoRearm << BT_AREARM_POS);
 	
-	ptBtBase->CR = ptBtBase->CR & ~(BT_SYNCCMD_MSK | BT_OSTMD_MSK(eTrgin));
-	ptBtBase->CR |=  ((BT_SYNC_EN << BT_SYNC_POS(eTrgin)) | (BT_SYNCMD_EN << BT_SYNCCMD_POS) | (eTrgMode << BT_OSTMD_POS(eTrgin)));
-	if((eTrgin == BT_TRGIN_SYNCEN0) || (eTrgin == BT_TRGIN_SYNCEN1))
+	if(eTrgin == BT_TRG_SYNCIN1)
 	{
-		ptBtBase->CR = ptBtBase->CR & ~(BT_AREARM_MSK(eTrgin));
-		ptBtBase->CR |= (eAutoRearm << BT_AREARM_POS(eTrgin));
-	}
-	if(eTrgin == BT_TRGIN_SYNCEN2)
-	{
-		ptBtBase->CR |= BT_EXTCKM_MSK;		//selecet count clk source
+		//ptBtBase->CR |= BT_EXTCKM_MSK;		//selecet count clk source
 		//ptBtBase->RSSR |= BT_START;			//start bt				
 	}
 	else

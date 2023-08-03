@@ -43,7 +43,7 @@ int etcb_one_trg_one_demo0(void)
 	csi_exi_set_evtrg(1, TRGSRC_EXI1, 1);
 	
 	csi_bt_start_sync(BT0, 10);
-	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_SYCAREARM);	//外部触发bt启动(SYNCIN0) 
+	csi_bt_set_sync(BT0,BT_TRG_SYNCIN0, BT_TRG_ONCE, ENABLE);  
 	csi_bt_set_evtrg(BT0, 0, BT_TRGSRC_PEND);
 	
 	csi_lpt_start_sync(LPT,LPT_CLK_ISCLK,200);
@@ -424,7 +424,7 @@ int etcb_mix_demo(void)
 	csi_exi_set_evtrg(3, TRGSRC_EXI3, 1);
 
 	csi_bt_start_sync(BT0, 200);
-	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_SYCAREARM);	//外部触发bt启动(SYNCIN0) 
+	csi_bt_set_sync(BT0,BT_TRG_SYNCIN0, BT_TRG_ONCE, ENABLE);  
 	
 	csi_bt_set_evtrg(BT0, 0, BT_TRGSRC_PEND);
 		

@@ -122,7 +122,13 @@ typedef enum
 	BT_SYNC_EN       
 }bt_sync_e;
 
-
+#define BT_AREARM_POS	(15)
+#define BT_AREARM_MSK	(0x01ul << BT_AREARM_POS)
+typedef enum
+{
+	BT_AREARM_DIS 	= 0,
+    BT_AREARM_EN            
+}bt_arearm_e;
 
 #define BT_SYNCCMD_POS	(15)
 #define BT_SYNCCMD_MSK	(0x01ul << BT_SYNCCMD_POS)
@@ -139,14 +145,6 @@ typedef enum
 	BT_CNTRLD_EN 	= 0,
     BT_CNTRLD_DIS           
 }bt_cntrld_e;
-
-#define BT_AREARM_POS(n)	(18 +  (2 * n))
-#define BT_AREARM_MSK(n)	(0x01ul << BT_AREARM_POS(n))
-typedef enum
-{
-	BT_AREARM_DIS 	= 0,
-    BT_AREARM_EN            
-}bt_arearm_e;
 
 
 #define BT_OSTMD_POS(n)	(24 + n)

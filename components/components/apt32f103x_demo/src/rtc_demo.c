@@ -293,7 +293,7 @@ void rtc_timer_demo(void)
 	tPwmCfg.wFreq 		= 1000;								//PWM 输出频率
 	tPwmCfg.byInt		= BT_INTSRC_NONE;
 	csi_bt_pwm_init(BT0, &tPwmCfg);							//初始化BT0 PWM输出
-	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_AUTOAREARM);	//外部触发bt启动(SYNCIN0)
+	csi_bt_set_sync(BT0, BT_TRG_SYNCIN0, BT_TRG_CONTINU, ENABLE);	//外部触发bt启动(SYNCIN0)
 	
 	/*** 触发目标事件BT1配置 ***/ 	
 	csi_pin_set_mux(PA014, PA014_BT1_OUT);					//PA014 作为BT1 PWM输出引脚
@@ -303,7 +303,7 @@ void rtc_timer_demo(void)
 	tPwmCfg.wFreq 		= 1000;								//PWM 输出频率
 	tPwmCfg.byInt		= BT_INTSRC_NONE;
 	csi_bt_pwm_init(BT1, &tPwmCfg);							//初始化BT0 PWM输出
-	csi_bt_set_sync(BT1, BT_TRGIN_SYNCEN0, BT_TRG_ONCE, BT_TRG_AUTOAREARM);	//外部触发bt启动(SYNCIN0)
+	csi_bt_set_sync(BT1, BT_TRG_SYNCIN0, BT_TRG_CONTINU, ENABLE);	//外部触发bt启动(SYNCIN0)
 	
 	csi_etb_init();								    //ETCB 初始化
 	

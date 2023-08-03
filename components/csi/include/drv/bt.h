@@ -57,9 +57,9 @@ typedef enum{
  * \brief    BT sync trigger input 
  */
 typedef enum{
-	BT_TRGIN_SYNCEN0	= 0,		//BT sync trigger input0		
-	BT_TRGIN_SYNCEN1,				//BT sync trigger input1	
-	BT_TRGIN_SYNCEN2				//BT sync trigger input2		
+	BT_TRG_SYNCIN0	= 0,	//sync evtrr input0		
+	BT_TRG_SYNCIN1,			//sync evtrg input1	
+	BT_TRG_SYNCIN2			//sync evtrg input1			
 }csi_bt_trgin_e;
 
 /**
@@ -75,15 +75,6 @@ typedef enum{
  * \enum     csi_bt_trgsrc_e
  * \brief    BT event trigger source
  */
- 
- /**
- * \enum     csi_bt_arearm_e
- * \brief    BT sync arearm mode 
- */
-typedef enum{
-	BT_TRG_AUTOAREARM	= 1,			//x1：计数器周期结束时，自动AREARM
-	BT_TRG_SYCAREARM	                //1x：SYNCIN[1]时，自动AREARM			
-}csi_bt_arearm_e;					    //BT  sync arearm mode 
 typedef enum
 {
 	BT_TRGSRC_DIS	= 0,  		//none trigger	       
@@ -223,7 +214,7 @@ csi_error_t csi_bt_pwm_updata(csp_bt_t *ptBtBase, uint32_t wfreq, uint8_t byDuty
   \param[in]   bAutoRearm 	auto rearm, ENABLE/DISABLE(true/false)
   \return      error code \ref csi_error_t
 */
-csi_error_t csi_bt_set_sync(csp_bt_t *ptBtBase,csi_bt_trgin_e eTrgin, csi_bt_trgmode_e eTrgMode, csi_bt_arearm_e eAutoRearm);
+csi_error_t csi_bt_set_sync(csp_bt_t *ptBtBase,csi_bt_trgin_e eTrgin, csi_bt_trgmode_e eTrgMode, bool bAutoRearm);
 
 /** 
   \brief 	   restart bt sync evtrg 
