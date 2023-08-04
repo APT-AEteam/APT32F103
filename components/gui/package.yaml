@@ -10,7 +10,7 @@ type: common
 yoc_version:
   - v7.2
   - v7.3
-depends:
+depends: 
 build_config:
   include:
     - include
@@ -36,4 +36,4 @@ field:
 suitableChip: 
 homepage: 
 soc_config: 
-depends_forward:
+depends_forward: 
