@@ -97,7 +97,7 @@ build_config:
   define:
     - NO_MORE_DEFINE
   libs:
-    - _103tkey_c_0_90.a
+    - _103tkey_f_0_95.a
   libpath:
     - drivers
 # source_file:                             # <可选项> 指定参与编译的源代码文件，支持通配符，采用相对路径
@@ -107,6 +107,8 @@ source_file:
   - drivers/sys/*.c
   - drivers/sys/*.S
   - drivers/liblib_103tkey_c_0_90.a
+  - drivers/liblib_103tkey_c_0_95.a
+  - drivers/liblib_103tkey_f_0_95.a
 ## 第五部分：配置信息
 # def_config:                              # 组件的可配置项
 #   CONFIG_DEBUG: y
