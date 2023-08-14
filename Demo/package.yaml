@@ -14,7 +14,7 @@ def_config:
   CONFIG_XIP: 1
   DBG_PRINT2PC: 1
 name: Demo
-version: v1.0.0
+version: v1.1.0
 description: 我的第一个方案工程
 tag: ""
 keywords: 
@@ -23,8 +23,8 @@ author:
 license: ""
 type: solution
 depends:
-  - apt32f103x_demo: v1.0.0
-  - sdk_103x: v1.0.0
+  - apt32f103x_demo: v1.1.0
+  - sdk_103x: v1.1.0
 build_config:
   include:
     - include
@@ -39,7 +39,7 @@ build_config:
 source_file:
   - src/*.c
 depends_forward:
-  - apt32f103x_demo: v1.0.0
-  - sdk_103x: v1.0.0
+  - apt32f103x_demo: v1.1.0
+  - sdk_103x: v1.1.0
 install: 
 homepage: 
