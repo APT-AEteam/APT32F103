@@ -32,7 +32,9 @@ typedef struct
 	__IM   uint32_t  MISR;		//0x001C	Mask interrupt status register  
 	__OM   uint32_t  ICR;		//0x0020	Interrupt clear register 
 	__IOM  uint32_t  DMACR;     //0x0024    Dma Control Register
-	__OM   uint32_t  SRR;		//0x0028	Software Reset Register       
+	__OM   uint32_t  SRR;		//0x0028	Software Reset Register   
+	__IM   uint32_t  RXFL;		//0x002C	rx fifo level
+	__IM   uint32_t  TXFL;		//0x0030	tx fifo level    
 } csp_spi_t;
 
 /*****************************************************************************
@@ -244,8 +246,8 @@ typedef enum{
 typedef enum{
 	SPI_PCLK_SWRST		= (0x01ul << 0),   		//pclk softreset
 	SPI_SCLK_SWRST		= (0x01ul << 1), 		//spi clk softreset              
-	//SPI_RXFIFO_RST    = (0x01ul << 8), 	    //rx fifo reset          
-	//SPI_TXFIFO_RST   	= (0x01ul << 9),		//tx fifo reset           
+	SPI_RXFIFO_RST      = (0x01ul << 8), 	    //rx fifo reset          
+	SPI_TXFIFO_RST   	= (0x01ul << 9),		//tx fifo reset           
 }spi_softreset_e;
 
 /******************************************************************************
@@ -307,7 +309,6 @@ static inline uint32_t csp_spi_get_sr(csp_spi_t *ptSpiBase)
 	return (uint32_t)(ptSpiBase->SR);
 }
 
-//lin add
 static inline uint8_t csp_spi_get_rxifl(csp_spi_t *ptSpiBase)
 {
 	return ptSpiBase->CR1 & (SPI_RXIFL_MSK) ;
@@ -376,6 +377,16 @@ static inline uint8_t csp_spi_read_ready(csp_spi_t *ptSpiBase)
 static inline void csp_spi_softreset(csp_spi_t *ptSpiBase,spi_softreset_e eRstSource)
 {
 		ptSpiBase->SRR |= eRstSource;
+}
+
+static inline uint8_t csp_spi_get_rxfifo_level(csp_spi_t *ptSpiBase)
+{
+	return (uint8_t)(ptSpiBase->RXFL & 0x0f);
+}
+
+static inline uint8_t csp_spi_get_txfifo_level(csp_spi_t *ptSpiBase)
+{
+	return (uint8_t)(ptSpiBase->TXFL & 0x0f);
 }
 
 static inline void csp_spi_set_rxdma(csp_spi_t *ptSpiBase, spi_rdma_en_e eRxDmaEn, spi_rdma_md_e eRxDmaMode) 
