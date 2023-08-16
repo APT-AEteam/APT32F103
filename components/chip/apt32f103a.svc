@@ -3325,7 +3325,7 @@
         <Bit Name="TNF" Authority="RO" Bits="17" Description="发送FIFO是否已满状态位&#xD;&#xA;0 = 发送FIFO已满&#xD;&#xA;1 = 发送FIFO未满" />
         <Bit Name="RNE" Authority="RO" Bits="16" Description="接收FIFO是否为空状态位&#xD;&#xA;0 = 接收FIFO为空&#xD;&#xA;1 = 接收FIFO非空" />
         <Bit Name="RFF" Authority="RO" Bits="15" Description="接收FIFO是否已满状态位&#xD;&#xA;0 = 接收FIFO未满&#xD;&#xA;1 = 接收FIFO已满" />
-        <Bit Name="TXRIS" Authority="RO" Bits="14" Description="发生FIFO状态位&#xD;&#xA;0 = 发生FIFO大于4&#xD;&#xA;1 = 发生FIFO小于等于4" />
+        <Bit Name="TXRIS" Authority="RO" Bits="14" Description="发送FIFO状态位&#xD;&#xA;0 = 发送FIFO大于4&#xD;&#xA;1 = 发送FIFO小于等于4" />
         <Bit Name="RORRIS" Authority="RO" Bits="13" Description="接收FIFO溢出状态位&#xD;&#xA;0 = 接收FIFO未溢出&#xD;&#xA;1 = 接收FIFO溢出" />
         <Bit Name="RXRIS" Authority="RO" Bits="12" Description="接收FIFO状态位&#xD;&#xA;0 = 接收FIFO小于中断触发点&#xD;&#xA;1 = 接收FIFO大于等于中断触发点&#xD;&#xA;接收FIFO中断触发点选择请参考US_CR(USART控制寄存器)的RXIFLSEL位" />
         <Bit Name="IDLEFLAG" Authority="RO" Bits="11" Description="0 = USART正在接收一个帧&#xD;&#xA;1 = USART没有在接收任何帧&#xD;&#xA;该位表示J1587协议的帧传送状态，当接收开始时变低，在接收完成+10个停止位(10个周期的高电平)后变高。" />
