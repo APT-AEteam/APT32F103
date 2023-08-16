@@ -265,7 +265,7 @@ int32_t csi_spi_send(csp_spi_t *ptSpiBase, void *pData, uint32_t wSize)
 	g_tSpiTransmit.byWriteable = SPI_STATE_BUSY;
 	g_tSpiTransmit.byTxSize = wSize;
 	g_tSpiTransmit.pbyTxData = (uint8_t *)pData;
-	csi_spi_clr_rxfifo(ptSpiBase);
+	csp_spi_softreset(ptSpiBase,SPI_TXFIFO_RST); 
 	csp_spi_en(ptSpiBase);
 	
 	switch(g_tSpiTransmit.bySendMode)
@@ -327,7 +327,7 @@ csi_error_t csi_spi_send_async(csp_spi_t *ptSpiBase, void *pData, uint32_t wSize
 		g_tSpiTransmit.byWriteable = SPI_STATE_BUSY;
 		g_tSpiTransmit.byTxSize = wSize;
 		g_tSpiTransmit.pbyTxData = (uint8_t *)pData;
-		csi_spi_clr_rxfifo(ptSpiBase);
+		csp_spi_softreset(ptSpiBase,SPI_TXFIFO_RST); 
 		csp_spi_en(ptSpiBase);
 		csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_TXIM_INT);
 	}
@@ -355,7 +355,7 @@ int32_t csi_spi_receive(csp_spi_t *ptSpiBase, void *pData, uint32_t wSize)
 	g_tSpiTransmit.byReadable = SPI_STATE_BUSY;
 	g_tSpiTransmit.byRxSize = wSize;
 	g_tSpiTransmit.pbyRxData = (uint8_t *)pData;
-	csi_spi_clr_rxfifo(ptSpiBase);
+	csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);
 	csp_spi_en(ptSpiBase);
 	switch(g_tSpiTransmit.byRecvMode)
 	{
@@ -410,7 +410,7 @@ csi_error_t csi_spi_receive_async(csp_spi_t *ptSpiBase, void *pData, uint32_t wS
 		g_tSpiTransmit.byRxSize = wSize;
 		g_tSpiTransmit.pbyRxData = (uint8_t *)pData;
 		csp_spi_en(ptSpiBase);
-		csi_spi_clr_rxfifo(ptSpiBase);
+		csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);
 		csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RXIM_INT);
 		csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RTIM_INT);
 	}
@@ -443,6 +443,8 @@ int32_t csi_spi_send_receive(csp_spi_t *ptSpiBase, void *pDataout, void *pDatain
 	g_tSpiTransmit.byReadable  = SPI_STATE_BUSY;
 	g_tSpiTransmit.pbyTxData = (uint8_t *)pDataout;
 	g_tSpiTransmit.pbyRxData = (uint8_t *)pDatain;
+	csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);	//clear rx fifo		
+	csp_spi_softreset(ptSpiBase,SPI_TXFIFO_RST);	//clear tx fifo	
 	csp_spi_en(ptSpiBase);
 	
 	switch(g_tSpiTransmit.bySendRecMode)
@@ -500,7 +502,7 @@ int32_t csi_spi_send_receive(csp_spi_t *ptSpiBase, void *pDataout, void *pDatain
 			return wCount;
 			
 		case SPI_TX_RX_MODE_INT:
-			csi_spi_clr_rxfifo(ptSpiBase);
+			csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);	//clear rx fifo	
 			g_tSpiTransmit.byTxFifoLength = 0x02;
 			csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RXIM_INT);
 			csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RTIM_INT);
@@ -541,7 +543,8 @@ csi_error_t csi_spi_send_receive_async(csp_spi_t *ptSpiBase, void *pDataout, voi
 		g_tSpiTransmit.pbyTxData = (uint8_t *)pDataout;
 		g_tSpiTransmit.pbyRxData = (uint8_t *)pDatain;
 		csp_spi_en(ptSpiBase);
-		csi_spi_clr_rxfifo(ptSpiBase);
+		csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);	//clear rx fifo		
+		csp_spi_softreset(ptSpiBase,SPI_TXFIFO_RST);	//clear tx fifo	
 	
 		g_tSpiTransmit.byTxFifoLength = 0x02;
 		csp_spi_int_enable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RXIM_INT);
@@ -606,7 +609,7 @@ static void apt_spi_intr_recv_data(csp_spi_t *ptSpiBase)
 {
 	if((g_tSpiTransmit.pbyRxData == NULL) || (g_tSpiTransmit.byRxSize == 0U))//use interrupt transceiver, but does not care about receiving
 	{
-		csi_spi_clr_rxfifo(ptSpiBase); 
+		csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST); 
 		g_tSpiTransmit.byReadable = SPI_STATE_IDLE;
 		csp_spi_int_disable(ptSpiBase, g_tSpiTransmit.byInt & SPI_RXIM_INT);
 		csp_spi_int_disable(ptSpiBase, SPI_RTIM_INT);
@@ -717,7 +720,7 @@ __attribute__((weak)) void spi_irqhandler(csp_spi_t *ptSpiBase)
 	if(wStatus & SPI_ROTIM_INT)
 	{	
 		//for reference
-		csi_spi_clr_rxfifo(ptSpiBase);
+		csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);
 		csp_spi_clr_isr(ptSpiBase, SPI_ROTIM_INT);
 	}
 	
@@ -838,7 +841,7 @@ csi_error_t csi_spi_send_receive_x8(csp_spi_t *ptSpiBase, void *pDataOut,void *p
 	else
 		bySize = (uint8_t)wSize;
 	
-	csi_spi_clr_rxfifo(ptSpiBase);
+	csp_spi_softreset(SPI0,SPI_RXFIFO_RST);
 	
 	g_tSpiTransmit.byWriteable = SPI_STATE_BUSY;
 	g_tSpiTransmit.byReadable  = SPI_STATE_BUSY;
@@ -905,7 +908,7 @@ csi_error_t csi_spi_send_receive_d8(csp_spi_t *ptSpiBase, uint8_t *pDataOut,uint
 		uint8_t byLast8Times = 0;
 		uint8_t byLastTxBuff[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-		csi_spi_clr_rxfifo(ptSpiBase);
+		csp_spi_softreset(ptSpiBase,SPI_RXFIFO_RST);
 
 		byZheng = (wSize >> 3);
 		byRemainder = wSize & 0x07;
