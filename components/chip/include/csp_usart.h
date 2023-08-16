@@ -80,11 +80,11 @@ typedef struct
 #define	US_SWRST_POS			(0)			 
 #define	US_SWRST_MSK			(0x01ul << US_SWRST_POS)
 
-//#define	US_RXFIFO_RST_POS		(8)			 
-//#define US_RXFIFO_RST_MSK		(0x01ul << US_RXFIFO_RST_POS)
-//
-//#define	US_TXFIFO_RST_POS		(16)			 
-//#define US_TXFIFO_RST_MSK		(0x01ul << US_TXFIFO_RST_POS)
+#define	US_RXFIFO_RST_POS		(8)			 
+#define US_RXFIFO_RST_MSK		(0x01ul << US_RXFIFO_RST_POS)
+
+#define	US_TXFIFO_RST_POS		(16)			 
+#define US_TXFIFO_RST_MSK		(0x01ul << US_TXFIFO_RST_POS)
 
 /******************************************************************************
 * CR: USART Control Registers
@@ -453,15 +453,15 @@ static inline void csp_usart_soft_rst(csp_usart_t *ptUsartBase)
 {
 	ptUsartBase->SRR  = US_SWRST_MSK; 			//SWRST 
 }
-//static inline void csp_usart_rxfifo_rst(csp_usart_t *ptUsartBase)
-//{
-//	ptUsartBase->SRR  = US_RXFIFO_RST_MSK; 		//rxfifo
-//}
-//static inline void csp_usart_txfifo_rst(csp_usart_t *ptUsartBase)
-//{
-//	ptUsartBase->SRR  = US_TXFIFO_RST_MSK; 		//txfifo
-//}
-//
+static inline void csp_usart_rxfifo_rst(csp_usart_t *ptUsartBase)
+{
+	ptUsartBase->SRR  = US_RXFIFO_RST_MSK; 		//rxfifo
+}
+static inline void csp_usart_txfifo_rst(csp_usart_t *ptUsartBase)
+{
+	ptUsartBase->SRR  = US_TXFIFO_RST_MSK; 		//txfifo
+}
+
 static inline void csp_usart_cr_cmd(csp_usart_t *ptUsartBase, usart_cr_e eCrCmd)
 {
 	ptUsartBase->CR |= eCrCmd;

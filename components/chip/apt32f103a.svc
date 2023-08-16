@@ -252,7 +252,7 @@
         <Bit Name="CLODIV" Authority="RW" Bits="14-12" Description="CLO输出分频选择。&#xD;&#xA;0h：4分频。&#xD;&#xA;1h：不分频。&#xD;&#xA;2h：2分频。&#xD;&#xA;4h：8分频。&#xD;&#xA;5h：16分频。&#xD;&#xA;其他：4分频。" />
         <Bit Name="CLOMX" Authority="RW" Bits="11-8" Description="CLO输出选择。（CLO管脚输出最高频率不超过10MHz，若输出频率较高，可选择CLODIV分频后输出）&#xD;&#xA;0h：ISCLK输出。&#xD;&#xA;1h：IMCLK输出。&#xD;&#xA;3h：EMCLK输出。&#xD;&#xA;4h：HFCLK输出。&#xD;&#xA;6h：RTCCLK输出。&#xD;&#xA;7h：PCLK输出。&#xD;&#xA;8h：HCLK输出。&#xD;&#xA;9h：IWDTCLK输出。&#xD;&#xA;Dh：SYSCLK输出。&#xD;&#xA;其他：保留。" />
         <Bit Name="HFO_FSEL" Authority="RW" Bits="5-4" Description="HFOSC频率选择。&#xD;&#xA;0h：48MHz。&#xD;&#xA;1h：24MHz。&#xD;&#xA;2h：12MHz。&#xD;&#xA;3h：6MHz。" />
-        <Bit Name="IMO_FSEL" Authority="RW" Bits="1-0" Description="IMOSC频率选择。&#xD;&#xA;0h：5.556MHz。&#xD;&#xA;1h：4.194MHz。&#xD;&#xA;2h：2.097MHz。&#xD;&#xA;3h：131.072KHz。" />
+        <Bit Name="IMO_FSEL" Authority="RW" Bits="1-0" Description="IMOSC频率选择。&#xD;&#xA;0h：5.556MHz。&#xD;&#xA;1h：4.194MHz。&#xD;&#xA;2h：2.097MHz。" />
       </Register>
       <Register Name="SYSCON_OPT0" Authority="RW" Address="0x40011068" Width="32" Description="系统配置寄存器0 [2]">
         <Bit Name="RDP" Authority="RO" Bits="27" Description="Read Protection使能User Option状态查询。&#xD;&#xA;0h：缺省关闭Read Protection。&#xD;&#xA;1h：缺省打开Read Protection。" />
@@ -3197,6 +3197,8 @@
         <Bit Name="CLKEN" Authority="RW" Bits="0" Description="时钟使能/禁止控制位&#xD;&#xA;0 = 时钟禁止1 = 时钟使能" />
       </Register>
       <Register Name="US_SRR" Authority="RW" Address="0x40083008" Width="32" Description="软件复位寄存器">
+        <Bit Name="TXFIFO_RST" Authority="RW" Bits="16" Description="发送FIFO复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位" />
+        <Bit Name="RXFIFO_RST" Authority="RW" Bits="8" Description="接收FIFO复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位" />
         <Bit Name="SWRST" Authority="RW" Bits="0" Description="软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位" />
       </Register>
       <Register Name="US_CR" Authority="RW" Address="0x4008300c" Width="32" Description="控制寄存器">
@@ -3469,8 +3471,16 @@
         <Bit Name="RXDMAEN" Authority="RW" Bits="0" Description="RX DMA enable" />
       </Register>
       <Register Name="SPI_SRR" Authority="RW" Address="0x40090028" Width="32" Description="SPI软件复位寄存器">
+        <Bit Name="TXFIFO_RST" Authority="RW" Bits="9" Description="发送FIFO复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位" />
+        <Bit Name="RXFIFO_RST" Authority="RW" Bits="8" Description="接收FIFO复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 复位" />
         <Bit Name="SCLK_ SWRST" Authority="RW" Bits="1" Description="SPICLK时钟域软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位" />
         <Bit Name="PCLK_SWRST" Authority="RW" Bits="0" Description="PCLK时钟域软件复位&#xD;&#xA;0 = 无效&#xD;&#xA;1 = 软件复位 " />
+      </Register>
+      <Register Name="SPI_RX_FL" Authority="RW" Address="0x4009002c" Width="32" Description="SPI发送FIFO有效数据长度寄存器">
+        <Bit Name="RXFL" Authority="RO" Bits="3-0" Description="接收FIFO中有效数据的个数" />
+      </Register>
+      <Register Name="SPI_TX_FL" Authority="RW" Address="0x40090030" Width="32" Description="SPI发送FIFO有效数据长度寄存器">
+        <Bit Name="TXFL" Authority="RO" Bits="3-0" Description="发送FIFO中有效数据的个数" />
       </Register>
     </Peripheral>
     <Peripheral Name="I2C">
