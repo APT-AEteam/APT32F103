@@ -98,6 +98,7 @@ build_config:
     - NO_MORE_DEFINE
   libs:
     - _103tkey_f_0_95.a
+    - libadctrim_lib.a
   libpath:
     - drivers
 # source_file:                             # <可选项> 指定参与编译的源代码文件，支持通配符，采用相对路径
