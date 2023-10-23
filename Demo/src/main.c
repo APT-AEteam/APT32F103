@@ -28,21 +28,21 @@ extern void user_demo(void);
 
 int main()
 {
-    system_init();
-	board_init();
+    system_init();							//系统配置，包括系统时钟，systick（使用BT3 中断实现）等
+	board_init();							//打印口配置，包括串口、管脚和波特率等
 	
-	csi_pin_set_mux(PA06, PA06_OUTPUT);		//PA06 output
-	csi_pin_set_high(PA06);					//PA06 output high;
+	csi_pin_set_mux(PA06, PA06_OUTPUT);		//PA06 配置为输出
+	csi_pin_set_high(PA06);					//PA06 输出高电平;
 	
-	my_printf("Hello World~~~~~~~\n");		//print message
+	my_printf("Hello World~~~~~~~\n");		//打印信息
 	
 	user_demo();							//demo				
 	
 	
 	while(1)
 	{
-		mdelay(100);						//delay 100ms
-		csi_pin_toggle(PA06);				//PA06 toggle
+		mdelay(100);						//延时 100ms。使用该延时，请务必保证有调用初始化函数“csi_tick_init()”,本例程默认在system_init()中调用该初始化函数。
+		csi_pin_toggle(PA06);				//PA06 翻转
 	}
 	
     return 0;

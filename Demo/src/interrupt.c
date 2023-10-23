@@ -58,12 +58,6 @@ uint8_t g_byAdcDone = 0;
 //ReturnValue:NONE
 /*************************************************************/
 
-//void coret_int_handler(void) 
-//{
-//    // ISR content ...
-//	tick_irqhandler();		//system coret 
-//}
-
 void syscon_int_handler(void) 
 {
     // ISR content ...
@@ -77,7 +71,6 @@ void syscon_int_handler(void)
 	if(csp_syscon_get_int_st(SYSCON) & IWDT_INT)
 	{
 		nop;
-		//csi_pin_toggle(PA05);
 		csp_syscon_int_clr(SYSCON, IWDT_INT);
 		//csi_iwdt_feed();
 	}
@@ -356,27 +349,6 @@ void LoadInstruAccessHandler(void)
     // ISR content ...
 	while(1){};
 }
-
-//void Trap2Handler(void) 
-//{
-//    // ISR content ...
-//	while(1){};
-//}
-//
-//void Trap3Handler(void) 
-//{
-//    // ISR content ...
-//	while(1){};
-//
-//}
-//
-//void PendTrapHandler(void) 
-//{
-//    // ISR content ...
-//	while(1){};
-//}
-
-
 
 
 /******************* (C) COPYRIGHT 2020 APT Chip *****END OF FILE****/

@@ -49,7 +49,7 @@ void system_init(void)		//__attribute__((weak))
 	csp_iwdt_disable(SYSCON);			//disable iwdt
 	csi_sysclk_config(g_tClkConfig);	//sysclk config
 	csi_calc_clk_freq();				//calculate(updata) sclk and pclk
-	csi_tick_init();               	 	//init systick(BT3)
+	csi_tick_init();               	 	//init systick(USE BT3 INT)，without this function ，"mdelay()" will be unreliable!
 	
 	__enable_excp_irq(); 				//enable all interrupts
 	
