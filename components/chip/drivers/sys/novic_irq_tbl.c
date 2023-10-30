@@ -30,9 +30,6 @@ void irq_vectors_init(void)
         g_irqvector[i] = Default_Handler;
     }
 	
-//#ifdef	CONFIG_IRQ_LOOKUP		//Table lookup method for interrupt processing 
-	//init all irq table
- //   g_irqvector[CORET_IRQn] 	= coret_int_handler;
 	g_irqvector[SYSCON_IRQ_NUM] 	= syscon_int_handler;
 	g_irqvector[IFC_IRQ_NUM] 		= ifc_int_handler;
 	g_irqvector[ADC_IRQ_NUM] 		= adc0_int_handler;
@@ -61,7 +58,5 @@ void irq_vectors_init(void)
 	g_irqvector[BT2_IRQ_NUM] 		= bt2_int_handler;
 	g_irqvector[BT3_IRQ_NUM] 		= bt3_int_handler;
 
-
-//#endif
 
 }

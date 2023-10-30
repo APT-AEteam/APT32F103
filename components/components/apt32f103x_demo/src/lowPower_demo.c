@@ -116,7 +116,6 @@ void lp_lpt_wakeup_deepsleep_demo(void)
 	
 	while(1) 
 	{
-//		csi_pin_set_high(PB05);
 		csi_pm_enter_sleep(ePmMode);
 		my_printf("Wakeup From Deep-Sleep Mode...\n");
 		csi_pin_toggle(PB05);
@@ -136,35 +135,35 @@ void lp_wakeup_demo(void)
 
 
 	
-	csi_pin_set_mux(PB01,PB01_OUTPUT);				//PB01 OUTPUT
+	csi_pin_set_mux(PB02,PB02_OUTPUT);				//PB02 OUTPUT
 	
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
-//	csi_pin_toggle(PB01);
-//	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
+	csi_pin_toggle(PB02);
+	mdelay(250);
 
 	
 #ifdef CONFIG_USER_PM	
 	csi_pm_attach_callback(ePmMode, prepare_lp, wkup_lp);	//需要在工程设置compiler tab下加入define CONFIG_USER_PM=1;
 #endif
 	
-//	csi_pin_set_mux(PB01,PB01_INPUT);							//PB01 输入							
-//	csi_pin_pull_mode(PB01, GPIO_PULLUP);						//PB01 上拉
-//	csi_pin_irq_mode(PB01,EXI_GRP1, GPIO_IRQ_FALLING_EDGE);		//PB01 下降沿产生中断
-//	csi_pin_irq_enable(PB01, EXI_GRP1, ENABLE);					//PB01 中断使能，选择中断组0	
-//	csi_vic_set_wakeup_irq(EXI1_IRQn);
+	csi_pin_set_mux(PB01,PB01_INPUT);							//PB01 输入							
+	csi_pin_pull_mode(PB01, GPIO_PULLUP);						//PB01 上拉
+	csi_pin_irq_mode(PB01,EXI_GRP1, GPIO_IRQ_FALLING_EDGE);		//PB01 下降沿产生中断
+	csi_pin_irq_enable(PB01,ENABLE);							//PB01 中断使能，选择中断组0
+	csi_pin_vic_irq_enable(EXI_GRP1, ENABLE);					//PB1 VIC中断使能，选择中断组1
 	
 	
 //	csi_pm_clk_enable(SP_IDLE_PCLK, DISABLE);
@@ -174,7 +173,7 @@ void lp_wakeup_demo(void)
 //	csi_pm_clk_enable(DP_ESOSC, ENABLE);
 //	csi_pm_clk_enable(DP_EMOSC, ENABLE);
 	
-	csi_pm_config_wakeup_source(WKUP_LVD, ENABLE);
+//	csi_pm_config_wakeup_source(WKUP_LVD, ENABLE);
 
 	
 	//LPT WAKEUP DeepSleep
@@ -182,7 +181,7 @@ void lp_wakeup_demo(void)
 //	csi_lpt_start(LPT);	  
 	
 	//LVD WAKEUP	DeepSleep
-	csi_lvd_int_enable(LVD_INTF,LVD_33);  						//VDD掉电到3.6V即触发LVD中断
+//	csi_lvd_int_enable(LVD_INTF,LVD_33);  						//VDD掉电到3.6V即触发LVD中断
 	
 
 //	csi_pin_set_mux(PA03, PA03_OSC_XI);
@@ -207,26 +206,25 @@ void lp_wakeup_demo(void)
 	
 //	mdelay(10);
 	
-//	switch(ePmMode)
-//	{
-//		case PM_MODE_SLEEP:
-//			my_printf("Enter Sleep Mode\n");
-//			break;
-//		case PM_MODE_DEEPSLEEP:
-//			my_printf("Enter Deep-Sleep mode\n");
-//			break;
-//		default:
-//			break;
-//	}
+	switch(ePmMode)
+	{
+		case PM_MODE_SLEEP:
+			my_printf("Enter Sleep Mode\n");
+			break;
+		case PM_MODE_DEEPSLEEP:
+			my_printf("Enter Deep-Sleep mode\n");
+			break;
+		default:
+			break;
+	}
 	
 	while(1) 
 	{
-		//csi_pin_set_high(PB01);
 		
 		csi_pm_enter_sleep(ePmMode);
 	//	csi_iwdt_feed();
 		//mdelay(100);
-		csi_pin_toggle(PB01);
+		csi_pin_toggle(PB02);
 		mdelay(100);
 		my_printf("Wakeup From Sleep Mode...\n");
 	}
