@@ -53,11 +53,7 @@ irq_nested_level:
     .weak   Default_IRQHandler
     .type   Default_IRQHandler, %function
 Default_IRQHandler:
-//	ipush
-	
-//.F_RegNotSave:
-//
-//    csrr    t1, mcause
+
     addi    sp, sp, -48
     sw      t0, 4(sp)
     sw      t1, 8(sp)
@@ -83,12 +79,6 @@ Default_IRQHandler:
     lw      t2, (t0)
     jalr    t2
 	
-//	li      t0, MSTATUS_PRV1
-//    csrs    mstatus, t0
-//    
-//.F_RegNotLoad:
-//    ipop
-
     csrc    mstatus, 8   // Clear MIE bit of mstatus
 
     lw      a1, 40(sp)
@@ -102,7 +92,6 @@ Default_IRQHandler:
     not     a4, a4      //a4 = 0xfffffffe
     and     a5, a4, a3  
     sb      a5, 0(a2)
-	
 	
     li      t0, MSTATUS_PRV1
     csrs    mstatus, t0
