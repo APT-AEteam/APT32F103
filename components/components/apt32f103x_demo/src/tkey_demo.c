@@ -69,7 +69,7 @@ void csi_tkey_config(void)
  
  
 /*
- * 库版本说明  注意！！！目前只有默认版本，其他版本后续补上！！！！！！！！！
+ * 库版本说明  注意！！！目前已有的版本都在chip组件下的drivers目录下内看到
  * 
  * 
  * lib_103tkey_f_X_XX：跳频版本，Touch使用中断处理，占用更多的SRAM及程序空间，抗干扰能力最强
@@ -107,11 +107,9 @@ void csi_tkey_config(void)
  
 ③mc_X_XX版本：
 
-   只需要在主循环调用csi_tkey_main_prog();定时器中断和TKEY中断函数里不需要调用任何函数
+   只需要在主循环调用tkey_main_prog();定时器中断和TKEY中断函数里不需要调用任何函数
 
- 
 所有版本的使用除了调用函数的地方不一样和需要调用的函数不一样，其他处理机制都是一样的。
-
 
 */
 
@@ -124,7 +122,8 @@ void tkey_demo(void)
 	csi_pin_set_low(PA015);
 	while(1)
 	{
-		//tkey_uart_serialplot();//串口打样采样值函数
+		//tkey_main_prog();//主循环版本，需要调用该函数
+		tkey_uart_serialplot();//串口打样采样值函数
 		if(dwKey_Map!=0)		//处理按键结果，如果有按键按下，点亮LED灯
 		{
 			csi_pin_set_low(PA015);
