@@ -97,7 +97,7 @@ build_config:
   define:
     - NO_MORE_DEFINE
   libs:
-    - _103tkey_f_0_95.a
+    - _103tkey_c_1_01.a
     - libadctrim_lib.a
   libpath:
     - drivers
