@@ -4,6 +4,20 @@ cpu core头文件，csi api接口头文件。
 # Release Notes
 
 ======================================================
+Version: V1.2.0
+Release Date: 2024.1.25
+
+Release Notes
+1.touch key库升级到V1.0.1
+2.usart/uart中断处理更新
+3.增加printf和atof文件，防止调用print类函数占用空间过大
+4.修复lp——demo中的exi唤醒的bug
+5.将interrupt.c从board组件移到工程组件下
+6.在工程配置中增加CONFIG_IRQ_LOOKUP=1，默认使用中断查表法
+7.ifc中断前先清相应的标志位/增加使能IFC clk；只校验USEROPTION这一个地址
+8.图形化更新，支持sio外所有外设
+9.添加ADC OFFSET校准静态库及校准函数adc0_offset_trim
+======================================================
 Version: V1.1.0
 Release Date: 2023.8.14
 

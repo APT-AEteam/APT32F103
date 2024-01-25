@@ -1,5 +1,5 @@
 name: sdk_103x
-version: v1.1.0
+version: v1.2.0
 description: ""
 tag: ""
 keywords: 
@@ -9,8 +9,8 @@ license: ""
 homepage: 
 type: sdk
 depends:
-  - apt32f103x_evb: v1.1.0
-  - apt32f103x_gui: v1.1.0
+  - apt32f103x_evb: v1.2.0
+  - apt32f103x_gui: v1.2.0
   - apt_console: v0.0.0
 hw_info:
   cpu_id: ""
@@ -33,6 +33,6 @@ source_file:
 def_config: 
 install: 
 depends_forward:
-  - apt32f103x_evb: v1.1.0
-  - apt32f103x_gui: v1.1.0
+  - apt32f103x_evb: v1.2.0
+  - apt32f103x_gui: v1.2.0
   - apt_console: v0.0.0
