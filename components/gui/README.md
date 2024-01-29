@@ -16,6 +16,7 @@ Release Notes
 7.ifc中断前先清相应的标志位/增加使能IFC clk；只校验USEROPTION这一个地址
 8.图形化更新，支持sio外所有外设
 9.添加ADC OFFSET校准静态库及校准函数adc0_offset_trim
+10.修改link文件，使得0x104地址为0
 ======================================================
 Version: V1.1.0
 Release Date: 2023.8.14
